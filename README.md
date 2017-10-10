@@ -1,0 +1,2 @@
+# JMA Publish Sharer
+JMA(Japan Meteorological Agency)がPubSubHubbubで提供している気象データを用いてTwitterなどへ共有するアプリケーションです
