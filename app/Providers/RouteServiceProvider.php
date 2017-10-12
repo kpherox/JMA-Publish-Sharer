@@ -37,6 +37,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
 
+        $this->mapWebHooksRoutes();
+
         $this->mapWebRoutes();
 
         //
@@ -69,5 +71,20 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
+    }
+ 
+    /**
+     * Define the "hooks" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapWebHooksRoutes()
+    {
+        Route::prefix('hooks')
+             ->middleware('api')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/hooks.php'));
     }
 }
