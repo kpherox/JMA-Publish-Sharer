@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use Illuminate\Http\Request;
 
 class PushController extends Controller
@@ -16,7 +17,7 @@ class PushController extends Controller
         $hubMode = $request->input('hub_mode');
         $hubChallenge = $request->input('hub_challenge');
 
-        if ($hubmode == 'subscribe' || $hubmode == 'unsubscribe') {
+        if ($hubMode == 'subscribe' || $hubMode == 'unsubscribe') {
             return response($hubChallenge, 200)->header('Content-Type', 'text/plain');
         } else {
             Log::debug('hub_mode not subscribe|unsubscribe');
