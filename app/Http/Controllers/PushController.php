@@ -7,11 +7,20 @@ use Illuminate\Http\Request;
 class PushController extends Controller
 {
     /**
-     * subscribe JMA Publish
+     * Subscribe Check JMA Publish
      *
      * @return \Illuminate\Http\Response
      */
     function subscriber() {
+        //
+    }
+
+    /**
+     * Recive JMA Publish
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function receiveFeed() {
         //
     }
 }

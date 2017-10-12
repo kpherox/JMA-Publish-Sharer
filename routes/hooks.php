@@ -18,5 +18,6 @@ use Illuminate\Http\Request;
  */
 Route::prefix('push')->group(function () {
     Route::get('subscriber', 'PushController@subscriber');
+    Route::post('subscriber', 'PushController@receiveFeed');
 });
 
