@@ -7,12 +7,20 @@ use Illuminate\Http\Request;
 class PushController extends Controller
 {
     /**
-     * Subscribe Check JMA Publish
+     * Subscribe Check JMA
      *
      * @return \Illuminate\Http\Response
      */
-    function subscriber() {
-        //
+    function subscriber(Request $request) {
+        // Subscribe check
+        $hubMode = $request->input('hub_mode');
+        $hubChallenge = $request->input('hub_challenge');
+
+        if ($hubmode == 'subscribe' || $hubmode == 'unsubscribe') {
+            return response($hubChallenge, 200)->header('Content-Type', 'text/plain');
+        } else {
+            return response('Not Found', 404)->header('Content-Type', 'text/plain');
+        }
     }
 
     /**
@@ -20,7 +28,7 @@ class PushController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    function receiveFeed() {
+    function receiveFeed(Request $request) {
         //
     }
 }
