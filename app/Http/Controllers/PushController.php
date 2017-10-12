@@ -19,6 +19,7 @@ class PushController extends Controller
         if ($hubmode == 'subscribe' || $hubmode == 'unsubscribe') {
             return response($hubChallenge, 200)->header('Content-Type', 'text/plain');
         } else {
+            Log::debug('hub_mode not subscribe|unsubscribe');
             return response('Not Found', 404)->header('Content-Type', 'text/plain');
         }
     }
@@ -29,6 +30,22 @@ class PushController extends Controller
      * @return \Illuminate\Http\Response
      */
     function receiveFeed(Request $request) {
-        //
+        // Xml parse
+        $content = $request->getContent();
+        if (false === ($feed = simplexml_load_string($content))) {
+            $message = "feed Parse ERROR";
+            Log::error($message);
+            return $message;
+        }
+        Log::debug('success feed parse');
+
+        $client = new GuzzleHttp\Client();
+        // Fetch JMA xml
+        foreach ($feed->entry as $entry) {
+            $url = $entry->link['href'];
+            Log::debug($url);
+            $response = $client->get($url);
+            Log::debug($res->getBody());
+        }
     }
 }
