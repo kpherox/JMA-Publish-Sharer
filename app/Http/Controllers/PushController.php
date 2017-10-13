@@ -31,7 +31,7 @@ class PushController extends Controller
         }
         $hubChallenge = $request->hub_challenge;
         Log::debug($hubMode);
-        Log::debug('Success subscribe check')
+        Log::debug('Success subscribe check');
 
         return response($hubChallenge, 200)->header('Content-Type', 'text/plain');
     }
@@ -46,12 +46,15 @@ class PushController extends Controller
         $content = $request->getContent();
 
         if (env('IS_HUB_VERIFY_TOKEN', false)) {
-            if (!isset($request->header('X-Hub-Signature'))) {
+            $signature = explode('=',$request->header('x-hub-signature'));
+            Log::debug($signature);
+            if (empty($signature)) {
+                Log::error('Invalid X-Hub-Signature');
                 return response('Invalid X-Hub-Signature', 404)->header('Content-Type', 'text/plain');
             }
-            $signature = $request->header('X-Hub-Signature');
-            $hash = hash_hmac("sha1",$content,env('HUB_VERIFY_TOKEN');
-            if ($signature != $hash) {
+            $hash = hash_hmac($signature[0],$content,env('HUB_VERIFY_TOKEN'));
+            if ($signature[1] != $hash) {
+                Log::error('Invalid X-Hub-Signature');
                 return response('Invalid X-Hub-Signature', 404)->header('Content-Type', 'text/plain');
             }
 
