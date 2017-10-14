@@ -73,8 +73,12 @@ class PushController extends Controller
         $client = new Client();
         // Fetch JMA xml
         foreach ($feed->entry as $entry) {
-            $title = (string)$entry->title;
+            $kindOfInfo = (string)$entry->title;
             $url = (string)$entry->link['href'];
+            $uuid = (string)$entry->id;
+            $time = (string)$entry->updated;
+            $headline = (string)$entry->content;
+            $obs = (string)$entry->author->name;
             try {
                 $response = $client->get($url);
             } catch (ClientException $e) {
