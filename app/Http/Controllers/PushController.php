@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use \Datetime;
 use Log;
 use Illuminate\Http\Request;
 use App\Eloquents\Feed;
@@ -58,36 +59,42 @@ class PushController extends Controller
 
         $feeds = new Feed;
 
-        $feeds->updated = $feed->updated;
+        $dateTime = new DateTime((string)$feed->updated);
+        $feeds->updated = $dateTime->format("Y-m-d H:i:s");
+        $feeds->uuid = explode(':', (string)$feed->id)[2];
         foreach ($feed->link as $link) {
             if ($link['rel'] != 'self') continue;
-            $feeds->url = $link['href'];
+            $feeds->url = (string)$link['href'];
         }
 
-        $entries = $feed->entry;
         $entriesUUID = [];
 
         // Fetch JMA xml
-        $client = new Client();
-        foreach ($entries as $entry) {
+        //$client = new Client();
+        foreach ($feed->entry as $entry) {
+            /*
             $kindOfInfo = (string)$entry->title;
             $url = (string)$entry->link['href'];
-            $uuid = (string)$entry->id;
             $time = (string)$entry->updated;
             $headline = (string)$entry->content;
             $obs = (string)$entry->author->name;
+             */
+            $uuid = (string)$entry->id;
+            array_push($entriesUUID, $uuid);
 
-            $entriesUUID += $uuid;
-
+            /*
             try {
                 $response = $client->get($url);
             } catch (ClientException $e) {
                 report($e);
                 continue;
             }
+             */
         }
 
         $feeds->entries = serialize($entriesUUID);
+
+        $feeds->save();
     }
 }
 

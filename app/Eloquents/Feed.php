@@ -21,4 +21,11 @@ class Feed extends Model
      * @var array
      */
     protected $hidden = [];
+
+    /**
+     * Not use timestamp.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }
