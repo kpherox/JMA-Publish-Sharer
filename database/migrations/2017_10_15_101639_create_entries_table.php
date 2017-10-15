@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFeedsTable extends Migration
+class CreateEntriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateFeedsTable extends Migration
      */
     public function up()
     {
-        Schema::create('feeds', function (Blueprint $table) {
+        Schema::create('entries', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('kind_of_info');
             $table->string('url', 2048);
             $table->uuid('uuid')->unique();
-            $table->string('entries');
+            $table->string('observatory_name');
+            $table->string('headline');
             $table->dateTimeTz('updated');
             $table->timestamps();
         });
@@ -30,6 +32,6 @@ class CreateFeedsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feeds');
+        Schema::dropIfExists('entries');
     }
 }

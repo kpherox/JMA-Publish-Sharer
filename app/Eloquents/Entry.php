@@ -4,7 +4,7 @@ namespace App\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Feed extends Model
+class Entry extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,7 +12,7 @@ class Feed extends Model
      * @var array
      */
     protected $fillable = [
-        'url', 'uuid', 'entries', 'updated',
+        'kind_of_info', 'url', 'uuid', 'observatory_name', 'headline', 'updated',
     ];
 
     /**
@@ -22,4 +22,3 @@ class Feed extends Model
      */
     protected $hidden = [];
 }
-
