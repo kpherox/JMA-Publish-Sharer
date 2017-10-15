@@ -6,8 +6,9 @@ use \Datetime;
 use Log;
 use Illuminate\Http\Request;
 use App\Eloquents\Feed;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
+use App\Eloquents\Entry;
+//use GuzzleHttp\Client;
+//use GuzzleHttp\Exception\ClientException;
 
 class PushController extends Controller
 {
@@ -57,11 +58,11 @@ class PushController extends Controller
         }
         Log::debug('Success feed parse');
 
-        $feeds = new Feed;
+        $uuid = explode(':', (string)$feed->id);
+        $feeds = Feed::firstOrNew(['uuid' => $uuid[2]]);
 
         $dateTime = new DateTime((string)$feed->updated);
         $feeds->updated = $dateTime->format("Y-m-d H:i:s");
-        $feeds->uuid = explode(':', (string)$feed->id)[2];
         foreach ($feed->link as $link) {
             if ($link['rel'] != 'self') continue;
             $feeds->url = (string)$link['href'];
@@ -70,20 +71,23 @@ class PushController extends Controller
         $entriesUUID = [];
 
         // Fetch JMA xml
-        //$client = new Client();
         foreach ($feed->entry as $entry) {
-            /*
-            $kindOfInfo = (string)$entry->title;
-            $url = (string)$entry->link['href'];
-            $time = (string)$entry->updated;
-            $headline = (string)$entry->content;
-            $obs = (string)$entry->author->name;
-             */
-            $uuid = (string)$entry->id;
-            array_push($entriesUUID, $uuid);
+            $entryUUID = explode(':', (string)$entry->id);
+            array_push($entriesUUID, $entryUUID);
+            $entries = Entry::firstOrNew(['uuid' => $entryUUID[2]]);
+
+            $entries->kind_of_info = (string)$entry->title;
+            $entries->url = (string)$entry->link['href'];
+            $entries->headline = (string)$entry->content;
+            $entries->observatory_name = (string)$entry->author->name;
+            $dateTime = new DateTime((string)$entry->updated);
+            $entries->updated = $dateTime->format("Y-m-d H:i:s");
+
+            $entries->save();
 
             /*
             try {
+                $client = new Client();
                 $response = $client->get($url);
             } catch (ClientException $e) {
                 report($e);
