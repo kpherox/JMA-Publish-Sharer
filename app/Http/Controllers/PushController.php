@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Log;
 use Illuminate\Http\Request;
+use App\Eloquents\Feed;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 
@@ -17,21 +18,12 @@ class PushController extends Controller
     function subscriber(Request $request) {
         // Subscribe check
         $hubMode = $request->hub_mode;
-        if ($hubMode != 'subscribe' && $hubMode != 'unsubscribe') {
-            Log::notice('hub_mode not subscribe|unsubscribe');
-            return response('Not Found', 404)->header('Content-Type', 'text/plain');
-        }
+        if ($hubMode != 'subscribe' && $hubMode != 'unsubscribe') abort(404, 'Not Found');
 
         if (env('IS_HUB_VERIFY_TOKEN', false)) {
             $hubVerifyToken = $request->hub_verify_token;
-            if (empty($hubVerifyToken)) {
-                Log::notice('Not exist hub_verify_token');
-                return response('Not exist hub_verify_token', 403)->header('Content-Type', 'text/plain');
-            }
-            if ($hubVerifyToken != env('HUB_VERIFY_TOKEN')) {
-                Log::notice('Incorrect hub_verify_token');
-                return response('Incorrect hub_verify_token', 403)->header('Content-Type', 'text/plain');
-            }
+            if (empty($hubVerifyToken)) abort(403, 'Not exist hub_verify_token');
+            if ($hubVerifyToken != env('HUB_VERIFY_TOKEN')) abort(403, 'Incorrect hub_verify_token');
         }
         $hubChallenge = $request->hub_challenge;
         Log::notice($hubMode);
@@ -51,34 +43,42 @@ class PushController extends Controller
 
         if (env('IS_HUB_VERIFY_TOKEN', false)) {
             $signature = explode('=',$request->header('x-hub-signature'));
-            if (empty($signature)) {
-                Log::notice('Not exist hub signature');
-                return response('Not exist X-Hub-Signature', 403)->header('Content-Type', 'text/plain');
-            }
+            if (empty($signature[1])) abort(403, 'Not exist hub signature');
             $hash = hash_hmac($signature[0],$content,env('HUB_VERIFY_TOKEN'));
-            if ($signature[1] != $hash) {
-                Log::notice('Invalid hub signature');
-                return response('Invalid X-Hub-Signature', 403)->header('Content-Type', 'text/plain');
-            }
-
+            if ($signature[1] != $hash) abort(403, 'Invalid hub signature');
             Log::debug('Success check hub signature');
         }
+
         if (false === ($feed = simplexml_load_string($content))) {
             $message = "Feed Parse ERROR";
             Log::error($message.": ".$content);
             return $message;
         }
         Log::debug('Success feed parse');
-        
-        $client = new Client();
+
+        $feeds = new Feed;
+
+        $feeds->updated = $feed->updated;
+        foreach ($feed->link as $link) {
+            if ($link['rel'] != 'self') continue;
+            $feeds->url = $link['href'];
+        }
+
+        $entries = $feed->entry;
+        $entriesUUID = [];
+
         // Fetch JMA xml
-        foreach ($feed->entry as $entry) {
+        $client = new Client();
+        foreach ($entries as $entry) {
             $kindOfInfo = (string)$entry->title;
             $url = (string)$entry->link['href'];
             $uuid = (string)$entry->id;
             $time = (string)$entry->updated;
             $headline = (string)$entry->content;
             $obs = (string)$entry->author->name;
+
+            $entiresUUID += $uuid;
+
             try {
                 $response = $client->get($url);
             } catch (ClientException $e) {
@@ -86,6 +86,8 @@ class PushController extends Controller
                 continue;
             }
         }
+
+        $feeds->entries = serialize($entriesUUID);
     }
 }
 
