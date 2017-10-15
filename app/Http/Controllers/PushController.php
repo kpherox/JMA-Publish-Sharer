@@ -77,7 +77,7 @@ class PushController extends Controller
             $headline = (string)$entry->content;
             $obs = (string)$entry->author->name;
 
-            $entiresUUID += $uuid;
+            $entriesUUID += $uuid;
 
             try {
                 $response = $client->get($url);
