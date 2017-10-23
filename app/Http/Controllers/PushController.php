@@ -7,8 +7,6 @@ use Log;
 use Illuminate\Http\Request;
 use App\Eloquents\Feed;
 use App\Eloquents\Entry;
-//use GuzzleHttp\Client;
-//use GuzzleHttp\Exception\ClientException;
 
 class PushController extends Controller
 {
@@ -85,16 +83,6 @@ class PushController extends Controller
             $entries->updated = $dateTime->format("Y-m-d H:i:s");
 
             $entries->save();
-
-            /*
-            try {
-                $client = new Client();
-                $response = $client->get($url);
-            } catch (ClientException $e) {
-                report($e);
-                continue;
-            }
-             */
         }
     }
 }
