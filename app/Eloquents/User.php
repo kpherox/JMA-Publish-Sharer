@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    // Relation social accounts
+    public function accounts() {
+        return $this->hasMany('App\Eloquents\LinkedSocialAccount');
+    }
 }

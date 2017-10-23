@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Services\SocialAccountsService;
+
+abstract class SocialAccountController extends Controller
+{
+    abstract protected function getProvider();
+
+    /**
+     * Redirect the user to the authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    abstract public function redirectToProvider();
+
+    /**
+     * Obtain the user information
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback(SocialAccountsService $accountService)
+    {
+
+        try {
+            $user = \Socialite::with($this->getProvider())->user();
+        } catch (\Exception $e) {
+            return redirect('/login');
+        }
+
+        $authUser = $accountService->findOrCreate(
+            $user,
+            $this->getProvider()
+        );
+
+        auth()->login($authUser, true);
+
+        return redirect()->to('/home');
+    }
+}
