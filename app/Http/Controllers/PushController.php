@@ -74,7 +74,7 @@ class PushController extends Controller
             $entries = Entry::firstOrNew(['uuid' => $entryUUID[2]]);
 
             $entries->kind_of_info = (string)$entry->title;
-            $entries->feed_uuid = $uuid;
+            $entries->feed_uuid = $uuid[2];
             $entries->observatory_name = (string)$entry->author->name;
             $entries->headline = (string)$entry->content;
             $entries->url = (string)$entry->link['href'];
