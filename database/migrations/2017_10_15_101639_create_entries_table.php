@@ -15,11 +15,12 @@ class CreateEntriesTable extends Migration
     {
         Schema::create('entries', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('kind_of_info');
-            $table->string('url', 2048);
             $table->uuid('uuid')->unique();
+            $table->string('kind_of_info');
+            $table->uuid('feed_uuid');
             $table->string('observatory_name');
             $table->string('headline');
+            $table->string('url', 2048);
             $table->dateTimeTz('updated');
             $table->timestamps();
         });

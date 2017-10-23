@@ -12,7 +12,7 @@ class Feed extends Model
      * @var array
      */
     protected $fillable = [
-        'url', 'uuid', 'entries', 'updated',
+        'uuid', 'url', 'updated',
     ];
 
     /**

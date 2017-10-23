@@ -12,7 +12,7 @@ class Entry extends Model
      * @var array
      */
     protected $fillable = [
-        'kind_of_info', 'url', 'uuid', 'observatory_name', 'headline', 'updated',
+        'uuid', 'kind_of_info', 'feed_uuid', 'observatory_name', 'headline', 'url', 'updated',
     ];
 
     /**
