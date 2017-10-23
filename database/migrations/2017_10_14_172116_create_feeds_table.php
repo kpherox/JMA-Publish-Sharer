@@ -15,8 +15,8 @@ class CreateFeedsTable extends Migration
     {
         Schema::create('feeds', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('url', 2048);
             $table->uuid('uuid')->unique();
+            $table->string('url', 2048);
             $table->dateTimeTz('updated');
             $table->timestamps();
         });

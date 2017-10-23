@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
  * PubSubHubbub(PuSH) webhooks
  */
 Route::prefix('push')->group(function () {
-    Route::get('subscriber', 'PushController@subscriber');
+    Route::get('subscriber', 'PushController@subscribeCheck');
     Route::post('subscriber', 'PushController@receiveFeed');
 });
 
