@@ -8,6 +8,16 @@ class TwitterAccountController extends SocialAccountController
 {
     protected $provider = 'twitter';
 
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     protected function getProvider() {
         return $this->provider;
     }

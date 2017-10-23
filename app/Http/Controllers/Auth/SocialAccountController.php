@@ -11,6 +11,16 @@ abstract class SocialAccountController extends Controller
     abstract protected function getProvider();
 
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
+
+    /**
      * Redirect the user to the authentication page.
      *
      * @return \Illuminate\Http\Response
