@@ -17,7 +17,7 @@ class PushController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    function subscriber(Request $request) {
+    function subscribeCheck(Request $request) {
         // Subscribe check
         $hubMode = $request->hub_mode;
         if ($hubMode != 'subscribe' && $hubMode != 'unsubscribe') abort(404, 'Not Found');
@@ -68,7 +68,7 @@ class PushController extends Controller
             $feeds->url = (string)$link['href'];
         }
 
-        $entriesUUID = [];
+        $feeds->save();
 
         // Fetch JMA xml
         foreach ($feed->entry as $entry) {
@@ -77,9 +77,10 @@ class PushController extends Controller
             $entries = Entry::firstOrNew(['uuid' => $entryUUID[2]]);
 
             $entries->kind_of_info = (string)$entry->title;
-            $entries->url = (string)$entry->link['href'];
-            $entries->headline = (string)$entry->content;
+            $entries->feed_uuid = $uuid;
             $entries->observatory_name = (string)$entry->author->name;
+            $entries->headline = (string)$entry->content;
+            $entries->url = (string)$entry->link['href'];
             $dateTime = new DateTime((string)$entry->updated);
             $entries->updated = $dateTime->format("Y-m-d H:i:s");
 
@@ -95,10 +96,6 @@ class PushController extends Controller
             }
              */
         }
-
-        $feeds->entries = serialize($entriesUUID);
-
-        $feeds->save();
     }
 }
 

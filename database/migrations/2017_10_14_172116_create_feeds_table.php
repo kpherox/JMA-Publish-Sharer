@@ -17,7 +17,6 @@ class CreateFeedsTable extends Migration
             $table->bigIncrements('id');
             $table->string('url', 2048);
             $table->uuid('uuid')->unique();
-            $table->string('entries');
             $table->dateTimeTz('updated');
             $table->timestamps();
         });
