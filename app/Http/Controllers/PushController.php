@@ -71,7 +71,6 @@ class PushController extends Controller
         // Fetch JMA xml
         foreach ($feed->entry as $entry) {
             $entryUUID = explode(':', (string)$entry->id);
-            array_push($entriesUUID, $entryUUID);
             $entries = Entry::firstOrNew(['uuid' => $entryUUID[2]]);
 
             $entries->kind_of_info = (string)$entry->title;
