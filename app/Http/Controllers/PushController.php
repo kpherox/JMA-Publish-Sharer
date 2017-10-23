@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use \Datetime;
+use DateTime;
 use Log;
 use Illuminate\Http\Request;
 use App\Eloquents\Feed;
