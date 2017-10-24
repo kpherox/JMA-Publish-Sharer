@@ -17,7 +17,7 @@ abstract class SocialAccountController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        //$this->middleware('guest')->except('logout');
     }
 
     /**
@@ -34,7 +34,6 @@ abstract class SocialAccountController extends Controller
      */
     public function handleProviderCallback(SocialAccountsService $accountService)
     {
-
         try {
             $user = \Socialite::with($this->getProvider())->user();
         } catch (\Exception $e) {
