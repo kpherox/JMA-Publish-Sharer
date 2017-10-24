@@ -41,10 +41,13 @@ abstract class SocialAccountController extends Controller
             return redirect('/login');
         }
 
-        $authUser = $accountService->findOrCreate(
-            $user,
-            $this->getProvider()
-        );
+        try {
+            $authUser = $accountService->findOrCreate(
+                $user, $this->getProvider()
+            );
+        } catch (\Exception $e) {
+            return redirect('/home');
+        }
 
         auth()->login($authUser, true);
 

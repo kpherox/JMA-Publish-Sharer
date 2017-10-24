@@ -18,6 +18,8 @@ class CreateLinkedSocialAccountsTable extends Migration
             $table->bigInteger('user_id');
             $table->string('provider_name')->nullable();
             $table->string('provider_id')->unique()->nullable();
+            $table->string('provider_token')->unique()->nullable();
+            $table->string('provider_token_secret')->unique()->nullable();
             $table->timestampsTz();
         });
     }

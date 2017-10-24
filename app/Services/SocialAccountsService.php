@@ -14,13 +14,15 @@ class SocialAccountsService
                    ->where('provider_id', $providerUser->getId())
                    ->first();
 
-        if ($account) {
+        if ($account && Auth::guest()) {
             return $account->user;
+        } elseif ($account) {
+            throw new \Exception('It is already linked to other account');
         }
 
-        $user = User::where('email', $providerUser->getEmail())->first();
+        $user = Auth::guest ? User::where('email', $providerUser->getEmail())->first() : Auth::user();
 
-        if (! $user) {
+        if (! $user && Auth::guest()) {
             $user = User::create([  
                 'email' => $providerUser->getEmail(),
                 'name'  => $providerUser->getName(),
@@ -28,8 +30,10 @@ class SocialAccountsService
         }
 
         $user->accounts()->create([
-            'provider_id'   => $providerUser->getId(),
+            'provider_id' => $providerUser->getId(),
             'provider_name' => $provider,
+            'provider_token' => $providerUser->token,
+            'provider_token_secret' => $providerUser->tokenSecret,
         ]);
 
         return $user;
