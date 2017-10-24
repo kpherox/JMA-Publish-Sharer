@@ -16,6 +16,9 @@ class SocialAccountsService
                    ->first();
 
         if ($account && Auth::guest()) {
+            $account->provider_token = $providerUser->token;
+            $account->provider_token_secret = $providerUser->tokenSecret;
+            $account->save();
             return $account->user;
         } elseif ($account) {
             throw new \Exception('It is already linked to other account');
@@ -31,8 +34,8 @@ class SocialAccountsService
         }
 
         $user->accounts()->create([
-            'provider_id' => $providerUser->getId(),
             'provider_name' => $provider,
+            'provider_id' => $providerUser->getId(),
             'provider_token' => $providerUser->token,
             'provider_token_secret' => $providerUser->tokenSecret,
         ]);
