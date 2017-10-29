@@ -1,0 +1,3 @@
+[submodule "resources/assets/simple-icons"]
+	path = resources/assets/simple-icons
+	url = https://github.com/simple-icons/simple-icons
