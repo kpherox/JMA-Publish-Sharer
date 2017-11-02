@@ -56,33 +56,38 @@ class PushController extends Controller
         }
         Log::debug('Success feed parse');
 
-        $uuid = explode(':', (string)$feed->id);
-        $feeds = Feed::firstOrNew(['uuid' => $uuid[2]]);
-
+        $feedUuid = explode(':', (string)$feed->id);
         $dateTime = new DateTime((string)$feed->updated);
+        $feeds = Feed::firstOrNew(['uuid' => $feedUuid[2]]);
         $feeds->updated = $dateTime->format("Y-m-d H:i:s");
         foreach ($feed->link as $link) {
-            if ($link['rel'] != 'self') continue;
-            $feeds->url = (string)$link['href'];
+            if ($link['rel'] == 'self') {
+                $feeds->url = (string)$link['href'];
+                break;
+            }
         }
-
         $feeds->save();
 
         // Fetch JMA xml
+        $entryArray = [];
         foreach ($feed->entry as $entry) {
-            $entryUUID = explode(':', (string)$entry->id);
-            $entries = Entry::firstOrNew(['uuid' => $entryUUID[2]]);
-
-            $entries->kind_of_info = (string)$entry->title;
-            $entries->feed_uuid = $uuid[2];
-            $entries->observatory_name = (string)$entry->author->name;
-            $entries->headline = (string)$entry->content;
-            $entries->url = (string)$entry->link['href'];
+            $entryUuid = explode(':', (string)$entry->id);
             $dateTime = new DateTime((string)$entry->updated);
-            $entries->updated = $dateTime->format("Y-m-d H:i:s");
 
-            $entries->save();
+            $entryArray[] = [
+                'uuid' => $entryUuid[2],
+                'kind_of_info' => (string)$entry->title,
+                'feed_uuid' => $feedUuid[2],
+                'observatory_name' => (string)$entry->author->name,
+                'headline' => (string)$entry->content,
+                'url' => (string)$entry->link['href'],
+                'updated' => $dateTime->format("Y-m-d H:i:s"),
+            ];
         }
+
+        $entries = Entry::insertOnDuplicateKey($entryArray, [
+            'kind_of_info', 'feed_uuid', 'observatory_name', 'headline', 'updated',
+        ]);
     }
 }
 
