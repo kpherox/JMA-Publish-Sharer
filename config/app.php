@@ -167,6 +167,7 @@ return [
         /*
          * Package Service Providers...
          */
+        InsertOnDuplicateKey\InsertOnDuplicateKeyServiceProvider::class,
 
         /*
          * Application Service Providers...
