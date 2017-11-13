@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use DateTime;
 use Log;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Eloquents\Feed;
 use App\Eloquents\Entry;
@@ -18,12 +18,12 @@ class PushController extends Controller
     function subscribeCheck(Request $request) {
         // Subscribe check
         $hubMode = $request->hub_mode;
-        if ($hubMode != 'subscribe' && $hubMode != 'unsubscribe') abort(404, 'Not Found');
+        abort_if($hubMode != 'subscribe' && $hubMode != 'unsubscribe', 404, 'Not Found');
 
         if (env('IS_HUB_VERIFY_TOKEN', false)) {
             $hubVerifyToken = $request->hub_verify_token;
-            if (empty($hubVerifyToken)) abort(403, 'Not exist hub_verify_token');
-            if ($hubVerifyToken != env('HUB_VERIFY_TOKEN')) abort(403, 'Incorrect hub_verify_token');
+            abort_if(is_null($hubVerifyToken), 403, 'Not exist hub_verify_token');
+            abort_if($hubVerifyToken != env('HUB_VERIFY_TOKEN'), 403, 'Incorrect hub_verify_token');
         }
         $hubChallenge = $request->hub_challenge;
         Log::notice($hubMode);
@@ -43,9 +43,9 @@ class PushController extends Controller
 
         if (env('IS_HUB_VERIFY_TOKEN', false)) {
             $signature = explode('=',$request->header('x-hub-signature'));
-            if (empty($signature[1])) abort(403, 'Not exist hub signature');
+            abort_if(is_null($signature[1]), 403, 'Not exist hub signature');
             $hash = hash_hmac($signature[0],$content,env('HUB_VERIFY_TOKEN'));
-            if ($signature[1] != $hash) abort(403, 'Invalid hub signature');
+            abort_if($signature[1] != $hash, 403, 'Invalid hub signature');
             Log::debug('Success check hub signature');
         }
 
@@ -59,8 +59,8 @@ class PushController extends Controller
         $uuid = explode(':', (string)$feed->id);
         $feeds = Feed::firstOrNew(['uuid' => $uuid[2]]);
 
-        $dateTime = new DateTime((string)$feed->updated);
-        $feeds->updated = $dateTime->format("Y-m-d H:i:s");
+        $carbon = Carbon::parse((string)$feed->updated);
+        $feeds->updated = $carbon;
         foreach ($feed->link as $link) {
             if ($link['rel'] != 'self') continue;
             $feeds->url = (string)$link['href'];
