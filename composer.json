@@ -10,7 +10,9 @@
         "guidocella/eloquent-insert-on-duplicate-key": "^2.1",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0"
+        "laravel/socialite": "^3.0",
+        "laravel/tinker": "~1.0",
+        "socialiteproviders/twitter": "^3.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

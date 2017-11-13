@@ -7,3 +7,70 @@
 
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+.btn-social {
+    padding: 0;
+    a {
+        margin: 0;
+        padding: 6px 12px;
+        font-weight: bold;
+        font-size: 1.3em;
+        color: white;
+        display: block;
+        width: 100%;
+        height: 100%;
+        outline: none;
+
+        &::before, &::after {
+            position: absolute;
+            z-index: -1;
+            display: block;
+            content: '';
+        }
+
+        &, &::before, &::after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-transition: all .3s;
+            transition: all .3s;
+        }
+
+        &:hover {
+            background-color: rgba(255,255,255,.2);
+            text-decoration: none;
+            color: white;
+        }
+
+        svg {
+            margin: 0px 5px 0 0;
+            vertical-align: middle;
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+    }
+}
+
+$border-color:#cdcdcd;
+
+.text-border {
+    display: flex;
+    color: $border-color;
+    align-items: center;
+    text-align: center; /* for no-flexbox browsers */
+
+    &::before, &::after {
+        border-top: 1px solid $border-color;
+        content: '';
+        flex-grow: 1;
+    }
+
+    &::before {
+        margin-right: 0.5em;
+    }
+
+    &::after {
+        margin-left: 0.5em;
+    }
+}

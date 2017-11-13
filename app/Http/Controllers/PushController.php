@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use DateTime;
 use Log;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Eloquents\Feed;
 use App\Eloquents\Entry;
@@ -18,12 +18,12 @@ class PushController extends Controller
     function subscribeCheck(Request $request) {
         // Subscribe check
         $hubMode = $request->hub_mode;
-        if ($hubMode != 'subscribe' && $hubMode != 'unsubscribe') abort(404, 'Not Found');
+        abort_if($hubMode != 'subscribe' && $hubMode != 'unsubscribe', 404, 'Not Found');
 
         if (env('IS_HUB_VERIFY_TOKEN', false)) {
             $hubVerifyToken = $request->hub_verify_token;
-            if (empty($hubVerifyToken)) abort(403, 'Not exist hub_verify_token');
-            if ($hubVerifyToken != env('HUB_VERIFY_TOKEN')) abort(403, 'Incorrect hub_verify_token');
+            abort_if(is_null($hubVerifyToken), 403, 'Not exist hub_verify_token');
+            abort_if($hubVerifyToken != env('HUB_VERIFY_TOKEN'), 403, 'Incorrect hub_verify_token');
         }
         $hubChallenge = $request->hub_challenge;
         Log::notice($hubMode);
@@ -43,9 +43,9 @@ class PushController extends Controller
 
         if (env('IS_HUB_VERIFY_TOKEN', false)) {
             $signature = explode('=',$request->header('x-hub-signature'));
-            if (empty($signature[1])) abort(403, 'Not exist hub signature');
+            abort_if(is_null($signature[1]), 403, 'Not exist hub signature');
             $hash = hash_hmac($signature[0],$content,env('HUB_VERIFY_TOKEN'));
-            if ($signature[1] != $hash) abort(403, 'Invalid hub signature');
+            abort_if($signature[1] != $hash, 403, 'Invalid hub signature');
             Log::debug('Success check hub signature');
         }
 
@@ -57,9 +57,9 @@ class PushController extends Controller
         Log::debug('Success feed parse');
 
         $feedUuid = explode(':', (string)$feed->id);
-        $dateTime = new DateTime((string)$feed->updated);
+        $carbon = Carbon::parse((string)$feed->updated);
         $feeds = Feed::firstOrNew(['uuid' => $feedUuid[2]]);
-        $feeds->updated = $dateTime->format("Y-m-d H:i:s");
+        $feeds->updated = $carbon;
         foreach ($feed->link as $link) {
             if ($link['rel'] == 'self') {
                 $feeds->url = (string)$link['href'];
@@ -72,7 +72,7 @@ class PushController extends Controller
         $entryArray = [];
         foreach ($feed->entry as $entry) {
             $entryUuid = explode(':', (string)$entry->id);
-            $dateTime = new DateTime((string)$entry->updated);
+            $carbon = Carbon::parse((string)$entry->updated);
 
             $entryArray[] = [
                 'uuid' => $entryUuid[2],
@@ -81,7 +81,7 @@ class PushController extends Controller
                 'observatory_name' => (string)$entry->author->name,
                 'headline' => (string)$entry->content,
                 'url' => (string)$entry->link['href'],
-                'updated' => $dateTime->format("Y-m-d H:i:s"),
+                'updated' => $carbon,
             ];
         }
 
