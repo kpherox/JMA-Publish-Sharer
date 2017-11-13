@@ -11,17 +11,21 @@ class SocialAccountsService
 {
     public function findOrCreate(ProviderUser $providerUser, $provider)
     {
-        $account = LinkedSocialAccount::where('provider_name', $provider)
-                   ->where('provider_id', $providerUser->getId())
-                   ->first();
+        $accounts = LinkedSocialAccount::where('provider_name', $provider)
+                   ->where('provider_id', $providerUser->getId());
 
-        if ($account && Auth::guest()) {
-            $account->provider_token = $providerUser->token;
-            $account->provider_token_secret = $providerUser->tokenSecret;
+        if ($accounts->exists()) {
+            $account = $accounts->first();
+            $account->account_name = $providerUser->nickname;
+            $account->account_avatar = $providerUser->avatar;
+            $account->account_token = $providerUser->token;
+            $account->account_token_secret = $providerUser->tokenSecret;
             $account->save();
-            return $account->user;
-        } elseif ($account) {
-            throw new \Exception('It is already linked to other account');
+            if (Auth::guest()) {
+                return $account->user;
+            } else {
+                throw new \Exception('It is already linked to other account');
+            }
         }
 
         $user = Auth::guest() ? User::where('email', $providerUser->getEmail())->first() : Auth::user();
@@ -36,8 +40,10 @@ class SocialAccountsService
         $user->accounts()->create([
             'provider_name' => $provider,
             'provider_id' => $providerUser->getId(),
-            'provider_token' => $providerUser->token,
-            'provider_token_secret' => $providerUser->tokenSecret,
+            'account_name' => $providerUser->nickname,
+            'account_avatar' => $providerUser->avatar,
+            'account_token' => $providerUser->token,
+            'account_token_secret' => $providerUser->tokenSecret,
         ]);
 
         return $user;

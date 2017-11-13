@@ -12,7 +12,7 @@ class LinkedSocialAccount extends Model
      * @var array
      */
     protected $fillable = [
-        'provider_name', 'provider_id', 'provider_token', 'provider_token_secret'
+        'provider_name', 'provider_id', 'account_name', 'account_avatar', 'account_token', 'account_token_secret'
     ];
 
     // Relation user

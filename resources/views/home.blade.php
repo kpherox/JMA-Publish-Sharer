@@ -17,6 +17,27 @@
                     You are logged in!
                 </div>
             </div>
+
+            @php
+                $social = auth()->user()->accounts();
+            @endphp
+            @if ($social->exists())
+                <div class="panel panel-default">
+                    <div class="panel-heading">Social Accounts</div>
+
+                    <div class="panel-body">
+                        <dl class="dl-horizontal">
+                            @foreach ($social->get() as $socialAccount)
+                                <dt>{{ $socialAccount->provider_name }}</dt>
+                                <dd>
+                                    <img class="align-middle" src="{{ $socialAccount->account_avatar }}" alt="{{ $socialAccount->provider_name }} Icon" />
+                                    {{ $socialAccount->account_name }}
+                                </dd>
+                            @endforeach
+                        </dl>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </div>
