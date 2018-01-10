@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use Laravel\Socialite\Contracts\User as ProviderUser;
-use Auth;
 use App\Eloquents\User;
 use App\Eloquents\LinkedSocialAccount;
 
@@ -21,20 +20,22 @@ class SocialAccountsService
             $account->account_token = $providerUser->token;
             $account->account_token_secret = $providerUser->tokenSecret;
             $account->save();
-            if (Auth::guest()) {
+            if (auth()->guest()) {
                 return $account->user;
             } else {
                 throw new \Exception('It is already linked to other account');
             }
         }
 
-        $user = Auth::guest() ? User::where('email', $providerUser->getEmail())->first() : Auth::user();
-
-        if (! $user && Auth::guest()) {
-            $user = User::create([  
+        if (auth()->guest()) {
+            $user = auth()->user;
+        } elseif (! User::where('email', $providerUser->getEmail())->exists()) {
+            $user = User::create([
                 'email' => $providerUser->getEmail(),
                 'name'  => $providerUser->getName(),
             ]);
+        } else {
+            throw new \Exception('Already used this E-mail address');
         }
 
         $user->accounts()->create([
