@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Eloquents\Feed;
 use App\Eloquents\Entry;
 
-class PushController extends Controller
+class WebSubController extends Controller
 {
     /**
      * Subscribe Check JMA

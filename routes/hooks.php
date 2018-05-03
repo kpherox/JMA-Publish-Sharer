@@ -14,10 +14,20 @@ use Illuminate\Http\Request;
 */
 
 /**
- * PubSubHubbub(PuSH) webhooks
+ * WebSub webhooks
  */
-Route::prefix('push')->group(function () {
-    Route::get('subscriber', 'PushController@subscribeCheck');
-    Route::post('subscriber', 'PushController@receiveFeed');
+// old prefix redirect
+Route::prefix('push')->group(function() {
+    Route::get('subscriber', function() {
+        return redirect()->route('websub.subscribeCheck');
+    });
+    Route::post('subscriber', function() {
+        return redirect()->route('websub.receiveFeet');
+    });
+});
+
+Route::prefix('websub')->group(function () {
+    Route::get('subscriber', 'WebSubController@subscribeCheck')->name('websub.subscribeCheck');
+    Route::post('subscriber', 'WebSubController@receiveFeed')->name('websub.receiveFeet');
 });
 
