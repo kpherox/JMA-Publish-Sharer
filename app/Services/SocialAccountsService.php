@@ -27,8 +27,8 @@ class SocialAccountsService
             }
         }
 
-        if (auth()->guest()) {
-            $user = auth()->user;
+        if (auth()->check()) {
+            $user = auth()->user();
         } elseif (! User::where('email', $providerUser->getEmail())->exists()) {
             $user = User::create([
                 'email' => $providerUser->getEmail(),

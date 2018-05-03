@@ -17,6 +17,7 @@ Auth::routes();
 
 Route::prefix('twitter')->group(function() {
     Route::get('login', 'Auth\TwitterAccountController@redirectToProvider')->name('twitter.login');
+    Route::get('linktouser', 'Auth\TwitterAccountController@linkToUser')->name('twitter.linktouser');
     Route::get('callback', 'Auth\TwitterAccountController@handleProviderCallback')->name('twitter.callback');
 });
 
