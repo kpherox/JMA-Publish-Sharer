@@ -22,3 +22,6 @@ yarn-error.log
 .AppleDouble
 .LSOverride
 
+# Coverage directory used by tools like istanbul
+/coverage
+
