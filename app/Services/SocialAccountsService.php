@@ -12,11 +12,12 @@ class SocialAccountsService
     {
         $accounts = LinkedSocialAccount::where('provider_name', $provider)
                    ->where('provider_id', $providerUser->getId());
+        $providerUserAvatar = preg_replace("/https?:\/\/(.+?)_normal.jpg/", "https://$1.jpg", $providerUser->avatar);
 
         if ($accounts->exists()) {
             $account = $accounts->first();
             $account->account_name = $providerUser->nickname;
-            $account->account_avatar = $providerUser->avatar;
+            $account->account_avatar = $providerUserAvatar;
             $account->account_token = $providerUser->token;
             $account->account_token_secret = $providerUser->tokenSecret;
             $account->save();
@@ -42,7 +43,7 @@ class SocialAccountsService
             'provider_name' => $provider,
             'provider_id' => $providerUser->getId(),
             'account_name' => $providerUser->nickname,
-            'account_avatar' => $providerUser->avatar,
+            'account_avatar' => $providerUserAvatar,
             'account_token' => $providerUser->token,
             'account_token_secret' => $providerUser->tokenSecret,
         ]);
