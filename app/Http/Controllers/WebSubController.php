@@ -58,6 +58,7 @@ class WebSubController extends Controller
 
         $feedUuid = explode(':', (string)$feed->id);
         $carbon = Carbon::parse((string)$feed->updated);
+        $carbon->setTimezone(config('app.timezone'));
         $feeds = Feed::firstOrNew(['uuid' => $feedUuid[2]]);
         $feeds->updated = $carbon;
         foreach ($feed->link as $link) {
@@ -73,6 +74,7 @@ class WebSubController extends Controller
         foreach ($feed->entry as $entry) {
             $entryUuid = explode(':', (string)$entry->id);
             $carbon = Carbon::parse((string)$entry->updated);
+            $carbon->setTimezone(config('app.timezone'));
 
             $entryArray[] = [
                 'uuid' => $entryUuid[2],
