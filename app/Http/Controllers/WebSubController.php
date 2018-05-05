@@ -87,9 +87,7 @@ class WebSubController extends Controller
             ];
         }
 
-        $entries = Entry::insertOnDuplicateKey($entryArray, [
-            'kind_of_info', 'feed_uuid', 'observatory_name', 'headline', 'updated',
-        ]);
+        $entries = Entry::insert($entryRecords);
     }
 }
 
