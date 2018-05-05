@@ -111,7 +111,7 @@ class WebSubController extends Controller
             }
         }
 
-        $entryRecords = []
+        $entryRecords = [];
         foreach ($results as $key => $result) {
             $entryArray = $entryArrays[$key];
             $entryArray['uuid'] = $key;

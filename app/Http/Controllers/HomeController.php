@@ -23,6 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home', ['socialAccounts' => auth()->user()->accounts()]);
     }
 }

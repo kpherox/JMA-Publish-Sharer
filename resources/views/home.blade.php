@@ -18,26 +18,29 @@
                 </div>
             </div>
 
-            @php
-                $social = auth()->user()->accounts();
-            @endphp
-            @if ($social->exists())
-                <div class="card">
-                    <div class="card-header">Social Accounts</div>
+            <div class="card">
+                <div class="card-header">Social Accounts</div>
 
-                    <div class="card-body">
-                        <dl class="row">
-                            @foreach ($social->get() as $socialAccount)
-                                <dt class="col-sm-3 text-right">{{ $socialAccount->provider_name }}</dt>
-                                <dd class="col-sm-9">
-                                    <img class="align-middle" src="{{ $socialAccount->account_avatar }}" alt="{{ $socialAccount->provider_name }} Icon" />
-                                    {{ $socialAccount->account_name }}
-                                </dd>
-                            @endforeach
-                        </dl>
-                    </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3 text-right mt-1">Twitter</dt>
+                            <dd class="col-sm-9">
+                            @if ($socialAccounts->where('provider_name', 'twitter')->exists())
+                                @foreach ($socialAccounts->where('provider_name', 'twitter')->get() as $account)
+                                <p class="mb-2"><a class="text-body" href="http://twitter.com/{{ $account->account_name }}">
+                                    <img class="align-middle rounded-circle social-avatar" src="{{ $account->account_avatar }}" alt="Twitter Icon" />
+                                    &#64;{{ $account->account_name }}
+                                </a></p>
+                                @endforeach
+                            @endif
+                                <p class="mb-0"><a class="text-body" href="{{ route('twitter.linktouser') }}">
+                                    <button type="button" class="btn btn-secondary btn-lg btn-add p-0 rounded-circle">＋</button>
+                                    Link Account
+                                </a></p>
+                            </dd>
+                    </dl>
                 </div>
-            @endif
+            </div>
         </div>
     </div>
 </div>
