@@ -8,6 +8,26 @@
 // Bootstrap
 @import "~bootstrap/scss/bootstrap.scss";
 
+header.navbar {
+    margin-bottom: 1.5rem;
+}
+
+.list-group-striped .list-group-item {
+    &:nth-child(even) {
+        background-color: rgba(0,0,0,.05);
+    }
+}
+
+.card {
+    margin-bottom: 1.5rem;
+
+    .card-header {
+        h5{
+            margin-bottom: 0;
+        }
+    }
+}
+
 .btn-social {
     padding: 0;
     a {
@@ -74,3 +94,4 @@ $border-color:#cdcdcd;
         margin-left: 0.5em;
     }
 }
+

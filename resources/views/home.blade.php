@@ -1,13 +1,13 @@
-@extends('layouts.app')
+@extends ('layouts.app')
 
-@section('content')
+@section ('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-header">Dashboard</div>
 
-                <div class="panel-body">
+                <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -22,14 +22,14 @@
                 $social = auth()->user()->accounts();
             @endphp
             @if ($social->exists())
-                <div class="panel panel-default">
-                    <div class="panel-heading">Social Accounts</div>
+                <div class="card">
+                    <div class="card-header">Social Accounts</div>
 
-                    <div class="panel-body">
-                        <dl class="dl-horizontal">
+                    <div class="card-body">
+                        <dl class="row">
                             @foreach ($social->get() as $socialAccount)
-                                <dt>{{ $socialAccount->provider_name }}</dt>
-                                <dd>
+                                <dt class="col-sm-3 text-right">{{ $socialAccount->provider_name }}</dt>
+                                <dd class="col-sm-9">
                                     <img class="align-middle" src="{{ $socialAccount->account_avatar }}" alt="{{ $socialAccount->provider_name }} Icon" />
                                     {{ $socialAccount->account_name }}
                                 </dd>
