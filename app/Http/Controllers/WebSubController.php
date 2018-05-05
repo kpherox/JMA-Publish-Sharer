@@ -7,6 +7,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Eloquents\Feed;
 use App\Eloquents\Entry;
+use GuzzleHttp\Client;
+use GuzzleHttp\Promise;
 
 class WebSubController extends Controller
 {
@@ -56,11 +58,11 @@ class WebSubController extends Controller
         }
         Log::debug('Success feed parse');
 
-        $feedUuid = explode(':', (string)$feed->id);
-        $carbon = Carbon::parse((string)$feed->updated);
-        $carbon->setTimezone(config('app.timezone'));
-        $feeds = Feed::firstOrNew(['uuid' => $feedUuid[2]]);
-        $feeds->updated = $carbon;
+        $feedUuid = explode(':', (string)$feed->id)[2];
+        $feedUpdated = Carbon::parse((string)$feed->updated);
+        $feedUpdated->setTimezone(config('app.timezone'));
+        $feeds = Feed::firstOrNew(['uuid' => $feedUuid]);
+        $feeds->updated = $feedUpdated;
         foreach ($feed->link as $link) {
             if ($link['rel'] == 'self') {
                 $feeds->url = (string)$link['href'];
@@ -69,22 +71,57 @@ class WebSubController extends Controller
         }
         $feeds->save();
 
+        $client = new Client();
         // Fetch JMA xml
-        $entryArray = [];
-        foreach ($feed->entry as $entry) {
-            $entryUuid = explode(':', (string)$entry->id);
-            $carbon = Carbon::parse((string)$entry->updated);
-            $carbon->setTimezone(config('app.timezone'));
+        $entryArrays = [];
+        $promises = [];
+        $results  = [];
 
-            $entryArray[] = [
-                'uuid' => $entryUuid[2],
-                'kind_of_info' => (string)$entry->title,
-                'feed_uuid' => $feedUuid[2],
-                'observatory_name' => (string)$entry->author->name,
-                'headline' => (string)$entry->content,
-                'url' => (string)$entry->link['href'],
-                'updated' => $carbon,
+        foreach ($feed->entry as $entry) {
+            $entryUuid = explode(':', (string)$entry->id)[2];
+            $kindOfInfo = (string)$entry->title;
+            $observatoryName = (string)$entry->author->name;
+            $headline = (string)$entry->content;
+            $updated = Carbon::parse((string)$entry->updated);
+            $updated->setTimezone(config('app.timezone'));
+            $url = (string)$entry->link['href'];
+
+            $promises[$entryUuid] = $client->getAsync($url);
+
+            $entryArrays[$entryUuid] = [
+                'kind_of_info' => $kindOfInfo,
+                'feed_uuid' => $feedUuid,
+                'observatory_name' => $observatoryName,
+                'headline' => $headline,
+                'url' => $url,
+                'updated' => $updated,
             ];
+        }
+
+        foreach (Promise\settle($promises)->wait() as $key => $obj) {
+            switch ($obj['state']) {
+                case 'fulfilled':
+                    $results[$key] = $obj['value'];
+                    break;
+                case 'rejected':
+                    $results[$key] = new Response($obj['reason']->getCode());
+                    break;
+                default:
+                    $results[$key] = new Response(0);
+            }
+        }
+
+        $entryRecords = []
+        foreach ($results as $key => $result) {
+            $entryArray = $entryArrays[$key];
+            $entryArray['uuid'] = $key;
+
+            if ($result->getReasonPhrase() === 'OK') {
+                $xmlDoc = $result->getBody()->getContents();
+                $entryArray['xml_document'] = $xmlDoc;
+            }
+
+            $entryRecords[] = $entryArray;
         }
 
         $entries = Entry::insert($entryRecords);
