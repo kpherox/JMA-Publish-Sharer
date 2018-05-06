@@ -16,17 +16,13 @@ use Illuminate\Http\Request;
 /**
  * WebSub webhooks
  */
-// old prefix redirect
-Route::prefix('push')->group(function() {
-    Route::get('subscriber', function() {
-        return redirect()->route('websub.subscribeCheck');
-    });
-    Route::post('subscriber', function() {
-        return redirect()->route('websub.receiveFeet');
-    });
+Route::prefix('websub')->group(function () {
+    Route::get('subscriber', 'WebSubController@subscribeCheck')->name('websub.subscribeCheck');
+    Route::post('subscriber', 'WebSubController@receiveFeed')->name('websub.receiveFeet');
 });
 
-Route::prefix('websub')->group(function () {
+// old prefix
+Route::prefix('push')->group(function() {
     Route::get('subscriber', 'WebSubController@subscribeCheck')->name('websub.subscribeCheck');
     Route::post('subscriber', 'WebSubController@receiveFeed')->name('websub.receiveFeet');
 });

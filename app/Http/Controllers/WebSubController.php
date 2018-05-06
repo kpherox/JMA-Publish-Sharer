@@ -46,8 +46,10 @@ class WebSubController extends Controller
         if (env('IS_HUB_VERIFY_TOKEN', false)) {
             $signature = explode('=',$request->header('x-hub-signature'));
             abort_if(is_null($signature[1]), 403, 'Not exist hub signature');
+
             $hash = hash_hmac($signature[0],$content,env('HUB_VERIFY_TOKEN'));
             abort_if($signature[1] != $hash, 403, 'Invalid hub signature');
+
             Log::debug('Success check hub signature');
         }
 
@@ -57,6 +59,9 @@ class WebSubController extends Controller
             return $message;
         }
         Log::debug('Success feed parse');
+
+        $now = Carbon::now();
+        $now->setTimezone(config('app.timezone'));
 
         $feedUuid = explode(':', (string)$feed->id)[2];
         $feedUpdated = Carbon::parse((string)$feed->updated);
@@ -115,6 +120,8 @@ class WebSubController extends Controller
         foreach ($results as $key => $result) {
             $entryArray = $entryArrays[$key];
             $entryArray['uuid'] = $key;
+            $entryArray['created_at'] = $now;
+            $entryArray['updated_at'] = $now;
 
             if ($result->getReasonPhrase() === 'OK') {
                 $xmlDoc = $result->getBody()->getContents();
