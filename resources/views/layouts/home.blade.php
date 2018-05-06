@@ -1,9 +1,9 @@
-@extends ('layouts.app')
+@extends ('layouts.dashboard')
 
 @section ('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-md-3 col-xl-2 bg-dark sidebar p-0">
+        <div class="col-12 col-md-3 col-xl-2 bg-secondary sidebar p-0">
             <nav class="collapse links">
                 <div class="list-group list-group-flush m-0 pt-2">
                     <a class="list-group-item @if ($__env->yieldContent('title') !== 'Dashboard') list-group-item-action list-group-item-dark text-dark @else text-body disabled @endif" href="{{ route('home') }}">Dashboard</a>

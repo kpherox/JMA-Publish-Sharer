@@ -8,17 +8,53 @@
 // Bootstrap
 @import "~bootstrap/scss/bootstrap.scss";
 
-header.navbar {
+$border-color:#cdcdcd;
+
+.text-border {
+    display: flex;
+    color: $border-color;
+    align-items: center;
+    text-align: center; /* for no-flexbox browsers */
+
+    &::before, &::after {
+        border-top: 1px solid $border-color;
+        content: '';
+        flex-grow: 1;
+    }
+
+    &::before {
+        margin-right: 0.5em;
+    }
+
+    &::after {
+        margin-left: 0.5em;
+    }
+}
+
+#app>header>nav {
     min-height: 3rem;
 }
 
-@media (min-width: 768px) {
-    .sidebar {
-        position: sticky;
-        top: 3rem;
-        height: calc(100vh - 3rem);
+.navbar-brand.dashboard {
+    line-height: 1rem;
+
+    @media (max-width: 768px) {
+        min-width: 12rem;
+        max-width: 12rem;
     }
-    .links {
+}
+
+.sidebar {
+    top: 3rem;
+
+    @media (min-width: 768px) {
+        height: calc(100vh - 3rem);
+        position: sticky;
+    }
+}
+
+.links {
+    @media (min-width: 768px) {
         display: block !important;
     }
 }
@@ -39,14 +75,21 @@ header.navbar {
     }
 }
 
-img.social-avatar {
-    width:3rem;
-    height:3rem;
+img {
+    &.social-avatar {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    &.account {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
 }
 
 button.btn-add {
-    width:3rem;
-    height:3rem;
+    width: 3rem;
+    height: 3rem;
 }
 
 .btn-social {
@@ -90,29 +133,6 @@ button.btn-add {
             height: 24px;
             fill: white;
         }
-    }
-}
-
-$border-color:#cdcdcd;
-
-.text-border {
-    display: flex;
-    color: $border-color;
-    align-items: center;
-    text-align: center; /* for no-flexbox browsers */
-
-    &::before, &::after {
-        border-top: 1px solid $border-color;
-        content: '';
-        flex-grow: 1;
-    }
-
-    &::before {
-        margin-right: 0.5em;
-    }
-
-    &::after {
-        margin-left: 0.5em;
     }
 }
 
