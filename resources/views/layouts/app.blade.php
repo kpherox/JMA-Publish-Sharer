@@ -8,18 +8,23 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>
+        @if (View::hasSection('title'))
+        @yield('title') -
+        @endif
+        {{ config('app.name', 'JMA Publish Sharer') }}
+        </title>
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
         <div id="app">
-            <header class="navbar navbar-expand-md navbar-light bg-white">
-                <nav class="container">
+            <header class="m-0 p-0">
+                <nav class="navbar navbar-expand-md navbar-light bg-white">
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                    <a class="navbar-brand col-1 col-md-3 col-xl-2 text-md-center" href="{{ url('/') }}">
+                        {{ config('app.name', 'JMA Publish Sharer') }}
                     </a>
 
                     <!-- Collapsed Hamburger -->
@@ -42,7 +47,7 @@
                             @else
                             <li class="nav-item dropdown">
                                 <a href="#" id="navbarDropdownMenuLink" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    {{ Auth::user()->name }}
+                                    {{ auth()->user()->name }}
                                 </a>
 
                                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
@@ -51,8 +56,8 @@
                                         {{ csrf_field() }}
                                     </form>
                                     <script>
-                                    document.addEventListener('DOMContentLoaded', function() {
-                                        document.getElementById('logout-button').addEventListener('click', function(e) {
+                                    document.addEventListener('DOMContentLoaded', () => {
+                                        document.getElementById('logout-button').addEventListener('click', (e) => {
                                             e.preventDefault();
                                             document.getElementById('logout-form').submit();
                                         });

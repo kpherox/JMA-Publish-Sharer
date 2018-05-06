@@ -9,7 +9,18 @@
 @import "~bootstrap/scss/bootstrap.scss";
 
 header.navbar {
-    margin-bottom: 1.5rem;
+    min-height: 3rem;
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        position: sticky;
+        top: 3rem;
+        height: calc(100vh - 3rem);
+    }
+    .links {
+        display: block !important;
+    }
 }
 
 .list-group-striped .list-group-item {
@@ -19,7 +30,7 @@ header.navbar {
 }
 
 .card {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 
     .card-header {
         h5{

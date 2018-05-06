@@ -3,7 +3,7 @@
 @section ('content')
 <div class="container">
     <div class="row">
-        <div class="col-lg-8 offset-lg-2">
+        <div class="col-lg-8 offset-lg-2 p-3">
             <div class="card">
                 <div class="card-header">Reset Password</div>
 

@@ -23,6 +23,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home', ['socialAccounts' => auth()->user()->accounts()]);
+        return view('home.index');
+    }
+
+    /**
+     * Show the application linked social accounts.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function socialAccounts()
+    {
+        return view('home.socialAccounts', ['socialAccounts' => auth()->user()->accounts()]);
     }
 }

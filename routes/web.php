@@ -21,5 +21,8 @@ Route::prefix('twitter')->group(function() {
     Route::get('callback', 'Auth\TwitterAccountController@handleProviderCallback')->name('twitter.callback');
 });
 
-Route::get('home', 'HomeController@index')->name('home');
+Route::prefix('home')->group(function() {
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('socialAccounts', 'HomeController@socialAccounts')->name('home.socialAccounts');
+});
 
