@@ -3,9 +3,9 @@
 @section ('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-md-3 col-xl-2 bg-secondary sidebar p-0">
-            <nav class="collapse links">
-                <div class="list-group list-group-flush m-0 pt-2">
+        <div class="col-md-2 bg-secondary sidebar collapse p-0 pt-5 d-md-block">
+            <nav class="sidebar-links pt-2">
+                <div class="list-group list-group-flush">
                     <a class="list-group-item @if ($__env->yieldContent('title') !== 'Dashboard') list-group-item-action list-group-item-dark text-dark @else text-body disabled @endif" href="{{ route('home') }}">Dashboard</a>
                     <a class="list-group-item @if ($__env->yieldContent('title') !== 'Social Accounts') list-group-item-action list-group-item-dark text-dark @else text-body disabled @endif" href="{{ route('home.socialAccounts') }}">Social Accounts</a>
                 </div>
@@ -18,7 +18,7 @@
                 </script>
             </nav>
         </div>
-        <div class="col-12 col-md-9 col-xl-8 offset-xl-1 p-3">
+        <div class="col-12 col-md-10 ml-auto pt-2 main">
             @if (session('status'))
             <div class="card">
                 <h5 class="card-header">Alert</h5>

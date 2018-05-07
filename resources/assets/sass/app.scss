@@ -37,25 +37,35 @@ $border-color:#cdcdcd;
 
 .navbar-brand.dashboard {
     line-height: 1rem;
+    min-width: 12rem;
 
     @media (max-width: 768px) {
-        min-width: 12rem;
         max-width: 12rem;
     }
 }
 
 .sidebar {
-    top: 3rem;
-
-    @media (min-width: 768px) {
-        height: calc(100vh - 3rem);
-        position: sticky;
-    }
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    min-width: 12rem;
 }
 
-.links {
+.sidebar-links {
+    position: sticky;
+    top: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    height: calc(100vh - 3rem);
+}
+
+.main {
+
     @media (min-width: 768px) {
-        display: block !important;
+        max-width: calc(100vw - 12rem);
     }
 }
 

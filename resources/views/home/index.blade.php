@@ -2,9 +2,11 @@
 @section ('title', 'Dashboard')
 
 @section ('page-content')
-<div id="dashboard" class="card">
-    <div class="card-body">
-        You are logged in!
+<div class="card-columns">
+    <div class="card">
+        <div class="card-body">
+            You are logged in!
+        </div>
     </div>
 </div>
 @endsection

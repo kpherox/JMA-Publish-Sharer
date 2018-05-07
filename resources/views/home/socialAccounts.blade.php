@@ -2,12 +2,12 @@
 @section ('title', 'Social Accounts')
 
 @section ('page-content')
-<div id="socialAccounts" class="card">
-    <h5 class="card-header">Acounts List</h5>
+<div id="account-lists" class="card">
+    <h5 class="card-header">Account Lists</h5>
     <div class="card-body">
         <dl class="row mb-0">
-            <dt class="col-sm-3 text-sm-right mt-sm-1 mb-2">Twitter</dt>
-                <dd class="col-sm-9 ml-3 ml-sm-0 mb-2">
+            <dt class="col-sm-2 text-sm-right mt-sm-1 mb-2">Twitter</dt>
+                <dd class="col-sm-8 col-lg-4 ml-3 ml-sm-0 mb-2">
                     @if ($socialAccounts->where('provider_name', 'twitter')->exists())
                     @foreach ($socialAccounts->where('provider_name', 'twitter')->get() as $account)
                     <p class="mb-2"><a class="text-body" href="http://twitter.com/{{ $account->account_name }}">
