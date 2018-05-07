@@ -9,6 +9,7 @@ class TwitterAccountController extends SocialAccountController
 {
     protected $provider = 'twitter';
     private $register = true;
+    private $forceLogin = false;
 
     /**
      * Create a new controller instance.
@@ -33,7 +34,11 @@ class TwitterAccountController extends SocialAccountController
         if (Auth::check() && $this->register) {
             return redirect('/home');
         }
-        return \Socialite::driver($this->getProvider())->redirect();
+
+        return \Socialite::driver($this->getProvider())
+            ->with([
+                'force_login' => $this->forceLogin
+            ])->redirect();
     }
 
     /**
@@ -45,7 +50,9 @@ class TwitterAccountController extends SocialAccountController
         if (Auth::guest()) {
             return redirect('/login');
         }
+
         $this->register = false;
+        $this->forceLogin = true;
         return $this->redirectToProvider();
     }
 }
