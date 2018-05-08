@@ -2,7 +2,7 @@
 
 @section ('header')
 <header>
-    <nav class="navbar navbar-expand navbar-light bg-white m-0 p-0 sticky-top">
+    <nav class="navbar navbar-expand navbar-light bg-white m-0 p-0 fixed-top">
         <!-- Branding Image -->
         <a class="navbar-brand dashboard col-2 text-white bg-dark pt-3 pb-3 pl-2 mr-0 mr-md-3" href="{{ url('/') }}">
             {{ config('app.name', 'JMA Publish Sharer') }}

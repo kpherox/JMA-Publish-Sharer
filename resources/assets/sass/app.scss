@@ -39,7 +39,7 @@ $border-color:#cdcdcd;
     line-height: 1rem;
     min-width: 12rem;
 
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         max-width: 12rem;
     }
 }
@@ -49,8 +49,17 @@ $border-color:#cdcdcd;
     top: 0;
     bottom: 0;
     left: 0;
-    z-index: 100;
-    min-width: 12rem;
+    padding: 3rem 0 0;
+    z-index: 1020;
+
+    @media (max-width: 767px) and (orientation: landscape) {
+        max-width: 12rem;
+    }
+
+    @media (min-width: 768px), (orientation: landscape) {
+        display: block !important;
+        min-width: 12rem;
+    }
 }
 
 .sidebar-links {
@@ -63,8 +72,11 @@ $border-color:#cdcdcd;
 }
 
 .main {
+    margin-top: 3rem;
+    padding-top: .5rem;
+    min-height: calc(100vh - 3rem);
 
-    @media (min-width: 768px) {
+    @media (min-width: 768px), (orientation: landscape) {
         max-width: calc(100vw - 12rem);
     }
 }
@@ -104,6 +116,7 @@ button.btn-add {
 
 .btn-social {
     padding: 0;
+
     a {
         margin: 0;
         padding: 6px 12px;
