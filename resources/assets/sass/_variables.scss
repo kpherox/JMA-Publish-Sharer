@@ -3,26 +3,8 @@
 $body-bg: #f5f8fa;
 $body-color: #636b6f;
 
-// Borders
-$laravel-border-color: darken($body-bg, 10%);
-$list-group-border-color: $laravel-border-color;
-$navbar-light-toggler-border-color: $laravel-border-color;
-
-// Colors
-$primary: #3097D1;
-$info: #8eb4cb;
-$success: #2ab27b;
-$warning: #cbb956;
-$danger: #bf5329;
-
 // Typography
 $font-family-sans-serif: "Raleway", sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
 
-// Froms
-$input-border-color: lighten($body-color, 40%);
-$input-focus-border-color: lighten($primary, 25%);
-$input-placeholder-color: lighten($body-color, 30%);
-
-// Cards
-$card-cap-bg: #fff;
-$card-border-color: $laravel-border-color;

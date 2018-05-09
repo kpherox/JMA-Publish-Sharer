@@ -59,14 +59,23 @@ ajv@^5.0.0:
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.3.0"
 
-ajv@^6.1.0:
-  version "6.4.0"
-  resolved "https://registry.npmjs.org/ajv/-/ajv-6.4.0.tgz#d3aff78e9277549771daf0164cff48482b754fc6"
+ajv@^5.1.0:
+  version "5.5.2"
+  resolved "https://registry.npmjs.org/ajv/-/ajv-5.5.2.tgz#73b5eeca3fab653e3d3f9422b341ad42205dc965"
   dependencies:
+    co "^4.6.0"
     fast-deep-equal "^1.0.0"
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.3.0"
-    uri-js "^3.0.2"
+
+ajv@^6.1.0:
+  version "6.5.0"
+  resolved "https://registry.npmjs.org/ajv/-/ajv-6.5.0.tgz#543517d6849a8da6e59a2c85c840fd2f50c59dd8343fd87ba7517e34ef05908cde8ba10fad1e99bb59f5f2b7793fc3ea69245dfc5ad6bf71b54d506aa4cf3780"
+  dependencies:
+    fast-deep-equal "^2.0.1"
+    fast-json-stable-stringify "^2.0.0"
+    json-schema-traverse "^0.3.0"
+    uri-js "^4.2.1"
 
 align-text@^0.1.1:
   version "0.1.4"
@@ -127,13 +136,6 @@ ansi-styles@^3.2.1:
 ansi-wrap@0.1.0:
   version "0.1.0"
   resolved "https://registry.npmjs.org/ansi-wrap/-/ansi-wrap-0.1.0.tgz#a82250ddb0015e9a27ca82e82ea603bbfa45efaf"
-
-anymatch@^1.3.0:
-  version "1.3.2"
-  resolved "https://registry.npmjs.org/anymatch/-/anymatch-1.3.2.tgz#d1735ac82f254c7436388f1a963342377b12c7a86caffd7eae5703028b57251ec2d686591c236c7e96cac0c8d103752a6f9b45d5169eda89684ebe31a6af968c"
-  dependencies:
-    micromatch "^2.1.5"
-    normalize-path "^2.0.0"
 
 anymatch@^2.0.0:
   version "2.0.0"
@@ -337,7 +339,7 @@ autoprefixer@^6.3.1:
     postcss "^5.2.16"
     postcss-value-parser "^3.2.3"
 
-autoprefixer@^7.1.1:
+autoprefixer@^7.2.6:
   version "7.2.6"
   resolved "https://registry.npmjs.org/autoprefixer/-/autoprefixer-7.2.6.tgz#22af1344807effd790f2b6c685c3fb72de5c61bff7aa3358011d929f32c211cc05eabbd539ac7cfbdf9f71c8179386c48501a33997794cb86c92c98076c6c6a9"
   dependencies:
@@ -352,15 +354,23 @@ aws-sign2@~0.6.0:
   version "0.6.0"
   resolved "https://registry.npmjs.org/aws-sign2/-/aws-sign2-0.6.0.tgz#14342dd38dbcc94d0e5b87d763cd63612c0e794f"
 
+aws-sign2@~0.7.0:
+  version "0.7.0"
+  resolved "https://registry.npmjs.org/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
+
 aws4@^1.2.1:
   version "1.7.0"
   resolved "https://registry.npmjs.org/aws4/-/aws4-1.7.0.tgz#df634375af36ae1c03f7f241082901f8c4580e9d284af968d882faad0580d743d08bbb4350cddea8c4a5b57998f8eca5ffb3773f7a8db4096fed7d1df5b236f3"
 
-axios@^0.16.2:
-  version "0.16.2"
-  resolved "https://registry.npmjs.org/axios/-/axios-0.16.2.tgz#ba4f92f17167dfbab40983785454b9ac149c3c6d"
+aws4@^1.6.0:
+  version "1.7.0"
+  resolved "https://registry.npmjs.org/aws4/-/aws4-1.7.0.tgz#df634375af36ae1c03f7f241082901f8c4580e9d284af968d882faad0580d743d08bbb4350cddea8c4a5b57998f8eca5ffb3773f7a8db4096fed7d1df5b236f3"
+
+axios@^0.18:
+  version "0.18.0"
+  resolved "https://registry.npmjs.org/axios/-/axios-0.18.0.tgz#32d53e4851efdc0a11993b6cd000789d70c05102"
   dependencies:
-    follow-redirects "^1.2.3"
+    follow-redirects "^1.3.0"
     is-buffer "^1.1.5"
 
 babel-code-frame@^6.26.0:
@@ -1136,7 +1146,19 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
-bootstrap@^4.1.1:
+boom@4.x.x:
+  version "4.3.1"
+  resolved "https://registry.npmjs.org/boom/-/boom-4.3.1.tgz#4f8a3005cb4a7e3889f749030fd25b96e01d2e31"
+  dependencies:
+    hoek "4.x.x"
+
+boom@5.x.x:
+  version "5.2.0"
+  resolved "https://registry.npmjs.org/boom/-/boom-5.2.0.tgz#67905393a6517b8b575d0964a9fb66b005003695e6bb096c1793a8bfc4e1a0c6d04737464c0d67818456d7ad067b180e823b0538a273d0b621a0d8bed8030153"
+  dependencies:
+    hoek "4.x.x"
+
+bootstrap@^4.0.0:
   version "4.1.1"
   resolved "https://registry.npmjs.org/bootstrap/-/bootstrap-4.1.1.tgz#4a988348e71b83827f3e3552b789f2e5e63a8fbe156d54a344e63815bfd62145c157d7276f996ec91e0a9cfbcda17b869c12b54fe9c9216a91b2f537c8ff0c72"
 
@@ -1435,24 +1457,24 @@ caniuse-api@^1.5.2:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529:
-  version "1.0.30000833"
-  resolved "https://registry.npmjs.org/caniuse-db/-/caniuse-db-1.0.30000833.tgz#2bd7be72a401658d2cbcb8f4d7600deebeb1c676"
+  version "1.0.30000836"
+  resolved "https://registry.npmjs.org/caniuse-db/-/caniuse-db-1.0.30000836.tgz#788b6c8f6f02991743b18cdbbd54f96d05b4b95a"
 
 caniuse-db@^1.0.30000634:
-  version "1.0.30000833"
-  resolved "https://registry.npmjs.org/caniuse-db/-/caniuse-db-1.0.30000833.tgz#2bd7be72a401658d2cbcb8f4d7600deebeb1c676"
+  version "1.0.30000836"
+  resolved "https://registry.npmjs.org/caniuse-db/-/caniuse-db-1.0.30000836.tgz#788b6c8f6f02991743b18cdbbd54f96d05b4b95a"
 
 caniuse-db@^1.0.30000639:
-  version "1.0.30000833"
-  resolved "https://registry.npmjs.org/caniuse-db/-/caniuse-db-1.0.30000833.tgz#2bd7be72a401658d2cbcb8f4d7600deebeb1c676"
+  version "1.0.30000836"
+  resolved "https://registry.npmjs.org/caniuse-db/-/caniuse-db-1.0.30000836.tgz#788b6c8f6f02991743b18cdbbd54f96d05b4b95a"
 
 caniuse-lite@^1.0.30000792:
-  version "1.0.30000833"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30000833.tgz#b4a36e2aee162c89a1e0dc684e09edc45a43ad1880d10e90d4dc9c361b8c493d0ac7e3edf189d10d6e95f31b321fa02d3b60a902889b6ad124e5e68484fdced6"
+  version "1.0.30000836"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30000836.tgz#0e5551f2c55328381deedf79534b215f783b31e27f0ce8ca3a151c6a25ea9d59a73b9b06e139f6acb54e9157cf50982740dc6719ef3fe062b4746488f806a043"
 
 caniuse-lite@^1.0.30000805:
-  version "1.0.30000833"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30000833.tgz#b4a36e2aee162c89a1e0dc684e09edc45a43ad1880d10e90d4dc9c361b8c493d0ac7e3edf189d10d6e95f31b321fa02d3b60a902889b6ad124e5e68484fdced6"
+  version "1.0.30000836"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30000836.tgz#0e5551f2c55328381deedf79534b215f783b31e27f0ce8ca3a151c6a25ea9d59a73b9b06e139f6acb54e9157cf50982740dc6719ef3fe062b4746488f806a043"
 
 capture-stack-trace@^1.0.0:
   version "1.0.0"
@@ -1461,6 +1483,10 @@ capture-stack-trace@^1.0.0:
 caseless@~0.11.0:
   version "0.11.0"
   resolved "https://registry.npmjs.org/caseless/-/caseless-0.11.0.tgz#715b96ea9841593cc33067923f5ec60ebda4f7d7"
+
+caseless@~0.12.0:
+  version "0.12.0"
+  resolved "https://registry.npmjs.org/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
 
 caw@^1.0.1:
   version "1.2.0"
@@ -1528,21 +1554,6 @@ chalk@^2.4.1:
 charenc@~0.0.1:
   version "0.0.2"
   resolved "https://registry.npmjs.org/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
-
-chokidar@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.npmjs.org/chokidar/-/chokidar-1.7.0.tgz#798e689778151c8076b4b360e5edd28cda2bb468"
-  dependencies:
-    anymatch "^1.3.0"
-    async-each "^1.0.0"
-    glob-parent "^2.0.0"
-    inherits "^2.0.1"
-    is-binary-path "^1.0.0"
-    is-glob "^2.0.0"
-    path-is-absolute "^1.0.0"
-    readdirp "^2.0.0"
-  optionalDependencies:
-    fsevents "^1.0.0"
 
 chokidar@^2.0.0:
   version "2.0.3"
@@ -1754,6 +1765,12 @@ colors@~1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/colors/-/colors-1.1.2.tgz#168a4701756b6a7f51a12ce0c97bfa28c084ed63"
 
+combined-stream@1.0.6:
+  version "1.0.6"
+  resolved "https://registry.npmjs.org/combined-stream/-/combined-stream-1.0.6.tgz#723e7df6e801ac5613113a7e445a9b69cb632818"
+  dependencies:
+    delayed-stream "~1.0.0"
+
 combined-stream@^1.0.5:
   version "1.0.6"
   resolved "https://registry.npmjs.org/combined-stream/-/combined-stream-1.0.6.tgz#723e7df6e801ac5613113a7e445a9b69cb632818"
@@ -1938,12 +1955,12 @@ copy-descriptor@^0.1.0:
   resolved "https://registry.npmjs.org/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
 
 core-js@^2.4.0:
-  version "2.5.5"
-  resolved "https://registry.npmjs.org/core-js/-/core-js-2.5.5.tgz#b14dde936c640c0579a6b50cabcc132dd6127e3b"
+  version "2.5.6"
+  resolved "https://registry.npmjs.org/core-js/-/core-js-2.5.6.tgz#9505157d08b468b8b1db1a728ebac912f7ee602a8f73f1f09932ac0bf54d7fcab4cec8d7ed2419b69e3ea1138d3794ecbabf460c44cf8e3f946f688388665f49"
 
 core-js@^2.5.0:
-  version "2.5.5"
-  resolved "https://registry.npmjs.org/core-js/-/core-js-2.5.5.tgz#b14dde936c640c0579a6b50cabcc132dd6127e3b"
+  version "2.5.6"
+  resolved "https://registry.npmjs.org/core-js/-/core-js-2.5.6.tgz#9505157d08b468b8b1db1a728ebac912f7ee602a8f73f1f09932ac0bf54d7fcab4cec8d7ed2419b69e3ea1138d3794ecbabf460c44cf8e3f946f688388665f49"
 
 core-util-is@1.0.2:
   version "1.0.2"
@@ -1978,8 +1995,8 @@ cosmiconfig@^2.1.1:
     require-from-string "^1.1.0"
 
 create-ecdh@^4.0.0:
-  version "4.0.1"
-  resolved "https://registry.npmjs.org/create-ecdh/-/create-ecdh-4.0.1.tgz#899bc20a0f17a87419d62a0d053cd74bf7104a4aa4a9c3ecf31497e2ea4d07e0c093d1eddeecd07f6277dae0073429def0b0e62abdbd02066b12ce2822bc0bb9"
+  version "4.0.3"
+  resolved "https://registry.npmjs.org/create-ecdh/-/create-ecdh-4.0.3.tgz#19b10740f30eb301a929733d902595aeb7a651c0668ed794690d354fdae42823c35df5075f42283fd2e91d8a3634f15a9a96b87befe91437378d0771af140b6b"
   dependencies:
     bn.js "^4.1.0"
     elliptic "^6.0.0"
@@ -2043,7 +2060,7 @@ create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-cross-env@^5.1.4:
+cross-env@^5.1:
   version "5.1.4"
   resolved "https://registry.npmjs.org/cross-env/-/cross-env-5.1.4.tgz#331f26c3a25685fa58a0493b3c6bc7c4930b43040739102cf3ed9b5fe0b59464388771a40dbd736f30b6370f39607f5940c94ed011d9c4c69c82b7cf98c1716e"
   dependencies:
@@ -2093,6 +2110,12 @@ cryptiles@2.x.x:
   dependencies:
     boom "2.x.x"
 
+cryptiles@3.x.x:
+  version "3.1.2"
+  resolved "https://registry.npmjs.org/cryptiles/-/cryptiles-3.1.2.tgz#a89fbb220f5ce25ec56e8c4aa8a4fd7b5b0d29fe"
+  dependencies:
+    boom "5.x.x"
+
 crypto-browserify@^3.11.0:
   version "3.12.0"
   resolved "https://registry.npmjs.org/crypto-browserify/-/crypto-browserify-3.12.0.tgz#7f3e2ca4887ece78ced958cbf88761129449dd837ab0ccc84d20628e4e852b652f4eaaee4905befdc0994d236c32264dbd47aad02aaeac5f9d01bca218e63a5a"
@@ -2113,7 +2136,7 @@ css-color-names@0.0.4:
   version "0.0.4"
   resolved "https://registry.npmjs.org/css-color-names/-/css-color-names-0.0.4.tgz#808adc2e79cf84738069b646cb20ec27beb629e0"
 
-css-loader@^0.28.3:
+css-loader@^0.28.9:
   version "0.28.11"
   resolved "https://registry.npmjs.org/css-loader/-/css-loader-0.28.11.tgz#c28bc7823031f1920c1922fca53cacede740d42966cf11de63a9ff77dee0839a1d82cc4480a8d42cf474be2ab20be1563022fdb1faa80bf402501a3adad2ef3e"
   dependencies:
@@ -2601,7 +2624,7 @@ domutils@1.5.1:
     dom-serializer "0"
     domelementtype "1"
 
-dotenv-expand@^4.0.1:
+dotenv-expand@^4.2.0:
   version "4.2.0"
   resolved "https://registry.npmjs.org/dotenv-expand/-/dotenv-expand-4.2.0.tgz#def1f1ca5d6059d24a766e587942c21106ce1275"
 
@@ -3216,6 +3239,10 @@ extend@~3.0.0:
   version "3.0.1"
   resolved "https://registry.npmjs.org/extend/-/extend-3.0.1.tgz#a755ea7bc1adfcc5a31ce7e762dbaadc5e636444"
 
+extend@~3.0.1:
+  version "3.0.1"
+  resolved "https://registry.npmjs.org/extend/-/extend-3.0.1.tgz#a755ea7bc1adfcc5a31ce7e762dbaadc5e636444"
+
 extglob@^0.3.1:
   version "0.3.2"
   resolved "https://registry.npmjs.org/extglob/-/extglob-0.3.2.tgz#2e18ff3d2f49ab2765cec9023f011daa8d8349a1"
@@ -3235,7 +3262,7 @@ extglob@^2.0.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-extract-text-webpack-plugin@^3.0.0:
+extract-text-webpack-plugin@^3.0.2:
   version "3.0.2"
   resolved "https://registry.npmjs.org/extract-text-webpack-plugin/-/extract-text-webpack-plugin-3.0.2.tgz#6edfcb6789b946ab7f0ab9761e22ae025fe8aa0d29b31d6db132e4bd66c97a7d42b43f9f7ed91984c690f473ad636816b25d96abeb000663158bdcf70e129641"
   dependencies:
@@ -3263,6 +3290,10 @@ fancy-log@^1.1.0:
 fast-deep-equal@^1.0.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/fast-deep-equal/-/fast-deep-equal-1.1.0.tgz#c053477817c86b51daa853c81e059b733d023614"
+
+fast-deep-equal@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/fast-deep-equal/-/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
 
 fast-json-stable-stringify@^2.0.0:
   version "2.0.0"
@@ -3297,7 +3328,7 @@ figures@^1.3.5:
     escape-string-regexp "^1.0.5"
     object-assign "^4.1.0"
 
-file-loader@^0.11.1:
+file-loader@^0.11.2:
   version "0.11.2"
   resolved "https://registry.npmjs.org/file-loader/-/file-loader-0.11.2.tgz#37eba11779acc0815ece21d08c649c27fc875d8b770e22c1782fbdbd65be5a350188294c48e955d58ad7422fbb28cd9a037467e01c9b82ffae5c541b7e4ce9be"
   dependencies:
@@ -3356,12 +3387,12 @@ filenamify@^2.0.0:
     trim-repeated "^1.0.0"
 
 fill-range@^2.1.0:
-  version "2.2.3"
-  resolved "https://registry.npmjs.org/fill-range/-/fill-range-2.2.3.tgz#50b77dfd7e469bc7492470963699fe7a8485a723"
+  version "2.2.4"
+  resolved "https://registry.npmjs.org/fill-range/-/fill-range-2.2.4.tgz#727adc09b8f4d7e8f68131bddb55593e71db8e67407fca1057f886795da4671192c9f6238d3c98efd12bb0ad56256329c3a0da029117ef66e29ea244fbf77ee5"
   dependencies:
     is-number "^2.1.0"
     isobject "^2.0.0"
-    randomatic "^1.1.3"
+    randomatic "^3.0.0"
     repeat-element "^1.1.2"
     repeat-string "^1.5.2"
 
@@ -3438,16 +3469,16 @@ flush-write-stream@^1.0.0:
     readable-stream "^2.0.4"
 
 follow-redirects@^1.0.0:
-  version "1.2.5"
-  resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.2.5.tgz#94c870413af215b1bec18b00204282d4a7f92060e554d9ce351a2020196587b2cba15ee9348c56d33f5f86345aafd341aa5fa1776638f4a6e85553717fa1847e"
+  version "1.4.1"
+  resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.4.1.tgz#bb161e3d53e882dc9ad64b469c001739a7276c8b91301e1d92fa9e373daa4ed4d0b2ecd27db0e8955fb030c2b10260b1d1b2e000a2db04e92322d31b6e4475be"
   dependencies:
-    debug "^2.6.9"
+    debug "^3.1.0"
 
-follow-redirects@^1.2.3:
-  version "1.2.5"
-  resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.2.5.tgz#94c870413af215b1bec18b00204282d4a7f92060e554d9ce351a2020196587b2cba15ee9348c56d33f5f86345aafd341aa5fa1776638f4a6e85553717fa1847e"
+follow-redirects@^1.3.0:
+  version "1.4.1"
+  resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.4.1.tgz#bb161e3d53e882dc9ad64b469c001739a7276c8b91301e1d92fa9e373daa4ed4d0b2ecd27db0e8955fb030c2b10260b1d1b2e000a2db04e92322d31b6e4475be"
   dependencies:
-    debug "^2.6.9"
+    debug "^3.1.0"
 
 for-in@^0.1.3:
   version "0.1.8"
@@ -3487,6 +3518,14 @@ form-data@~2.1.1:
   dependencies:
     asynckit "^0.4.0"
     combined-stream "^1.0.5"
+    mime-types "^2.1.12"
+
+form-data@~2.3.1:
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/form-data/-/form-data-2.3.2.tgz#4970498be604c20c005d4f5c23aecd21d6b49099"
+  dependencies:
+    asynckit "^0.4.0"
+    combined-stream "1.0.6"
     mime-types "^2.1.12"
 
 forwarded@~0.1.2:
@@ -3938,6 +3977,10 @@ handle-thing@^1.2.5:
   version "1.2.5"
   resolved "https://registry.npmjs.org/handle-thing/-/handle-thing-1.2.5.tgz#fd7aad726bf1a5fd16dfc29b2f7a6601d27139c4"
 
+har-schema@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/har-schema/-/har-schema-2.0.0.tgz#a94c2224ebcac04782a0d9035521f24735b7ec92"
+
 har-validator@~2.0.6:
   version "2.0.6"
   resolved "https://registry.npmjs.org/har-validator/-/har-validator-2.0.6.tgz#cdcbc08188265ad119b6a5a7c8ab70eecfb5d27d"
@@ -3946,6 +3989,13 @@ har-validator@~2.0.6:
     commander "^2.9.0"
     is-my-json-valid "^2.12.4"
     pinkie-promise "^2.0.0"
+
+har-validator@~5.0.3:
+  version "5.0.3"
+  resolved "https://registry.npmjs.org/har-validator/-/har-validator-5.0.3.tgz#ba402c266194f15956ef15e0fcf242993f6a7dfd"
+  dependencies:
+    ajv "^5.1.0"
+    har-schema "^2.0.0"
 
 has-ansi@^2.0.0:
   version "2.0.0"
@@ -4052,6 +4102,15 @@ hawk@~3.1.3:
     hoek "2.x.x"
     sntp "1.x.x"
 
+hawk@~6.0.2:
+  version "6.0.2"
+  resolved "https://registry.npmjs.org/hawk/-/hawk-6.0.2.tgz#9a2a30865dbe53b4257b8bdd2ea0dd3edf66d3d2bac998642c34d61a8522533ad00a7fa61c74a67c9800c8668b4596cf993a9f1458d1575416096d155942416d"
+  dependencies:
+    boom "4.x.x"
+    cryptiles "3.x.x"
+    hoek "4.x.x"
+    sntp "2.x.x"
+
 he@1.1.x:
   version "1.1.1"
   resolved "https://registry.npmjs.org/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
@@ -4071,6 +4130,10 @@ hmac-drbg@^1.0.0:
 hoek@2.x.x:
   version "2.16.3"
   resolved "https://registry.npmjs.org/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
+
+hoek@4.x.x:
+  version "4.2.1"
+  resolved "https://registry.npmjs.org/hoek/-/hoek-4.2.1.tgz#40b83cd9f1a47e727fe22cb5c59f35ffd488262ab5346154306b3a3daaf28c166bea35b651f8ffb270ea4c78b13651dd3cdc0dd912d50f43e2de281e2bdf897c"
 
 home-or-tmp@^2.0.0:
   version "2.0.0"
@@ -4173,6 +4236,14 @@ http-signature@~1.1.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
+http-signature@~1.2.0:
+  version "1.2.0"
+  resolved "https://registry.npmjs.org/http-signature/-/http-signature-1.2.0.tgz#9aecd925114772f3d95b65a60abb8f7c18fbace1"
+  dependencies:
+    assert-plus "^1.0.0"
+    jsprim "^1.2.2"
+    sshpk "^1.7.0"
+
 https-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
@@ -4251,7 +4322,7 @@ imagemin@^5.3.1:
     pify "^2.3.0"
     replace-ext "^1.0.0"
 
-img-loader@^2.0.0:
+img-loader@^2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/img-loader/-/img-loader-2.0.1.tgz#703e43fb3cc80ef54fc97f679b3ebe18bdb405fa5150a5045c5babf483de502f3f2d1253fcf43760957229e948ba6f11e6b095657812141d1c729b274b823201"
   dependencies:
@@ -4796,7 +4867,7 @@ isurl@^1.0.0-alpha5:
     has-to-string-tag-x "^1.2.0"
     is-object "^1.0.1"
 
-jquery@^3.3.1:
+jquery@^3.2:
   version "3.3.1"
   resolved "https://registry.npmjs.org/jquery/-/jquery-3.3.1.tgz#51b95d726c69e67a79dbf10da2d1b194b7ba68632f985e11f12ead663b0fe8a9ec6b177fc69dd9ae1e74706f77951ea73d7c94170ccddd948e408d3044935d1a"
 
@@ -4946,46 +5017,46 @@ kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.npmjs.org/kind-of/-/kind-of-6.0.2.tgz#b3990b39c9c7d17a833be16fb9a2d7f030e3675f0218593b572807e3442828f510856e1edabbccd2bc14ab4b7c2100cec1849e2cad3553dd0e8f305399ed90a8"
 
-laravel-mix@^1.7.2:
-  version "1.7.2"
-  resolved "https://registry.npmjs.org/laravel-mix/-/laravel-mix-1.7.2.tgz#2dad5e02c0a411dc9273d27d309fe0f038f511f1a8eda5d6f761992a849bad2838b9058d36857cdb87bafa8e1fe04a3f61662b63065391d9d6249d6e56a3fe77"
+laravel-mix@^2.0:
+  version "2.1.11"
+  resolved "https://registry.npmjs.org/laravel-mix/-/laravel-mix-2.1.11.tgz#fa20ea54f3ae1d2aba360fd65f4c3c5763bb47cf38eeed4dd63c9b07f000b9171ade7470e2223d04d349df4ed58a25dbd46ba5c4a8b12deebbb213c56ad263bd"
   dependencies:
-    autoprefixer "^7.1.1"
+    autoprefixer "^7.2.6"
     babel-core "^6.24.1"
     babel-loader "^7.1.1"
     babel-plugin-transform-object-rest-spread "^6.26.0"
     babel-plugin-transform-runtime "^6.23.0"
     babel-preset-env "^1.5.1"
-    chokidar "^1.7.0"
+    chokidar "^2.0.0"
     clean-css "^4.1.3"
     concatenate "0.0.2"
-    css-loader "^0.28.3"
+    css-loader "^0.28.9"
     dotenv "^4.0.0"
-    dotenv-expand "^4.0.1"
-    extract-text-webpack-plugin "^3.0.0"
-    file-loader "^0.11.1"
+    dotenv-expand "^4.2.0"
+    extract-text-webpack-plugin "^3.0.2"
+    file-loader "^0.11.2"
     friendly-errors-webpack-plugin "^1.6.1"
     fs-extra "^3.0.1"
     glob "^7.1.2"
     html-loader "^0.4.5"
-    img-loader "^2.0.0"
-    lodash "^4.17.4"
+    img-loader "^2.0.1"
+    lodash "^4.17.5"
     md5 "^2.2.1"
-    node-sass "^4.5.3"
-    postcss-loader "^2.0.5"
-    resolve-url-loader "^2.0.2"
+    node-sass "^4.7.2"
+    postcss-loader "^2.1.0"
+    resolve-url-loader "^2.2.1"
     sass-loader "^6.0.5"
-    style-loader "^0.18.1"
-    uglify-js "^2.8.28"
-    uglifyjs-webpack-plugin "^1.0.0"
-    vue-loader "^13.0.5"
-    vue-template-compiler "^2.0.0"
-    webpack "^3.5.0"
+    style-loader "^0.18.2"
+    uglify-js "^2.8.29"
+    uglifyjs-webpack-plugin "^1.1.8"
+    vue-loader "^13.7.1"
+    vue-template-compiler "^2.5.13"
+    webpack "^3.11.0"
     webpack-chunk-hash "^0.4.0"
-    webpack-dev-server "^2.5.1"
+    webpack-dev-server "^2.11.1"
     webpack-merge "^4.1.0"
-    webpack-notifier "^1.5.0"
-    yargs "^8.0.1"
+    webpack-notifier "^1.5.1"
+    yargs "^8.0.2"
 
 lazy-cache@^1.0.3:
   version "1.0.4"
@@ -5226,10 +5297,6 @@ lodash@^4.14.0:
   version "4.17.10"
   resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.10.tgz#51e8f0783d690e85eef800fcdb9956c29e191ad4b0827a59c5bdc90d5883ed2b63433f8d6ffea5d3dde5c78390d1fa0658d468735f665b2ec1ccbf9400ada256"
 
-lodash@^4.17.10:
-  version "4.17.10"
-  resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.10.tgz#51e8f0783d690e85eef800fcdb9956c29e191ad4b0827a59c5bdc90d5883ed2b63433f8d6ffea5d3dde5c78390d1fa0658d468735f665b2ec1ccbf9400ada256"
-
 lodash@^4.17.2:
   version "4.17.10"
   resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.10.tgz#51e8f0783d690e85eef800fcdb9956c29e191ad4b0827a59c5bdc90d5883ed2b63433f8d6ffea5d3dde5c78390d1fa0658d468735f665b2ec1ccbf9400ada256"
@@ -5296,15 +5363,15 @@ lpad-align@^1.0.1:
     meow "^3.3.0"
 
 lru-cache@^4.0.1:
-  version "4.1.2"
-  resolved "https://registry.npmjs.org/lru-cache/-/lru-cache-4.1.2.tgz#c207955e1ac3c005a7205ff264046c167301b5d1573a0d5bf1122b862969fb488360de2675070d6449436747b807ae0185ac5e439ccdecf332beeef07b590f79"
+  version "4.1.3"
+  resolved "https://registry.npmjs.org/lru-cache/-/lru-cache-4.1.3.tgz#7c5121bdc833b88a0955417c7d8af9291d18ab10f6dfcce039b4e9b37d587400f03cf029f366b833c4eb724916cb1ede90d95ff5a05c567f35705c305e782b24"
   dependencies:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
 lru-cache@^4.1.1:
-  version "4.1.2"
-  resolved "https://registry.npmjs.org/lru-cache/-/lru-cache-4.1.2.tgz#c207955e1ac3c005a7205ff264046c167301b5d1573a0d5bf1122b862969fb488360de2675070d6449436747b807ae0185ac5e439ccdecf332beeef07b590f79"
+  version "4.1.3"
+  resolved "https://registry.npmjs.org/lru-cache/-/lru-cache-4.1.3.tgz#7c5121bdc833b88a0955417c7d8af9291d18ab10f6dfcce039b4e9b37d587400f03cf029f366b833c4eb724916cb1ede90d95ff5a05c567f35705c305e782b24"
   dependencies:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
@@ -5340,6 +5407,10 @@ map-visit@^1.0.0:
 math-expression-evaluator@^1.2.14:
   version "1.2.17"
   resolved "https://registry.npmjs.org/math-expression-evaluator/-/math-expression-evaluator-1.2.17.tgz#de819fdbcd84dccd8fae59c6aeb79615b9d266ac"
+
+math-random@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/math-random/-/math-random-1.0.1.tgz#8b3aac588b8a66e4975e3cdea67f7bb329601fac"
 
 md5.js@^1.3.4:
   version "1.3.4"
@@ -5457,24 +5528,6 @@ merge-stream@^1.0.0:
 methods@~1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
-
-micromatch@^2.1.5:
-  version "2.3.11"
-  resolved "https://registry.npmjs.org/micromatch/-/micromatch-2.3.11.tgz#86677c97d1720b363431d04d0d15293bd38c1565"
-  dependencies:
-    arr-diff "^2.0.0"
-    array-unique "^0.2.1"
-    braces "^1.8.2"
-    expand-brackets "^0.1.4"
-    extglob "^0.3.1"
-    filename-regex "^2.0.0"
-    is-extglob "^1.0.0"
-    is-glob "^2.0.1"
-    kind-of "^3.0.2"
-    normalize-path "^2.0.1"
-    object.omit "^2.0.0"
-    parse-glob "^3.0.4"
-    regex-cache "^0.4.2"
 
 micromatch@^2.3.11:
   version "2.3.11"
@@ -5848,7 +5901,7 @@ node-notifier@^5.1.2:
     shellwords "^0.1.1"
     which "^1.3.0"
 
-node-sass@^4.5.3:
+node-sass@^4.7.2:
   version "4.9.0"
   resolved "https://registry.npmjs.org/node-sass/-/node-sass-4.9.0.tgz#4051dfad997a96a454ddcb32a70be2cf65cb80634ea1641ba3618ebedb1f42a39f2f8732d41b569e1c7f5d47803bd2d3dda841cd24577043ba0ddbc01fd0f34a"
   dependencies:
@@ -5899,12 +5952,6 @@ normalize-package-data@^2.3.4:
     is-builtin-module "^1.0.0"
     semver "2 || 3 || 4 || 5"
     validate-npm-package-license "^3.0.1"
-
-normalize-path@^2.0.0:
-  version "2.1.1"
-  resolved "https://registry.npmjs.org/normalize-path/-/normalize-path-2.1.1.tgz#1ab28b556e198363a8c1a6f7e6fa20137fe6aed9"
-  dependencies:
-    remove-trailing-separator "^1.0.1"
 
 normalize-path@^2.0.1:
   version "2.1.1"
@@ -5977,6 +6024,10 @@ number-is-nan@^1.0.0:
   resolved "https://registry.npmjs.org/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
 oauth-sign@~0.8.1:
+  version "0.8.2"
+  resolved "https://registry.npmjs.org/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
+
+oauth-sign@~0.8.2:
   version "0.8.2"
   resolved "https://registry.npmjs.org/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
 
@@ -6352,6 +6403,10 @@ pend@~1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/pend/-/pend-1.2.0.tgz#7a57eb550a6783f9115331fcf4663d5c8e007a50"
 
+performance-now@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
+
 pify@^2.0.0:
   version "2.3.0"
   resolved "https://registry.npmjs.org/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
@@ -6389,7 +6444,7 @@ pngquant-bin@^4.0.0:
     execa "^0.10.0"
     logalot "^2.0.0"
 
-popper.js@^1.14.3:
+popper.js@^1.12:
   version "1.14.3"
   resolved "https://registry.npmjs.org/popper.js/-/popper.js-1.14.3.tgz#1438f98d046acf7b4d78cd502bf418ac64d4f095"
 
@@ -6498,9 +6553,9 @@ postcss-load-plugins@^2.3.0:
     cosmiconfig "^2.1.1"
     object-assign "^4.1.0"
 
-postcss-loader@^2.0.5:
-  version "2.1.4"
-  resolved "https://registry.npmjs.org/postcss-loader/-/postcss-loader-2.1.4.tgz#2f6a7ae78a0af78e41fe00c550680e861eeece3d7d456a18d5254c7895682a7a351f631d6d0d11a6947fdbc2468eee2931bdb68910bb049f5a0f36f15d22dfe0"
+postcss-loader@^2.1.0:
+  version "2.1.5"
+  resolved "https://registry.npmjs.org/postcss-loader/-/postcss-loader-2.1.5.tgz#a55ee40799de274ff5b59f0bd6e18e04d4d50424825d0a08b1932caf0bcef15dab2866b6b4197f7fcd06195c68c368c99d1276c35a1cc7af7710a85901bf48b2"
   dependencies:
     loader-utils "^1.1.0"
     postcss "^6.0.0"
@@ -6962,6 +7017,10 @@ qs@~6.3.0:
   version "6.3.2"
   resolved "https://registry.npmjs.org/qs/-/qs-6.3.2.tgz#e75bd5f6e268122a2a0e0bda630b2550c166502c"
 
+qs@~6.5.1:
+  version "6.5.2"
+  resolved "https://registry.npmjs.org/qs/-/qs-6.5.2.tgz#3796405f8fcbc49985fbbc0def8a540faa8087dff09ef750723abd4d98debef5f3494a3b6df9b0f75b1aa8c8f3192db1abdd7fa1d376756fd63a5eea40734318"
+
 query-string@^4.1.0:
   version "4.3.4"
   resolved "https://registry.npmjs.org/query-string/-/query-string-4.3.4.tgz#bbb693b9ca915c232515b228b1a02b609043dbeb"
@@ -6985,12 +7044,13 @@ querystringify@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/querystringify/-/querystringify-2.0.0.tgz#7933e8e6dff86e068c359c728d6c7a3766ba02e1349aae75296be973b9d4fcc02a8b1708eafe8aac650a112d076a899d9e89500415d4ffef97ebf410f4a2f8b7"
 
-randomatic@^1.1.3:
-  version "1.1.7"
-  resolved "https://registry.npmjs.org/randomatic/-/randomatic-1.1.7.tgz#0f92548cfc896da24392e01ace956749f5642e5a5e3b7c0394f44e4cc2c6286d73305345460adc88aa3596dcff03335392a1341f30f1eb9e5038be75374ea1a3"
+randomatic@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/randomatic/-/randomatic-3.0.0.tgz#55dc45388118de634ee4fb524649257bf84f2431ef4212b6d686bbdcae3201cf6a9a9e8de36f6003217581930e4cc792d3f018cda57fd93adc79ff8d688a2748"
   dependencies:
-    is-number "^3.0.0"
-    kind-of "^4.0.0"
+    is-number "^4.0.0"
+    kind-of "^6.0.0"
+    math-random "^1.0.1"
 
 randombytes@^2.0.0:
   version "2.0.6"
@@ -7382,29 +7442,31 @@ replace-ext@^1.0.0:
   resolved "https://registry.npmjs.org/replace-ext/-/replace-ext-1.0.0.tgz#de63128373fcbf7c3ccfa4de5a480c45a67958eb"
 
 request@2:
-  version "2.79.0"
-  resolved "https://registry.npmjs.org/request/-/request-2.79.0.tgz#4dfe5bf6be8b8cdc37fcf93e04b65577722710de"
+  version "2.85.0"
+  resolved "https://registry.npmjs.org/request/-/request-2.85.0.tgz#f07ec48628dde23b3eb3ac2e54f2e3c0e4710f8cdebb28d8ba0a6b74e5e53d2a9a02998bfd03b2f8407f6de2021d508790630a361e6bbe285be68bfe203c389a"
   dependencies:
-    aws-sign2 "~0.6.0"
-    aws4 "^1.2.1"
-    caseless "~0.11.0"
+    aws-sign2 "~0.7.0"
+    aws4 "^1.6.0"
+    caseless "~0.12.0"
     combined-stream "~1.0.5"
-    extend "~3.0.0"
+    extend "~3.0.1"
     forever-agent "~0.6.1"
-    form-data "~2.1.1"
-    har-validator "~2.0.6"
-    hawk "~3.1.3"
-    http-signature "~1.1.0"
+    form-data "~2.3.1"
+    har-validator "~5.0.3"
+    hawk "~6.0.2"
+    http-signature "~1.2.0"
     is-typedarray "~1.0.0"
     isstream "~0.1.2"
     json-stringify-safe "~5.0.1"
-    mime-types "~2.1.7"
-    oauth-sign "~0.8.1"
-    qs "~6.3.0"
-    stringstream "~0.0.4"
-    tough-cookie "~2.3.0"
-    tunnel-agent "~0.4.1"
-    uuid "^3.0.0"
+    mime-types "~2.1.17"
+    oauth-sign "~0.8.2"
+    performance-now "^2.1.0"
+    qs "~6.5.1"
+    safe-buffer "^5.1.1"
+    stringstream "~0.0.5"
+    tough-cookie "~2.3.3"
+    tunnel-agent "^0.6.0"
+    uuid "^3.1.0"
 
 request@~2.79.0:
   version "2.79.0"
@@ -7461,7 +7523,7 @@ resolve-from@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/resolve-from/-/resolve-from-3.0.0.tgz#b22c7af7d9d6881bc8b6e653335eebcb0a188748"
 
-resolve-url-loader@^2.0.2:
+resolve-url-loader@^2.2.1:
   version "2.3.0"
   resolved "https://registry.npmjs.org/resolve-url-loader/-/resolve-url-loader-2.3.0.tgz#45a1145a017f07a69383d54a68ebf6a3a75f9b97fbe7f94687c4be490c2831c066e3c5a40369e12d1f95eca11ac24c578d4e252c1d7a21578709eec5ebd9f257"
   dependencies:
@@ -7868,6 +7930,12 @@ sntp@1.x.x:
   dependencies:
     hoek "2.x.x"
 
+sntp@2.x.x:
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/sntp/-/sntp-2.1.0.tgz#14bd5be7c043aea4b7035d65274cc476727750e2aa5716b002417793b17409537b550df8699ad5f86f01675582f592fb372af0b16d28be2c2c583811b9562d26"
+  dependencies:
+    hoek "4.x.x"
+
 sockjs-client@1.1.4:
   version "1.1.4"
   resolved "https://registry.npmjs.org/sockjs-client/-/sockjs-client-1.1.4.tgz#5babe386b775e4cf14e7520911452654016c8b12"
@@ -8188,6 +8256,10 @@ stringstream@~0.0.4:
   version "0.0.5"
   resolved "https://registry.npmjs.org/stringstream/-/stringstream-0.0.5.tgz#4e484cd4de5a0bbbee18e46307710a8a81621878"
 
+stringstream@~0.0.5:
+  version "0.0.5"
+  resolved "https://registry.npmjs.org/stringstream/-/stringstream-0.0.5.tgz#4e484cd4de5a0bbbee18e46307710a8a81621878"
+
 strip-ansi@^3.0.0:
   version "3.0.1"
   resolved "https://registry.npmjs.org/strip-ansi/-/strip-ansi-3.0.1.tgz#6a385fb8853d952d5ff05d0e8aaf94278dc63dcf"
@@ -8260,7 +8332,7 @@ strip-outer@^1.0.0:
   dependencies:
     escape-string-regexp "^1.0.2"
 
-style-loader@^0.18.1:
+style-loader@^0.18.2:
   version "0.18.2"
   resolved "https://registry.npmjs.org/style-loader/-/style-loader-0.18.2.tgz#58fa493d9194c5660758850c34d398aaa97bce1f39cc69abf3815d4d55aae76593224aa55bdc52c43dd06168bf4f7d5caa7f54352b227ad5448069f669a482cf"
   dependencies:
@@ -8516,6 +8588,12 @@ tough-cookie@~2.3.0:
   dependencies:
     punycode "^1.4.1"
 
+tough-cookie@~2.3.3:
+  version "2.3.4"
+  resolved "https://registry.npmjs.org/tough-cookie/-/tough-cookie-2.3.4.tgz#4d9e934df23936d667bb2cbf29e72ff829e844e9f25e7d8337decba27b604290b0b17d97c8b6020b410d85891e8523b0029f2b4d029cfcd50817b064439aca2c"
+  dependencies:
+    punycode "^1.4.1"
+
 trim-newlines@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/trim-newlines/-/trim-newlines-1.0.0.tgz#5887966bb582a4503a41eb524f7d35011815a613"
@@ -8588,20 +8666,11 @@ uglify-es@^3.3.4:
     source-map "~0.6.1"
 
 uglify-js@3.3.x:
-  version "3.3.23"
-  resolved "https://registry.npmjs.org/uglify-js/-/uglify-js-3.3.23.tgz#2acf8aa8b183b189f8cfea54ec9b0a0b30b44f798f625fab53e55c3d989039ace313852a8b8502458dea3cc0db262ef37b7ee7d650d78f76e2cf58a4f77beabf"
+  version "3.3.24"
+  resolved "https://registry.npmjs.org/uglify-js/-/uglify-js-3.3.24.tgz#852efe4c38aa22abd649c09c291c9b090ce6327133278af297d12b4665b8185c86e3ca74fdd2998b2ff99952dbb05cd4f020a70a041dc4c889cd9cad86f2f30a"
   dependencies:
     commander "~2.15.0"
     source-map "~0.6.1"
-
-uglify-js@^2.8.28:
-  version "2.8.29"
-  resolved "https://registry.npmjs.org/uglify-js/-/uglify-js-2.8.29.tgz#29c5733148057bb4e1f75df35b7a9cb72e6a59dd"
-  dependencies:
-    source-map "~0.5.1"
-    yargs "~3.10.0"
-  optionalDependencies:
-    uglify-to-browserify "~1.0.0"
 
 uglify-js@^2.8.29:
   version "2.8.29"
@@ -8624,7 +8693,7 @@ uglifyjs-webpack-plugin@^0.4.6:
     uglify-js "^2.8.29"
     webpack-sources "^1.0.1"
 
-uglifyjs-webpack-plugin@^1.0.0:
+uglifyjs-webpack-plugin@^1.1.8:
   version "1.2.5"
   resolved "https://registry.npmjs.org/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-1.2.5.tgz#848409d72c403e1100db25bf8bb16bf925d954ca7e544237778d914c706041ddb2869ff551d05c47740458f5796a107196a403304313b9312f0c748520d7f04b"
   dependencies:
@@ -8721,9 +8790,9 @@ upper-case@^1.1.1:
   version "1.1.3"
   resolved "https://registry.npmjs.org/upper-case/-/upper-case-1.1.3.tgz#f6b4501c2ec4cdd26ba78be7222961de77621598"
 
-uri-js@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.npmjs.org/uri-js/-/uri-js-3.0.2.tgz#f90b858507f81dea4dcfbb3c4c3dbfa2b557faaa"
+uri-js@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.npmjs.org/uri-js/-/uri-js-4.2.1.tgz#8e92820371e3b017d20ce120c510c0c5008dc877c23d26eae7b3ea0a4777800c81b8f6f7216c70e781079dca844b39c876a49eb477f0dc3ef295386ed8a71cf4"
   dependencies:
     punycode "^2.1.0"
 
@@ -8810,6 +8879,10 @@ uuid@^3.0.0:
   resolved "https://registry.npmjs.org/uuid/-/uuid-3.2.1.tgz#8d99ccc256fd224bbf3b7b26196bd985ab827fa72fbe92a2e012918a5892ddcc6723e1b3f63e4c1294f3d9416e5e228f26871bee09ec2c7c224b4e6281ee4110"
 
 uuid@^3.0.1:
+  version "3.2.1"
+  resolved "https://registry.npmjs.org/uuid/-/uuid-3.2.1.tgz#8d99ccc256fd224bbf3b7b26196bd985ab827fa72fbe92a2e012918a5892ddcc6723e1b3f63e4c1294f3d9416e5e228f26871bee09ec2c7c224b4e6281ee4110"
+
+uuid@^3.1.0:
   version "3.2.1"
   resolved "https://registry.npmjs.org/uuid/-/uuid-3.2.1.tgz#8d99ccc256fd224bbf3b7b26196bd985ab827fa72fbe92a2e012918a5892ddcc6723e1b3f63e4c1294f3d9416e5e228f26871bee09ec2c7c224b4e6281ee4110"
 
@@ -8902,7 +8975,7 @@ vue-hot-reload-api@^2.2.0:
   version "2.3.0"
   resolved "https://registry.npmjs.org/vue-hot-reload-api/-/vue-hot-reload-api-2.3.0.tgz#da3fedfb021bc9530fe4dbdcb50a1252f2e460aa160009364254228a5accd9aebfba5cc581d70b5097d3bece1743fdde6611e2066984a236e398ce00cd98fc24"
 
-vue-loader@^13.0.5:
+vue-loader@^13.7.1:
   version "13.7.1"
   resolved "https://registry.npmjs.org/vue-loader/-/vue-loader-13.7.1.tgz#bfa3db28c1a5fe158718fc41dae187b00ebabeeb2b5c5eba27f875422157b54eb3e735522bc8eae7197de4cd69dd03579ae10928d3f79f1a177db81036cee126"
   dependencies:
@@ -8927,7 +9000,7 @@ vue-style-loader@^3.0.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-template-compiler@^2.0.0:
+vue-template-compiler@^2.5.13:
   version "2.5.16"
   resolved "https://registry.npmjs.org/vue-template-compiler/-/vue-template-compiler-2.5.16.tgz#65bba109c17f85362695da1439572ed9f71b7920199dfcf00ec90676e3ab9e30622161e010b01df91f2702d5fcd1a66471e58328643a37dff4fc4529b7e976d8"
   dependencies:
@@ -8938,7 +9011,7 @@ vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#c772d5df0766984461542632deabaa039ecd256ec5de2e9f69ab3efa92505ad927593fa7ee4df41784d5747bc22e7e3ca5e4c9151bc2a71b3752e14faa07842e"
 
-vue@^2.5.16:
+vue@^2.5.7:
   version "2.5.16"
   resolved "https://registry.npmjs.org/vue/-/vue-2.5.16.tgz#fdf7e6b2256e3c2f0fb167059199e07696acd7d0019b99a1db003b883a9c96dc824f09606631c678960e5e404ca38db688fc0872f88eb6b4c252949f5e64e82d"
 
@@ -8982,7 +9055,7 @@ webpack-dev-middleware@1.12.2:
     range-parser "^1.0.3"
     time-stamp "^2.0.0"
 
-webpack-dev-server@^2.5.1:
+webpack-dev-server@^2.11.1:
   version "2.11.2"
   resolved "https://registry.npmjs.org/webpack-dev-server/-/webpack-dev-server-2.11.2.tgz#ceb3e85fdedbc78eef6620177c3ae4c3ca5ef508c9fa5ba7425dddca9a23c96c16af5339236874552acc3df4e3a291d03d1367f8da9f8dc3268682dc5097b680"
   dependencies:
@@ -9020,7 +9093,7 @@ webpack-merge@^4.1.0:
   dependencies:
     lodash "^4.17.5"
 
-webpack-notifier@^1.5.0:
+webpack-notifier@^1.5.1:
   version "1.6.0"
   resolved "https://registry.npmjs.org/webpack-notifier/-/webpack-notifier-1.6.0.tgz#ffac8e55ff8c469752b8c1bbb011a16f10986e02"
   dependencies:
@@ -9042,7 +9115,7 @@ webpack-sources@^1.1.0:
     source-list-map "^2.0.0"
     source-map "~0.6.1"
 
-webpack@^3.5.0:
+webpack@^3.11.0:
   version "3.11.0"
   resolved "https://registry.npmjs.org/webpack/-/webpack-3.11.0.tgz#de43857a35aa8f9212a49938423fd5ef0f7c87d565e76c1a93708b8b0fdc0ce7db553abb15ea19d127681c763d3d8947af9d194b8d8e7efcc4daf0789e770a42"
   dependencies:
@@ -9228,24 +9301,6 @@ yargs@^7.0.0:
     which-module "^1.0.0"
     y18n "^3.2.1"
     yargs-parser "^5.0.0"
-
-yargs@^8.0.1:
-  version "8.0.2"
-  resolved "https://registry.npmjs.org/yargs/-/yargs-8.0.2.tgz#6299a9055b1cefc969ff7e79c1d918dceb22c360"
-  dependencies:
-    camelcase "^4.1.0"
-    cliui "^3.2.0"
-    decamelize "^1.1.1"
-    get-caller-file "^1.0.1"
-    os-locale "^2.0.0"
-    read-pkg-up "^2.0.0"
-    require-directory "^2.1.1"
-    require-main-filename "^1.0.1"
-    set-blocking "^2.0.0"
-    string-width "^2.0.0"
-    which-module "^2.0.0"
-    y18n "^3.2.1"
-    yargs-parser "^7.0.0"
 
 yargs@^8.0.2:
   version "8.0.2"
