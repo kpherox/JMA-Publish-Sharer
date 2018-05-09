@@ -29,5 +29,7 @@
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
         <env name="MAIL_DRIVER" value="array"/>
+        <env name="IS_HUB_VERIFY_TOKEN" value="true"/>
+        <env name="HUB_VERIFY_TOKEN" value="testwebsub"/>
     </php>
 </phpunit>
