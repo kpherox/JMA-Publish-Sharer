@@ -6,7 +6,7 @@ php:
 
 before_script:
   - phpenv config-rm xdebug.ini
-  - cp .env.travis .env
+  - cp .env.travis .env.testing
   - mysql -e 'create database homestead_test;'
   - composer self-update
   - composer install --no-interaction
