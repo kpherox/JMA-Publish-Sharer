@@ -42,6 +42,12 @@
         }
     },
     "scripts": {
+        "test": [
+            "phpunit -c phpunit.xml"
+        ],
+        "cover": [
+            "@composer test -- --coverage-clover coverage/clover.xml"
+        ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],

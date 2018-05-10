@@ -19,20 +19,22 @@ class WebSubTest extends TestCase
     {
         $response = $this->call('GET', '/hooks/websub/subscriber', [
                                     'hub_mode' => 'subscribe',
-                                    'hub_verify_token' => 'testwebsub'
+                                    'hub_verify_token' => 'testwebsub',
+                                    'hub_challenge' => 'test'
                                 ]);
 
-        $response->assertStatus(200);
+        $response->assertSeeText('test');
     }
 
     public function testSubscribeCheckOldPathSuccess()
     {
         $response = $this->call('GET', '/hooks/push/subscriber', [
                                     'hub_mode' => 'subscribe',
-                                    'hub_verify_token' => 'testwebsub'
+                                    'hub_verify_token' => 'testwebsub',
+                                    'hub_challenge' => 'test'
                                 ]);
 
-        $response->assertStatus(200);
+        $response->assertSeeText('test');
     }
 
     /**
@@ -48,7 +50,7 @@ class WebSubTest extends TestCase
                                     'hub.verify_token' => 'testfail'
                                 ]);
 
-        $response->assertStatus(403);
+        $response->assertForbidden();
     }
 
     public function testSubscribeCheckOldPathIncorrecetToken()
@@ -58,7 +60,7 @@ class WebSubTest extends TestCase
                                     'hub.verify_token' => 'testfail'
                                 ]);
 
-        $response->assertStatus(403);
+        $response->assertForbidden();
     }
 
     /**
@@ -73,7 +75,7 @@ class WebSubTest extends TestCase
                                     'hub_mode' => 'subscribe'
                                 ]);
 
-        $response->assertStatus(403);
+        $response->assertForbidden();
     }
 
     public function testSubscribeCheckOldPathNotExistToken()
@@ -82,7 +84,7 @@ class WebSubTest extends TestCase
                                     'hub_mode' => 'subscribe'
                                 ]);
 
-        $response->assertStatus(403);
+        $response->assertForbidden();
     }
 
     /**
@@ -95,14 +97,14 @@ class WebSubTest extends TestCase
     {
         $response = $this->call('GET', '/hooks/websub/subscriber');
 
-        $response->assertStatus(404);
+        $response->assertNotFound();
     }
 
     public function testSubscribeCheckOldPathNotFound()
     {
         $response = $this->call('GET', '/hooks/push/subscriber');
 
-        $response->assertStatus(404);
+        $response->assertNotFound();
     }
 
 }
