@@ -9,6 +9,7 @@ use App\Eloquents\Feed;
 use App\Eloquents\Entry;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise;
+use GuzzleHttp\Psr7;
 
 class WebSubController extends Controller
 {
@@ -109,10 +110,10 @@ class WebSubController extends Controller
                     $results[$key] = $obj['value'];
                     break;
                 case 'rejected':
-                    $results[$key] = new Response($obj['reason']->getCode());
+                    $results[$key] = new Psr7\Response($obj['reason']->getCode());
                     break;
                 default:
-                    $results[$key] = new Response(0);
+                    $results[$key] = new Psr7\Response(0);
             }
         }
 
