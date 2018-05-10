@@ -53,16 +53,6 @@ class WebSubTest extends TestCase
         $response->assertForbidden();
     }
 
-    public function testSubscribeCheckOldPathIncorrecetToken()
-    {
-        $response = $this->call('GET', '/hooks/push/subscriber', [
-                                    'hub_mode' => 'subscribe',
-                                    'hub.verify_token' => 'testfail'
-                                ]);
-
-        $response->assertForbidden();
-    }
-
     /**
      * Subscribe check test.
      * Does't set 'hub.verify_token'
@@ -78,15 +68,6 @@ class WebSubTest extends TestCase
         $response->assertForbidden();
     }
 
-    public function testSubscribeCheckOldPathNotExistToken()
-    {
-        $response = $this->call('GET', '/hooks/push/subscriber', [
-                                    'hub_mode' => 'subscribe'
-                                ]);
-
-        $response->assertForbidden();
-    }
-
     /**
      * Subscribe check test.
      * Doesn't set 'hub.mode'
@@ -96,13 +77,6 @@ class WebSubTest extends TestCase
     public function testSubscribeCheckNotFound()
     {
         $response = $this->call('GET', '/hooks/websub/subscriber');
-
-        $response->assertNotFound();
-    }
-
-    public function testSubscribeCheckOldPathNotFound()
-    {
-        $response = $this->call('GET', '/hooks/push/subscriber');
 
         $response->assertNotFound();
     }
