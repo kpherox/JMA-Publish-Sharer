@@ -47,11 +47,12 @@ class WebSubController extends Controller
         if (config('app.isUseWebSubVerifyToken')) {
             $hubSignature = $request->header('x-hub-signature');
             abort_if(empty($hubSignature), 403, 'Not exist x-hub-signature header');
-            $signature = explode('=',$hubSignature);
-            abort_if(empty($signature[1]), 403, 'Not exist hub signature');
 
-            $hash = hash_hmac($signature[0],$content,config('app.websubVerifyToken'));
-            abort_if($signature[1] != $hash, 403, 'Invalid hub signature');
+            $signature = collect(explode('=',$hubSignature));
+            abort_if($signature->count() !== 2, 403, 'Invalid x-hub-signature header');
+
+            $hash = hash_hmac($signature->first(),$content,config('app.websubVerifyToken'));
+            abort_if($signature->last() !== $hash, 403, 'Invalid hub signature');
 
             Log::debug('Success check hub signature');
         }
@@ -66,7 +67,7 @@ class WebSubController extends Controller
         $now = Carbon::now();
         $now->setTimezone(config('app.timezone'));
 
-        $feedUuid = explode(':', (string)$feed->id)[2];
+        $feedUuid = collect(explode(':', (string)$feed->id))->last();
         $feedUpdated = Carbon::parse((string)$feed->updated);
         $feedUpdated->setTimezone(config('app.timezone'));
         $feeds = Feed::firstOrNew(['uuid' => $feedUuid]);
@@ -86,7 +87,7 @@ class WebSubController extends Controller
         $results  = [];
 
         foreach ($feed->entry as $entry) {
-            $entryUuid = explode(':', (string)$entry->id)[2];
+            $entryUuid = collect(explode(':', (string)$entry->id))->last();
             $kindOfInfo = (string)$entry->title;
             $observatoryName = (string)$entry->author->name;
             $headline = (string)$entry->content;
