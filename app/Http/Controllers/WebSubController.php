@@ -23,10 +23,10 @@ class WebSubController extends Controller
         $hubMode = $request->hub_mode;
         abort_if($hubMode != 'subscribe' && $hubMode != 'unsubscribe', 404, 'Not Found');
 
-        if (env('IS_HUB_VERIFY_TOKEN', false)) {
+        if (config('app.isUseWebSubVerifyToken')) {
             $hubVerifyToken = $request->hub_verify_token;
-            abort_if(is_null($hubVerifyToken), 403, 'Not exist hub_verify_token');
-            abort_if($hubVerifyToken != env('HUB_VERIFY_TOKEN'), 403, 'Incorrect hub_verify_token');
+            abort_if(empty($hubVerifyToken), 403, 'Not exist hub.verify_token');
+            abort_if($hubVerifyToken != config('app.websubVerifyToken'), 403, 'Incorrect hub.verify_token');
         }
         $hubChallenge = $request->hub_challenge;
         Log::notice($hubMode);
@@ -44,11 +44,13 @@ class WebSubController extends Controller
         // Xml parse
         $content = $request->getContent();
 
-        if (env('IS_HUB_VERIFY_TOKEN', false)) {
-            $signature = explode('=',$request->header('x-hub-signature'));
-            abort_if(is_null($signature[1]), 403, 'Not exist hub signature');
+        if (config('app.isUseWebSubVerifyToken')) {
+            $hubSignature = $request->header('x-hub-signature');
+            abort_if(empty($hubSignature), 403, 'Not exist x-hub-signature header');
+            $signature = explode('=',$hubSignature);
+            abort_if(empty($signature[1]), 403, 'Not exist hub signature');
 
-            $hash = hash_hmac($signature[0],$content,env('HUB_VERIFY_TOKEN'));
+            $hash = hash_hmac($signature[0],$content,config('app.websubVerifyToken'));
             abort_if($signature[1] != $hash, 403, 'Invalid hub signature');
 
             Log::debug('Success check hub signature');

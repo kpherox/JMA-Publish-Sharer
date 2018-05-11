@@ -110,6 +110,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | WebSub verify token
+    |--------------------------------------------------------------------------
+    |
+    | This verify token used by WebSub controller.
+    |
+    */
+
+    'isUseWebSubVerifyToken' => env('USE_WEBSUB_VERIFY_TOKEN', false),
+
+    'websubVerifyToken' => env('WEBSUB_VERIFY_TOKEN', ''),
+
+    /*
+    |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |
