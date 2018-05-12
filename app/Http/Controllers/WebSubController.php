@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Log;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Eloquents\Feed;
@@ -29,8 +28,8 @@ class WebSubController extends Controller
             abort_if($hubVerifyToken != config('app.websubVerifyToken'), 403, 'Incorrect hub.verify_token');
         }
         $hubChallenge = $request->hub_challenge;
-        Log::notice($hubMode);
-        Log::info('Success subscribe check');
+        \Log::notice($hubMode);
+        \Log::info('Success subscribe check');
 
         return response($hubChallenge, 200)->header('Content-Type', 'text/plain');
     }
@@ -54,15 +53,15 @@ class WebSubController extends Controller
             $hash = hash_hmac($signature->first(),$content,config('app.websubVerifyToken'));
             abort_if($signature->last() !== $hash, 403, 'Invalid hub signature');
 
-            Log::debug('Success check hub signature');
+            \Log::debug('Success check hub signature');
         }
 
         if (false === ($feed = simplexml_load_string($content))) {
             $message = "Feed Parse ERROR";
-            Log::error($message.": ".$content);
+            \Log::error($message.": ".$content);
             return $message;
         }
-        Log::debug('Success feed parse');
+        \Log::debug('Success feed parse');
 
         $now = Carbon::now();
         $now->setTimezone(config('app.timezone'));

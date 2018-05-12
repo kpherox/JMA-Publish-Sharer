@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Auth;
 use Illuminate\Http\Request;
 
 class TwitterAccountController extends SocialAccountController
@@ -31,7 +30,7 @@ class TwitterAccountController extends SocialAccountController
      * @return \Illuminate\Http\Response
      */
     public function redirectToProvider() {
-        if (Auth::check() && $this->register) {
+        if (auth()->check() && $this->register) {
             return redirect('/home');
         }
 
@@ -47,7 +46,7 @@ class TwitterAccountController extends SocialAccountController
      * @return \Illuminate\Http\Response
      */
     public function linkToUser() {
-        if (Auth::guest()) {
+        if (auth()->guest()) {
             return redirect('/login');
         }
 
