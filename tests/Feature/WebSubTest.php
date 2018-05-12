@@ -15,6 +15,43 @@ class WebSubTest extends TestCase
     private static $websubOldEndpoint = '/hooks/push/subscriber';
 
     private $verifyToken = 'testwebsub';
+    private $challengeValue = 'test';
+
+    /**
+     * Get 'GET query' parameters
+     *
+     * @return array
+     */
+    private function getParameters(String $status)
+    {
+        $result = [];
+
+        switch ($status) {
+            case 'check_success':
+                $result = [
+                    'hub_mode' => 'subscribe',
+                    'hub_verify_token' => $this->verifyToken,
+                    'hub_challenge' => $this->challengeValue,
+                ];
+                break;
+            case 'incorrect_token':
+                $result = [
+                    'hub_mode' => 'subscribe',
+                    'hub_verify_token' => 'testfail',
+                    'hub_challenge' => $this->challengeValue,
+                ];
+                break;
+            case 'not_exist_token':
+                $result = [
+                    'hub_mode' => 'subscribe',
+                ];
+                break;
+            default:
+                break;
+        }
+
+        return $result;
+    }
 
     /**
      * Receive feed test.
@@ -49,6 +86,18 @@ class WebSubTest extends TestCase
         $response = $this->call('POST', self::$websubEndpoint, [], [], [], $headers, $atomFeed);
 
         $response->assertSuccessful();
+        $this
+            ->assertDatabaseHas('entries', [
+                'uuid' => '8e55b8d8-518b-3dc9-9156-7e87c001d7b5',
+                'xml_document' => $sampleData1
+            ])
+            ->assertDatabaseHas('entries', [
+                'uuid' => 'b60694a6-d389-3194-a051-092ee9b2c474',
+                'xml_document' => $sampleData2
+            ])
+            ->assertDatabaseHas('feeds', [
+                'uuid' => 'be4342e2-ff73-363c-a3ed-66e05e977224',
+            ]);
     }
 
     /**
@@ -59,32 +108,20 @@ class WebSubTest extends TestCase
      */
     public function testSubscribeCheckSuccess()
     {
-        $challengeValue = 'test';
-        $parameter = [
-            'hub_mode' => 'subscribe',
-            'hub_verify_token' => $this->verifyToken,
-            'hub_challenge' => $challengeValue,
-        ];
+        $response = $this->call('GET', self::$websubEndpoint, $this->getParameters('check_success'));
 
-        $response = $this->call('GET', self::$websubEndpoint, $parameter);
-
-        $response->assertSuccessful()
-            ->assertSeeText($challengeValue);
+        $response
+            ->assertSuccessful()
+            ->assertSeeText($this->challengeValue);
     }
 
     public function testSubscribeCheckOldPathSuccess()
     {
-        $challengeValue = 'test';
-        $parameter = [
-            'hub_mode' => 'subscribe',
-            'hub_verify_token' => $this->verifyToken,
-            'hub_challenge' => $challengeValue
-        ];
+        $response = $this->call('GET', self::$websubOldEndpoint, $this->getParameters('check_success'));
 
-        $response = $this->call('GET', self::$websubOldEndpoint, $parameter);
-
-        $response->assertSuccessful()
-            ->assertSeeText($challengeValue);
+        $response
+            ->assertSuccessful()
+            ->assertSeeText($this->challengeValue);
     }
 
     /**
@@ -95,13 +132,7 @@ class WebSubTest extends TestCase
      */
     public function testSubscribeCheckIncorrectToken()
     {
-        $parameter = [
-            'hub_mode' => 'subscribe',
-            'hub_verify_token' => 'testfail',
-            'hub_challenge' => 'test'
-        ];
-
-        $response = $this->call('GET', self::$websubEndpoint, $parameter);
+        $response = $this->call('GET', self::$websubEndpoint, $this->getParameters('incorrect_token'));
 
         $response->assertForbidden();
     }
@@ -114,7 +145,7 @@ class WebSubTest extends TestCase
      */
     public function testSubscribeCheckNotExistToken()
     {
-        $response = $this->call('GET', self::$websubEndpoint, ['hub_mode' => 'subscribe']);
+        $response = $this->call('GET', self::$websubEndpoint, $this->getParameters('not_exist_token'));
 
         $response->assertForbidden();
     }
@@ -127,7 +158,7 @@ class WebSubTest extends TestCase
      */
     public function testSubscribeCheckNotFound()
     {
-        $response = $this->get(self::$websubEndpoint);
+        $response = $this->call('GET', self::$websubEndpoint, $this->getParameters(''));
 
         $response->assertNotFound();
     }
