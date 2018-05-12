@@ -165,6 +165,7 @@ return [
          */
         InsertOnDuplicateKey\InsertOnDuplicateKeyServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
+        Kozz\Laravel\Providers\Guzzle::class,
 
         /*
          * Application Service Providers...
@@ -232,6 +233,7 @@ return [
          * Package Service Providers...
          */
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Guzzle' => Kozz\Laravel\Facades\Guzzle::class,
 
     ],
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6b264191571ee0ec6618ecba3b545914",
+    "content-hash": "4303b77aaa454223da7cf1a91a28782a",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -683,6 +683,62 @@
             "time": "2015-04-20T18:58:01+00:00"
         },
         {
+            "name": "kozz/laravel-guzzle-provider",
+            "version": "6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/urakozz/laravel-guzzle.git",
+                "reference": "f9609049c82e3e443ab156a6d485597b10181ec1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/urakozz/laravel-guzzle/zipball/f9609049c82e3e443ab156a6d485597b10181ec1",
+                "reference": "f9609049c82e3e443ab156a6d485597b10181ec1",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~6.0",
+                "illuminate/support": "~5.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kozz\\Laravel\\": "src/",
+                    "Kozz\\Tests\\Laravel\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hongbo Tang",
+                    "email": "thbourlove@gmail.com"
+                },
+                {
+                    "name": "Yury Kozyrev",
+                    "email": "urakozz@gmail.com"
+                }
+            ],
+            "description": "Guzzle Service Provider for Laravel 5",
+            "keywords": [
+                "Guzzle",
+                "http",
+                "laravel"
+            ],
+            "time": "2015-06-03T09:26:54+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "v5.6.21",
             "source": {
@@ -823,16 +879,16 @@
         },
         {
             "name": "laravel/socialite",
-            "version": "v3.0.9",
+            "version": "v3.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/socialite.git",
-                "reference": "fc1c8d415699e502f3e61cbc61e3250d5bd942eb"
+                "reference": "647ee1b1b7520e16c661b4df5cdff1d7f6902eee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/socialite/zipball/fc1c8d415699e502f3e61cbc61e3250d5bd942eb",
-                "reference": "fc1c8d415699e502f3e61cbc61e3250d5bd942eb",
+                "url": "https://api.github.com/repos/laravel/socialite/zipball/647ee1b1b7520e16c661b4df5cdff1d7f6902eee",
+                "reference": "647ee1b1b7520e16c661b4df5cdff1d7f6902eee",
                 "shasum": ""
             },
             "require": {
@@ -881,7 +937,7 @@
                 "laravel",
                 "oauth"
             ],
-            "time": "2017-11-06T16:02:48+00:00"
+            "time": "2017-12-05T13:46:36+00:00"
         },
         {
             "name": "laravel/tinker",

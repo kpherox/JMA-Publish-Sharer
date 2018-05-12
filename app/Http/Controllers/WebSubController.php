@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Eloquents\Feed;
 use App\Eloquents\Entry;
-use GuzzleHttp\Client;
 use GuzzleHttp\Promise;
 use GuzzleHttp\Psr7;
 
@@ -79,7 +78,6 @@ class WebSubController extends Controller
         }
         $feeds->save();
 
-        $client = new Client();
         // Fetch JMA xml
         $entryArrays = [];
         $promises = [];
@@ -94,7 +92,7 @@ class WebSubController extends Controller
             $updated->setTimezone(config('app.timezone'));
             $url = (string)$entry->link['href'];
 
-            $promises[$entryUuid] = $client->getAsync($url);
+            $promises[$entryUuid] = \Guzzle::getAsync($url);
 
             $entryArrays[$entryUuid] = [
                 'kind_of_info' => $kindOfInfo,
