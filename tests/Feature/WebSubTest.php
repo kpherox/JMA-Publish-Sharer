@@ -33,12 +33,9 @@ class WebSubTest extends TestCase
                       ->with('http://*/*/b60694a6-d389-3194-a051-092ee9b2c474.xml')
                       ->andReturn(new Promise\FulfilledPromise(new Psr7\Response(200, [], '<?xml', 1.1)));
 
-        $atomFeed = fopen('tests/SampleData/jmaxml_atomfeed.xml', 'r');
-        fseek($atomFeed, 1);
-        $feedString = fread($atomFeed, 1540);
-        fclose($atomFeed);
+        $atomFeed = file_get_contents('tests/SampleData/jmaxml_atomfeed.xml');
 
-        $hash = hash_hmac('sha1', $feedString, $this->verifyToken);
+        $hash = hash_hmac('sha1', $atomFeed, $this->verifyToken);
 
         $headers = [
             'HTTP_user-agent' => 'AppEngine-Google; (+http://code.google.com/appengine; appid: s~alert-hub)',
@@ -46,7 +43,7 @@ class WebSubTest extends TestCase
             'HTTP_x-hub-signature' => 'sha1='.$hash
         ];
 
-        $response = $this->call('POST', self::$websubEndpoint, [], [], [], $headers, $feedString);
+        $response = $this->call('POST', self::$websubEndpoint, [], [], [], $headers, $atomFeed);
 
         $response->assertSuccessful();
     }
