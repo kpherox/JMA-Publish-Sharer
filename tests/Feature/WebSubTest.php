@@ -134,7 +134,9 @@ class WebSubTest extends TestCase
     {
         $response = $this->call('GET', self::$websubEndpoint, $this->getParameters('incorrect_token'));
 
-        $response->assertForbidden();
+        $response
+            ->assertForbidden()
+            ->assertSeeText('Incorrect hub.verify_token');
     }
 
     /**
@@ -147,7 +149,9 @@ class WebSubTest extends TestCase
     {
         $response = $this->call('GET', self::$websubEndpoint, $this->getParameters('not_exist_token'));
 
-        $response->assertForbidden();
+        $response
+            ->assertForbidden()
+            ->assertSeeText('Not exist hub.verify_token');
     }
 
     /**

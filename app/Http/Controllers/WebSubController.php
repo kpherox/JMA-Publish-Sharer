@@ -19,7 +19,7 @@ class WebSubController extends Controller
     function subscribeCheck(Request $request) {
         // Subscribe check
         $hubMode = $request->hub_mode;
-        abort_if($hubMode != 'subscribe' && $hubMode != 'unsubscribe', 404, 'Not Found');
+        abort_if($hubMode != 'subscribe' && $hubMode != 'unsubscribe', 404);
 
         if (config('app.isUseWebSubVerifyToken')) {
             $hubVerifyToken = $request->hub_verify_token;
