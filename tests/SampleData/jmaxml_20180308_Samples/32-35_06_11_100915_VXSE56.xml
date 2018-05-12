@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx="http://xml.kishou.go.jp/jmaxml1/">
+<Control>
+	<Title>地震の活動状況等に関する情報</Title>
+	<DateTime>2008-06-15T01:30:00Z</DateTime>
+	<Status>通常</Status>
+	<EditorialOffice>気象庁本庁</EditorialOffice>
+	<PublishingOffice>気象庁</PublishingOffice>
+  </Control>
+<Head xmlns="http://xml.kishou.go.jp/jmaxml1/informationBasis1/">
+	<Title>地震の活動状況等に関する情報</Title>
+	<ReportDateTime>2008-06-15T10:30:00+09:00</ReportDateTime>
+	<TargetDateTime>2008-06-15T10:30:00+09:00</TargetDateTime>
+	<EventID>20080614084350</EventID>
+	<InfoType>発表</InfoType>
+	<Serial></Serial>
+	<InfoKind>地震の活動状況等に関する情報</InfoKind>
+	<InfoKindVersion>1.0_0</InfoKindVersion>
+	<Headline>
+		<Text>地震の活動状況等をお知らせします。</Text>
+	</Headline>
+</Head>
+<Body xmlns="http://xml.kishou.go.jp/jmaxml1/body/seismology1/" xmlns:jmx_eb="http://xml.kishou.go.jp/jmaxml1/elementBasis1/">
+	<Naming english="Ｔｈｅ　Ｉｗａｔｅ－Ｍｉｙａｇｉ　Ｎａｉｒｉｋｕ　Ｅａｒｔｈｑｕａｋｅ　ｉｎ　２００８">平成２０年（２００８年）岩手・宮城内陸地震</Naming>
+	<Text>２００８年６月１４日０８時４３分頃に岩手県内陸南部で発生した地震について、概要を以下のとおりお知らせします。
+
+○余震の発生状況
+６月１４日０８時４３分に発生した岩手・宮城内陸地震による余震は、北北東から南南西に延びる長さ約４５ｋｍ、幅約１５ｋｍの範囲に分布しています。
+１５日１０時までに震度１以上を観測した余震は２６４回です（最大震度別地震回数表参照）。
+これまでの最大余震は、１４日０９時２０分に発生したＭ５．７（暫定値）の地震（最大震度５弱）です。
+
+○余震の見通し
+余震は、しだいに少なくなりつつあるものの依然活発な状況が継続しています。
+今後１週間程度は、活発な余震活動が継続するものと考えられ、場所によっては震度６弱となるような余震が発生するおそれがあります。
+
+○防災上の留意事項
+揺れの強かった地域では、土砂災害や道路の崩壊、家屋の倒壊などの被害が発生しています。
+総務省消防庁（６月１５日０９時３０分現在）によると、今回の地震により、死者５名、行方不明者１４名、負傷者１５０名などの被害が確認されています。
+揺れの強かった地域では、土砂崩れや家屋の倒壊などの危険性が通常より高くなっています。
+余震により、被害が拡大する可能性がありますので、作業等には十分注意して下さい。
+
+○地震機動観測班による調査
+気象庁は、緊急災害対策派遣隊（ＴＥＣ－ＦＯＲＣＥ）として地震機動観測班を派遣し、この地震により震度６強が観測された地域を中心に、被害及び地震動の調査を実施しています。
+
+　地震情報、津波情報等は最新の情報をご覧下さい。
+　なお、現在発表している情報は気象庁ホームページで公表しております。</Text>
+</Body>
+</Report>

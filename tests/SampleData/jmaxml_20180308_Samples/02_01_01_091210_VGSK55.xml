@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx="http://xml.kishou.go.jp/jmaxml1/">
+  <Control>
+    <Title>生物季節観測</Title>
+    <DateTime>2008-03-11T04:14:59Z</DateTime>
+    <Status>通常</Status>
+    <EditorialOffice>和歌山地方気象台</EditorialOffice>
+    <PublishingOffice>和歌山地方気象台</PublishingOffice>
+  </Control>
+  <Head xmlns="http://xml.kishou.go.jp/jmaxml1/informationBasis1/">
+    <Title>生物季節観測</Title>
+    <ReportDateTime>2008-03-11T13:12:00+09:00</ReportDateTime>
+    <TargetDateTime>2008-03-11T00:00:00+09:00</TargetDateTime>
+    <EventID>20080311131200_18</EventID>
+    <InfoType>発表</InfoType>
+    <Serial />
+    <InfoKind>生物季節観測報告気象報</InfoKind>
+    <InfoKindVersion>1.0_0</InfoKindVersion>
+    <Headline>
+      <Text />
+    </Headline>
+  </Head>
+  <Body xmlns="http://xml.kishou.go.jp/jmaxml1/body/meteorology1/">
+    <MeteorologicalInfos type="生物季節観測">
+      <MeteorologicalInfo>
+        <DateTime significant="yyyy-mm-dd">2008-03-11T00:00:00+09:00</DateTime>
+        <Item>
+          <Kind>
+            <Name>うぐいすの初鳴日</Name>
+            <Code>18</Code>
+            <ClassName>ウグイス</ClassName>
+            <Condition>通常</Condition>
+          </Kind>
+          <Station>
+            <Name>和歌山地方気象台</Name>
+            <Code type="国際地点番号">47777</Code>
+            <Location>和歌山市男野芝丁</Location>
+            <Status>付近</Status>
+          </Station>
+        </Item>
+      </MeteorologicalInfo>
+    </MeteorologicalInfos>
+    <AdditionalInfo>
+      <ObservationAddition>
+        <DeviationFromNormal>0</DeviationFromNormal>
+        <DeviationFromLastYear>12</DeviationFromLastYear>
+        <Text>紀三井寺（キミイデラ）</Text>
+      </ObservationAddition>
+    </AdditionalInfo>
+  </Body>
+</Report>

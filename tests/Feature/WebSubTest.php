@@ -24,14 +24,17 @@ class WebSubTest extends TestCase
      */
     public function testReceiveFeedSuccess()
     {
+        $sampleData1 = file_get_contents('tests/SampleData/jmaxml_20180308_Samples/01_01_01_091210_VGSK50.xml');
+        $sampleData2 = file_get_contents('tests/SampleData/jmaxml_20180308_Samples/01_01_02_091210_VGSK50.xml');
+
         \Guzzle::shouldReceive('getAsync')
                       ->once()
                       ->with('http://*/*/8e55b8d8-518b-3dc9-9156-7e87c001d7b5.xml')
-                      ->andReturn(new Promise\FulfilledPromise(new Psr7\Response(200, [], '<?xml', 1.1)));
+                      ->andReturn(new Promise\FulfilledPromise(new Psr7\Response(200, [], $sampleData1)));
         \Guzzle::shouldReceive('getAsync')
                       ->once()
                       ->with('http://*/*/b60694a6-d389-3194-a051-092ee9b2c474.xml')
-                      ->andReturn(new Promise\FulfilledPromise(new Psr7\Response(200, [], '<?xml', 1.1)));
+                      ->andReturn(new Promise\FulfilledPromise(new Psr7\Response(200, [], $sampleData2)));
 
         $atomFeed = file_get_contents('tests/SampleData/jmaxml_atomfeed.xml');
 

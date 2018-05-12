@@ -1,0 +1,359 @@
+¾ÞÝº¸»²½Ó1 ·¼Ö³
+(STX)
+84 03 00 100705070246 C11 1007050656 286 /// // /// 0396 01427 030
+63 EI // BI S4 211 212 220 222 S3 200 202 203 210 213 221 230 231
+233 240 242 250 CI S4 21101 21104 21200 21215 22002 22016 22052
+22053 22205 S3 20002 20200 20202 20203 20204 20207 20210 20215
+20216 20218 20219 20224 20304 21000 21001 21004 21006 21007 21012
+21100 21102 21103 21201 21202 21203 21204 21206 21211 21212 21213
+21214 21216 21301 21302 21303 21304 21313 21318 21326 21327 22007
+22010 22055 22056 22057 22107 22108 22110 22113 22116 22117 22119
+22201 22202 22208 22209 22211 23014 23100 23113 23300 23330 24001
+24203 24207 25007 A170000 9999
+
+’nkî•ñikŒ¹Ek“x‚ÉŠÖ‚·‚éî•ñj
+•½¬‚Q‚Q”N‚VŒŽ‚T“ú‚VŽž‚Q•ª@‹CÛ’¡”­•\
+‚«‚å‚¤‚O‚T“ú‚O‚UŽž‚T‚U•ª‚±‚ë’nk‚ª‚ ‚è‚Ü‚µ‚½B
+kŒ¹’n‚ÍAŠâŽèŒ§‰«i–kˆÜ‚R‚XD‚U“xA“ŒŒo‚P‚S‚QD‚V“xj‚ÅAkŒ¹‚Ì[‚³
+‚Í–ñ‚R‚O‚‹‚A’nk‚Ì‹K–Íiƒ}ƒOƒjƒ`ƒ…[ƒhj‚Í‚UD‚R‚Æ„’è‚³‚ê‚Ü‚·B
+mk“x‚RˆÈã‚ªŠÏ‘ª‚³‚ê‚½’nˆæn
+k“x‚S    ŠâŽèŒ§‰ˆŠÝ“ì•”  ŠâŽèŒ§“à—¤–k•”  ‹{éŒ§–k•”  ‹{éŒ§’†•”  
+k“x‚R    ÂXŒ§’ÃŒy–k•”  ÂXŒ§ŽO”ªã–k  ÂXŒ§‰º–k
+          ŠâŽèŒ§‰ˆŠÝ–k•”  ŠâŽèŒ§“à—¤“ì•”  ‹{éŒ§“ì•”
+          H“cŒ§‰ˆŠÝ–k•”  H“cŒ§‰ˆŠÝ“ì•”  H“cŒ§“à—¤“ì•”
+          ŽRŒ`Œ§¯“à  ŽRŒ`Œ§‘ºŽR  •Ÿ“‡Œ§’†’Ê‚è  
+mk“x‚RˆÈã‚ªŠÏ‘ª‚³‚ê‚½Žs’¬‘ºn
+k“x‚S    —¤‘O‚“cŽs  ‘å’Æ’¬  ·‰ªŽs  –î‹Ð’¬  ‹CåÀŽs  —O’J’¬
+          ŒIŒ´Žs  “o•ÄŽs  ÎŠªŽs  
+k“x‚R    •½“à’¬  ”ªŒËŽs  ŽO‘òŽs  –ì•Ó’n’¬  ŽµŒË’¬  ˜ZŒË’¬  “Œ–k’¬
+          ŒÜŒË’¬  “cŽq’¬  ÂX“ì•”’¬  ŠKã’¬  ‚¨‚¢‚ç‚¹’¬  “Œ’Ê‘º
+          ‹{ŒÃŽs  ‹vŽœŽs  ŽR“c’¬  “c–ì”¨‘º  •‘ã‘º  –ì“c‘º
+          ‘å‘D“nŽs  Š˜ÎŽs  Z“c’¬  “ñŒËŽs  Ž´Î’¬  Š‹Šª’¬  ŠâŽè’¬
+          ‘ê‘ò‘º  ˆêŒË’¬  ”ª”¦•½Žs  Œy•Ä’¬  ‹ãŒË‘º  Ž‡”g’¬  ‰ÔŠªŽs
+          –kãŽs  ‰“–ìŽs  ˆêŠÖŽs  ‹àƒPè’¬  •½ò’¬  ¼˜a‰ê’¬
+          ‰œBŽs  ‹{é‰Á”ü’¬  F–ƒ’¬  “ìŽO—¤’¬  ‹{é”ü—¢’¬  ‘åèŽs
+          –¼ŽæŽs  Šp“cŽs  ŠâÀŽs  ‘å‰ÍŒ´’¬  ‹{éìè’¬  ŠÛX’¬
+          ŽRŒ³’¬  å‘ä‹{é–ì‹æ  å‘äŽá—Ñ‹æ  “Œ¼“‡Žs  ¼“‡’¬
+          —˜•{’¬  ˆäì’¬  H“cŽs  —R—˜–{‘‘Žs  ‰¡ŽèŽs  ‘ååŽs
+          Žð“cŽs  ‘ºŽRŽs  ’†ŽR’¬  ‘Œ©’¬  
+‚±‚Ì’nk‚É‚æ‚é’Ã”g‚ÌS”z‚Í‚ ‚è‚Ü‚¹‚ñB
+î•ñ‘æ‚P†=
+(ETX)
+
+ÄÞ³Î³ÁÃÝ4 ·¼Ö³
+(STX)
+35 03 00 100705070246 C51 9999
+
+
+Še’n‚Ìk“x‚ÉŠÖ‚·‚éî•ñ
+•½¬‚Q‚Q”N‚VŒŽ‚T“ú‚VŽž‚Q•ª@‹CÛ’¡”­•\
+‚«‚å‚¤‚O‚T“ú‚O‚UŽž‚T‚U•ª‚±‚ë’nk‚ª‚ ‚è‚Ü‚µ‚½B
+kŒ¹’n‚ÍAŠâŽèŒ§‰«i–kˆÜ‚R‚XD‚U“xA“ŒŒo‚P‚S‚QD‚V“xj‚ÅAkŒ¹‚Ì[‚³
+‚Í–ñ‚R‚O‚‹‚A’nk‚Ì‹K–Íiƒ}ƒOƒjƒ`ƒ…[ƒhj‚Í‚UD‚R‚Æ„’è‚³‚ê‚Ü‚·B
+Še’n‚Ìk“x‚ÍŽŸ‚Ì‚Æ‚¨‚è‚Å‚·B
+‚È‚¨A–ˆó‚Í‹CÛ’¡ˆÈŠO‚Ìk“xŠÏ‘ª“_‚É‚Â‚¢‚Ä‚Ìî•ñ‚Å‚·B
+ŠâŽèŒ§   k“x‚S    —¤‘O‚“cŽs‚“c’¬–  ‘å’Æ’¬V’¬–
+                   ·‰ªŽs‹ÊŽR‹æ–÷ì–  –î‹Ð’¬“ì–î•–  
+         k“x‚R    ‹{ŒÃŽsŒLƒ–è  ‹{ŒÃŽsŒÜŒŽ’¬–  ‹{ŒÃŽs“c˜V–
+                   ‹{ŒÃŽsìˆä–  ‹{ŒÃŽs–å”n“c‘ã–  ‹{ŒÃŽs–ÎŽs–
+                   ‹vŽœŽsìè’¬  ‹vŽœŽs’·“à’¬–  ŽR“c’¬”ª”¦’¬
+                   ŽR“c’¬‘å‘ò–  “c–ì”¨‘º“c–ì”¨  •‘ã‘º“º‰®–
+                   –ì“c‘º–ì“c–  ‘å‘D“nŽs‘å‘D“n’¬  ‘å‘D“nŽs’–ì’¬
+                   Š˜ÎŽs‘ü‰z’¬  Š˜ÎŽs’†È’¬–  Z“c’¬¢“c•Ä–
+                   ·‰ªŽsŽR‰¤’¬  ·‰ªŽs”nê’¬–  ·‰ªŽs‹ÊŽR‹æa–¯–
+                   “ñŒËŽs•Ÿ‰ª  “ñŒËŽsÎØŠ–  Ž´Î’¬çŠ “c
+                   Š‹Šª’¬Š‹ŠªŒ³–Ø  ŠâŽè’¬ŒÜ“úŽs–  ‘ê‘ò‘º‰LŽ”–
+                   ˆêŒË’¬‚‘PŽ›–  ”ª”¦•½Žs‘åX  ”ª”¦•½Žs“c“ª–
+                   ”ª”¦•½Žs–ì‘Ê–  ”ª”¦•½Žs™Û“c–  Œy•Ä’¬Œy•Ä–
+                   ‹ãŒË‘ºˆÉ•Û“à–  Ž‡”g’¬“ú‹l–  ‰ÔŠªŽs‘å”—’¬
+                   ‰ÔŠªŽsÎ’¹’J’¬–  ‰ÔŠªŽsÞ–Ø’¬–
+                   ‰ÔŠªŽs‘å”—‘‡ŽxŠ–  –kãŽs–öŒ´’¬
+                   ‰“–ìŽs¼è’¬–  ‰“–ìŽs‹{Žç’¬–  ˆêŠÖŽsŽR–Ú–
+                   ˆêŠÖŽs‰Ôò’¬–  ˆêŠÖŽsç‰X’¬–  ˆêŠÖŽsŽºª’¬–
+                   ‹àƒPè’¬¼ª–  •½ò’¬•½ò–  ¼˜a‰ê’¬‘ò“àìM–
+                   ‰œBŽs…‘ò‹æ‘åà’¬  ‰œBŽs…‘ò‹æ²‘q‰Í–
+                   ‰œBŽs‘O‘ò‹æ–  ‰œBŽs’_‘ò‹æ–  ‰œBŽsˆßì‹æ–  
+         k“x‚Q    ‹{ŒÃŽs’·‘ò  ‹vŽœŽsŽRŒ`’¬–  Šâò’¬Šâò–
+                   “c–ì”¨‘º–ðê–  ŠâŽè—m–ì’¬ŽíŽs  ŠâŽè—m–ì’¬‘å–ì–
+                   ‘å‘D“nŽs·’¬–  Š‹Šª’¬Á–h•ª–  Š‹Šª’¬–ðê–
+                   ˆêŠÖŽs‘å“Œ’¬  ˆêŠÖŽs“ŒŽR’¬–  ˆêŠÖŽsìè’¬–
+                   ¼˜a‰ê’¬ìK–  
+‹{éŒ§   k“x‚S    ‹CåÀŽsÔŠâ  —O’J’¬V’¬  ŒIŒ´Žs‹à¬–
+                   “o•ÄŽs“o•Ä’¬–  “o•ÄŽs”—’¬–  ÎŠªŽs“¶’¬–  
+         k“x‚R    ‹CåÀŽsù‚ªw–  ‹CåÀŽs“‚ŒK’¬–
+                   ‹{é‰Á”ü’¬’†V“c–  ‹{é‰Á”ü’¬¬–ì“c–
+                   F–ƒ’¬Žlâ}–  ŒIŒ´ŽsŒI‹î  ŒIŒ´Žs’zŠÙ–
+                   ŒIŒ´ŽsŽá–ö–  ŒIŒ´Žs‚´…–  ŒIŒ´Žs£•ô–
+                   ŒIŒ´Žséò‘ò–  ŒIŒ´ŽsŽu”g•P–  ŒIŒ´Žsˆê”—–
+                   “o•ÄŽs’†“c’¬  “o•ÄŽs–L—¢’¬–  “o•ÄŽs•ÄŽR’¬–
+                   “o•ÄŽs“ì•û’¬–  “ìŽO—¤’¬Žu’Ãì  “ìŽO—¤’¬‰Ì’Ã–
+                   ‹{é”ü—¢’¬–k‰Y–  ‹{é”ü—¢’¬–ØŠÔ’Ë–
+                   ‘åèŽsŒÃìŽO“ú’¬  ‘åèŽs–ÂŽq–  ‘åèŽsŒÃì–k’¬–
+                   ‘åèŽs¼ŽR–  ‘åèŽsŽ­“‡‘ä–  ‘åèŽsŠâoŽR–
+                   ‘åèŽs“cK–  –¼ŽæŽs‘“c–  Šp“cŽsŠp“c–
+                   ŠâÀŽs÷–  ‘å‰ÍŒ´’¬V“ì–  ‹{éìè’¬‘Oì–
+                   ŠÛX’¬’¹‰®–  ŽRŒ³’¬ó¶Œ´–  å‘ä‹{é–ì‹æ‹ê’|–
+                   å‘äŽá—Ñ‹æ‰“Œ©’Ë–  ÎŠªŽs–å˜e–  ÎŠªŽs–kã’¬–
+                   ÎŠªŽs‘Š–ì’J–  ÎŠªŽs‘O’J’n–  “Œ¼“‡Žs–î–{–
+                   ¼“‡’¬‚é  —˜•{’¬—˜•{–  
+         k“x‚Q    ‹CåÀŽs–{‹g’¬–  ‹{é‰Á”ü’¬‹{è–
+                   ŒIŒ´Žs‰ÔŽR–  “o•ÄŽs“Œ˜a’¬–  “o•ÄŽsÎ‰z’¬–
+                   “o•ÄŽs’ÃŽR’¬–  ‘åèŽsŽO–{–Ø–  ”’ÎŽs˜j—’¬–
+                   å‘ä‹ó`  ‘ ‰¤’¬‰~“c–  ‘º“c’¬‘º“c–
+                   ˜j—’¬‰º¬˜H–  å‘äÂ—t‹æ‘å‘q  å‘äÂ—t‹æì•À–
+                   å‘äÂ—t‹æ‰J‹{–  å‘äÂ—t‹æ—Ž‡–
+                   å‘ä‹{é–ì‹æŒÜ—Ö  å‘ä‘¾”’‹æŽR“c–
+                   å‘äò‹æ«ŠÄ–  ÎŠªŽsò’¬  ÎŠªŽs‘å‰Z
+=
+(ETX)
+ÄÞ³Î³ÁÃÝ4 ·¼Ö³
+(STX)
+35 03 00 100705070246 C41 9999
+                   ÎŠªŽsˆ¼ì•l–  ÎŠªŽs—YŸ’¬–  ‰–â}Žsˆ®’¬–
+                   ‘½‰êéŽs’†‰›–  “Œ¼“‡Žs¬–ì–  Žµƒ–•l’¬“Œ‹{•l–
+                   ‘å˜a’¬‹g‰ª–  ‘å‹½’¬””ì–  •x’J’¬•x’J–
+                   ‘åt‘º‘åt–  —ì’¬—ì•l–  
+         k“x‚P    Žµƒ–h’¬ŠÖ–  ŽÄ“c’¬‘D‰ª  ŠÛX’¬ã‘ê  
+ÂXŒ§   k“x‚R    •½“à’¬¬–©  ”ªŒËŽs“àŠÛ–  ”ªŒËŽs“ì‹½‹æ–
+                   ŽO‘òŽs÷’¬–  –ì•Ó’n’¬“c‹·‘ò–  ŽµŒË’¬ŽµŒË–
+                   ŽµŒË’¬Xƒmã–  ˜ZŒË’¬Œ¢—Ž£–  “Œ–k’¬ã–k“ì–
+                   ŒÜŒË’¬ŒÃŠÚ  ŒÜŒË’¬‘qÎ’†Žs–  “cŽq’¬“cŽq–
+                   ÂX“ì•”’¬•½–  ÂX“ì•”’¬“Ï•Ä’n–  ŠKã’¬“¹•§–
+                   ‚¨‚¢‚ç‚¹’¬ã–¾“°–  ‚¨‚¢‚ç‚¹’¬’†‰º“c–
+                   “Œ’Ê‘º¬“c–ì‘ò–  “Œ’Ê‘º»Žq–”–  
+         k“x‚Q    ÂXŽs‰Ô‰€  ÂXŽs’†‰›–  ÂXŽs˜Q‰ª–
+                   ŒÜŠìŒ´Žs•~“‡’¬–  ŒÜŠìŒ´Žs‹à–Ø’¬–
+                   •½“à’¬“Œ“c‘ò–  ¡•Ê’¬¡•Ê–  –H“c‘º–H“c–
+                   ”Â–ö’¬”Â–ö–  ÂX’ß“c’¬’ß“c–  ‚Â‚ª‚éŽs–Ø‘¢–
+                   ‚Â‚ª‚éŽs”–  ‚Â‚ª‚éŽsŽÔ—Í’¬–  ŠOƒ–•l’¬ŠI“c–
+                   ŠOƒ–•l’¬•½ŠÚ–  ’†”‘’¬’†—¢–  ’†”‘’¬¬”‘–
+                   O‘OŽsé“Œ’†‰›–  O‘OŽs‰ê“c–  [‰Y’¬[‰Y
+                   “¡è’¬¼–L“c–  “¡è’¬…–Ø–  •½ìŽs‰Ž‰ê–
+                   •½ìŽs”–Ø’¬–  •½ìŽs’ôƒ–ŠÖ–  ”ªŒËŽs“‡Žç
+                   ”ªŒËŽs–©’¬  \˜a“cŽs¼“ñ”Ô’¬–
+                   \˜a“cŽs¼\“ñ”Ô’¬–  \˜a“cŽs‰œ£–
+                   –ì•Ó’n’¬–ì•Ó’n–  ‰¡•l’¬—Ñƒm˜e–  ‰¡•l’¬Ž›‰º–
+                   “Œ–k’¬“ƒƒm‘òŽR–  ˜Zƒ–Š‘º”öéo  ŽOŒË’¬Ý•{¬˜H–
+                   ÂX“ì•”’¬‰«“c–Ê–  ‚Þ‚ÂŽs‹à‹È  ‚Þ‚ÂŽs‹à’J–
+                   ‚Þ‚ÂŽs‘å”¨’¬’†“‡–  ‚Þ‚ÂŽsì“à’¬–
+                   ‚Þ‚ÂŽs˜e–ì‘ò–  ‘åŠÔ’¬‘åŠÔ–  
+         k“x‚P    ŒÜŠìŒ´Žs‘¾“c  ŒÜŠìŒ´Žs‘Š“à–
+                   ‚Â‚ª‚éŽsX“c’¬–  ŠOƒ–•l’¬ŽO‰X–  O‘OŽs˜a“c’¬
+                   O‘OŽsŒÜŠ–  éËƒ–‘ò’¬–{’¬  éËƒ–‘ò’¬•‘ŒË’¬–
+                   [‰Y’¬’·Œc•½  [‰Y’¬[‰Y’†‘ò–  [‰Y’¬Šâè–
+                   ¼–Ú‰®‘º“c‘ã–  ‘å˜k’¬‘å˜k–  ŽµŒË’¬“VŠÔŠÚ
+                   ‚Þ‚ÂŽs‘å”¨’¬  “Œ’Ê‘ºK‰®–  •—ŠÔ‰Y‘ºˆÕ‘ŠÔ–
+                   ²ˆä‘º’·Œã–  ²ˆä‘º²ˆä–  
+H“cŒ§   k“x‚R    ˆäì’¬–kìK–  H“cŽs—Y˜a–­–@–
+                   —R—˜–{‘‘Žs‘O‹½–  —R—˜–{‘‘Žs¼–Ú’¬À“c–
+                   ‰¡ŽèŽs‘å—Y–  ‘ååŽs‘å‹È‰Ô‰€’¬–  ‘ååŽsŠ ˜a–ì–
+                   ‘ååŽs‚—œ–  
+         k“x‚Q    ”\‘ãŽs—Î’¬  ”\‘ãŽs’Ç•ª’¬–  ”\‘ãŽsã’¬–
+                   ”\‘ãŽs“ñƒcˆä’¬ã‘ä–  “¡—¢’¬“¡‹Õ–
+                   ŒÜé–Ú’¬¼ˆéƒm–Ú  ”ª˜YŠƒ’¬‘å“¹–
+                   ŠƒãŽsº˜a‘å‹v•Û–  ŠƒãŽs”Ñ“cì‰ºˆ¸ì–
+                   ŠƒãŽs“V‰¤–  ŽOŽí’¬–L‰ª–  H“cŽsŽR‰¤
+                   H“cŽs—Y˜a—•Ä–Ø  H“cŽsÁ–h’¡ŽÉ–
+                   H“cŽs‰Í•Ó˜a“c–  —R—˜–{‘‘ŽsÎ˜e
+                   —R—˜–{‘‘Žs÷¬˜H–  —R—˜–{‘‘Žs”öè–
+                   —R—˜–{‘‘Žs–î“‡’¬–î“‡’¬–  —R—˜–{‘‘ŽsŠâé“à“¹ì–
+                   —R—˜–{‘‘Žs“Œ—R—˜˜V•û–  —R—˜–{‘‘ŽsŠâ’J’¬–
+                   —R—˜–{‘‘Žs’¹ŠC’¬•šŒ©–  ‚É‚©‚ÙŽs•½‘ò–
+                   ‚É‚©‚ÙŽs‹à‰Y–  ‚É‚©‚ÙŽsÛŠƒ’¬•lƒm“c–
+                   ‘åŠÙŽs”ä“à’¬–¡‘X“à  ‘åŠÙŽs÷’¬–  ‘åŠÙŽs’†é–
+                   ‘åŠÙŽs”ä“à’¬î“c–  ‘åŠÙŽs‘Œû–  Ž­ŠpŽs‰Ô—Ö–
+                   ¬â’¬¬â»X–  –kH“cŽs‰Ô‰€’¬
+                   –kH“cŽs•Ä“à‘ò–  –kH“cŽsV“c–Ú–
+                   ‰¡ŽèŽs—Y•¨ì’¬¡h  ‰¡ŽèŽsˆÀ“c–ö’ç’n“à–
+                   ‰¡ŽèŽs’†‰›’¬–  ‰¡ŽèŽs‘“c’¬‘“c–
+                   ‰¡ŽèŽs•½Ž­’¬ó•‘–  ‰¡ŽèŽs‘åX’¬–
+                   ‰¡ŽèŽs\•¶Žš’¬–  ‰¡ŽèŽsŽR“à“yŸº–  “’‘òŽs‰«’ß
+=
+(ETX)
+
+ÄÞ³Î³ÁÃÝ4 ·¼Ö³
+(STX)
+35 03 00 100705070246 C31 9999
+                   “’‘òŽsŽ›‘ò–  “’‘òŽsì˜A’¬–  “’‘òŽs‰¡–x–
+                   “’‘òŽsŠF£–  ‰HŒã’¬¼”n‰¹“à–  “Œ¬£‘º’Öì–
+                   “Œ¬£‘º“cŽq“à–  H“c”ü‹½’¬˜Z‹½“Œª
+                   H“c”ü‹½’¬“yè–  ‘ååŽs‹¦˜a‹«“‚¼Šx–
+                   ‘ååŽs_‹{Ž›–  ‘ååŽs–k’·–ì–
+                   ‘ååŽs‹¦˜a‹«–ì“c–  ‘ååŽs“ìŠO–
+                   ‘ååŽs‘¾“c’¬‘¾“c–  å–kŽsŠpŠÙ’¬“ŒŸŠy’š
+                   å–kŽs¼–Ø’¬ã•O–Ø“à–
+                   å–kŽs“c‘òŒÎ¶•Û“àã´…–  å–kŽsŠpŠÙ’¬¬Ÿ“c–
+                   å–kŽs“c‘òŒÎ“c‘ò–  å–kŽs“c‘òŒÎ¶•Û“à‹{ƒmŒã–
+                   å–kŽs¼–Ø’¬ãrˆä–  
+         k“x‚P    ’jŽ­Žs’jŽ­’†  ’jŽ­Žs‘Dì–  ’jŽ­ŽsŠpŠÔè–
+                   ‘åŠƒ‘º’†‰›–  ŽOŽí’¬Ž­“n–  ŽOŽí’¬‰Lì–
+                   ”ª•ô’¬•ô•l–Ú–¼Šƒ–  H“cŽs”ª‹´‰^“®Œö‰€–
+                   ¬â’¬¬âzŽR–  ã¬ˆ¢m‘º¬‘ò“c–
+                   –kH“cŽsˆ¢m‹âŽR–  “’‘òŽs²’|’¬–  
+ŽRŒ`Œ§   k“x‚R    Žð“cŽs”ò’¹–  Žð“cŽsŽR“c–  ‘ºŽRŽs’†‰›–
+                   ’†ŽR’¬’·è–  
+         k“x‚Q    ’ß‰ªŽs‰·ŠCì  ’ß‰ªŽs“¹“c’¬–  ’ß‰ªŽs“¡“‡–
+                   Žð“cŽs‹Tƒ–è  Žð“cŽs‹{–ì‰Y–  Žð“cŽs–{’¬–
+                   ŽOì’¬‰¡ŽR–  —V²’¬—V²  —V²’¬•‘’ß–
+                   ¯“à’¬—]–Ú–  V¯Žs“Œ’J’n“c’¬  V¯Žs‰«‚Ì’¬–
+                   Åã’¬Œü’¬–  MŒ`’¬MŒ`–  ^Žºì’¬V’¬–
+                   ‘å‘ ‘º•IÜ–  ‘å‘ ‘º´…–  øì‘º²“n–
+                   Š¦‰Í]Žs¼ª–  Š¦‰Í]Žs’†‰›–  ãŽRŽs‰Íè–
+                   “V“¶Žs˜V–ìX–  “ŒªŽs’†‰›–  ŽR•Ó’¬—Îƒ–‹u–
+                   ‰Í–k’¬’J’n  ‰Í–k’¬–ðê–  ¼ì’¬‘åˆä‘ò–
+                   ŽRŒ`’©“ú’¬‹{h–  ‘å]’¬¶‘ò–  ”ö‰Ô‘òŽsŽá—t’¬–
+                   •Ä‘òŽs‰w‘O  •Ä‘òŽs—ÑòŽ›–  “ì—zŽsŽOŠÔ’Ê–
+                   ‚”©’¬‚”©–  ŽRŒ`ì¼’¬ã¬¼–
+                   ŽRŒ`¬‘’¬Šâˆä‘ò  ŽRŒ`¬‘’¬¬‘¬â’¬–
+                   ”’‘é’¬•Š›  ”Ñ–L’¬’Ö–  
+         k“x‚P    ’ß‰ªŽs”nê’¬  ’ß‰ªŽsãŽR“Y–  V¯Žs–x’[’¬–
+                   ŽRŒ`‹àŽR’¬‹àŽR–  ŒË‘ò‘ºŒÃŒû–  ŽRŒ`Žs—Î’¬
+                   ŽRŒ`Žs–òŽt’¬–  ¼ì’¬ŠC–¡–  ’·ˆäŽs‚Ü‚Ü‚Ìã–
+                   ”Ñ–L’¬ãŒ´–  
+•Ÿ“‡Œ§   k“x‚R    ‘Œ©’¬“¡“c–  
+         k“x‚Q    •Ÿ“‡Žs¼–Ø’¬  •Ÿ“‡Žs÷–Ø’¬–  •Ÿ“‡ŽsŒÜ˜V“à’¬–
+                   ŒSŽRŽs’©“ú  ŒSŽRŽsŠJ¬–  ŒSŽRŽsŒÎ“ì’¬–
+                   {‰êìŽs”ª”¦ŽR–  {‰êìŽs”ª”¦’¬–
+                   {‰êìŽsŠâ£ŽxŠ–  “ñ–{¼Žsj“¹–
+                   ŒKÜ’¬“Œ‘å‹÷–  ì–“’¬ŒÜ•S“c–  ‹¾Î’¬•sŽžÀ–
+                   “V‰h‘º‰º¼–{–  òè‘ºòè–  –î’¬ˆê–{–Ø–
+                   ‹Êì‘º¬‚–  óì’¬óì–  ŒÃ“a’¬¼ì–
+                   “c‘ºŽs‘êª’¬–  “c‘ºŽs‘å‰z’¬–
+                   •Ÿ“‡ˆÉ’BŽs‘OìŒ´–  •Ÿ“‡ˆÉ’BŽs—Àì’¬–
+                   •Ÿ“‡ˆÉ’BŽs•ÛŒ´’¬–  ‚¢‚í‚«Žs¬–¼•l  ‘Š”nŽs’†‘º–
+                   “è—t’¬–k“c–  ‘åŒF’¬‰º–ìã–  ‘o—t’¬VŽR–
+                   ˜Q]’¬Šô¢‹´  V’n’¬’J’n¬‰®–
+                   “ì‘Š”nŽsŒ´’¬‹æ‚Œ©’¬–  “ì‘Š”nŽsŒ´’¬‹æ–{’¬–
+                   “ì‘Š”nŽsŽ­“‡‹æ–  “ì‘Š”nŽs¬‚‹æ–
+                   ’–•c‘ã’¬ç‘ã“c–  ‰ï’Ãâ‰º’¬Žs’†ŽO”Ôb–
+                   ‰ï’Ã”ü—¢’¬V’ß’¡ŽÉ–  
+         k“x‚P    ”’‰ÍŽsŠs“à  ”’‰ÍŽsV”’‰Í–  ”’‰ÍŽs“Œ–
+                   “ñ–{¼Žs–ûˆä–  ‘å‹Ê‘º‹È“¡  ‘å‹Ê‘º‹Êˆä–
+                   ¼‹½‘ºŒF‘q–  ’I‘q’¬’I‘q’†‹–ì
+                   ’I‘q’¬’I‘qŠÚƒ–‹u–  –îÕ’¬“ŒŠÚ‰ºã–ì“à–
+                   •½“c‘º‰i“c–  ¬–ì’¬’†’Ê–  “c‘ºŽs‘Dˆø’¬
+                   “c‘ºŽsí—t’¬–  “c‘ºŽs“s˜H’¬–  –{‹{Žs–{‹{–
+                   ‚¢‚í‚«ŽsŽO˜a’¬  ‚¢‚í‚«Žs•½Žlƒc”g–
+                   ‚¢‚í‚«Žs‹Ñ’¬–  ‚¢‚í‚«Žs•½”~–{–
+=
+(ETX)
+
+ÄÞ³Î³ÁÃÝ4 ·¼Ö³
+(STX)
+35 03 00 100705070246 C21 9999
+                   •Ÿ“‡L–ì’¬‰º–k”—•c‘ã‘Ö–  •x‰ª’¬–{‰ª–
+                   ì“à‘ºãì“à¬ŽR•½–  ì“à‘ºãì“à‘“n–
+                   ‘åŒF’¬–ìã–  “ì‘Š”nŽsŒ´’¬‹æŽO“‡’¬  ¼‰ï’Ã’¬–ì‘ò
+                   ’–•c‘ã’¬é“ì  “ì‰ï’Ã’¬“c“‡  
+–kŠC“¹   k“x‚Q    VŽÂ’Ã‘º‘æ‚S‚Vü–  ”ŸŠÙŽs‘åX’¬–
+                   ”ŸŠÙŽs”‘’¬–  ”ŸŠÙŽsV•l’¬–  ”ŸŠÙŽs“úƒm•l’¬–
+                   “n“‡–k“lŽs’†‰›–  ’m“à’¬d“à–  ãƒm‘’¬‘å—¯–
+                   Œú‘ò•”’¬V’¬–  “ì–y’¬‰h’¬–  ’·À’¬’†‰›–
+                   “Ï¬–qŽs––L’¬  “Ï¬–qŽsˆ®’¬–  ˆÀ•½’¬‘—ˆ–ki–
+                   ‚Þ‚©‚í’¬¼•—–  VŠ¥’¬–k¯’¬–
+                   V‚Ð‚¾‚©’¬Ã“àŽRŽè’¬  V‚Ð‚¾‚©’¬Ã“àŒäK’¬–
+                   ‰Y‰Í’¬’z’n–  —lŽ—’¬‰h’¬–  ‰¹X’¬Œ³’¬–
+                   ‰Y–y’¬÷’¬–  \Ÿ‘åŽ÷’¬“Œ–{’Ê–
+                   ‹ú˜HŽs‰¹•Ê’¬’¼•Ê–  ‹ú˜HŽsˆ¢Š¦’¬ˆ¢Š¦ŒÎ‰·ò–
+                   ‹ú˜H’¬•Ê•Û–  •W’Ã’¬–k‚Qð–  
+         k“x‚P    ÎŽëŽs‰Ôì  ÎŽëŽs‰Ô”È–  ŽD–y–k‹æ‘¾•½–
+                   çÎŽs–k‰h  VçÎ‹ó`  çÎŽsŽá‘–
+                   çÎŽsŽxâ”ŒÎ‰·ò–  Œb’ëŽs‹ž’¬–  ”ŸŠÙŽs”üŒ´
+                   ”ŸŠÙŽs”öŽD•”’¬  ”ŸŠÙŽsì‹‚’¬–  Žµ”Ñ’¬÷’¬
+                   Žµ”Ñ’¬–{’¬–  “n“‡X’¬ŒäK’¬  •Ÿ“‡’¬•Ÿ“‡–
+                   žwŽR]·’¬‰W_  Œú‘ò•”’¬–ØŠÔ“à–
+                   ƒjƒZƒR’¬’†‰›’Ê–  ‹ä’mˆÀ’¬“ì‚Pð
+                   ‹ä’mˆÀ’¬–k‚Sð–  –…”w‹’¬–…”w‹–  –k—³’¬˜a–
+                   ‘êìŽs‘å’¬  »ìŽs¼‚Uð–  ŠâŒ©‘òŽs”µ‚ª‹u–
+                   ŠâŒ©‘òŽsŒI‘ò’¬“Œ–{’¬–  ŽOŠ}ŽsŽá¼’¬–
+                   ŒIŽR’¬¼•—–  ’†•x—Ç–ì’¬ŽsŠX’n–  ‘å‹ó’¬“Œ‘”‹Õ–
+                   ‘å‹ó’¬—–ž•Ê¼‚Rð–  ’_UˆÉ’BŽs”~–{
+                   ‘s•Ë’¬‘ê”V’¬–  “´–êŒÎ’¬“´–ê’¬–  “o•ÊŽs÷–Ø’¬–
+                   ”’˜V’¬‘å’¬  ˆÀ•½’¬’Ç•ª”‚ª‹u–  ‚Þ‚©‚í’¬•ä•Ê–
+                   “ú‚’n•û“ú‚’¬–å•Ê–  •½Žæ’¬U“à–
+                   V‚Ð‚¾‚©’¬ŽOÎˆ®’¬–  ‰Y‰Í’¬–ì[  ‰Y‰Í’¬’ªŒ©
+                   ãŽm–y’¬ãŽm–y–  Ž­’Ç’¬“Œ’¬–  V“¾’¬‚Qð–
+                   ‘ÑLŽs“Œ‚Sð  ‘ÑLŽs“Œ‚Uð–  Žm–y’¬Žm–y–
+                   \Ÿ´…’¬“ì‚Sð  ‰èŽº’¬“Œ‚Qð–  –‹•Ê’¬–{’¬–
+                   –‹•Ê’¬’‰—Þ‹Ñ’¬–  –L ’¬–ÎŠâ–{’¬–
+                   ’†ŽD“à‘º“Œ‚Qð–  X•Ê‘ºX•Ê–  ’íŽq‹ü’¬’íŽq‹ü–
+                   ‹ú˜HŽsK’¬  ‹ú˜HŽsˆ¢Š¦’¬’†‰›–  ŒúŠÝ’¬^‰h’¬–
+                   •l’†’¬–¶‘½•z–  ”’f’¬¼‚Pð–  •ÊŠC’¬í”Õ
+                   •ÊŠC’¬–{•ÊŠC–  ªŽºŽs—ŽÎ“Œ–  ªŽºŽsàçàôàî–  
+ˆïéŒ§   k“x‚Q    “ú—§Žs–ðŠ–  í—¤‘¾“cŽs‹àˆä’¬–
+                   í—¤‘¾“cŽs‚Š`’¬–  Š}ŠÔŽs’†‰›–  ˆïé’¬¬’ç–
+                   ¬”ü‹ÊŽsã‹Ê—¢–  “y‰YŽs“¡‘ò–  Î‰ªŽsÎ‰ª–
+                   ŽæŽèŽs“¡‘ã–  ÷ìŽs^•Ç–  ‚Â‚­‚Î‚Ý‚ç‚¢Žs•Ÿ“c–
+                   ‚Â‚­‚Î‚Ý‚ç‚¢Žs‰Á“¡–  
+         k“x‚P    …ŒËŽs‹à’¬  …ŒËŽsç”g’¬–  …ŒËŽs’†‰›–
+                   “ú—§Žs•ì¬ŠwZ–  ‚”‹ŽsˆÀ—Çì–  Š}ŠÔŽsÎˆä–
+                   ‚Ð‚½‚¿‚È‚©Žs“ì_•~‘ä–  í—¤‘å‹{Žs’†•x’¬
+                   í—¤‘å‹{Žs–k’¬–  í—¤‘å‹{Žs–ìŒû–  “ß‰ÏŽs•Ÿ“c–
+                   “ß‰ÏŽs‰Z˜A–  “y‰YŽsí–¼  “y‰YŽs‰º‚’Ã–
+                   Î‰ªŽsŠ`‰ª  ‚Â‚­‚ÎŽs“V‰¤‘ä–  ˆïéŽ­“ˆŽs”«Œ`
+                   —˜ª’¬•zì  â“ŒŽsŠâˆä  ˆî•~Žs]ŒËèb–
+                   ˆî•~Žs–ðŠ–  ˆî•~ŽsŒ‹²–  ’}¼ŽsM¶
+                   –g“cŽs–g“c  í‘Žs…ŠC“¹z–K’¬–  í‘ŽsVÎ‰º– 
+ 
+“È–ØŒ§   k“x‚Q    ‚ª‘ò’¬Î–––  
+         k“x‚P    ‘å“cŒ´Žs•‰H“c’¬  “ß{’¬Ž›Žq–
+                   “ß{‰–Œ´Žs“çŠ|–  ‰F“s‹{Žs–¾•Û–ì’¬  “È–ØŽsˆ®’¬
+                   ‰vŽq’¬‰vŽq  ŽsŠL’¬Žs”·–  “ß{‰GŽRŽs’†‰›
+                   “È–Ø“ß‰Ïì’¬¬ì–  
+ŒQ”nŒ§   k“x‚Q    ŒQ”n–¾˜a’¬V—¢–  
+=
+(ETX)
+
+ÄÞ³Î³ÁÃÝ4 ·¼Ö³
+(STX)
+35 03 00 100705070246 C11 9999
+         k“x‚P    ‹Ë¶ŽsD•P’¬  ‹Ë¶ŽsŒ³h’¬–  ŠÙ—ÑŽsé’¬–
+                   ”Â‘q’¬”Â‘q  ŒQ”nç‘ã“c’¬ÔŠâ–  —WŠy’¬’†–ì–  
+é‹ÊŒ§   k“x‚Q    ‰Á{Žs‰ºŽO–“–  ‰Á{Žs‘å—˜ª–  ‹vŠìŽsÂ—t–
+                   ‹vŠìŽsŒI‹´–  t“ú•”Žs’JŒ´V“c–  ‹{‘ã’¬Š}Œ´–
+                   ‚³‚¢‚½‚Ü’†‰›‹æ‰º—Ž‡–  
+         k“x‚P    ŒF’JŽs÷’¬  ŒF’JŽs‘å—¢–  s“cŽs–{ŠÛ–
+                   s“cŽs“ì‰ÍŒ´–  ‹vŠìŽs‰º‘Œ©  ‹gŒ©’¬‰º×’J–
+                   ŒË“cŽsãŒË“c–  ”µƒP’JŽsŽOƒc˜a–  âŒËŽsç‘ã“c–
+                   –Ñ˜CŽR’¬Šâˆä–  ì“‡’¬•½À–
+                   ‚³‚¢‚½‚Ü‘å‹{‹æ“VÀ’¬–  ‚³‚¢‚½‚Ü‰Y˜a‹æ‚»  
+ç—tŒ§   k“x‚Q    ŽæŽs²Œ´‰ºìŠÝ  
+         k“x‚P    “Œ‹àŽs“ú‹g‘ä–  ‘½ŒÃ’¬‘½ŒÃ  ’·¶‘º–{‹½–
+                   ŽæŽs–ðŠ–  ç—t’†‰›‹æ’†‰›`  ç—t’†‰›‹æ“s’¬–
+                   ç—t‰ÔŒ©ì‹æ‰Ô“‡’¬–  ç—tŽá—t‹æ¬‘q‘ä–
+                   ŽsŒ´ŽsŽoè–  
+_“ÞìŒ§ k“x‚Q    ‰¡•l¼‹æ‚Ý‚È‚Æ‚Ý‚ç‚¢–  ‰¡•l’†‹æŽR’¬–
+                   ‰¡•l’†‹æ“ú–{‘å’Ê–  
+         k“x‚P    ‰¡•l’†‹æŽRŽè’¬  ‰¡•l’†‹æŽR‰º’¬–
+                   Šƒ–èŽsŠƒ–è  ‘Š–ÍŒ´’†‰›‹æ’†‰›  
+VŠƒŒ§   k“x‚Q    ‰Á–ÎŽsK’¬–  V”­“cŽsZ“c–  ‘ºãŽs•Ð’¬–
+                   ‘ºãŽs¡h–  ‘ºãŽsŠâ‘ò–  ‘ºãŽs•{‰®–
+                   ŒÜòŽs‘¾“c–  ˆ¢‰ê–ìŽs‰ªŽR’¬–  ˆ¢‰ê–ìŽs‰Wƒ–‹´–
+                   ˆ¢‰ê’¬Ž­£’†ŠwZ–  VŠƒ“ì‹æ”’ª–  
+         k“x‚P    Œ©•Žsº˜a’¬–  V”­“cŽs’†‰›’¬–  ‘ºãŽs‰–’¬
+                   ‘ºãŽsŠ¦ì–  ‘ºãŽsŽO”V’¬–  ‘ºãŽsŽRŒû–
+                   ŒÜòŽs‘º¼‰³  ˆ¢‰ê–ìŽs•Û“c–  ˆ¢‰ê’¬’Ãì–
+                   ‘Ù“àŽsV˜a’¬  VŠƒ’†‰›‹æK¼
+                   VŠƒ’†‰›‹æVŠƒŽs–ðŠ–  VŠƒ]“ì‹æò’¬–
+                   VŠƒ¼Š—‹æ–ðŠ  
+ŽR—œŒ§   k“x‚Q    ”E–ì‘º”E‘–  
+         k“x‚P    ’†‰›Žs¬“‡–  •xŽm‰ÍŒûŒÎ’¬‘D’Ã  
+“Œ‹ž“s   k“x‚P    “Œ‹žç‘ã“c‹æ‘åŽè’¬  “Œ‹žç‘ã“c‹æ’¬–
+                   “Œ‹ž’†‰›‹æŸ‚Ç‚«–  “Œ‹ž`‹æ“ìÂŽR–
+                   “Œ‹ž–n“c‹æ“ŒŒü“‡–  “Œ‹ž]“Œ‹æ“Œ—z–
+                   “Œ‹ž]“Œ‹æX‰º–  “Œ‹ž]“Œ‹æ‹TŒË–  “Œ‹ž‘Û‹ó`
+                   “Œ‹ž‘å“c‹æ–{‰H“c–  “Œ‹ž™•À‹æ‚ˆäŒË–
+                   “Œ‹ž–k‹æ¼ƒ–Œ´–  “Œ‹ž–k‹æÔ‰H“ì–
+                   “Œ‹žrì‹ærì–  “Œ‹žrì‹æ“Œ”ö‹v–
+                   “Œ‹ž”Â‹´‹æ”Â‹´–  “Œ‹ž‘«—§‹æˆÉ‹»–
+                   “Œ‹ž‘«—§‹æ_–¾“ì–  “Œ‹ž‘«—§‹æçZ’†‹’¬–
+                   “Œ‹ž]ŒËì‹æ‘D–x–  ”ª‰¤ŽqŽs–x”V“à–
+                   ’¬“cŽs’‰¶–  ’¬“cŽs’†’¬–  ‘•ªŽ›ŽsŒË‘q
+                   ‘½–€Žs’ß–q–  
+’·–ìŒ§   k“x‚P    z–KŽsŒÎŠÝ’Ê‚è  Š–ìŽsŠ‹ˆäŒö‰€–
+                   ’·–ì“ì–q‘ºŠCƒmŒû–  
+Ã‰ªŒ§   k“x‚P    ¼ˆÉ“¤’¬‰F‹v{–  ˆÉ“¤‚Ì‘ŽsŽl“ú’¬–
+                   À’ÃŽs‚“‡–{’¬–  Œä“aêŽs”‹Œ´  
+‚±‚Ì’nk‚É‚æ‚é’Ã”g‚ÌS”z‚Í‚ ‚è‚Ü‚¹‚ñB
+=
+(ETX)

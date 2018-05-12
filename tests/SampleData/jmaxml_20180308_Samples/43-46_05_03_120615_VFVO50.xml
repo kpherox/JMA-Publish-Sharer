@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Report xmlns="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx="http://xml.kishou.go.jp/jmaxml1/">
+<Control>
+<Title>噴火警報・予報</Title>
+<DateTime>2012-05-20T00:00:00Z</DateTime>
+<Status>通常</Status>
+<EditorialOffice>仙台管区気象台</EditorialOffice>
+<PublishingOffice>仙台管区気象台</PublishingOffice>
+</Control>
+<Head xmlns="http://xml.kishou.go.jp/jmaxml1/informationBasis1/">
+<Title>火山名　栗駒山　噴火警報（山麓）</Title>
+<ReportDateTime>2012-05-20T09:00:00+09:00</ReportDateTime>
+<TargetDateTime>2012-05-20T09:00:00+09:00</TargetDateTime>
+<EventID>210</EventID>
+<InfoType>発表</InfoType>
+<Serial />
+<InfoKind>噴火警報・予報</InfoKind>
+<InfoKindVersion>1.0_0</InfoKindVersion>
+<Headline>
+<Text>＜栗駒山に噴火警報（山麓厳重警戒）を発表＞
+山麓に重大な影響を及ぼす噴火が発生すると予想。
+＜火口周辺警報（入山危険）から噴火警報（山麓厳重警戒）に引上げ＞</Text>
+<Information type="噴火警報・予報（対象火山）">
+<Item>
+<Kind>
+<Name>山麓厳重警戒</Name>
+<Code>24</Code>
+<Condition>引上げ</Condition>
+</Kind>
+<LastKind>
+<Name>入山危険</Name>
+<Code>23</Code>
+<Condition />
+</LastKind>
+<Areas codeType="火山名">
+<Area>
+<Name>栗駒山</Name>
+<Code>210</Code>
+</Area>
+</Areas>
+</Item>
+</Information>
+<Information type="噴火警報・予報（対象市町村等）">
+<Item>
+<Kind>
+<Name>噴火警報</Name>
+<Code>01</Code> 
+<Condition>発表</Condition>
+</Kind>
+<LastKind>
+<Name>火口周辺警報</Name>
+<Code>02</Code> 
+<Condition />
+</LastKind>
+<Areas codeType="気象・地震・火山情報／市町村等">
+<Area>
+<Name>岩手県一関市</Name>
+<Code>0320900</Code>
+</Area>
+<Area>
+<Name>宮城県栗原市</Name>
+<Code>0421300</Code>
+</Area>
+<Area>
+<Name>秋田県東成瀬村</Name>
+<Code>0546400</Code>
+</Area>
+</Areas>
+</Item>
+<Item>
+<Kind>
+<Name>噴火警報</Name>
+<Code>01</Code> 
+<Condition>発表</Condition>
+</Kind>
+<LastKind>
+<Name>噴火予報</Name>
+<Code>05</Code> 
+<Condition />
+</LastKind>
+<Areas codeType="気象・地震・火山情報／市町村等">
+<Area>
+<Name>秋田県湯沢市</Name>
+<Code>0520700</Code>
+</Area>
+</Areas>
+</Item>
+</Information>
+<Information type="噴火警報・予報（対象市町村の防災対応等）">
+<Item>
+<Kind>
+<Name>噴火警報：当該山麓厳重警戒</Name>
+<Code>47</Code> 
+<Condition>引上げ</Condition>
+</Kind>
+<LastKind>
+<Name>火口周辺警報：火口周辺警戒</Name>
+<Code>49</Code> 
+<Condition />
+</LastKind>
+<Areas codeType="気象・地震・火山情報／市町村等">
+<Area>
+<Name>岩手県一関市</Name>
+<Code>0320900</Code>
+</Area>
+<Area>
+<Name>宮城県栗原市</Name>
+<Code>0421300</Code>
+</Area>
+</Areas>
+</Item>
+<Item>
+<Kind>
+<Name>噴火警報：火口周辺警戒</Name>
+<Code>48</Code> 
+<Condition>切替</Condition>
+</Kind>
+<LastKind>
+<Name>火口周辺警報：火口周辺警戒</Name>
+<Code>49</Code> 
+<Condition />
+</LastKind>
+<Areas codeType="気象・地震・火山情報／市町村等">
+<Area>
+<Name>秋田県東成瀬村</Name>
+<Code>0546400</Code>
+</Area>
+</Areas>
+</Item>
+<Item>
+<Kind>
+<Name>噴火警報：火口周辺警戒</Name>
+<Code>48</Code> 
+<Condition>発表</Condition>
+</Kind>
+<LastKind>
+<Name>平常</Name>
+<Code>45</Code> 
+<Condition />
+</LastKind>
+<Areas codeType="気象・地震・火山情報／市町村等">
+<Area>
+<Name>秋田県湯沢市</Name>
+<Code>0520700</Code>
+</Area>
+</Areas>
+</Item>
+</Information>
+</Headline>
+</Head>
+<Body xmlns="http://xml.kishou.go.jp/jmaxml1/body/volcanology1/" xmlns:jmx_eb="http://xml.kishou.go.jp/jmaxml1/elementBasis1/">
+<VolcanoInfo type="噴火警報・予報（対象火山）">
+<Item>
+<Kind>
+<Name>山麓厳重警戒</Name>
+<Code>24</Code>
+<Condition>引上げ</Condition>
+</Kind>
+<LastKind>
+<Name>入山危険</Name>
+<Code>23</Code>
+<Condition />
+</LastKind>
+<Areas codeType="火山名">
+<Area>
+<Name>栗駒山</Name>
+<Code>210</Code>
+<Coordinate description="北緯３８度５７．６５分　東経１４０度４７．３０分　標高１６２７ｍ">+3857.65+14047.30+1627/</Coordinate>
+</Area>
+</Areas>
+</Item>
+</VolcanoInfo>
+<VolcanoInfo type="噴火警報・予報（対象市町村等）">
+<Item>
+<Kind>
+<Name>噴火警報</Name>
+<Code>01</Code> 
+<Condition>発表</Condition>
+</Kind>
+<LastKind>
+<Name>火口周辺警報</Name>
+<Code>02</Code> 
+<Condition />
+</LastKind>
+<Areas codeType="気象・地震・火山情報／市町村等">
+<Area>
+<Name>岩手県一関市</Name>
+<Code>0320900</Code>
+</Area>
+<Area>
+<Name>宮城県栗原市</Name>
+<Code>0421300</Code>
+</Area>
+<Area>
+<Name>秋田県東成瀬村</Name>
+<Code>0546400</Code>
+</Area>
+</Areas>
+</Item>
+<Item>
+<Kind>
+<Name>噴火警報</Name>
+<Code>01</Code> 
+<Condition>発表</Condition>
+</Kind>
+<LastKind>
+<Name>噴火予報</Name>
+<Code>05</Code> 
+<Condition />
+</LastKind>
+<Areas codeType="気象・地震・火山情報／市町村等">
+<Area>
+<Name>秋田県湯沢市</Name>
+<Code>0520700</Code>
+</Area>
+</Areas>
+</Item>
+</VolcanoInfo>
+<VolcanoInfo type="噴火警報・予報（対象市町村の防災対応等）">
+<Item>
+<Kind>
+<Name>噴火警報：当該山麓厳重警戒</Name>
+<Code>47</Code> 
+<Condition>引上げ</Condition>
+</Kind>
+<LastKind>
+<Name>火口周辺警報：火口周辺警戒</Name>
+<Code>49</Code> 
+<Condition />
+</LastKind>
+<Areas codeType="気象・地震・火山情報／市町村等">
+<Area>
+<Name>岩手県一関市</Name>
+<Code>0320900</Code>
+</Area>
+<Area>
+<Name>宮城県栗原市</Name>
+<Code>0421300</Code>
+</Area>
+</Areas>
+</Item>
+<Item>
+<Kind>
+<Name>噴火警報：火口周辺警戒</Name>
+<Code>48</Code> 
+<Condition>切替</Condition>
+</Kind>
+<LastKind>
+<Name>火口周辺警報：火口周辺警戒</Name>
+<Code>49</Code> 
+<Condition />
+</LastKind>
+<Areas codeType="気象・地震・火山情報／市町村等">
+<Area>
+<Name>秋田県東成瀬村</Name>
+<Code>0546400</Code>
+</Area>
+</Areas>
+</Item>
+<Item>
+<Kind>
+<Name>噴火警報：火口周辺警戒</Name>
+<Code>48</Code> 
+<Condition>発表</Condition>
+</Kind>
+<LastKind>
+<Name>平常</Name>
+<Code>45</Code> 
+<Condition />
+</LastKind>
+<Areas codeType="気象・地震・火山情報／市町村等">
+<Area>
+<Name>秋田県湯沢市</Name>
+<Code>0520700</Code>
+</Area>
+</Areas>
+</Item>
+</VolcanoInfo>
+<VolcanoInfoContent>
+<VolcanoHeadline>＜栗駒山に噴火警報（山麓厳重警戒）を発表＞
+山麓に重大な影響を及ぼす噴火が発生すると予想。
+＜火口周辺警報（入山危険）から噴火警報（山麓厳重警戒）に引上げ＞</VolcanoHeadline>
+<VolcanoActivity>  栗駒山では、本日（２０日）０６時００分に噴火が発生し、大きな噴石が火口から３ｋｍ程度まで飛散しました。また、火砕流が火口から北東へ２ｋｍ程度流下しました。本日になって、火山性微動の震幅は増大し、現在も継続中です。
+  今後さらに噴火活動が活発化する可能性があり、その場合には、大規模な火砕流が発生し山麓に到達する可能性がありますので、厳重な警戒してください。</VolcanoActivity>
+<VolcanoPrevention>  大規模な火砕流が到達する可能性がある山麓の地域では、厳重な警戒をしてください。
+　噴火に伴う弾道を描いて飛散する大きな噴石に警戒してください。
+  風下側では、降灰に注意してください。</VolcanoPrevention>
+<Appendix />
+</VolcanoInfoContent>
+</Body>   
+</Report>

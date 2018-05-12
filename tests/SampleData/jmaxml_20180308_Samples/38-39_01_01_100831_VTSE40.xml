@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx="http://xml.kishou.go.jp/jmaxml1/">
+<Control>
+	<Title>津波警報・注意報・予報</Title>
+	<DateTime>2009-08-10T20:10:25Z</DateTime>
+	<Status>通常</Status>
+	<EditorialOffice>大阪管区気象台</EditorialOffice>
+	<PublishingOffice>気象庁</PublishingOffice>
+</Control>
+<Head xmlns="http://xml.kishou.go.jp/jmaxml1/informationBasis1/">
+	<Title>津波注意報・予報</Title>
+	<ReportDateTime>2009-08-11T05:10:00+09:00</ReportDateTime>
+	<TargetDateTime>2009-08-11T05:10:00+09:00</TargetDateTime>
+	<EventID>20090811050711</EventID>
+	<InfoType>発表</InfoType>
+	<Serial></Serial>
+	<InfoKind>津波警報・注意報・予報</InfoKind>
+	<InfoKindVersion>1.0_0</InfoKindVersion>
+	<Headline>
+	<Text>津波注意報を発表しました。</Text>
+	<Information type="津波予報領域表現">
+	<Item>
+		<Kind>
+			<Name>津波注意報</Name>
+			<Code>62</Code>
+		</Kind>
+		<Areas codeType="津波予報区">
+			<Area>
+				<Name>伊豆諸島</Name>
+				<Code>320</Code>
+			</Area>
+			<Area>
+				<Name>静岡県</Name>
+				<Code>380</Code>
+			</Area>
+		</Areas>
+	</Item>
+	</Information>
+	</Headline>
+</Head>
+<Body xmlns="http://xml.kishou.go.jp/jmaxml1/body/seismology1/" xmlns:jmx_eb="http://xml.kishou.go.jp/jmaxml1/elementBasis1/">
+	<Tsunami>
+	<Forecast>
+		<CodeDefine>
+			<Type xpath="Item/Area/Code">津波予報区</Type>
+			<Type xpath="Item/Category/Kind/Code">警報等情報要素／津波警報・注意報・予報</Type>
+			<Type xpath="Item/Category/LastKind/Code">警報等情報要素／津波警報・注意報・予報</Type>
+		</CodeDefine>
+		<Item>
+			<Area>
+				<Name>伊豆諸島</Name>
+				<Code>320</Code>
+			</Area>
+			<Category>
+				<Kind>
+					<Name>津波注意報</Name>
+					<Code>62</Code>
+				</Kind>
+				<LastKind>
+					<Name>津波なし</Name>
+					<Code>00</Code>
+				</LastKind>
+			</Category>
+			<FirstHeight>
+				<Condition>既に津波到達と推測</Condition>
+			</FirstHeight>
+			<MaxHeight>
+				<jmx_eb:TsunamiHeight type="津波の高さ" unit="m" description="０．５ｍ">0.5</jmx_eb:TsunamiHeight>
+			</MaxHeight>
+		</Item>
+		<Item>
+			<Area>
+				<Name>静岡県</Name>
+				<Code>380</Code>
+			</Area>
+			<Category>
+				<Kind>
+					<Name>津波注意報</Name>
+					<Code>62</Code>
+				</Kind>
+				<LastKind>
+					<Name>津波なし</Name>
+					<Code>00</Code>
+				</LastKind>
+			</Category>
+			<FirstHeight>
+				<Condition>既に津波到達と推測</Condition>
+			</FirstHeight>
+			<MaxHeight>
+				<jmx_eb:TsunamiHeight type="津波の高さ" unit="m" description="０．５ｍ">0.5</jmx_eb:TsunamiHeight>
+			</MaxHeight>
+		</Item>
+		<Item>
+			<Area>
+				<Name>千葉県九十九里・外房</Name>
+				<Code>310</Code>
+			</Area>
+			<Category>
+				<Kind>
+					<Name>津波予報（若干の海面変動）</Name>
+					<Code>71</Code>
+				</Kind>
+				<LastKind>
+					<Name>津波なし</Name>
+					<Code>00</Code>
+				</LastKind>
+			</Category>
+			<MaxHeight>
+				<jmx_eb:TsunamiHeight type="津波の高さ" unit="m" description="０．２ｍ未満">0.2</jmx_eb:TsunamiHeight>
+			</MaxHeight>
+		</Item>
+		<Item>
+			<Area>
+				<Name>千葉県内房</Name>
+				<Code>311</Code>
+			</Area>
+			<Category>
+				<Kind>
+					<Name>津波予報（若干の海面変動）</Name>
+					<Code>71</Code>
+				</Kind>
+				<LastKind>
+					<Name>津波なし</Name>
+					<Code>00</Code>
+				</LastKind>
+			</Category>
+			<MaxHeight>
+				<jmx_eb:TsunamiHeight type="津波の高さ" unit="m" description="０．２ｍ未満">0.2</jmx_eb:TsunamiHeight>
+			</MaxHeight>
+		</Item>
+		<Item>
+			<Area>
+				<Name>相模湾・三浦半島</Name>
+				<Code>330</Code>
+			</Area>
+			<Category>
+				<Kind>
+					<Name>津波予報（若干の海面変動）</Name>
+					<Code>71</Code>
+				</Kind>
+				<LastKind>
+					<Name>津波なし</Name>
+					<Code>00</Code>
+				</LastKind>
+			</Category>
+			<MaxHeight>
+				<jmx_eb:TsunamiHeight type="津波の高さ" unit="m" description="０．２ｍ未満">0.2</jmx_eb:TsunamiHeight>
+			</MaxHeight>
+		</Item>
+		<Item>
+			<Area>
+				<Name>愛知県外海</Name>
+				<Code>390</Code>
+			</Area>
+			<Category>
+				<Kind>
+					<Name>津波予報（若干の海面変動）</Name>
+					<Code>71</Code>
+				</Kind>
+				<LastKind>
+					<Name>津波なし</Name>
+					<Code>00</Code>
+				</LastKind>
+			</Category>
+			<MaxHeight>
+				<jmx_eb:TsunamiHeight type="津波の高さ" unit="m" description="０．２ｍ未満">0.2</jmx_eb:TsunamiHeight>
+			</MaxHeight>
+		</Item>
+		<Item>
+			<Area>
+				<Name>伊勢・三河湾</Name>
+				<Code>391</Code>
+			</Area>
+			<Category>
+				<Kind>
+					<Name>津波予報（若干の海面変動）</Name>
+					<Code>71</Code>
+				</Kind>
+				<LastKind>
+					<Name>津波なし</Name>
+					<Code>00</Code>
+				</LastKind>
+			</Category>
+			<MaxHeight>
+				<jmx_eb:TsunamiHeight type="津波の高さ" unit="m" description="０．２ｍ未満">0.2</jmx_eb:TsunamiHeight>
+			</MaxHeight>
+		</Item>
+		<Item>
+			<Area>
+				<Name>三重県南部</Name>
+				<Code>400</Code>
+			</Area>
+			<Category>
+				<Kind>
+					<Name>津波予報（若干の海面変動）</Name>
+					<Code>71</Code>
+				</Kind>
+				<LastKind>
+					<Name>津波なし</Name>
+					<Code>00</Code>
+				</LastKind>
+			</Category>
+			<MaxHeight>
+				<jmx_eb:TsunamiHeight type="津波の高さ" unit="m" description="０．２ｍ未満">0.2</jmx_eb:TsunamiHeight>
+			</MaxHeight>
+		</Item>	</Forecast>
+	</Tsunami>
+	<Earthquake>
+		<OriginTime>2009-08-11T05:07:00+09:00</OriginTime>
+		<ArrivalTime>2009-08-11T05:07:00+09:00</ArrivalTime>
+		<Hypocenter>
+			<Area>
+				<Name>駿河湾</Name>
+				<Code type="震央地名">485</Code>
+				<jmx_eb:Coordinate description="北緯３４．８度　東経１３８．５度　深さ　２０ｋｍ" datum="日本測地系">+34.8+138.5-20000/</jmx_eb:Coordinate>
+				<NameFromMark>御前崎の北東４０ｋｍ付近</NameFromMark>
+				<MarkCode type="震央補助">305</MarkCode>
+				<Direction>北東</Direction>
+				<Distance unit="km">40</Distance>
+			</Area>
+		</Hypocenter>
+		<jmx_eb:Magnitude type="Mj" description="Ｍ６．６">6.6</jmx_eb:Magnitude>
+	</Earthquake>
+	<Comments>
+		<WarningComment codeType="固定付加文">
+			<Text>場所によっては津波の高さが「予想される津波の高さ」より高くなる可能性があります。</Text>
+			<Code>0108</Code>
+		</WarningComment>
+    <FreeFormComment>＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊　解説　＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+＜津波注意報＞
+高いところで０．５ｍ程度の津波が予想されますので、注意してください。
+＜津波予報（若干の海面変動）＞
+若干の海面変動が予想されますが、被害の心配はありません。</FreeFormComment>
+	</Comments>
+</Body>
+</Report>

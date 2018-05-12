@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx="http://xml.kishou.go.jp/jmaxml1/">
+  <Control>
+    <Title>生物季節観測</Title>
+    <DateTime>2009-07-22T10:53:59Z</DateTime>
+    <Status>通常</Status>
+    <EditorialOffice>松山地方気象台</EditorialOffice>
+    <PublishingOffice>松山地方気象台</PublishingOffice>
+  </Control>
+  <Head xmlns="http://xml.kishou.go.jp/jmaxml1/informationBasis1/">
+    <Title>生物季節観測</Title>
+    <ReportDateTime>2009-07-22T19:53:00+09:00</ReportDateTime>
+    <TargetDateTime>2009-07-22T00:00:00+09:00</TargetDateTime>
+    <EventID>20090722195300_26</EventID>
+    <InfoType>発表</InfoType>
+    <Serial />
+    <InfoKind>生物季節観測報告気象報</InfoKind>
+    <InfoKindVersion>1.0_0</InfoKindVersion>
+    <Headline>
+      <Text />
+    </Headline>
+  </Head>
+  <Body xmlns="http://xml.kishou.go.jp/jmaxml1/body/meteorology1/">
+    <MeteorologicalInfos type="生物季節観測">
+      <MeteorologicalInfo>
+        <DateTime significant="yyyy-mm-dd">2009-07-22T00:00:00+09:00</DateTime>
+        <Item>
+          <Kind>
+            <Name>ひぐらしの初鳴日</Name>
+            <Code>26</Code>
+            <ClassName>ヒグラシ</ClassName>
+            <Condition>通常</Condition>
+          </Kind>
+          <Station>
+            <Name>松山地方気象台</Name>
+            <Code type="国際地点番号">47887</Code>
+            <Location>松山市北持田町</Location>
+            <Status>付近</Status>
+          </Station>
+        </Item>
+      </MeteorologicalInfo>
+    </MeteorologicalInfos>
+    <AdditionalInfo>
+      <ObservationAddition>
+        <DeviationFromLastYear>-1</DeviationFromLastYear>
+        <Text>溝辺町（ミゾノベマチ）</Text>
+      </ObservationAddition>
+    </AdditionalInfo>
+  </Body>
+</Report>

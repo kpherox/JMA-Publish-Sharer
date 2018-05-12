@@ -1,0 +1,52 @@
+Å³·Ô½Ä4 ·¼Ö³
+(STX)
+37 03 00 080614084355 C11
+9999
+                            ’nk‚h‚c  F‚Q‚O‚O‚W‚O‚U‚P‚S‚O‚W‚S‚R‚T‚O
+                            •½¬‚Q‚O”N  ‚UŒŽ‚P‚S“ú‚O‚WŽž‚S‚R•ª‚T‚T•b
+                                                          ‹CÛ’¡”­•\
+
+‹Ù‹}’nk‘¬•ñiŒx•ñji‘æ‚R•ñj
+
+‚P‚S“ú‚O‚WŽž‚S‚R•ª‚S‚T•b 
+ŠâŽèŒ§“à—¤“ì•”            ‚l‚UD‚Q’ö“x
+–kˆÜ‚R‚XD‚O“x  “ŒŒo‚P‚S‚OD‚X“x  [‚³‚P‚O‚‹‚
+
+ƒŽå—v“®‚Ì“ž’B—\‘ª„
+ŽRŒ`Œ§Åã            k“x‚S  ’ö“x          ‚O‚WŽž‚S‚R•ª‚T‚V•b ˆÈ~
+‹{éŒ§’†•”            k“x‚S  ’ö“x          ‚O‚WŽž‚S‚S•ª‚O‚R•b ˆÈ~
+ŽRŒ`Œ§‘ºŽR            k“x‚S  ’ö“x          ‚O‚WŽž‚S‚S•ª‚O‚R•b ˆÈ~
+H“cŒ§‰ˆŠÝ“ì•”        k“x‚S  ’ö“x          ‚O‚WŽž‚S‚S•ª‚O‚R•b ˆÈ~
+ŠâŽèŒ§‰ˆŠÝ“ì•”        k“x‚S  ’ö“x          ‚O‚WŽž‚S‚S•ª‚O‚R•b ˆÈ~
+ŠâŽèŒ§“à—¤–k•”        k“x‚S  ’ö“x          ‚O‚WŽž‚S‚S•ª‚O‚T•b ˆÈ~
+ŽRŒ`Œ§¯“à            k“x‚S  ’ö“x          ‚O‚WŽž‚S‚S•ª‚P‚P•b ˆÈ~
+‹{éŒ§“ì•”            k“x‚S  ’ö“x          ‚O‚WŽž‚S‚S•ª‚P‚P•b ˆÈ~
+ŠâŽèŒ§‰ˆŠÝ–k•”        k“x‚R  ‚©‚ç‚S  ’ö“x  ‚O‚WŽž‚S‚S•ª‚P‚S•b ˆÈ~
+
+ƒŽå—v“®‚ªŠù‚É“ž’B‚µ‚½‚ÆŽv‚í‚ê‚é’nˆæ„
+ŠâŽèŒ§“à—¤“ì•”        k“x‚TŽã‚©‚ç‚T‹­’ö“x
+‹{éŒ§–k•”            k“x‚TŽã’ö“x
+H“cŒ§“à—¤“ì•”        k“x‚TŽã’ö“x
+
+ƒŒx•ñ‘ÎÛ‚Ì’nˆæ„
+ŠâŽèŒ§“à—¤“ì•”@‹{éŒ§–k•”@H“cŒ§“à—¤“ì•”@ŽRŒ`Œ§Åã@‹{éŒ§’†•”
+H“cŒ§‰ˆŠÝ“ì•”@ŠâŽèŒ§‰ˆŠÝ“ì•”@ŠâŽèŒ§“à—¤–k•”@ŠâŽèŒ§‰ˆŠÝ–k•”
+
+‹­‚¢—h‚ê‚ÉŒx‰ú‚µ‚Ä‚­‚¾‚³‚¢B
+=
+(ETX)
+
+
+
+Å³·Ô½Ä3 ·¼Ö³
+(STX)
+37 03 00 080614084355 C11
+080614084345
+ND20080614084350 NCN003 JD////////////// JN///
+213 N390 E1409 010 62 5+ RK33513 RT01/// RC0////
+EBI 213 S5+5- ////// 11 220 S5-5- ////// 11 233 S5-5- ////// 11
+241 S0404 084357 10 222 S0404 084403 10 242 S0404 084403 00
+231 S0404 084403 10 211 S0404 084403 10 212 S0404 084405 10
+240 S0404 084411 00 221 S0404 084411 00 210 S0403 084414 10
+9999=
+(ETX)

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Report xmlns="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx="http://xml.kishou.go.jp/jmaxml1/">
+<Control>
+	<Title>地震の活動状況等に関する情報</Title>
+	<DateTime>2010-02-27T23:30:00Z</DateTime>
+	<Status>通常</Status>
+	<EditorialOffice>気象庁本庁</EditorialOffice>
+	<PublishingOffice>気象庁</PublishingOffice>
+  </Control>
+<Head xmlns="http://xml.kishou.go.jp/jmaxml1/informationBasis1/">
+	<Title>地震の活動状況等に関する情報</Title>
+	<ReportDateTime>2010-02-28T08:30:00+09:00</ReportDateTime>
+	<TargetDateTime>2010-02-28T08:30:00+09:00</TargetDateTime>
+	<EventID>20100227153529</EventID>
+	<InfoType>発表</InfoType>
+	<Serial></Serial>
+	<InfoKind>地震の活動状況等に関する情報</InfoKind>
+	<InfoKindVersion>1.0_0</InfoKindVersion>
+	<Headline>
+		<Text>地震の活動状況等をお知らせします。</Text>
+	</Headline>
+</Head>
+<Body xmlns="http://xml.kishou.go.jp/jmaxml1/body/seismology1/" xmlns:jmx_eb="http://xml.kishou.go.jp/jmaxml1/elementBasis1/">
+	<Text>２０１０年２月２７日１５時３４分頃にチリ中部沿岸で発生した地震について、２８日０８時３０分現在の概要を以下のとおりお知らせします。
+
+＊＊＊　地震及び津波の概要　＊＊＊
+発生日時：２月２７日１５時３４分頃
+マグニチュード：８．６
+場所および深さ：チリ中部沿岸（南緯３６．１度、西経７２．６度）
+発震機構等：東西方向に圧力軸を持つ逆断層型
+
+＊＊＊　津波警報等の発表状況　＊＊＊
+津波警報等については発表準備中
+
+＊＊＊　津波の観測状況　＊＊＊
+国・地域名　　　　　検潮所名　　　　　　　　　　　津波の高さ
+エクアドル　　　　　ガラパゴス諸島サンタクルス島　０．７ｍ
+米領サモア　　　　　パゴパゴ　　　　　　　　　　　０．７ｍ
+サモア　　　　　　　アピア　　　　　　　　　　　　０．２ｍ
+米国　　　　　　　　ハワイ州ホノルル　　　　　　　０．２ｍ
+
+太平洋津波警報センター（ＰＴＷＣ）による津波の観測値
+国・地域名　　　　　検潮所名　　　　　　　　　　　津波の高さ
+チリ　　　　　　　　タルカワノ　　　　　　　　　　２．３ｍ
+チリ　　　　　　　　バルパライソ　　　　　　　　　１．３ｍ
+チリ　　　　　　　　コキンボ　　　　　　　　　　　１．３ｍ
+チリ　　　　　　　　コラル　　　　　　　　　　　　０．９ｍ
+チリ　　　　　　　　アンクド　　　　　　　　　　　０．６ｍ
+チリ　　　　　　　　アントファガスタ　　　　　　　０．５ｍ
+チリ　　　　　　　　イースター島　　　　　　　　　０．４ｍ
+エクアドル　　　　　ガラパゴス諸島バルトラ島　　　０．３ｍ
+仏領マルキーズ諸島　ヒバオア島　　　　　　　　　　１．８ｍ
+クック諸島　　　　　ラロトンガ島　　　　　　　　　０．３ｍ
+米国　　　　　　　　ハワイ州カフルイ　　　　　    １．０ｍ
+
+
+＊＊＊　防災上の留意事項　＊＊＊
+　太平洋沿岸では、１から３ｍ程度の津波が予想されますので警戒してください。
+
+　地震情報、津波情報等は最新の情報をご覧下さい。
+　なお、現在発表している情報は気象庁ホームページで公表しております。</Text>
+</Body>
+</Report>

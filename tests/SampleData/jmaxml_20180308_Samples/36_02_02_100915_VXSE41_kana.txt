@@ -1,0 +1,48 @@
+Å³·Ô½Ä4 ·¼Ö³
+(STX)
+36 03 00 080614084355 C11
+9999
+                            ’nk‚h‚c  F‚Q‚O‚O‚W‚O‚U‚P‚S‚O‚W‚S‚R‚T‚O
+                            •½¬‚Q‚O”N  ‚UŒŽ‚P‚S“ú‚O‚WŽž‚S‚R•ª‚T‚T•b
+                                                          ‹CÛ’¡”­•\
+
+‹Ù‹}’nk‘¬•ñiŒx•ñji‘æ‚Q•ñj
+
+‚P‚S“ú‚O‚WŽž‚S‚R•ª‚S‚U•b 
+ŠâŽèŒ§“à—¤“ì•”            ‚l‚UD‚P’ö“xˆÈã‚Ì’nk”­¶
+
+ƒŽå—v“®‚Ì“ž’B—\‘ª„
+ŠâŽèŒ§“à—¤–k•”        k“x‚S  ’ö“xˆÈã    ‚O‚WŽž‚S‚S•ª‚O‚P•b ˆÈ~
+ŠâŽèŒ§‰ˆŠÝ“ì•”        k“x‚S  ’ö“xˆÈã    ‚O‚WŽž‚S‚S•ª‚O‚S•b ˆÈ~
+ŽRŒ`Œ§Åã            k“x‚S  ’ö“xˆÈã    ‚O‚WŽž‚S‚S•ª‚O‚S•b ˆÈ~
+‹{éŒ§’†•”            k“x‚S  ’ö“xˆÈã    ‚O‚WŽž‚S‚S•ª‚O‚S•b ˆÈ~
+H“cŒ§‰ˆŠÝ“ì•”        k“x‚S  ’ö“xˆÈã    ‚O‚WŽž‚S‚S•ª‚O‚U•b ˆÈ~
+ŠâŽèŒ§‰ˆŠÝ–k•”        k“x‚S  ’ö“xˆÈã    ‚O‚WŽž‚S‚S•ª‚P‚Q•b ˆÈ~
+
+ƒŽå—v“®‚ªŠù‚É“ž’B‚µ‚½‚ÆŽv‚í‚ê‚é’nˆæ„
+ŠâŽèŒ§“à—¤“ì•”        k“x‚T‹­’ö“xˆÈã
+H“cŒ§“à—¤“ì•”        k“x‚S  ’ö“xˆÈã
+‹{éŒ§–k•”            k“x‚S  ’ö“xˆÈã
+
+ƒŒx•ñ‘ÎÛ‚Ì’nˆæ„
+ŠâŽèŒ§“à—¤“ì•”@H“cŒ§“à—¤“ì•”@‹{éŒ§–k•”@ŠâŽèŒ§“à—¤–k•”
+ŠâŽèŒ§‰ˆŠÝ“ì•”@ŽRŒ`Œ§Åã@‹{éŒ§’†•”@H“cŒ§‰ˆŠÝ“ì•”
+ŠâŽèŒ§‰ˆŠÝ–k•”
+
+‹­‚¢—h‚ê‚ÉŒx‰ú‚µ‚Ä‚­‚¾‚³‚¢B
+=
+(ETX)
+
+
+
+Å³·Ô½Ä3 ·¼Ö³
+(STX)
+36 03 00 080614084355 C11
+080614084346
+ND20080614084350 NCN002 JD////////////// JN///
+213 N391 E1410 010 61 5+ RK22512 RT01/// RC0////
+EBI 213 S5+// ////// 11 233 S04// ////// 11 220 S04// ////// 11
+212 S04// 084401 10 211 S04// 084404 10 241 S04// 084404 10
+222 S04// 084404 10 231 S04// 084406 10 210 S04// 084412 10
+9999=
+(ETX)

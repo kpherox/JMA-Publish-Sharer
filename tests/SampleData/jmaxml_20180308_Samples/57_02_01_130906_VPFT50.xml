@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx_add="http://xml.kishou.go.jp/jmaxml1/addition1/">
+<Control>
+<Title>府県高温注意情報</Title>
+<DateTime>2013-08-19T20:08:13Z</DateTime>
+<Status>通常</Status>
+<EditorialOffice>長崎地方気象台</EditorialOffice>
+<PublishingOffice>長崎地方気象台</PublishingOffice>
+</Control>
+<Head xmlns="http://xml.kishou.go.jp/jmaxml1/informationBasis1/">
+<Title>長崎県高温注意情報</Title>
+<ReportDateTime>2013-08-20T05:08:00+09:00</ReportDateTime>
+<TargetDateTime>2013-08-20T05:08:00+09:00</TargetDateTime>
+<EventID>JPFE130041</EventID>
+<InfoType>発表</InfoType>
+<Serial>1</Serial>
+<InfoKind>同一現象用平文情報</InfoKind>
+<InfoKindVersion>1.0_0</InfoKindVersion>
+<Headline>
+<Text/>
+</Headline>
+</Head>
+<Body xmlns="http://xml.kishou.go.jp/jmaxml1/body/meteorology1/">
+<Notice/>
+<Comment>
+<Text type="本文">長崎県では、２０日の日中は気温が３５度以上となるところがあるでしょう
+。熱中症など健康管理に注意してください。
+
+予想最高気温（前日の最高気温）
+　長崎　　３７度（３６．３度）
+　佐世保　３７度（３７．７度）
+　厳原　　３６度（３６．２度）
+　福江　　３６度（３５．９度）
+
+長崎で３０度以上の時間帯は、９時頃から２１時頃まで。
+佐世保で３０度以上の時間帯は、８時頃から２４時頃まで。
+厳原で３０度以上の時間帯は、８時頃から１８時頃まで。
+福江で３０度以上の時間帯は、８時頃から１９時頃まで。
+
+熱中症の危険が特に高くなります。
+特に、外出時や屋外での作業時、高齢者、乳幼児、体調のすぐれない方がお
+られるご家庭などにおいては、水分をこまめに補給し多量に汗をかいた場合
+は塩分も補給する、カーテンで日射を遮る、冷房を適切に利用し室温に留意
+するなど、熱中症に対して充分な対策をとってください。</Text>
+</Comment>
+</Body>
+</Report>

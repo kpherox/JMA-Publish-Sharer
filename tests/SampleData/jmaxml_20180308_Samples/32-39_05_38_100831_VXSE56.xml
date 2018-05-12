@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Report xmlns="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx="http://xml.kishou.go.jp/jmaxml1/">
+<Control>
+	<Title>地震の活動状況等に関する情報</Title>
+	<DateTime>2010-03-01T01:07:00Z</DateTime>
+	<Status>通常</Status>
+	<EditorialOffice>気象庁本庁</EditorialOffice>
+	<PublishingOffice>気象庁</PublishingOffice>
+  </Control>
+<Head xmlns="http://xml.kishou.go.jp/jmaxml1/informationBasis1/">
+	<Title>地震の活動状況等に関する情報</Title>
+	<ReportDateTime>2010-03-01T10:07:00+09:00</ReportDateTime>
+	<TargetDateTime>2010-03-01T10:07:00+09:00</TargetDateTime>
+	<EventID>20100227153529</EventID>
+	<InfoType>発表</InfoType>
+	<Serial></Serial>
+	<InfoKind>地震の活動状況等に関する情報</InfoKind>
+	<InfoKindVersion>1.0_0</InfoKindVersion>
+	<Headline>
+		<Text>地震の活動状況等をお知らせします。</Text>
+	</Headline>
+</Head>
+<Body xmlns="http://xml.kishou.go.jp/jmaxml1/body/seismology1/" xmlns:jmx_eb="http://xml.kishou.go.jp/jmaxml1/elementBasis1/">
+	<Text>２０１０年２月２７日１５時３４分頃にチリ中部沿岸で発生した地震について、３月１日１０時００分現在の概要を以下のとおりお知らせします。
+
+＊＊＊　地震及び津波の概要　＊＊＊
+発生日時：２月２７日１５時３４分頃
+マグニチュード：８．６
+場所：チリ中部沿岸（南緯３６．１度、西経７２．６度）
+発震機構等：東西方向に圧力軸を持つ逆断層型
+
+＊＊＊　津波警報・注意報の発表状況　＊＊＊
+津波注意報：青森県太平洋沿岸、岩手県、宮城県、福島県、茨城県、高知県
+　（０８時４０分現在）
+
+＊＊＊　これまでの津波警報・注意報の発表経緯　＊＊＊
+２月２８日
+　０９：３３　警報【大津波、津波】、津波注意報発表
+　１９：０１　警報【大津波】から警報【津波】へ全て切替え
+　２１：１３　警報【津波】から注意報へ一部切替え、及び警報・注意報一部解除
+　２３：３６　警報【津波】から注意報へ一部切替え、及び警報・注意報一部解除
+３月１日
+　０１：０７　警報【津波】から注意報へ一部切替え
+　０３：０６　警報【津波】から注意報へ全て切替え、及び注意報一部解除
+　０８：４０　注意報一部解除
+
+＊＊＊　防災上の留意事項　＊＊＊
+津波注意報が発表されている地域では、引き続き注意してください。
+津波注意報が解除された地域でも、今後しばらく海面変動が続く可能性がありますので、海岸での作業等を行う際は注意してください。
+
+　地震情報、津波情報等は最新の情報をご覧下さい。
+　なお、現在発表している情報は気象庁ホームページで公表しております。</Text>
+</Body>
+</Report>

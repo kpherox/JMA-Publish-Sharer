@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx_add="http://xml.kishou.go.jp/jmaxml1/addition1/">
+  <Control>
+    <Title>府県海氷予報</Title>
+    <DateTime>2009-02-21T02:00:00Z</DateTime>
+    <Status>通常</Status>
+    <EditorialOffice>網走地方気象台</EditorialOffice>
+    <PublishingOffice>網走地方気象台</PublishingOffice>
+  </Control>
+  <Head xmlns="http://xml.kishou.go.jp/jmaxml1/informationBasis1/">
+    <Title>網走・紋別地方海氷予報</Title>
+    <ReportDateTime>2009-02-21T11:00:00+09:00</ReportDateTime>
+    <TargetDateTime>2009-02-21T11:00:00+09:00</TargetDateTime>
+    <EventID />
+    <InfoType>発表</InfoType>
+    <Serial />
+    <InfoKind>平文情報</InfoKind>
+    <InfoKindVersion>1.0_0</InfoKindVersion>
+    <Headline>
+      <Text />
+    </Headline>
+  </Head>
+  <Body xmlns="http://xml.kishou.go.jp/jmaxml1/body/meteorology1/">
+    <Notice />
+    <Comment>
+      <Text type="本文">　流氷は、雄武町から知床岬にかけての沿岸で所々で接岸しています。
+
+　引き続き２１日夕方まで流氷の動きは激しく、２２日にかけて雄武町から
+知床岬の沿岸で、流氷はさらに接岸するところが多くなる見込みです。</Text>
+    </Comment>
+  </Body>
+</Report>

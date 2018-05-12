@@ -1,0 +1,36 @@
+Å³·Ô½Ä4 ·¼Ö³
+(STX)
+36 03 00 080614084354 C11
+9999
+                            ’nk‚h‚c  F‚Q‚O‚O‚W‚O‚U‚P‚S‚O‚W‚S‚R‚T‚O
+                            •½¬‚Q‚O”N  ‚UŒŽ‚P‚S“ú‚O‚WŽž‚S‚R•ª‚T‚S•b
+                                                          ‹CÛ’¡”­•\
+
+‹Ù‹}’nk‘¬•ñi—\•ñji‘æ‚P•ñj
+
+‚P‚S“ú‚O‚WŽž‚S‚R•ª‚S‚W•b 
+ŠâŽèŒ§“à—¤“ì•”            ‚l‚TD‚V’ö“xˆÈã‚Ì’nk”­¶
+
+ƒŽå—v“®‚Ì“ž’B—\‘ª„
+‹{éŒ§’†•”            k“x‚S  ’ö“xˆÈã    ‚O‚WŽž‚S‚S•ª‚O‚O•b ˆÈ~
+H“cŒ§“à—¤“ì•”        k“x‚S  ’ö“xˆÈã    ‚O‚WŽž‚S‚S•ª‚O‚O•b ˆÈ~
+ŠâŽèŒ§‰ˆŠÝ“ì•”        k“x‚S  ’ö“xˆÈã    ‚O‚WŽž‚S‚S•ª‚O‚R•b ˆÈ~
+
+ƒŽå—v“®‚ªŠù‚É“ž’B‚µ‚½‚ÆŽv‚í‚ê‚é’nˆæ„
+ŠâŽèŒ§“à—¤“ì•”        k“x‚TŽã’ö“xˆÈã
+‹{éŒ§–k•”            k“x‚TŽã’ö“xˆÈã
+=
+(ETX)
+
+
+
+Å³·Ô½Ä3 ·¼Ö³
+(STX)
+36 03 00 080614084354 C11
+080614084348
+ND20080614084350 NCN001 JD////////////// JN///
+213 N389 E1411 010 57 5- RK11511 RT00/// RC/////
+EBI 213 S5-// ////// 01 220 S5-// ////// 01 222 S04// 084400 00
+233 S04// 084400 00 211 S04// 084403 00
+9999=
+(ETX)

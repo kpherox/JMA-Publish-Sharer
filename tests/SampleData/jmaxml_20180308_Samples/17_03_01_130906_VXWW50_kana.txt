@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="SHIFT_JIS"?>
+<report lang="ja">
+  <head>
+    <title>土砂災害警戒情報</title>
+    <editorialOffice>岡山地方気象台</editorialOffice>
+    <dateTime>2013-09-02T06:37:00Z</dateTime>
+    <additionalInfo>
+      <v k="発表和暦日時">平成25年9月2日　15時37分</v>
+    </additionalInfo>
+  </head>
+  <body>
+    <soilWarningHead>
+      <targetArea code="330" name="岡山県" />
+      <title>土砂災害警戒情報</title>
+      <number>1</number>
+      <announceOffice>
+        <office classification="都道府県" contactInfo="086-226-7483（岡山県土木部防災砂防課）" name="岡山県" />
+        <office classification="気象庁" contactInfo="086-223-1331（岡山地方気象台）" name="岡山地方気象台" />
+      </announceOffice>
+      <dateTime>平成25年9月2日　15時37分</dateTime>
+      <fileName>Z__C_RJTD_20130902063700_INF_CHT_Jdosha_RP330_comp.pdf</fileName>
+    </soilWarningHead>
+    <soilWarningBody>
+      <headline>＜概況＞
+降り続く大雨により土砂災害の危険度が非常に高まっています。
+＜とるべき措置＞
+崖の近くなど土砂災害の発生しやすい地区にお住まいの方は、早めの避難を心がけるとともに、市町村から発表される避難勧告などの情報に注意してください。</headline>
+      <area code="3310000" name="岡山市">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3320200" name="倉敷市">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3320300" name="津山市">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3320400" name="玉野市">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3320500" name="笠岡市">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3320700" name="井原市">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3320800" name="総社市">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3320900" name="高梁市">
+        <warningLevel code="3" level="警戒" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3321000" name="新見市">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3321100" name="備前市">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3321200" name="瀬戸内市">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3321300" name="赤磐市">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3321400" name="真庭市">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3321500" name="美作市">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3321600" name="浅口市">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3334600" name="和気町">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3342300" name="早島町">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3344500" name="里庄町">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3346100" name="矢掛町">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3358600" name="新庄村">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3360600" name="鏡野町">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3362200" name="勝央町">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3362300" name="奈義町">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3364300" name="西粟倉村">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3366300" name="久米南町">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3366600" name="美咲町">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <area code="3368100" name="吉備中央町">
+        <warningLevel code="0" level="なし" pre_code="0" pre_level="なし" />
+      </area>
+      <notice />
+    </soilWarningBody>
+  </body>
+</report>

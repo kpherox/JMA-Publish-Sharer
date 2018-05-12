@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Report xmlns="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx="http://xml.kishou.go.jp/jmaxml1/">
+<Control>
+	<Title>地震の活動状況等に関する情報</Title>
+	<DateTime>2010-02-27T10:05:00Z</DateTime>
+	<Status>通常</Status>
+	<EditorialOffice>気象庁本庁</EditorialOffice>
+	<PublishingOffice>気象庁</PublishingOffice>
+  </Control>
+<Head xmlns="http://xml.kishou.go.jp/jmaxml1/informationBasis1/">
+	<Title>地震の活動状況等に関する情報</Title>
+	<ReportDateTime>2010-02-27T19:05:00+09:00</ReportDateTime>
+	<TargetDateTime>2010-02-27T19:05:00+09:00</TargetDateTime>
+	<EventID>20100227153529</EventID>
+	<InfoType>発表</InfoType>
+	<Serial></Serial>
+	<InfoKind>地震の活動状況等に関する情報</InfoKind>
+	<InfoKindVersion>1.0_0</InfoKindVersion>
+	<Headline>
+		<Text>地震の活動状況等をお知らせします。</Text>
+	</Headline>
+</Head>
+<Body xmlns="http://xml.kishou.go.jp/jmaxml1/body/seismology1/" xmlns:jmx_eb="http://xml.kishou.go.jp/jmaxml1/elementBasis1/">
+	<Text>２０１０年２月２７日１５時３４分頃にチリ中部沿岸で発生した地震について、２７日１６時４４分現在の概要を以下のとおりお知らせします。
+
+＊＊＊　地震の概要　＊＊＊
+発生日時：２月２７日１５時３４分頃
+マグニチュード：８．６
+場所および深さ：チリ中部沿岸（南緯３６．１度、西経７２．６度）、深さ約６０ｋｍ
+（震源は太平洋津波警報センター（ＰＴＷＣ）による）
+発震機構等：東西方向に圧力軸を持つ逆断層型
+
+＊＊＊　津波警報等の発表状況　＊＊＊
+日本への津波の影響については現在調査中
+
+＊＊＊　津波の観測状況　＊＊＊
+国・地域名　　　検潮所名　　　　　　津波の高さ
+　チリ　　　　　タルカワノ　　　　　１．２ｍ
+　チリ　　　　　バルパライソ　　　　１．３ｍ
+
+＊＊＊　防災上の留意事項　＊＊＊
+　日本への津波の影響は現在調査中です。今後発表される情報に注意してください。
+
+＊＊＊　今回の地震の震央付近で過去に発生した地震による津波　＊＊＊
+　１９６０年　５月２３日　　Ｍｗ９．５　　　太平洋沿岸で１ｍから４ｍ程度
+　１９８５年　３月　４日　　Ｍｗ７．９　　　１８ｃｍ（八丈島）
+　１９９５年　７月３０日　　Ｍｗ８．０　　　２９ｃｍ（八戸）
+　２００１年　６月２４日　　Ｍｗ８．４　　　２８ｃｍ（根室市花咲）
+　２００７年　８月１６日　　Ｍｗ８．０　　　１５ｃｍ（根室市花咲、八戸、宮古、石垣島石垣港）
+
+　地震情報、津波情報等は最新の情報をご覧下さい。
+　なお、現在発表している情報は気象庁ホームページで公表しております。</Text>
+</Body>
+</Report>

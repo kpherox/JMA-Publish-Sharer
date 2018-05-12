@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx="http://xml.kishou.go.jp/jmaxml1/">
+<Control>
+<Title>記録的短時間大雨情報</Title>
+<DateTime>2013-08-08T14:56:56Z</DateTime>
+<Status>通常</Status>
+<EditorialOffice>函館地方気象台</EditorialOffice>
+<PublishingOffice>函館地方気象台</PublishingOffice>
+</Control>
+<Head xmlns="http://xml.kishou.go.jp/jmaxml1/informationBasis1/">
+<Title>渡島地方記録的短時間大雨情報</Title>
+<ReportDateTime>2013-08-08T23:56:00+09:00</ReportDateTime>
+<TargetDateTime>2013-08-08T23:56:00+09:00</TargetDateTime>
+<EventID>JPSF201308082356_201308082356</EventID>
+<InfoType>発表</InfoType>
+<Serial>1</Serial>
+<InfoKind>記録的短時間大雨情報</InfoKind>
+<InfoKindVersion>1.0_0</InfoKindVersion>
+<Headline>
+<Text>
+２３時３０分北海道で記録的短時間大雨
+八雲町南部付近で約１１０ミリ</Text>
+<Information type="記録的短時間大雨情報（発表細分）">
+<Item>
+<Kind>
+<Name>記録的短時間大雨情報</Name>
+<Code>1</Code>
+<Condition>発表</Condition>
+</Kind>
+<Areas codeType="気象情報／府県予報区・細分区域等">
+<Area>
+<Name>渡島地方</Name>
+<Code>017010</Code>
+</Area>
+</Areas>
+</Item>
+</Information>
+</Headline>
+</Head>
+<Body xmlns="http://xml.kishou.go.jp/jmaxml1/body/meteorology1/">
+<Warning type="記録的短時間大雨情報（発表細分）">
+<Item>
+<Kind>
+<Name>記録的短時間大雨情報</Name>
+<Code>1</Code>
+<Status>発表</Status>
+</Kind>
+<Area>
+<Name>渡島地方</Name>
+<Code>017010</Code>
+</Area>
+</Item>
+<Item>
+<Kind>
+<Name>なし</Name>
+<Code>0</Code>
+<Status>なし</Status>
+</Kind>
+<Area>
+<Name>檜山地方</Name>
+<Code>017020</Code>
+</Area>
+</Item>
+</Warning>
+</Body>
+</Report>

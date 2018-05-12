@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx="http://xml.kishou.go.jp/jmaxml1/">
+<Control>
+	<Title>地震の活動状況等に関する情報</Title>
+	<DateTime>2008-07-10T01:30:00Z</DateTime>
+	<Status>通常</Status>
+	<EditorialOffice>気象庁本庁</EditorialOffice>
+	<PublishingOffice>気象庁</PublishingOffice>
+  </Control>
+<Head xmlns="http://xml.kishou.go.jp/jmaxml1/informationBasis1/">
+	<Title>地震の活動状況等に関する情報</Title>
+	<ReportDateTime>2008-07-10T10:30:00+09:00</ReportDateTime>
+	<TargetDateTime>2008-07-10T10:30:00+09:00</TargetDateTime>
+	<EventID>20080614084350</EventID>
+	<InfoType>発表</InfoType>
+	<Serial></Serial>
+	<InfoKind>地震の活動状況等に関する情報</InfoKind>
+	<InfoKindVersion>1.0_0</InfoKindVersion>
+	<Headline>
+		<Text>地震の活動状況等をお知らせします。</Text>
+	</Headline>
+</Head>
+<Body xmlns="http://xml.kishou.go.jp/jmaxml1/body/seismology1/" xmlns:jmx_eb="http://xml.kishou.go.jp/jmaxml1/elementBasis1/">
+	<Naming english="Ｔｈｅ　Ｉｗａｔｅ－Ｍｉｙａｇｉ　Ｎａｉｒｉｋｕ　Ｅａｒｔｈｑｕａｋｅ　ｉｎ　２００８">平成２０年（２００８年）岩手・宮城内陸地震</Naming>
+	<Text>余震は順調に減衰しており、震度４から５弱となるような地震の発生の可能性は、ほとんどなくなりました。
+岩手・宮城内陸地震の余震発生確率の発表は、今回で終了します。
+
+　地震情報、津波情報等は最新の情報をご覧下さい。
+　なお、現在発表している情報は気象庁ホームページで公表しております。</Text>
+</Body>
+</Report>

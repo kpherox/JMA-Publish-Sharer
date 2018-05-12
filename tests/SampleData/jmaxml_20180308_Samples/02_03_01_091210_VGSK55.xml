@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx="http://xml.kishou.go.jp/jmaxml1/">
+  <Control>
+    <Title>生物季節観測</Title>
+    <DateTime>2009-04-07T05:46:16Z</DateTime>
+    <Status>通常</Status>
+    <EditorialOffice>舞鶴海洋気象台</EditorialOffice>
+    <PublishingOffice>舞鶴海洋気象台</PublishingOffice>
+  </Control>
+  <Head xmlns="http://xml.kishou.go.jp/jmaxml1/informationBasis1/">
+    <Title>生物季節観測</Title>
+    <ReportDateTime>2009-04-07T14:45:00+09:00</ReportDateTime>
+    <TargetDateTime>2009-04-07T00:00:00+09:00</TargetDateTime>
+    <EventID>20090407144500_20</EventID>
+    <InfoType>発表</InfoType>
+    <Serial />
+    <InfoKind>生物季節観測報告気象報</InfoKind>
+    <InfoKindVersion>1.0_0</InfoKindVersion>
+    <Headline>
+      <Text />
+    </Headline>
+  </Head>
+  <Body xmlns="http://xml.kishou.go.jp/jmaxml1/body/meteorology1/">
+    <MeteorologicalInfos type="生物季節観測">
+      <MeteorologicalInfo>
+        <DateTime significant="yyyy-mm-dd">2009-04-07T00:00:00+09:00</DateTime>
+        <Item>
+          <Kind>
+            <Name>もんしろちょうの初見日</Name>
+            <Code>20</Code>
+            <ClassName>モンシロチョウ</ClassName>
+            <Condition>通常</Condition>
+          </Kind>
+          <Station>
+            <Name>舞鶴海洋気象台</Name>
+            <Code type="国際地点番号">47750</Code>
+            <Location>舞鶴市字下福井</Location>
+            <Status>付近</Status>
+          </Station>
+        </Item>
+      </MeteorologicalInfo>
+    </MeteorologicalInfos>
+    <AdditionalInfo>
+      <ObservationAddition>
+        <DeviationFromNormal>3</DeviationFromNormal>
+        <DeviationFromLastYear>-8</DeviationFromLastYear>
+      </ObservationAddition>
+    </AdditionalInfo>
+  </Body>
+</Report>

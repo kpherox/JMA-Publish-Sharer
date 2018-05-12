@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx_add="http://xml.kishou.go.jp/jmaxml1/addition1/">
+<Control>
+<Title>府県高温注意情報</Title>
+<DateTime>2011-08-20T20:10:00Z</DateTime>
+<Status>通常</Status>
+<EditorialOffice>熊谷地方気象台</EditorialOffice>
+<PublishingOffice>熊谷地方気象台</PublishingOffice>
+</Control>
+<Head xmlns="http://xml.kishou.go.jp/jmaxml1/informationBasis1/">
+<Title>埼玉県高温注意情報</Title>
+<ReportDateTime>2011-08-21T05:10:00+09:00</ReportDateTime>
+<TargetDateTime>2011-08-21T05:10:00+09:00</TargetDateTime>
+<EventID>JPTC110099</EventID>
+<InfoType>発表</InfoType>
+<Serial>1</Serial>
+<InfoKind>同一現象用平文情報</InfoKind>
+<InfoKindVersion>1.0_0</InfoKindVersion>
+<Headline>
+<Text/>
+</Headline>
+</Head>
+<Body xmlns="http://xml.kishou.go.jp/jmaxml1/body/meteorology1/">
+<Notice/>
+<Comment>
+<Text type="本文">埼玉県では、２１日の日中は気温が３５度以上となるところがあるでしょう
+。
+熱中症などに注意してください。
+
+予想最高気温（昨日の最高気温）
+　熊谷　　　３６度（３５．５度）
+　さいたま　３６度（３４．５度）
+　秩父　　　３５度（３３．５度）
+
+熊谷で３０度以上の時間帯は、８時頃から１６時頃まで。
+さいたまで３０度以上の時間帯は、８時頃から１７時頃まで。
+秩父で３０度以上の時間帯は、９時頃から１５時頃まで。
+
+熱中症の危険が特に高くなります。
+特に、外出時や、高齢者、乳幼児、体調のすぐれない方がおられるご家庭な
+どにおいては、水分・塩分をこまめに補給する、カーテンで日射を遮る、冷
+房を適切に利用し室温に留意するなど、熱中症に対して充分な対策をとって
+ください。</Text>
+</Comment>
+</Body>
+</Report>

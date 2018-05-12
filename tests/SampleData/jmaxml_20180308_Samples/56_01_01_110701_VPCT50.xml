@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx_add="http://xml.kishou.go.jp/jmaxml1/addition1/">
+<Control>
+<Title>地方高温注意情報</Title>
+<DateTime>2011-08-20T08:10:00Z</DateTime>
+<Status>通常</Status>
+<EditorialOffice>気象庁本庁</EditorialOffice>
+<PublishingOffice>気象庁予報部</PublishingOffice>
+</Control>
+<Head xmlns="http://xml.kishou.go.jp/jmaxml1/informationBasis1/">
+<Title>関東甲信地方高温注意情報</Title>
+<ReportDateTime>2011-08-20T17:10:00+09:00</ReportDateTime>
+<TargetDateTime>2011-08-20T17:10:00+09:00</TargetDateTime>
+<EventID>JPTK110099</EventID>
+<InfoType>発表</InfoType>
+<Serial>1</Serial>
+<InfoKind>同一現象用平文情報</InfoKind>
+<InfoKindVersion>1.0_0</InfoKindVersion>
+<Headline>
+<Text/>
+</Headline>
+</Head>
+<Body xmlns="http://xml.kishou.go.jp/jmaxml1/body/meteorology1/">
+<Notice/>
+<Comment>
+<Text type="本文">関東甲信地方では、２１日の日中は気温が３５度以上となるところがあるで
+しょう。
+熱中症などに注意してください。
+
+　予想最高気温
+　前橋　　　３６度　　　宇都宮　３５度　　　水戸　３４度
+　さいたま　３７度　　　東京　　３４度　　　千葉　３４度
+　横浜　　　３４度　　　長野　　３４度　　　甲府　３５度
+
+熱中症の危険が特に高くなります。
+特に、外出時や、高齢者、乳幼児、体調のすぐれない方がおられるご家庭な
+どにおいては、水分・塩分をこまめに補給する、カーテンで日射を遮る、冷
+房を適切に利用し室温に留意するなど、熱中症に対して充分な対策をとって
+ください。</Text>
+</Comment>
+</Body>
+</Report>
