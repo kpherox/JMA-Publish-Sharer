@@ -55,10 +55,33 @@ class WebSubController extends Controller
             \Log::debug('Success check hub signature');
         }
 
-        if (false === ($feed = simplexml_load_string($content))) {
-            $message = "Feed Parse ERROR";
-            \Log::error($message.": ".$content);
-            return $message;
+        libxml_use_internal_errors(true);
+        $feed = simplexml_load_string($content);
+
+        if ($feed === false) {
+            $message = 'Feed parse error';
+            \Log::warning($message);
+
+            foreach(libxml_get_errors() as $error) {
+                $errorMsg = 'Code: '.$error->code.', ';
+                switch ($error->level) {
+                    case LIBXML_ERR_WARNING:
+                        $errorMsg .= 'Warning: ';
+                        break;
+                    case LIBXML_ERR_ERROR:
+                        \Log::error($errorMsg);
+                        $errorMsg .= 'Error: ';
+                        break;
+                    case LIBXML_ERR_FATAL:
+                        $errorMsg .= 'Fatal: ';
+                        break;
+                }
+                $errorMsg .= trim($error->message);
+                \Log::warning($errorMsg);
+            }
+
+            libxml_clear_errors();
+            abort(403, $message);
         }
         \Log::debug('Success feed parse');
 
