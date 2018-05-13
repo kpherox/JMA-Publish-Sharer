@@ -71,7 +71,7 @@ class WebSubTest extends TestCase
         $headers['HTTP_Content-Type'] = 'application/atom+xml';
 
         if (!empty($signature)) {
-            $headers['HTTP_X-Hub-Signature'] => $signature;
+            $headers['HTTP_X-Hub-Signature'] = $signature;
         };
 
         return $headers;
