@@ -130,6 +130,25 @@ class WebSubTest extends TestCase
 
     /**
      * Receive feed test.
+     * Feed xml parse error.
+     *
+     * @return void
+     */
+    public function testReceiveFeedXmlParseError()
+    {
+        $atomFeed = ' '.file_get_contents('tests/SampleData/jmaxml_atomfeed.xml');
+
+        $hash = hash_hmac('sha1', $atomFeed, $this->verifyToken);
+
+        $response = $this->call('POST', self::$websubEndpoint, [], [], [], $this->getHeaders('POST', 'sha1='.$hash), $atomFeed);
+
+        $response
+            ->assertForbidden()
+            ->assertSeeText('Feed Parse ERROR');
+    }
+
+    /**
+     * Receive feed test.
      * Invalid signature.
      *
      * @return void
