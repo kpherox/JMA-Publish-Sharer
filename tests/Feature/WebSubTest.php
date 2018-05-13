@@ -18,7 +18,7 @@ class WebSubTest extends TestCase
     private $challengeValue = 'test';
 
     /**
-     * Get 'GET query' parameters
+     * Get query parameters for subscribe check test.
      *
      * @return array
      */
@@ -54,12 +54,46 @@ class WebSubTest extends TestCase
     }
 
     /**
+     * Get headers for receive feed test.
+     *
+     * @return array
+     */
+    private function getHeaders(String $verbs = 'GET', String $signature = null)
+    {
+        $headers = [
+            'HTTP_User-Agent' => 'AppEngine-Google; (+http://code.google.com/appengine; appid: s~alert-hub)'
+        ];
+
+        if (mb_strtoupper($verbs) === 'GET') {
+            return $headers;
+        };
+
+        $headers['HTTP_Content-Type'] = 'application/atom+xml';
+
+        if (!empty($signature)) {
+            $headers['HTTP_X-Hub-Signature'] => $signature;
+        };
+
+        return $headers;
+    }
+
+    /**
      * Receive feed test.
      * Success pattarn.
      *
      * @return void
      */
     public function testReceiveFeedSuccess()
+    {
+        $this->receiveSuccess(self::$websubEndpoint);
+    }
+
+    public function testReceiveFeedOldPathSuccess()
+    {
+        $this->receiveSuccess(self::$websubOldEndpoint);
+    }
+
+    private function receiveSuccess($endpoint)
     {
         $sampleData1 = file_get_contents('tests/SampleData/jmaxml_20180308_Samples/01_01_01_091210_VGSK50.xml');
         $sampleData2 = file_get_contents('tests/SampleData/jmaxml_20180308_Samples/01_01_02_091210_VGSK50.xml');
@@ -77,13 +111,7 @@ class WebSubTest extends TestCase
 
         $hash = hash_hmac('sha1', $atomFeed, $this->verifyToken);
 
-        $headers = [
-            'HTTP_user-agent' => 'AppEngine-Google; (+http://code.google.com/appengine; appid: s~alert-hub)',
-            'HTTP_content-type' => 'application/atom+xml',
-            'HTTP_x-hub-signature' => 'sha1='.$hash
-        ];
-
-        $response = $this->call('POST', self::$websubEndpoint, [], [], [], $headers, $atomFeed);
+        $response = $this->call('POST', $endpoint, [], [], [], $this->getHeaders('POST', 'sha1='.$hash), $atomFeed);
 
         $response->assertSuccessful();
         $this
@@ -108,16 +136,17 @@ class WebSubTest extends TestCase
      */
     public function testSubscribeCheckSuccess()
     {
-        $response = $this->call('GET', self::$websubEndpoint, $this->getParameters('check_success'));
-
-        $response
-            ->assertSuccessful()
-            ->assertSeeText($this->challengeValue);
+        $this->checkSuccess(self::$websubEndpoint);
     }
 
     public function testSubscribeCheckOldPathSuccess()
     {
-        $response = $this->call('GET', self::$websubOldEndpoint, $this->getParameters('check_success'));
+        $this->checkSuccess(self::$websubOldEndpoint);
+    }
+
+    private function checkSuccess($endpoint)
+    {
+        $response = $this->call('GET', $endpoint, $this->getParameters('check_success'), [], [], $this->getHeaders());
 
         $response
             ->assertSuccessful()
@@ -132,7 +161,7 @@ class WebSubTest extends TestCase
      */
     public function testSubscribeCheckIncorrectToken()
     {
-        $response = $this->call('GET', self::$websubEndpoint, $this->getParameters('incorrect_token'));
+        $response = $this->call('GET', self::$websubEndpoint, $this->getParameters('incorrect_token'), [], [], $this->getHeaders());
 
         $response
             ->assertForbidden()
@@ -147,7 +176,7 @@ class WebSubTest extends TestCase
      */
     public function testSubscribeCheckNotExistToken()
     {
-        $response = $this->call('GET', self::$websubEndpoint, $this->getParameters('not_exist_token'));
+        $response = $this->call('GET', self::$websubEndpoint, $this->getParameters('not_exist_token'), [], [], $this->getHeaders());
 
         $response
             ->assertForbidden()
@@ -162,7 +191,7 @@ class WebSubTest extends TestCase
      */
     public function testSubscribeCheckNotFound()
     {
-        $response = $this->call('GET', self::$websubEndpoint, $this->getParameters(''));
+        $response = $this->call('GET', self::$websubEndpoint, $this->getParameters(''), [], [], $this->getHeaders());
 
         $response->assertNotFound();
     }
