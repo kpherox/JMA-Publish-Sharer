@@ -63,21 +63,7 @@ class WebSubController extends Controller
             \Log::warning($message);
 
             foreach(libxml_get_errors() as $error) {
-                $errorMsg = 'Code: '.$error->code.', ';
-                switch ($error->level) {
-                    case LIBXML_ERR_WARNING:
-                        $errorMsg .= 'Warning: ';
-                        break;
-                    case LIBXML_ERR_ERROR:
-                        \Log::error($errorMsg);
-                        $errorMsg .= 'Error: ';
-                        break;
-                    case LIBXML_ERR_FATAL:
-                        $errorMsg .= 'Fatal: ';
-                        break;
-                }
-                $errorMsg .= trim($error->message);
-                \Log::warning($errorMsg);
+                \Log::warning(trim($error->message));
             }
 
             libxml_clear_errors();
