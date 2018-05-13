@@ -129,6 +129,61 @@ class WebSubTest extends TestCase
     }
 
     /**
+     * Receive feed test.
+     * Invalid signature.
+     *
+     * @return void
+     */
+    public function testReceiveFeedInvalidSignature()
+    {
+        $atomFeed = file_get_contents('tests/SampleData/jmaxml_atomfeed.xml');
+
+        $hash = hash_hmac('sha1', $atomFeed, $this->verifyToken);
+
+        $response = $this->call('POST', self::$websubEndpoint, [], [], [], $this->getHeaders('POST', 'sha1=test'.$hash), $atomFeed);
+
+        $response
+            ->assertForbidden()
+            ->assertSeeText('Invalid hub signature');
+    }
+
+    /**
+     * Receive feed test.
+     * Invalid X-Hub-Signature header.
+     *
+     * @return void
+     */
+    public function testReceiveFeedInvalidSignatureHeader()
+    {
+        $atomFeed = file_get_contents('tests/SampleData/jmaxml_atomfeed.xml');
+
+        $hash = hash_hmac('sha1', $atomFeed, $this->verifyToken);
+
+        $response = $this->call('POST', self::$websubEndpoint, [], [], [], $this->getHeaders('POST', $hash), $atomFeed);
+
+        $response
+            ->assertForbidden()
+            ->assertSeeText('Invalid x-hub-signature header');
+    }
+
+    /**
+     * Receive feed test.
+     * Doesn't set X-Hub-Signature header.
+     *
+     * @return void
+     */
+    public function testReceiveFeedNotExistSignature()
+    {
+        $atomFeed = file_get_contents('tests/SampleData/jmaxml_atomfeed.xml');
+
+        $response = $this->call('POST', self::$websubEndpoint, [], [], [], $this->getHeaders('POST'), $atomFeed);
+
+        $response
+            ->assertForbidden()
+            ->assertSeeText('Not exist x-hub-signature header');
+    }
+
+    /**
      * Subscribe check test.
      * Success pattarn.
      *
