@@ -36,14 +36,6 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                         </form>
-                        <script>
-                        document.addEventListener('DOMContentLoaded', () => {
-                            document.getElementById('logout-button').addEventListener('click', (e) => {
-                                e.preventDefault();
-                                document.getElementById('logout-form').submit();
-                            });
-                        });
-                        </script>
                     </ul>
                 </li>
                 @endguest

@@ -9,13 +9,6 @@
                     <a class="list-group-item @if ($__env->yieldContent('title') !== 'Dashboard') list-group-item-action list-group-item-dark text-dark @else text-body disabled @endif" href="{{ route('home') }}">Dashboard</a>
                     <a class="list-group-item @if ($__env->yieldContent('title') !== 'Social Accounts') list-group-item-action list-group-item-dark text-dark @else text-body disabled @endif" href="{{ route('home.socialAccounts') }}">Social Accounts</a>
                 </div>
-                <script>
-                document.addEventListener('DOMContentLoaded', () => {
-                    [].forEach.call(document.getElementsByClassName('disabled'), (e) => {
-                        e.addEventListener('click', (e) => e.preventDefault());
-                    });
-                });
-                </script>
             </nav>
         </div>
         <div class="col-12 col-md-10 ml-auto main">

@@ -28,6 +28,17 @@
         </div>
 
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}"></script>
+        <script async src="{{ asset('js/app.js') }}"></script>
+        @auth
+        <script>
+            document.getElementById('logout-button').addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('logout-form').submit();
+            });
+        </script>
+        @endauth
+        <script>
+            document.querySelectorAll('a.disabled').forEach((e) => e.addEventListener('click', (e) => e.preventDefault()));
+        </script>
     </body>
 </html>
