@@ -165,6 +165,7 @@ return [
          */
         InsertOnDuplicateKey\InsertOnDuplicateKeyServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
+        HTMLMin\HTMLMin\HTMLMinServiceProvider::class,
         Kozz\Laravel\Providers\Guzzle::class,
 
         /*
@@ -233,6 +234,7 @@ return [
          * Package Service Providers...
          */
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class,
         'Guzzle' => Kozz\Laravel\Facades\Guzzle::class,
 
     ],

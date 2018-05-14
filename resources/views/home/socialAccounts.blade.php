@@ -8,8 +8,8 @@
         <div class="card-body">
             <h5>Twitter</h5>
             <div class="list-group list-group-flush">
-                @if ($socialAccounts->where('provider_name', 'twitter')->exists())
-                @foreach ($socialAccounts->where('provider_name', 'twitter')->get() as $account)
+                @if ($twitterAccounts->exists())
+                @foreach ($twitterAccounts->get() as $account)
                 <a class="list-group-item list-group-item-action" href="#twitter-{{ $account->account_name }}">
                     <img class="align-middle rounded-circle social-avatar" src="{{ $account->account_avatar }}" alt="Twitter Icon" />
                     &#64;{{ $account->account_name }}
@@ -23,6 +23,8 @@
             </div>
         </div>
     </div>
+</div>
+<div class="col-lg-7 col-xl-8">
 </div>
 @endsection
 

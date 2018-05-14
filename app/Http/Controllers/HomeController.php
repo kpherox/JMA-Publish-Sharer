@@ -33,6 +33,7 @@ class HomeController extends Controller
      */
     public function socialAccounts()
     {
-        return view('home.socialAccounts', ['socialAccounts' => auth()->user()->accounts()]);
+        $socialAccounts = auth()->user()->accounts();
+        return view('home.socialAccounts', ['twitterAccounts' => $socialAccounts->where('provider_name', 'twitter')]);
     }
 }
