@@ -3,7 +3,7 @@
 @section ('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2 bg-secondary sidebar collapse">
+        <div class="col-md-2 bg-secondary sidebar collapse" id="homeSidebar">
             <nav class="sidebar-links py-2">
                 <div class="list-group list-group-flush">
                     <a class="list-group-item @if ($__env->yieldContent('title') !== 'Dashboard') list-group-item-action list-group-item-dark text-dark @else text-body disabled @endif" href="{{ route('home') }}">Dashboard</a>

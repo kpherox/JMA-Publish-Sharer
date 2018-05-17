@@ -44,8 +44,20 @@ $border-color:#cdcdcd;
     line-height: 1rem;
     min-width: 12rem;
 
-    @media (max-width: 767px) {
+    @include media-breakpoint-down(md) {
         max-width: 12rem;
+    }
+}
+
+@media (orientation: landscape) {
+    .d-landscape-none {
+        display: none !important;
+    }
+    .d-landscape-block {
+        display: block !important;
+    }
+    .d-landscape-inline {
+        display: inline !important;
     }
 }
 
@@ -57,7 +69,7 @@ $border-color:#cdcdcd;
     padding: 3rem 0 0;
     z-index: 1020;
 
-    @media (max-width: 767px) and (orientation: landscape) {
+    @media (max-width: 767.99px) and (orientation: landscape) {
         max-width: 12rem;
     }
 
