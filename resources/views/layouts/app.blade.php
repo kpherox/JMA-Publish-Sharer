@@ -35,6 +35,11 @@
                 e.preventDefault();
                 document.getElementById('logout-form').submit();
             });
+            jQuery(() => {
+                $(document).click((e) => {
+                    $('#homeSidebar').collapse('hide');
+                });
+            });
         </script>
         @endauth
         <script>

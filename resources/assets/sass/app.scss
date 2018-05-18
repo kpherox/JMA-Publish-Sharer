@@ -64,7 +64,6 @@ $border-color:#cdcdcd;
 .sidebar {
     position: fixed;
     top: 0;
-    bottom: 0;
     left: 0;
     padding: 3rem 0 0;
     z-index: 1020;
@@ -85,7 +84,9 @@ $border-color:#cdcdcd;
     overflow-x: hidden;
     overflow-y: auto;
 
-    height: calc(100vh - 3rem);
+    @media (min-width: 768px), (orientation: landscape) {
+        height: calc(100vh - 3rem);
+    }
 }
 
 .main {
