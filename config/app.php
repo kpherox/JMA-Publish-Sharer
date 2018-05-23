@@ -167,6 +167,7 @@ return [
         SocialiteProviders\Manager\ServiceProvider::class,
         HTMLMin\HTMLMin\HTMLMinServiceProvider::class,
         Kozz\Laravel\Providers\Guzzle::class,
+        Collective\Html\HtmlServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -236,6 +237,8 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class,
         'Guzzle' => Kozz\Laravel\Facades\Guzzle::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        'Form' => Collective\Html\FormFacade::class,
 
     ],
 
