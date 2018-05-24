@@ -56,9 +56,9 @@ class WebSubController extends Controller
         }
 
         libxml_use_internal_errors(true);
-        $feed = simplexml_load_string($content);
+        $feedXml = simplexml_load_string($content);
 
-        if (!$feed) {
+        if (!$feedXml) {
             $message = 'Feed parse error';
             \Log::warning($message);
 
@@ -74,13 +74,15 @@ class WebSubController extends Controller
         $now = Carbon::now();
         $now->setTimezone(config('app.timezone'));
 
-        $feedUuid = collect(explode(':', (string)$feed->id))->last();
-        $feedUpdated = Carbon::parse((string)$feed->updated);
+        $feed = json_decode(json_encode($feedXml), true);
+        $feedUuid = collect(explode(':', $feed['id']))->last();
+        $feedUpdated = Carbon::parse($feed['updated']);
         $feedUpdated->setTimezone(config('app.timezone'));
-        $links = collect($feed->link);
-        $isSelf = function($value, $key) {return $value['rel'] == 'self';};
-        $link = $links->first($isSelf);
-        $feedUrl = (string)$link['href'];
+        $links = collect($feed['link'])
+            ->map(function($item) {return $item['@attributes'];})
+            ->pluck('href', 'rel');
+        $feedUrl = $links['self'];
+        \Log::debug($links);
         $feeds = Feed::firstOrNew([
             'uuid' => $feedUuid,
             'url' => $feedUrl
@@ -93,21 +95,21 @@ class WebSubController extends Controller
         $promises = [];
         $results  = [];
 
-        foreach ($feed->entry as $entry) {
-            $entryUuid = collect(explode(':', (string)$entry->id))->last();
-            $kindOfInfo = (string)$entry->title;
-            $observatoryName = (string)$entry->author->name;
-            $headline = (string)$entry->content;
-            $updated = Carbon::parse((string)$entry->updated);
+        foreach ($feed['entry'] as $entry) {
+            $entryUuid = collect(explode(':', $entry['id']))->last();
+            $kindOfInfo = $entry['title'];
+            $observatory = collect($entry['author'])->get('name');
+            $headline = $entry['content'];
+            $updated = Carbon::parse($entry['updated']);
             $updated->setTimezone(config('app.timezone'));
-            $url = (string)$entry->link['href'];
+            $url = $entry['link']['@attributes']['href'];
 
             $promises[$entryUuid] = \Guzzle::getAsync($url);
 
             $entryArrays[$entryUuid] = [
                 'kind_of_info' => $kindOfInfo,
                 'feed_uuid' => $feedUuid,
-                'observatory_name' => $observatoryName,
+                'observatory_name' => $observatory,
                 'headline' => $headline,
                 'url' => $url,
                 'updated' => $updated,

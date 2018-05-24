@@ -125,6 +125,7 @@ class WebSubTest extends TestCase
             ])
             ->assertDatabaseHas('feeds', [
                 'uuid' => 'be4342e2-ff73-363c-a3ed-66e05e977224',
+                'url' => 'http://xml.kishou.go.jp/*/*.xml'
             ]);
     }
 
