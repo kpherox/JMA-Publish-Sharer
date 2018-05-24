@@ -58,7 +58,7 @@ class WebSubController extends Controller
         libxml_use_internal_errors(true);
         $feed = simplexml_load_string($content);
 
-        if ($feed === false) {
+        if (!$feed) {
             $message = 'Feed parse error';
             \Log::warning($message);
 
@@ -77,14 +77,15 @@ class WebSubController extends Controller
         $feedUuid = collect(explode(':', (string)$feed->id))->last();
         $feedUpdated = Carbon::parse((string)$feed->updated);
         $feedUpdated->setTimezone(config('app.timezone'));
-        $feeds = Feed::firstOrNew(['uuid' => $feedUuid]);
+        $links = collect($feed->link);
+        $isSelf = function($value, $key) {return $value['rel'] == 'self';};
+        $link = $links->first($isSelf);
+        $feedUrl = (string)$link['href'];
+        $feeds = Feed::firstOrNew([
+            'uuid' => $feedUuid,
+            'url' => $feedUrl
+        ]);
         $feeds->updated = $feedUpdated;
-        foreach ($feed->link as $link) {
-            if ($link['rel'] == 'self') {
-                $feeds->url = (string)$link['href'];
-                break;
-            }
-        }
         $feeds->save();
 
         // Fetch JMA xml
