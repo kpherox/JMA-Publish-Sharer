@@ -27,23 +27,25 @@
             @yield ('footer')
         </div>
 
+        @auth
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            {{ csrf_field() }}
+        </form>
+        @endauth
+
         <!-- Scripts -->
         <script async src="{{ asset('js/app.js') }}"></script>
         @auth
         <script>
-            document.getElementById('logout-button').addEventListener('click', (e) => {
-                e.preventDefault();
-                document.getElementById('logout-form').submit();
+        jQuery(() => {
+            $(document).click((e) => {
+                $('#homeSidebar').collapse('hide');
             });
-            jQuery(() => {
-                $(document).click((e) => {
-                    $('#homeSidebar').collapse('hide');
-                });
-            });
+        });
         </script>
         @endauth
         <script>
-            document.querySelectorAll('a.disabled').forEach((e) => e.addEventListener('click', (e) => e.preventDefault()));
+        document.querySelectorAll('a.disabled').forEach((e) => e.addEventListener('click', (e) => e.preventDefault()));
         </script>
     </body>
 </html>
