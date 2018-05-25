@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class TwitterAccountController extends SocialAccountController
 {
-    protected $provider = 'twitter';
-    private $register = true;
     private $forceLogin = false;
 
     /**
@@ -17,20 +16,16 @@ class TwitterAccountController extends SocialAccountController
      */
     public function __construct()
     {
-        parent::__construct();
-    }
-
-    protected function getProvider() {
-        return $this->provider;
+        if (method_exists('Base', '__construct')) parent::__construct();
+        $this->setProvider('twitter');
     }
 
     /**
      * Redirect the user to the Twitter authentication page.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function redirectToProvider() {
-        if (auth()->check() && $this->register) {
+    public function redirectToProvider() : RedirectResponse
+    {
+        if (auth()->check() && $this->isLogin()) {
             return redirect('/home');
         }
 
@@ -45,12 +40,13 @@ class TwitterAccountController extends SocialAccountController
      *
      * @return \Illuminate\Http\Response
      */
-    public function linkToUser() {
+    public function linkToUser() : RedirectResponse
+    {
         if (auth()->guest()) {
             return redirect('/login');
         }
 
-        $this->register = false;
+        $this->disableLogin();
         $this->forceLogin = true;
         return $this->redirectToProvider();
     }

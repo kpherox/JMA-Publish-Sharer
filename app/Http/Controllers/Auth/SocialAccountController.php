@@ -3,36 +3,55 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Services\SocialAccountsService;
 
 abstract class SocialAccountController extends Controller
 {
-    abstract protected function getProvider();
+    private $isLogin = true;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    protected function isLogin() : Bool
     {
-        //
+        return $this->isLogin;
+    }
+
+    protected function enableLogin() : Bool
+    {
+        return $this->isLogin = true;
+    }
+
+    protected function disableLogin() : Bool
+    {
+        return $this->isLogin = false;
+    }
+
+    private $provider = '';
+
+    protected function getProvider() : String
+    {
+        return $this->provider;
+    }
+
+    protected function setProvider(String $value) : String
+    {
+        return $this->provider = $value;
     }
 
     /**
      * Redirect the user to the authentication page.
-     *
-     * @return \Illuminate\Http\Response
      */
-    abstract public function redirectToProvider();
+    abstract public function redirectToProvider() : RedirectResponse;
+
+    /**
+     * Link social account for User account.
+     */
+    abstract public function linkToUser() : RedirectResponse;
 
     /**
      * Obtain the user information
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback(SocialAccountsService $accountService)
+    public function handleProviderCallback(SocialAccountsService $accountService) : RedirectResponse
     {
         try {
             $user = \Socialite::with($this->getProvider())->user();
