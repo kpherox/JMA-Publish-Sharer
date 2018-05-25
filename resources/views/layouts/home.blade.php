@@ -6,8 +6,11 @@
         <div class="col-md-2 bg-secondary sidebar collapse" id="homeSidebar">
             <nav class="sidebar-links py-2">
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item @if ($__env->yieldContent('title') !== 'Dashboard') list-group-item-action list-group-item-dark text-dark @else text-body disabled @endif" href="{{ route('home') }}">Dashboard</a>
-                    <a class="list-group-item @if ($__env->yieldContent('title') !== 'Social Accounts') list-group-item-action list-group-item-dark text-dark @else text-body disabled @endif" href="{{ route('home.socialAccounts') }}">Social Accounts</a>
+                    @foreach ($pageList as $routeName => $page)
+                    <a class="list-group-item {{ $page['isThis'] ? 'text-body disabled' : 'list-group-item-action list-group-item-dark text-dark' }}{{ $routeName === 'index' ? ' d-md-none d-landscape-none' : '' }}" href="{{ route($routeName) }}">
+                        {{ $page['name'] }}
+                    </a>
+                    @endforeach
                 </div>
             </nav>
         </div>

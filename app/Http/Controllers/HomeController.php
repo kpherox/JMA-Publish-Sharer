@@ -6,6 +6,21 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    private $pageList = [
+        'index' => [
+            'name' => 'Top Page',
+            'isThis' => false,
+        ],
+        'home.index' => [
+            'name' => 'Dashboard',
+            'isThis' => false,
+        ],
+        'home.accounts' => [
+            'name' => 'Social Accounts',
+            'isThis' => false,
+        ],
+    ];
+
     /**
      * Create a new controller instance.
      *
@@ -23,17 +38,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.index');
+        $index = 'home.index';
+        $this->pageList[$index]['isThis'] = true;
+        return view($index, ['pageList' => $this->pageList]);
     }
 
     /**
-     * Show the application linked social accounts.
+     * Show the application linked accounts.
      *
      * @return \Illuminate\Http\Response
      */
-    public function socialAccounts()
+    public function accounts()
     {
+        $accounts = 'home.accounts';
+        $this->pageList[$accounts]['isThis'] = true;
         $socialAccounts = auth()->user()->accounts();
-        return view('home.socialAccounts', ['twitterAccounts' => $socialAccounts->where('provider_name', 'twitter')]);
+        return view($accounts, [
+            'pageList' => $this->pageList,
+            'twitterAccounts' => $socialAccounts->where('provider_name', 'twitter')
+        ]);
     }
 }

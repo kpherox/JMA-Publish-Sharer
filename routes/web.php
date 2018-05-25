@@ -11,7 +11,7 @@
 |
 */
 
-Route::view('/', 'welcome');
+Route::view('/', 'welcome')->name('index');
 
 Auth::routes();
 
@@ -22,7 +22,7 @@ Route::prefix('twitter')->group(function() {
 });
 
 Route::prefix('home')->group(function() {
-    Route::get('/', 'HomeController@index')->name('home');
-    Route::get('social-accounts', 'HomeController@socialAccounts')->name('home.socialAccounts');
+    Route::get('/', 'HomeController@index')->name('home.index');
+    Route::get('social-accounts', 'HomeController@accounts')->name('home.accounts');
 });
 

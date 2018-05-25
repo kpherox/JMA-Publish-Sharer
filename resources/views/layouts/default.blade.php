@@ -4,7 +4,7 @@
 <header class="navbar navbar-expand-md navbar-light bg-white">
     <nav class="container">
         <!-- Branding Image -->
-        <a class="navbar-brand" href="{{ url('/') }}">
+        <a class="navbar-brand" href="{{ route('index') }}">
             {{ config('app.name', 'JMA Publish Sharer') }}
         </a>
 
