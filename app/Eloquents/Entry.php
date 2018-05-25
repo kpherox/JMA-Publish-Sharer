@@ -21,4 +21,9 @@ class Entry extends Model
      * @var array
      */
     protected $hidden = [];
+
+    // Relation feed
+    public function feed() {
+        return $this->belongsTo('App\Eloquents\Feed', 'feed_uuid', 'uuid');
+    }
 }

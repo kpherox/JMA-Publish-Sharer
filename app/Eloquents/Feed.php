@@ -21,5 +21,10 @@ class Feed extends Model
      * @var array
      */
     protected $hidden = [];
+
+    // Relation entries
+    public function entries() {
+        return $this->hasMany('App\Eloquents\Entry', 'feed_uuid', 'uuid');
+    }
 }
 
