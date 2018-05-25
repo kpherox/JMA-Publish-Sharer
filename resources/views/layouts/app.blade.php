@@ -15,6 +15,10 @@
         {{ config('app.name', 'JMA Publish Sharer') }}
         </title>
 
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&text=ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvxyz/!?" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans&text=Ww123456890" rel="stylesheet" type="text/css">
+
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
@@ -29,12 +33,12 @@
 
         @auth
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            {{ csrf_field() }}
+            @csrf
         </form>
         @endauth
 
         <!-- Scripts -->
-        <script async src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
         @auth
         <script>
         jQuery(() => {

@@ -8,7 +8,7 @@
             {{ config('app.name', 'JMA Publish Sharer') }}
         </a>
 
-        <a class="navbar-brand dashboard col-2 text-white bg-dark pt-3 pb-3 pl-2 mr-0 d-md-none d-landscape-none" href="#homeSidebar" data-toggle="collapse" role="button" aria-expanded="true" data-target="#homeSidebar" aria-controls="homeSidebar">
+        <a class="navbar-brand dashboard col-2 text-white bg-dark pt-3 pb-3 pl-2 mr-0 d-md-none d-landscape-none collapsed" href="#homeSidebar" data-toggle="collapse" role="button" aria-expanded="true" data-target="#homeSidebar" aria-controls="homeSidebar">
             {{ config('app.name', 'JMA Publish Sharer') }}
         </a>
 

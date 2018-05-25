@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Eloquents\Feed;
-use App\Eloquents\Entry;
+use Carbon\Carbon;
 use GuzzleHttp\Promise;
 use GuzzleHttp\Psr7;
+use App\Eloquents\Feed;
+use App\Eloquents\Entry;
 
 class WebSubController extends Controller
 {

@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
-                        {{ csrf_field() }}
+                        @csrf
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }} row">
                             <label for="name" class="col-lg-4 col-form-label text-lg-right">Name</label>
