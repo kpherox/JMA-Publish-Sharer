@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Carbon\Carbon;
 use GuzzleHttp\Promise;
 use GuzzleHttp\Psr7;
@@ -82,7 +83,6 @@ class WebSubController extends Controller
             ->map(function($item) {return $item['@attributes'];})
             ->pluck('href', 'rel');
         $feedUrl = $links['self'];
-        \Log::debug($links);
         $feeds = Feed::firstOrNew([
             'uuid' => $feedUuid,
             'url' => $feedUrl
@@ -94,6 +94,10 @@ class WebSubController extends Controller
         $entryArrays = [];
         $promises = [];
         $results  = [];
+
+        if (Arr::isAssoc($feed['entry'])) {
+            $feed['entry'] = [$feed['entry']];
+        }
 
         foreach ($feed['entry'] as $entry) {
             $entryUuid = collect(explode(':', $entry['id']))->last();
