@@ -53,10 +53,12 @@ abstract class SocialAccountController extends Controller
      */
     public function handleProviderCallback(SocialAccountsService $accountService) : RedirectResponse
     {
+        $redirectTo = auth()->check() ? 'home.accounts' : 'login';
+
         try {
             $user = \Socialite::with($this->getProvider())->user();
         } catch (\Exception $e) {
-            return redirect('/login');
+            return redirect()->route($redirectTo);
         }
 
         try {
@@ -64,11 +66,17 @@ abstract class SocialAccountController extends Controller
                 $user, $this->getProvider()
             );
         } catch (\Exception $e) {
-            return redirect('/home');
+            \Log::error($e);
+
+            return redirect()->route($redirectTo);
         }
 
-        auth()->login($authUser, true);
+        if (auth()->guest()) {
+            auth()->login($authUser, true);
 
-        return redirect()->to('/home');
+            return redirect()->route('home.index');
+        }
+
+        return redirect()->route('home.accounts');
     }
 }
