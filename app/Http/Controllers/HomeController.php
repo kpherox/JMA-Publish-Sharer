@@ -52,10 +52,11 @@ class HomeController extends Controller
     {
         $accounts = 'home.accounts';
         $this->pageList[$accounts]['isThis'] = true;
-        $socialAccounts = auth()->user()->accounts();
+        $socialAccounts = auth()->user()->accounts;
         return view($accounts, [
             'pageList' => $this->pageList,
-            'twitterAccounts' => $socialAccounts->where('provider_name', 'twitter')
+            'twitterAccounts' => $socialAccounts->where('provider_name', 'twitter'),
+            'githubAccounts' => $socialAccounts->where('provider_name', 'github')
         ]);
     }
 }
