@@ -35,9 +35,18 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'oauth1' => [
+        'twitter',
+    ],
+
     'twitter' => [
         'client_id' => env('TWITTER_KEY'),
         'client_secret' => env('TWITTER_SECRET'),
+    ],
+
+    'github' => [
+        'client_id' => env('GITHUB_KEY'),
+        'client_secret' => env('GITHUB_SECRET'),
     ],
 
 ];

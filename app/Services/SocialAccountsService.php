@@ -8,46 +8,60 @@ use App\Eloquents\LinkedSocialAccount;
 
 class SocialAccountsService
 {
-    public function findOrCreate(ProviderUser $providerUser, $provider)
+    public function findOrCreate(ProviderUser $providerUser, String $provider) : User
     {
-        $accounts = LinkedSocialAccount::where('provider_name', $provider)
-                   ->where('provider_id', $providerUser->getId());
-        $providerUserAvatar = preg_replace("/https?:\/\/(.+?)_normal.jpg/", "https://$1.jpg", $providerUser->avatar);
+        $account = LinkedSocialAccount::firstOrNew(['provider_name' => $provider, 'provider_id' => $providerUser->getId()]);
 
-        if ($accounts->exists()) {
-            $account = $accounts->first();
-            $account->account_name = $providerUser->nickname;
-            $account->account_avatar = $providerUserAvatar;
-            $account->account_token = $providerUser->token;
-            $account->account_token_secret = $providerUser->tokenSecret;
-            $account->save();
-            if (auth()->guest()) {
-                return $account->user;
-            } else {
-                throw new \Exception('It is already linked to other account');
-            }
-        }
+        $didExistAccount = !($account->wasRecentlyCreated = !$account->id);
 
-        if (auth()->check()) {
-            $user = auth()->user();
-        } elseif (! User::where('email', $providerUser->getEmail())->exists()) {
-            $user = User::create([
-                'email' => $providerUser->getEmail(),
-                'name'  => $providerUser->getName(),
-            ]);
-        } else {
+        if ($account->wasRecentlyCreated && auth()->guest() && User::where([
+                ['email', $providerUser->getEmail()],
+                ['id', '<>', auth()->id() ],
+            ])->exists()) {
             throw new \Exception('Already used this E-mail address');
         }
 
-        $user->accounts()->create([
-            'provider_name' => $provider,
-            'provider_id' => $providerUser->getId(),
-            'account_name' => $providerUser->nickname,
-            'account_avatar' => $providerUserAvatar,
-            'account_token' => $providerUser->token,
-            'account_token_secret' => $providerUser->tokenSecret,
-        ]);
+        if ($didExistAccount && auth()->check() && $account->user !== auth()->user()) {
+            throw new \Exception('It is already linked to other account');
+        }
 
+        $this->setAccountColumn($account, $providerUser, $provider);
+
+        $user = $account->wasRecentlyCreated
+                    ? auth()->check()
+                        ? auth()->user()
+                        : User::create(['email' => $providerUser->getEmail(), 'name' => $providerUser->getName()])
+                    : null;
+
+        return $this->accountUser($account, $didExistAccount, $user);
+    }
+
+    private function accountUser(LinkedSocialAccount $account, Bool $didExist, User $user = null) : User
+    {
+        if ($didExist) {
+            $account->save();
+            return $account->user;
+        }
+
+        $user->accounts()->save($account);
         return $user;
+    }
+
+    private function setAccountColumn(LinkedSocialAccount &$account, ProviderUser $user, String $provider)
+    {
+        $account->account_name = $user->getNickname();
+        $account->account_avatar = $this->originalSizeImageUrl($user->getAvatar());
+        $account->account_token = $user->token;
+        $account->account_token_secret = $this->isOAuthOne($provider) ? $user->tokenSecret : $user->refreshToken;
+    }
+
+    private function originalSizeImageUrl(String $url) : String
+    {
+        return preg_replace("/https?:\/\/(.+?)_normal.(jpg|jpeg|png|gif)/", "https://$1.$2", $url);
+    }
+
+    private function isOAuthOne(String $provider) : Bool
+    {
+        return collect(config('services.oauth1'))->contains($provider);
     }
 }
