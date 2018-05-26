@@ -45,7 +45,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        $simpleIcons = new SimpleIcons('Twitter');
-        return view('auth.login', compact('simpleIcons'));
+        $simpleIcons = new SimpleIcons('Twitter', 'GitHub');
+        return view('auth.login', ['simpleIcons' => $simpleIcons->getIcons()]);
     }
 }

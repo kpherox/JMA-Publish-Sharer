@@ -4,22 +4,31 @@ namespace App\Services;
 
 class SimpleIcons
 {
+    private $iconList;
+
+    public function getIcons()
+    {
+        return $this->iconList;
+    }
+
     /**
-     * Create a new controller instance.
+     * Create a new instance.
      *
      * @return void
-     */
+    **/
     public function __construct(...$useIcons)
     {
+        $iconList = collect(json_decode(\File::get(resource_path('assets/simple-icons/_data/simple-icons.json')), true)['icons']);
+
         foreach ($useIcons as $iconName) {
-            $iconList = json_decode(file_get_contents(resource_path('assets/simple-icons/_data/simple-icons.json')), true)['icons'];
-            $iconKey = array_search($iconName, array_column($iconList, 'title'));
-            $iconData = $iconList[$iconKey];
+            $iconData = $iconList->filter(function ($value) use ($iconName) {
+                return $value['title'] === $iconName;
+            });
             $title = mb_strtolower($iconName);
-            $hex = $iconData['hex'];
-            $source = $iconData['source'];
-            $svg = file_get_contents(resource_path('assets/simple-icons/icons/'.$title.'.svg'));
-            $this->$title = [
+            $hex = $iconData->first()['hex'];
+            $source = $iconData->first()['source'];
+            $svg = \File::get(resource_path('assets/simple-icons/icons/'.$title.'.svg'));
+            $this->iconList[] = [
                 "title" => $iconName,
                 "lowerTitle" => $title,
                 "hex" => $hex,

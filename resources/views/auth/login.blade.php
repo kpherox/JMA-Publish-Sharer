@@ -64,12 +64,12 @@
                     <p class="text-border">or</p>
                     <div class="social-login text-center">
                         @foreach ($simpleIcons as $simpleIcon)
-                            <div class="btn btn-default btn-social" style="background-color: #{{ $simpleIcon['hex'] }}">
-                                <a href="{{ route($simpleIcon['lowerTitle'].'.login') }}">
-                                    {!! $simpleIcon['svg'] !!}
-                                    Sign in with {{ $simpleIcon['title'] }}
-                                </a>
-                            </div>
+                        <div class="btn btn-default btn-social" style="background-color: #{{ $simpleIcon['hex'] }}">
+                            <a href="{{ route($simpleIcon['lowerTitle'].'.login') }}">
+                                {!! $simpleIcon['svg'] !!}
+                                Sign in with {{ $simpleIcon['title'] }}
+                            </a>
+                        </div>
                         @endforeach
                     </div>
                 </div>

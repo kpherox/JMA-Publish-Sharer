@@ -17,7 +17,6 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&text=ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvxyz/!?" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Noto+Sans&text=Ww123456890" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
