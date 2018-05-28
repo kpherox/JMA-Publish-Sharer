@@ -6,9 +6,9 @@
         <div class="col-md-2 bg-secondary sidebar collapse" id="homeSidebar">
             <nav class="sidebar-links py-2">
                 <div class="list-group list-group-flush">
-                    @foreach ($pageList as $routeName => $page)
-                    <a class="list-group-item {{ $page['isThis'] ? 'text-body disabled' : 'list-group-item-action list-group-item-dark text-dark' }}{{ $routeName === 'index' ? ' d-md-none d-landscape-none' : '' }}" href="{{ route($routeName) }}">
-                        {{ $page['name'] }}
+                    @foreach ($menus as $routeName => $menu)
+                    <a class="list-group-item {{ $menu['isCurrent'] ? 'text-body disabled' : 'list-group-item-action list-group-item-dark text-dark' }}{{ $routeName === 'index' ? ' d-md-none d-landscape-none' : '' }}" href="{{ route($routeName) }}">
+                        {{ $menu['name'] }}
                     </a>
                     @endforeach
                 </div>

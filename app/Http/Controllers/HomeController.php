@@ -6,18 +6,18 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    private $pageList = [
+    private $menus = [
         'index' => [
             'name' => 'Top Page',
-            'isThis' => false,
+            'isCurrent' => false,
         ],
         'home.index' => [
             'name' => 'Dashboard',
-            'isThis' => false,
+            'isCurrent' => false,
         ],
         'home.accounts' => [
             'name' => 'Social Accounts',
-            'isThis' => false,
+            'isCurrent' => false,
         ],
     ];
 
@@ -39,8 +39,8 @@ class HomeController extends Controller
     public function index()
     {
         $index = 'home.index';
-        $this->pageList[$index]['isThis'] = true;
-        return view($index, ['pageList' => $this->pageList]);
+        $this->menus[$index]['isCurrent'] = true;
+        return view($index, ['menus' => $this->menus]);
     }
 
     /**
@@ -51,12 +51,14 @@ class HomeController extends Controller
     public function accounts()
     {
         $accounts = 'home.accounts';
-        $this->pageList[$accounts]['isThis'] = true;
+        $this->menus[$accounts]['isCurrent'] = true;
         $socialAccounts = auth()->user()->accounts;
         return view($accounts, [
-            'pageList' => $this->pageList,
-            'twitterAccounts' => $socialAccounts->where('provider_name', 'twitter'),
-            'githubAccounts' => $socialAccounts->where('provider_name', 'github')
+            'menus' => $this->menus,
+            'socialAccounts' => [
+                'Twitter' => $socialAccounts->where('provider_name', 'twitter'),
+                'GitHub' => $socialAccounts->where('provider_name', 'github'),
+            ],
         ]);
     }
 }
