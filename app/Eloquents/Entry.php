@@ -3,6 +3,7 @@
 namespace App\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Entry extends Model
 {
@@ -22,8 +23,11 @@ class Entry extends Model
      */
     protected $hidden = [];
 
-    // Relation feed
-    public function feed() {
+    /**
+     * Relation feed
+    **/
+    public function feed() : BelongsTo
+    {
         return $this->belongsTo('App\Eloquents\Feed', 'feed_uuid', 'uuid');
     }
 }

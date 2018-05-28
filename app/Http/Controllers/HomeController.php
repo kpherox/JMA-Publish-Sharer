@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
@@ -33,10 +33,8 @@ class HomeController extends Controller
 
     /**
      * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() : View
     {
         $index = 'home.index';
         $this->menus[$index]['isCurrent'] = true;
@@ -45,10 +43,8 @@ class HomeController extends Controller
 
     /**
      * Show the application linked accounts.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function accounts()
+    public function accounts() : View
     {
         $accounts = 'home.accounts';
         $this->menus[$accounts]['isCurrent'] = true;

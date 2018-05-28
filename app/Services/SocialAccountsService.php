@@ -12,9 +12,9 @@ class SocialAccountsService
     {
         $account = LinkedSocialAccount::firstOrNew(['provider_name' => $provider, 'provider_id' => $providerUser->getId()]);
 
-        $didExistAccount = !($account->wasRecentlyCreated = !$account->id);
+        $didExistAccount = $account->id;
 
-        if ($account->wasRecentlyCreated && auth()->guest() && User::where('email', $providerUser->getEmail())->exists()) {
+        if (!$didExistAccount && auth()->guest() && User::where('email', $providerUser->getEmail())->exists()) {
             throw new \Exception('Already used this E-mail address');
         }
 
@@ -36,6 +36,9 @@ class SocialAccountsService
         return $user;
     }
 
+    /**
+     * Set ProviderUser property to LinkedSocialAccount columns
+    **/
     private function setAccountColumn(LinkedSocialAccount &$account, ProviderUser $user, Bool $isOAuthOne)
     {
         $account->account_name = $user->getNickname();
@@ -44,11 +47,17 @@ class SocialAccountsService
         $account->account_token_secret = $isOAuthOne ? $user->tokenSecret : $user->refreshToken;
     }
 
+    /**
+     * Return original size image's url for Twitter
+    **/
     private function originalSizeImageUrl(String $url) : String
     {
         return preg_replace("/https?:\/\/(.+?)_normal.(jpg|jpeg|png|gif)/", "https://$1.$2", $url);
     }
 
+    /**
+     * Contains provider to oauth1
+    **/
     private function isOAuthOne(String $provider) : Bool
     {
         return collect(config('services.oauth1'))->contains($provider);

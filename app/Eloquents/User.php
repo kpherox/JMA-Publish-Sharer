@@ -4,6 +4,7 @@ namespace App\Eloquents;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -27,8 +28,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    // Relation social accounts
-    public function accounts() {
+    /**
+     * Relation social accounts
+    **/
+    public function accounts() : HasMany
+    {
         return $this->hasMany('App\Eloquents\LinkedSocialAccount');
     }
 }

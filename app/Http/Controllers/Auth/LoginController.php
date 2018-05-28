@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\View\View;
 use App\Services\SimpleIcons;
 
 class LoginController extends Controller
@@ -40,10 +41,8 @@ class LoginController extends Controller
 
     /**
      * Show the application's login form.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function showLoginForm()
+    public function showLoginForm() : View
     {
         $simpleIcons = new SimpleIcons('Twitter', 'GitHub');
         return view('auth.login', ['simpleIcons' => $simpleIcons->getIcons()]);

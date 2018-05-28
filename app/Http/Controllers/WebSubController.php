@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Carbon\Carbon;
 use GuzzleHttp\Promise;
@@ -14,10 +15,9 @@ class WebSubController extends Controller
 {
     /**
      * Subscribe Check JMA
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function subscribeCheck(Request $request) {
+    public function subscribeCheck(Request $request) : Response
+    {
         // Subscribe check
         $hubMode = $request->hub_mode;
         abort_if($hubMode != 'subscribe' && $hubMode != 'unsubscribe', 404);
@@ -37,9 +37,10 @@ class WebSubController extends Controller
     /**
      * Recive JMA Publish
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function receiveFeed(Request $request) {
+    public function receiveFeed(Request $request)
+    {
         // Xml parse
         $content = $request->getContent();
 

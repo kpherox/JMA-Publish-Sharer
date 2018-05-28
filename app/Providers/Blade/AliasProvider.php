@@ -16,14 +16,4 @@ class AliasProvider extends ServiceProvider
         // Alias components/navbar-right.blade.php
         \Blade::component('components.navbar-right', 'navbarRight');
     }
-
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
 }

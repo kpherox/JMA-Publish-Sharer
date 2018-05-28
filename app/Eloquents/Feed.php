@@ -3,6 +3,7 @@
 namespace App\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Feed extends Model
 {
@@ -22,8 +23,11 @@ class Feed extends Model
      */
     protected $hidden = [];
 
-    // Relation entries
-    public function entries() {
+    /**
+     * Relation entries
+    **/
+    public function entries() : HasMany
+    {
         return $this->hasMany('App\Eloquents\Entry', 'feed_uuid', 'uuid');
     }
 }
