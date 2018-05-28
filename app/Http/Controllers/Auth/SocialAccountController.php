@@ -9,23 +9,6 @@ use App\Services\SocialAccountsService;
 
 abstract class SocialAccountController extends Controller
 {
-    private $isLogin = true;
-
-    protected function isLogin() : Bool
-    {
-        return $this->isLogin;
-    }
-
-    protected function enableLogin() : Bool
-    {
-        return $this->isLogin = true;
-    }
-
-    protected function disableLogin() : Bool
-    {
-        return $this->isLogin = false;
-    }
-
     private $provider = '';
 
     protected function getProvider() : String
@@ -46,7 +29,10 @@ abstract class SocialAccountController extends Controller
     /**
      * Link social account for User account.
      */
-    abstract public function linkToUser() : RedirectResponse;
+    public function linkToUser() : RedirectResponse
+    {
+        return $this->redirectToProvider();
+    }
 
     /**
      * Obtain the user information

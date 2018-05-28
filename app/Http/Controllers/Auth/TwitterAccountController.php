@@ -25,29 +25,17 @@ class TwitterAccountController extends SocialAccountController
      */
     public function redirectToProvider() : RedirectResponse
     {
-        if (auth()->check() && $this->isLogin()) {
-            return redirect('/home');
-        }
-
         return \Socialite::driver($this->getProvider())
-            ->with([
-                'force_login' => $this->forceLogin
-            ])->redirect();
+                    ->with(['force_login' => $this->forceLogin])
+                    ->redirect();
     }
 
     /**
      * Link Twitter account for User account.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function linkToUser() : RedirectResponse
     {
-        if (auth()->guest()) {
-            return redirect('/login');
-        }
-
-        $this->disableLogin();
         $this->forceLogin = true;
-        return $this->redirectToProvider();
+        return parent::linkToUser();
     }
 }

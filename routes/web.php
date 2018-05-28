@@ -17,14 +17,14 @@ Auth::routes();
 
 Route::namespace('Auth')->group(function() {
     Route::prefix('github')->group(function() {
-        Route::get('login', 'GitHubAccountController@redirectToProvider')->name('github.login');
-        Route::get('linktouser', 'GitHubAccountController@linkToUser')->name('github.linktouser');
+        Route::get('login', 'GitHubAccountController@redirectToProvider')->name('github.login')->middleware('guest');
+        Route::get('linktouser', 'GitHubAccountController@linkToUser')->name('github.linktouser')->middleware('auth');
         Route::get('callback', 'GitHubAccountController@handleProviderCallback')->name('github.callback');
     });
 
     Route::prefix('twitter')->group(function() {
-        Route::get('login', 'TwitterAccountController@redirectToProvider')->name('twitter.login');
-        Route::get('linktouser', 'TwitterAccountController@linkToUser')->name('twitter.linktouser');
+        Route::get('login', 'TwitterAccountController@redirectToProvider')->name('twitter.login')->middleware('guest');
+        Route::get('linktouser', 'TwitterAccountController@linkToUser')->name('twitter.linktouser')->middleware('auth');
         Route::get('callback', 'TwitterAccountController@handleProviderCallback')->name('twitter.callback');
     });
 });

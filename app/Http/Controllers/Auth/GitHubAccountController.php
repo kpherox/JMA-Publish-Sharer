@@ -19,30 +19,10 @@ class GitHubAccountController extends SocialAccountController
     }
 
     /**
-     * Redirect the user to the Twitter authentication page.
+     * Redirect the user to the GitHub authentication page.
      */
     public function redirectToProvider() : RedirectResponse
     {
-        if (auth()->check() && $this->isLogin()) {
-            return redirect('/home');
-        }
-
-        return \Socialite::driver($this->getProvider())
-            ->redirect();
-    }
-
-    /**
-     * Link Twitter account for User account.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function linkToUser() : RedirectResponse
-    {
-        if (auth()->guest()) {
-            return redirect('/login');
-        }
-
-        $this->disableLogin();
-        return $this->redirectToProvider();
+        return \Socialite::driver($this->getProvider())->redirect();
     }
 }
