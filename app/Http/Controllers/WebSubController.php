@@ -17,7 +17,7 @@ class WebSubController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    function subscribeCheck(Request $request) {
+    public function subscribeCheck(Request $request) {
         // Subscribe check
         $hubMode = $request->hub_mode;
         abort_if($hubMode != 'subscribe' && $hubMode != 'unsubscribe', 404);
@@ -39,7 +39,7 @@ class WebSubController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    function receiveFeed(Request $request) {
+    public function receiveFeed(Request $request) {
         // Xml parse
         $content = $request->getContent();
 
@@ -148,7 +148,7 @@ class WebSubController extends Controller
             $entryRecords[] = $entryArray;
         }
 
-        $entries = Entry::insert($entryRecords);
+        Entry::insert($entryRecords);
     }
 }
 
