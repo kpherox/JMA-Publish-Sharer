@@ -16,6 +16,7 @@ class MainController extends Controller
     {
         return view('index', [
                     'entries' => Entry::select(['uuid', 'kind_of_info', 'observatory_name', 'headline', 'url', 'updated'])
+                                     ->groupBy('observatory_name', 'headline', 'updated')
                                      ->orderBy('updated', 'desc')
                                      ->simplePaginate(5),
                 ]);
