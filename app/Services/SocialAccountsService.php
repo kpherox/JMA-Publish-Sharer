@@ -14,10 +14,7 @@ class SocialAccountsService
 
         $didExistAccount = !($account->wasRecentlyCreated = !$account->id);
 
-        if ($account->wasRecentlyCreated && auth()->guest() && User::where([
-                ['email', $providerUser->getEmail()],
-                ['id', '<>', auth()->id() ],
-            ])->exists()) {
+        if ($account->wasRecentlyCreated && auth()->guest() && User::where('email', $providerUser->getEmail())->exists()) {
             throw new \Exception('Already used this E-mail address');
         }
 
@@ -25,34 +22,26 @@ class SocialAccountsService
             throw new \Exception('It is already linked to other account');
         }
 
-        $this->setAccountColumn($account, $providerUser, $provider);
+        $this->setAccountColumn($account, $providerUser, $this->isOAuthOne($provider));
 
-        $user = $account->wasRecentlyCreated
-                    ? auth()->check()
-                        ? auth()->user()
-                        : User::create(['email' => $providerUser->getEmail(), 'name' => $providerUser->getName()])
-                    : null;
-
-        return $this->accountUser($account, $didExistAccount, $user);
-    }
-
-    private function accountUser(LinkedSocialAccount $account, Bool $didExist, User $user = null) : User
-    {
-        if ($didExist) {
+        if ($didExistAccount) {
             $account->save();
             return $account->user;
         }
 
+        $user = auth()->user() ?? User::create(['email' => $providerUser->getEmail(), 'name' => $providerUser->getName()]);
+
         $user->accounts()->save($account);
+
         return $user;
     }
 
-    private function setAccountColumn(LinkedSocialAccount &$account, ProviderUser $user, String $provider)
+    private function setAccountColumn(LinkedSocialAccount &$account, ProviderUser $user, Bool $isOAuthOne)
     {
         $account->account_name = $user->getNickname();
         $account->account_avatar = $this->originalSizeImageUrl($user->getAvatar());
         $account->account_token = $user->token;
-        $account->account_token_secret = $this->isOAuthOne($provider) ? $user->tokenSecret : $user->refreshToken;
+        $account->account_token_secret = $isOAuthOne ? $user->tokenSecret : $user->refreshToken;
     }
 
     private function originalSizeImageUrl(String $url) : String
