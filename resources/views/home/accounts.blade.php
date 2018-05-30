@@ -11,14 +11,20 @@
                 <h5 class="card-header bg-transparent border-info">{{ $provider }}</h5>
                 <div class="list-group list-group-flush">
                     @foreach ($accounts as $account)
-                    <a class="list-group-item list-group-item-action" :class="{disabled: isShowing}" href="#{{ $account->provider_name }}-{{ $account->account_name }}" v-on:click.prevent="showAccountSettings('{{ $account->provider_id }}', '{{ $account->account_name }}', '{{ $provider }}')">
-                        <img class="align-middle rounded-circle social-avatar" src="{{ $account->account_avatar }}" alt="{{ $provider }} {{ $account->account_name }} Icon" />
-                        &#64;{{ $account->account_name }}
+                    <a href="#{{ $account->provider_name }}-{{ $account->nickname }}" class="list-group-item list-group-item-action" :class="{disabled: isShowing}"
+                       v-on:click.prevent="showAccountSettings('{{ $provider }}', '{{ $account->provider_id }}', '{{ $account->name }}', '{{ $account->nickname }}')">
+                        <img class="rounded-circle social-avatar" src="{{ $account->avatar }}" alt="{{ $provider }} {{ $account->name }} Icon" />
+                        <div class="d-inline-block align-middle">
+                            <p class="mb-0">{{ $account->name }}</p>
+                            <p class="mb-0 text-muted">&#64;{{ $account->nickname }}</p>
+                        </div>
                     </a>
                     @endforeach
                     <a class="list-group-item list-group-item-action" href="{{ route($account->provider_name.'.linktouser') }}">
                         <button type="button" class="btn btn-secondary btn-lg btn-add p-0 rounded-circle">＋</button>
-                        Link Account
+                        <p class="d-inline-block align-middle mb-0">
+                            Link Account
+                        </p>
                     </a>
                 </div>
             </div>
@@ -28,19 +34,20 @@
 </div>
 <div class="col-lg-7 col-xl-8">
     <transition name="fade">
-        <account-settings v-if="isDisplay" :provider="providerName" :name="accountName" :id="accountId" token="{{ csrf_token() }}"></account-settings>
+        <account-settings v-if="isDisplay" :provider="providerName" :id="providerId" :name="accountName" :nickname="accountNickname" token="{{ csrf_token() }}"></account-settings>
     </transition>
     <script>
     let mix = {
         data: {
             providerName: '',
+            providerId: '',
             accountName: '',
-            accountId: '',
+            accountNickname: '',
             isDisplay: false,
             isShowing: false
         },
         methods: {
-            showAccountSettings(id, name, provider) {
+            showAccountSettings(provider, id, name, nickname) {
                 if (this.isShowing) return;
 
                 let delay = this.isDisplay ? 500 : 0;
@@ -50,8 +57,9 @@
 
                 setTimeout(() => {
                     this.providerName = provider;
+                    this.providerId = id;
                     this.accountName = name;
-                    this.accountId = id;
+                    this.accountNickname = nickname;
                     this.isDisplay = true;
                 }, delay);
 

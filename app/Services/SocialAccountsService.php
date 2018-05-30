@@ -18,7 +18,7 @@ class SocialAccountsService
             throw new \Exception('Already used this E-mail address');
         }
 
-        if ($didExistAccount && auth()->check() && $account->user !== auth()->user()) {
+        if ($didExistAccount && auth()->check() && $account->user_id !== auth()->id()) {
             throw new \Exception('It is already linked to other account');
         }
 
@@ -41,10 +41,11 @@ class SocialAccountsService
     **/
     private function setAccountColumn(LinkedSocialAccount &$account, ProviderUser $user, Bool $isOAuthOne)
     {
-        $account->account_name = $user->getNickname();
-        $account->account_avatar = $this->originalSizeImageUrl($user->getAvatar());
-        $account->account_token = $user->token;
-        $account->account_token_secret = $isOAuthOne ? $user->tokenSecret : $user->refreshToken;
+        $account->name = $user->getName();
+        $account->nickname = $user->getNickname();
+        $account->avatar = $this->originalSizeImageUrl($user->getAvatar());
+        $account->token = $user->token;
+        $account->token_secret = $isOAuthOne ? $user->tokenSecret : $user->refreshToken;
     }
 
     /**
