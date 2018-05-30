@@ -38,17 +38,5 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
-        @auth
-        <script>
-        jQuery(() => {
-            $(document).click((e) => {
-                $('#homeSidebar').collapse('hide');
-            });
-        });
-        </script>
-        @endauth
-        <script>
-        document.querySelectorAll('a.disabled').forEach((e) => e.addEventListener('click', (e) => e.preventDefault()));
-        </script>
     </body>
 </html>
