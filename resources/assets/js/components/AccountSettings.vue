@@ -1,7 +1,7 @@
 <template>
     <div class="card card-default">
         <div class="card-body">
-            <h5 class="card-title">{{ name }} - {{ provider }}</h5>
+            <h5 class="card-title">{{ name }} <small class="text-muted">&#64;{{ nickname }}</small> - {{ provider }}</h5>
 
             I'm an example component!
         </div>
@@ -12,8 +12,9 @@
     export default {
         props: [
             'provider',
-            'name',
             'id',
+            'name',
+            'nickname',
             'token',
         ],
         mounted() {
