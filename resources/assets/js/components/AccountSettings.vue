@@ -8,7 +8,7 @@
             <p class="card-text">I'm an example component!</p>
 
             <div class="card border-light">
-                <h5 class="card-header bg-transparent border-danger">Danzer Zone</h5>
+                <h5 class="card-header bg-transparent border-danger">Danger Zone</h5>
 
                 <div class="card-body">
                     <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#unlinkModal">Unlink this account</button>
