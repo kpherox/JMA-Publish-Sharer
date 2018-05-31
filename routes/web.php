@@ -16,21 +16,21 @@ Route::view('/', 'welcome')->name('index');
 Auth::routes();
 
 Route::namespace('Auth')->group(function() {
-    Route::prefix('github')->group(function() {
-        Route::get('login', 'GitHubAccountController@redirectToProvider')->name('github.login')->middleware('guest');
-        Route::get('linktouser', 'GitHubAccountController@linkToUser')->name('github.linktouser')->middleware('auth');
-        Route::get('callback', 'GitHubAccountController@handleProviderCallback')->name('github.callback');
+    Route::prefix('github')->name('github.')->group(function() {
+        Route::get('login', 'GitHubAccountController@redirectToProvider')->name('login')->middleware('guest');
+        Route::get('linktouser', 'GitHubAccountController@linkToUser')->name('linktouser')->middleware('auth');
+        Route::get('callback', 'GitHubAccountController@handleProviderCallback')->name('callback');
     });
 
-    Route::prefix('twitter')->group(function() {
-        Route::get('login', 'TwitterAccountController@redirectToProvider')->name('twitter.login')->middleware('guest');
-        Route::get('linktouser', 'TwitterAccountController@linkToUser')->name('twitter.linktouser')->middleware('auth');
-        Route::get('callback', 'TwitterAccountController@handleProviderCallback')->name('twitter.callback');
+    Route::prefix('twitter')->name('twitter.')->group(function() {
+        Route::get('login', 'TwitterAccountController@redirectToProvider')->name('login')->middleware('guest');
+        Route::get('linktouser', 'TwitterAccountController@linkToUser')->name('linktouser')->middleware('auth');
+        Route::get('callback', 'TwitterAccountController@handleProviderCallback')->name('callback');
     });
 });
 
-Route::prefix('home')->group(function() {
-    Route::get('/', 'HomeController@index')->name('home.index');
-    Route::get('social-accounts', 'HomeController@accounts')->name('home.accounts');
+Route::prefix('home')->name('home.')->group(function() {
+    Route::get('/', 'HomeController@index')->name('index');
+    Route::get('social-accounts', 'HomeController@accounts')->name('accounts');
 });
 

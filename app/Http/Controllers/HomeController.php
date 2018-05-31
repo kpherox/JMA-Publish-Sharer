@@ -47,14 +47,22 @@ class HomeController extends Controller
     public function accounts() : View
     {
         $accounts = 'home.accounts';
+        $user = auth()->user();
+
         $this->menus[$accounts]['isCurrent'] = true;
-        $socialAccounts = auth()->user()->accounts;
+        $socialAccounts = $user->accounts;
+        $isSafeUnlink = $user->existsEmailAndPassword() || $socialAccounts->count() > 1;
+
         return view($accounts, [
             'menus' => $this->menus,
-            'socialAccounts' => [
+            'socialAccounts' => collect([
                 'Twitter' => $socialAccounts->where('provider_name', 'twitter'),
                 'GitHub' => $socialAccounts->where('provider_name', 'github'),
-            ],
+            ]),
+            'endpoints' => collect([
+                'unlink' => url('/')
+            ]),
+            'isSafeUnlink' => $isSafeUnlink ? 1 : 0
         ]);
     }
 }

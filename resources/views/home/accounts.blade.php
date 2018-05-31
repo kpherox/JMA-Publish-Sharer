@@ -34,10 +34,18 @@
 </div>
 <div class="col-lg-7 col-xl-8">
     <transition name="fade">
-        <account-settings v-if="isDisplay" :provider="providerName" :id="providerId" :name="accountName" :nickname="accountNickname" token="{{ csrf_token() }}"></account-settings>
+        <account-settings v-if="isDisplay"
+            csrf-token="{{ csrf_token() }}"
+            :provider="providerName"
+            :id="providerId"
+            :name="accountName"
+            :nickname="accountNickname"
+            :endpoints="{{ $endpoints }}"
+            :is-safe-unlink="{{ $isSafeUnlink }}">
+        </account-settings>
     </transition>
     <script>
-    let mix = {
+    mix = {
         data: {
             providerName: '',
             providerId: '',
@@ -60,6 +68,7 @@
                     this.providerId = id;
                     this.accountName = name;
                     this.accountNickname = nickname;
+
                     this.isDisplay = true;
                 }, delay);
 
@@ -72,6 +81,5 @@
     }
     </script>
 </div>
-
 @endsection
 

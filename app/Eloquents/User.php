@@ -35,4 +35,28 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Eloquents\LinkedSocialAccount');
     }
+
+    /**
+     * Exists value of email column
+    **/
+    public function existsEmail() : Bool
+    {
+        return isset($this->email);
+    }
+
+    /**
+     * Exists value of password column
+    **/
+    public function existsPassword() : Bool
+    {
+        return isset($this->password);
+    }
+
+    /**
+     * Exists value of email column and password column
+    **/
+    public function existsEmailAndPassword() : Bool
+    {
+        return $this->existsEmail() && $this->existsPassword();
+    }
 }
