@@ -95,8 +95,8 @@ class WebSubTest extends TestCase
 
     private function receiveSuccess($endpoint)
     {
-        $sampleData1 = file_get_contents('tests/SampleData/jmaxml_20180308_Samples/01_01_01_091210_VGSK50.xml');
-        $sampleData2 = file_get_contents('tests/SampleData/jmaxml_20180308_Samples/01_01_02_091210_VGSK50.xml');
+        $sampleData1 = file_get_contents('tests/SampleData/jmaxml_Samples/01_01_01_091210_VGSK50.xml');
+        $sampleData2 = file_get_contents('tests/SampleData/jmaxml_Samples/01_01_02_091210_VGSK50.xml');
 
         \Guzzle::shouldReceive('getAsync')
                       ->once()
