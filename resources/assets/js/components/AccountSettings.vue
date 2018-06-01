@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <h5 class="card-header bg-transparent">
-            {{ name }} <small class="text-muted">&#64;{{ nickname }}</small> - {{ provider }}
+            {{ account.name }} <small class="text-muted">&#64;{{ account.nickname }}</small> - {{ providerName[account.provider_name] }}
         </h5>
 
         <div class="card-body">
@@ -36,7 +36,7 @@
 
                             <div class="modal-body">
                                 <p class="mb-0">
-                                    This account (<strong>&#64;{{ nickname }} - {{ provider }}</strong>) will be deauthenticated.<br/>
+                                    This account (<strong>&#64;{{ account.nickname }} - {{ providerName[account.provider_name] }}</strong>) will be deauthenticated.<br/>
                                     Are you okay?
                                 </p>
                             </div>
@@ -60,21 +60,9 @@
                 type: String,
                 default: '',
             },
-            provider: {
-                type: String,
-                default: '',
-            },
-            id: {
-                type: Number,
-                default: '',
-            },
-            name: {
-                type: String,
-                default: '',
-            },
-            nickname: {
-                type: String,
-                default: '',
+            providerName: {
+                type: Object,
+                default: {},
             },
             endpoints: {
                 type: Object,
@@ -86,10 +74,25 @@
                 type: Boolean,
                 default: false,
             },
+            accounts: {
+                type: Object,
+                default: {},
+            },
+            accountIndex: {
+                type: Number,
+                default: 0,
+            },
+            account: {
+                type: Object,
+                default: {},
+            },
         },
         methods: {
             unlinkAccount() {
-                alert(this.provider+" / "+this.name)
+                console.log("Unlinked "+this.providerName[this.account.provider_name]+" / "+this.account.name)
+                Vue.delete(this.accounts[this.account.provider_name], this.accountIndex)
+                this.$emit('update:accounts', accounts)
+                jQuery(() => $('#unlinkModal').modal('hide'))
             }
         },
         mounted() {
