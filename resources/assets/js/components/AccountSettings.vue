@@ -90,7 +90,11 @@
         methods: {
             unlinkAccount() {
                 console.log("Unlinked "+this.providerName[this.account.provider_name]+" / "+this.account.name)
-                Vue.delete(this.accounts[this.account.provider_name], this.accountIndex)
+                if (this.accounts[this.account.provider_name].length < 2) {
+                    Vue.delete(this.accounts, this.account.provider_name)
+                } else {
+                    Vue.delete(this.accounts[this.account.provider_name], this.accountIndex)
+                }
                 this.$emit('update:accounts', accounts)
                 jQuery(() => $('#unlinkModal').modal('hide'))
             }

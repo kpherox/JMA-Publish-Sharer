@@ -56,7 +56,6 @@ class HomeController extends Controller
                 return collect($account)->forget(['id', 'user_id', 'created_at', 'updated_at']);
             });
         });
-        $isSafeUnlink = $user->existsEmailAndPassword() || $socialAccounts->count() > 1;
 
         return view($accounts, [
             'menus' => $this->menus,
@@ -65,7 +64,7 @@ class HomeController extends Controller
             'endpoints' => collect([
                 'unlink' => url('/')
             ]),
-            'isSafeUnlink' => $isSafeUnlink ? 1 : 0
+            'existsEmail' => $user->existsEmailAndPassword() ? 1 : 0
         ]);
     }
 }

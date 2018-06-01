@@ -9,7 +9,9 @@
             <script>let accounts = {}</script>
             @foreach ($socialAccounts as $provider => $accounts)
             <div class="card border-0">
+                @if ($accounts->count() > 0)
                 <script>accounts.{{ $provider }} = @json($accounts->toArray())</script>
+                @endif
                 <h5 class="card-header bg-transparent border-info">{{ $providerName[$provider] }}</h5>
                 <transition-group name="fade" tag="div" class="list-group list-group-flush">
                     <a v-for="(account, index) in accounts.{{ $provider }}" class="list-group-item list-group-item-action" :key="account" :href="'#'+account.provider_name+'-'+account.nickname" :class="{'disabled' : isShowing}"
@@ -38,7 +40,7 @@
             csrf-token="{{ csrf_token() }}"
             :provider-name="{{ $providerName }}"
             :endpoints="endpoints"
-            :is-safe-unlink="{{ $isSafeUnlink }}"
+            :is-safe-unlink="isSafeUnlink"
             :accounts="accounts"
             v-on:update:accounts="updateList($event)"
             :account-index="accountIndex"
@@ -47,7 +49,7 @@
     </transition>
     <script>
     mix = {
-        data: { endpoints: { unlink: '/' }, isDisplay: false, isShowing: false, account: {}, accountIndex: 0 },
+        data: { endpoints: { unlink: '/' }, isSafeUnlink: false, existsEmail: {{ $existsEmail }}, isDisplay: false, isShowing: false, accounts: accounts, account: {}, accountIndex: 0 },
         methods: {
             showAccountSettings(unlinkEndpoint, account, accountIndex) {
                 if (this.isShowing) return;
@@ -58,6 +60,7 @@
                 this.isDisplay = false;
 
                 setTimeout(() => {
+                    this.checkSafeUnlink();
                     this.endpoints.unlink = unlinkEndpoint;
                     this.account = account;
                     this.accountIndex = accountIndex;
@@ -70,9 +73,26 @@
                     this.isShowing = false;
                 }, delay + 500);
             },
+            checkSafeUnlink() {
+                let count = 0;
+
+                if (this.existsEmail) {
+                    return this.isSafeUnlink = true;
+                }
+
+                for (let provider of Object.keys(this.accounts)) {
+                    count += this.accounts[provider].length;
+
+                    if (count > 1) {
+                        return this.isSafeUnlink = true;
+                    }
+                }
+
+                return this.isSafeUnlink = false;
+            },
             updateList(e) {
-                this.accounts = e
-                this.$forceUpdate()
+                this.accounts = e;
+                this.$forceUpdate();
                 this.isDisplay = false;
             }
         }
