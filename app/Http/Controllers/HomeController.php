@@ -53,7 +53,7 @@ class HomeController extends Controller
         $providerName = collect(config('services.providers'));
         $socialAccounts = $providerName->map(function($item, $key) use ($user) {
             return $user->accounts->where('provider_name', $key)->map(function($account) {
-                return collect($account)->forget(['created_at', 'updated_at']);
+                return collect($account)->forget(['id', 'user_id', 'created_at', 'updated_at']);
             });
         });
         $isSafeUnlink = $user->existsEmailAndPassword() || $socialAccounts->count() > 1;
