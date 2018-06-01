@@ -13,22 +13,26 @@
                 <script>accounts.{{ $provider }} = @json($accounts->toArray())</script>
                 @endif
                 <h5 class="card-header bg-transparent border-info">{{ $providerName[$provider] }}</h5>
-                <transition-group name="fade" tag="div" class="list-group list-group-flush">
-                    <a v-for="(account, index) in accounts.{{ $provider }}" class="list-group-item list-group-item-action" :key="account" :href="'#'+account.provider_name+'-'+account.nickname" :class="{'disabled' : isShowing}"
-                       v-on:click.prevent="showAccountSettings('{{ route('index') }}', account, index)">
-                        <img class="rounded-circle social-avatar" :src="account.avatar" alt="{{ $provider }} @{{ account.name }} Icon" />
-                        <div class="d-inline-block align-middle">
-                            <p class="mb-0">@{{ account.name }}</p>
-                            <p class="mb-0 text-muted">&#64;@{{ account.nickname }}</p>
-                        </div>
-                    </a>
-                    <a class="list-group-item list-group-item-action" :key="account" href="{{ route($provider.'.linktouser') }}">
-                        <button type="button" class="btn btn-secondary btn-lg btn-add p-0 rounded-circle">＋</button>
-                        <p class="d-inline-block align-middle mb-0">
+                <div class="list-group list-group-flush">
+                    <transition-group name="fade" class="account-list">
+                        <a class="d-flex list-group-item list-group-item-action" :class="{'disabled' : isShowing, 'active': accountIndex === index }"
+                           v-for="(account, index) in accounts.{{ $provider }}" :key="account"
+                           :href="'#'+account.provider_name+'-'+account.nickname"
+                           v-on:click.prevent="showAccountSettings('{{ route('index') }}', account, index)">
+                            <img class="rounded-circle social-avatar mr-2" :src="account.avatar" alt="{{ $provider }} @{{ account.name }} Icon" />
+                            <div class="align-self-center">
+                                <p class="mb-0">@{{ account.name }}</p>
+                                <p class="mb-0" :class="{'text-light': accountIndex === index, 'text-muted': accountIndex !== index}">&#64;@{{ account.nickname }}</p>
+                            </div>
+                        </a>
+                    </transition-group>
+                    <a class="d-flex list-group-item list-group-item-action" :class="{'disabled' : isShowing}" href="{{ route($provider.'.linktouser') }}">
+                        <button type="button" class="btn btn-secondary btn-lg btn-add p-0 rounded-circle mr-2">＋</button>
+                        <p class="align-self-center mb-1">
                             Link Account
                         </p>
                     </a>
-                </transition-group>
+                </div>
             </div>
             @endforeach
         </div>
@@ -49,7 +53,7 @@
     </transition>
     <script>
     mix = {
-        data: { endpoints: { unlink: '/' }, isSafeUnlink: false, existsEmail: {{ $existsEmail }}, isDisplay: false, isShowing: false, accounts: accounts, account: {}, accountIndex: 0 },
+        data: { endpoints: { unlink: '/' }, isSafeUnlink: false, existsEmail: {{ $existsEmail }}, isDisplay: false, isShowing: false, accounts: accounts, account: {}, accountIndex: -1 },
         methods: {
             showAccountSettings(unlinkEndpoint, account, accountIndex) {
                 if (this.isShowing) return;
@@ -63,13 +67,13 @@
                     this.checkSafeUnlink();
                     this.endpoints.unlink = unlinkEndpoint;
                     this.account = account;
-                    this.accountIndex = accountIndex;
 
                     this.isDisplay = true;
                 }, delay);
 
                 setTimeout(() => {
                     console.log('showed '+account.name+'\'s settings');
+                    this.accountIndex = accountIndex;
                     this.isShowing = false;
                 }, delay + 500);
             },
