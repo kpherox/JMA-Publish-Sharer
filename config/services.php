@@ -35,6 +35,11 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'providers' => [
+        'twitter' => 'Twitter',
+        'github' => 'GitHub',
+    ],
+
     'oauth1' => [
         'twitter',
     ],

@@ -16,21 +16,21 @@ class SimpleIcons
      *
      * @return void
     **/
-    public function __construct(...$useIcons)
+    public function __construct()
     {
         $iconList = collect(json_decode(\File::get(resource_path('assets/simple-icons/_data/simple-icons.json')), true)['icons']);
+        $providers = config('services.providers');
 
-        foreach ($useIcons as $iconName) {
-            $iconData = $iconList->filter(function ($value) use ($iconName) {
-                return $value['title'] === $iconName;
-            });
-            $title = mb_strtolower($iconName);
-            $hex = $iconData->first()['hex'];
-            $source = $iconData->first()['source'];
-            $svg = \File::get(resource_path('assets/simple-icons/icons/'.$title.'.svg'));
+        foreach ($providers as $provider => $providerName) {
+            $iconData = $iconList->filter(function ($value) use ($providerName) {
+                return $value['title'] === $providerName;
+            })->first();
+            $hex = $iconData['hex'];
+            $source = $iconData['source'];
+            $svg = \File::get(resource_path('assets/simple-icons/icons/'.$provider.'.svg'));
             $this->iconList[] = [
-                "title" => $iconName,
-                "lowerTitle" => $title,
+                "title" => $providerName,
+                "lowerTitle" => $provider,
                 "hex" => $hex,
                 "source" => $source,
                 "svg" => $svg

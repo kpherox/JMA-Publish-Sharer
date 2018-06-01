@@ -50,15 +50,18 @@ class HomeController extends Controller
         $user = auth()->user();
 
         $this->menus[$accounts]['isCurrent'] = true;
-        $socialAccounts = $user->accounts;
+        $providerName = collect(config('services.providers'));
+        $socialAccounts = $providerName->map(function($item, $key) use ($user) {
+            return $user->accounts->where('provider_name', $key)->map(function($account) {
+                return collect($account)->forget(['created_at', 'updated_at']);
+            });
+        });
         $isSafeUnlink = $user->existsEmailAndPassword() || $socialAccounts->count() > 1;
 
         return view($accounts, [
             'menus' => $this->menus,
-            'socialAccounts' => collect([
-                'Twitter' => $socialAccounts->where('provider_name', 'twitter'),
-                'GitHub' => $socialAccounts->where('provider_name', 'github'),
-            ]),
+            'socialAccounts' => $socialAccounts,
+            'providerName' => $providerName,
             'endpoints' => collect([
                 'unlink' => url('/')
             ]),
