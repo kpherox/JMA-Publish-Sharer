@@ -2,6 +2,8 @@
 Changelog.
 
 ## [Unreleased]
+
+## [Version 0.3 (Pre-Release)][0.3] - 2018-06-03
 ### Added
 - Support Social login.
 - Add feature test.
@@ -38,7 +40,8 @@ Changelog.
 - Subscribe check.
 - Save received feed.
 
-[Unreleased]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.2.2...develop
+[Unreleased]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.3...develop
+[0.3]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.2.2...v0.3
 [0.2.2]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.2...v0.2.1
 [0.2]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.1...v0.2

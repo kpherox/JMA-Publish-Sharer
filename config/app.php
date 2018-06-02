@@ -163,7 +163,6 @@ return [
         /*
          * Package Service Providers...
          */
-        InsertOnDuplicateKey\InsertOnDuplicateKeyServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
         HTMLMin\HTMLMin\HTMLMinServiceProvider::class,
         Kozz\Laravel\Providers\Guzzle::class,
