@@ -7,6 +7,12 @@
 
 require('./bootstrap');
 
+jQuery(() => {
+    $('a.disabled').click((e) => e.preventDefault());
+
+    $(document).click(() => $('.sidebar').collapse('hide'));
+});
+
 window.Vue = require('vue');
 
 /**
@@ -15,8 +21,14 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('account-settings', require('./components/AccountSettings.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    mixins: [mix],
+    methods: {
+        logout: () => {
+            document.getElementById('logout-form').submit();
+        }
+    }
 });

@@ -22,7 +22,7 @@ return [
     'ses' => [
         'key' => env('SES_KEY'),
         'secret' => env('SES_SECRET'),
-        'region' => 'us-east-1',
+        'region' => env('SES_REGION', 'us-east-1'),
     ],
 
     'sparkpost' => [
@@ -30,9 +30,28 @@ return [
     ],
 
     'stripe' => [
-        'model' => App\User::class,
+        'model' => App\Eloquents\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
+    ],
+
+    'providers' => [
+        'twitter' => 'Twitter',
+        'github' => 'GitHub',
+    ],
+
+    'oauth1' => [
+        'twitter',
+    ],
+
+    'twitter' => [
+        'client_id' => env('TWITTER_KEY'),
+        'client_secret' => env('TWITTER_SECRET'),
+    ],
+
+    'github' => [
+        'client_id' => env('GITHUB_KEY'),
+        'client_secret' => env('GITHUB_SECRET'),
     ],
 
 ];

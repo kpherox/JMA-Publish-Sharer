@@ -1,9 +1,188 @@
 
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
 // Variables
 @import "variables";
 
 // Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import "~bootstrap/scss/bootstrap.scss";
+
+.navbar-laravel {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+$border-color:#cdcdcd;
+
+.text-border {
+    display: flex;
+    color: $border-color;
+    align-items: center;
+    text-align: center; /* for no-flexbox browsers */
+
+    &:before, &:after {
+        border-top: 1px solid $border-color;
+        content: '';
+        flex-grow: 1;
+    }
+
+    &:before {
+        margin-right: 0.5em;
+    }
+
+    &::after {
+        margin-left: 0.5em;
+    }
+}
+
+#app>header>nav {
+    min-height: 3rem;
+}
+
+.navbar-brand.dashboard {
+    line-height: 1rem;
+    min-width: 12rem;
+
+    @include media-breakpoint-down(md) {
+        max-width: 12rem;
+    }
+}
+
+@media (orientation: landscape) {
+    .d-landscape-none {
+        display: none !important;
+    }
+    .d-landscape-block {
+        display: block !important;
+    }
+    .d-landscape-inline {
+        display: inline !important;
+    }
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 3rem 0 0;
+    z-index: 1020;
+
+    @media (max-width: 767.99px) and (orientation: landscape) {
+        max-width: 12rem;
+    }
+
+    @media (min-width: 768px), (orientation: landscape) {
+        display: block !important;
+        min-width: 12rem;
+    }
+}
+
+.sidebar-links {
+    position: sticky;
+    top: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    @media (min-width: 768px), (orientation: landscape) {
+        height: calc(100vh - 3rem);
+    }
+}
+
+.main {
+    margin-top: 3rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    display: flex;
+    flex-wrap: wrap;
+
+    @media (min-width: 768px), (orientation: landscape) {
+        max-width: calc(100vw - 12rem);
+    }
+}
+
+.list-group-striped .list-group-item {
+    &:nth-child(even) {
+        background-color: rgba(0,0,0,.05);
+    }
+}
+
+.card {
+    margin-bottom: 1rem;
+
+    .card-header {
+        h5{
+            margin-bottom: 0;
+        }
+    }
+}
+
+img {
+    &.social-avatar {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    &.account {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+}
+
+button.btn-add {
+    min-width: 3rem;
+    height: 3rem;
+}
+
+.btn-social {
+    padding: 0;
+    margin-top: .25rem;
+    margin-bottom: .25rem;
+
+    a {
+        margin: 0;
+        padding: 6px 12px;
+        font-weight: bold;
+        font-size: 1.3em;
+        color: white;
+        display: block;
+        width: 100%;
+        height: 100%;
+        outline: none;
+
+        &:before, &:after {
+            position: absolute;
+            z-index: -1;
+            display: block;
+            content: '';
+        }
+
+        &, &:before, &:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-transition: all .3s;
+            transition: all .3s;
+        }
+
+        &:hover {
+            background-color: rgba(255,255,255,.2);
+            text-decoration: none;
+            color: white;
+        }
+
+        svg {
+            margin: 0px 5px 0 0;
+            vertical-align: middle;
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+    }
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+

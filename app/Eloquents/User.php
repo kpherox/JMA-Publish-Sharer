@@ -4,6 +4,7 @@ namespace App\Eloquents;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -26,4 +27,36 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Relation social accounts
+    **/
+    public function accounts() : HasMany
+    {
+        return $this->hasMany('App\Eloquents\LinkedSocialAccount');
+    }
+
+    /**
+     * Exists value of email column
+    **/
+    public function existsEmail() : Bool
+    {
+        return isset($this->email);
+    }
+
+    /**
+     * Exists value of password column
+    **/
+    public function existsPassword() : Bool
+    {
+        return isset($this->password);
+    }
+
+    /**
+     * Exists value of email column and password column
+    **/
+    public function existsEmailAndPassword() : Bool
+    {
+        return $this->existsEmail() && $this->existsPassword();
+    }
 }

@@ -110,20 +110,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Logging Configuration
+    | WebSub verify token
     |--------------------------------------------------------------------------
     |
-    | Here you may configure the log settings for your application. Out of
-    | the box, Laravel uses the Monolog PHP logging library. This gives
-    | you a variety of powerful log handlers / formatters to utilize.
-    |
-    | Available Settings: "single", "daily", "syslog", "errorlog"
+    | This verify token used by WebSub controller.
     |
     */
 
-    'log' => env('APP_LOG', 'single'),
+    'isUseWebSubVerifyToken' => env('USE_WEBSUB_VERIFY_TOKEN', false),
 
-    'log_level' => env('APP_LOG_LEVEL', 'debug'),
+    'websubVerifyToken' => env('WEBSUB_VERIFY_TOKEN', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -167,15 +163,21 @@ return [
         /*
          * Package Service Providers...
          */
+        SocialiteProviders\Manager\ServiceProvider::class,
+        HTMLMin\HTMLMin\HTMLMinServiceProvider::class,
+        Kozz\Laravel\Providers\Guzzle::class,
+        Collective\Html\HtmlServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        //App\Providers\BroadcastServiceProvider::class,
+        App\Providers\ConfigServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\Blade\AliasProvider::class,
 
     ],
 
@@ -192,6 +194,9 @@ return [
 
     'aliases' => [
 
+        /*
+         * Laravel Framework Service Providers...
+         */
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -225,6 +230,15 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        /*
+         * Package Service Providers...
+         */
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class,
+        'Guzzle' => Kozz\Laravel\Facades\Guzzle::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        'Form' => Collective\Html\FormFacade::class,
 
     ],
 

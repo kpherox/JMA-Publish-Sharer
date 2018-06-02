@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema; //Import Schema
+use Illuminate\Pagination\AbstractPaginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Paginator support bootstrap 4
+        AbstractPaginator::defaultView('pagination::bootstrap-4');
+        AbstractPaginator::defaultSimpleView('pagination::simple-bootstrap-4');
     }
 }

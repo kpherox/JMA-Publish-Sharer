@@ -2,10 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
+    private $menus = [
+        'index' => [
+            'name' => 'Top Page',
+            'isCurrent' => false,
+        ],
+        'home.index' => [
+            'name' => 'Dashboard',
+            'isCurrent' => false,
+        ],
+        'home.accounts' => [
+            'name' => 'Social Accounts',
+            'isCurrent' => false,
+        ],
+    ];
+
     /**
      * Create a new controller instance.
      *
@@ -18,11 +33,43 @@ class HomeController extends Controller
 
     /**
      * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() : View
     {
-        return view('home');
+        $index = 'home.index';
+        $this->menus[$index]['isCurrent'] = true;
+        return view($index, ['menus' => $this->menus]);
+    }
+
+    /**
+     * Show the application linked accounts.
+     */
+    public function accounts() : View
+    {
+        $accounts = 'home.accounts';
+        $user = auth()->user();
+
+        $this->menus[$accounts]['isCurrent'] = true;
+        $providerName = collect(config('services.providers'));
+
+        $socialAccounts = $providerName->map(function($item, $key) use ($user) {
+            return $user->accounts->where('provider_name', $key)->map(function($account) {
+                return collect($account)->forget(['id', 'user_id', 'updated_at']);
+            });
+        });
+
+        $endpoints = $providerName->map(function($item, $key) {
+            return collect([
+                'unlink' => route($key.'.unlink')
+            ]);
+        });
+
+        return view($accounts, [
+            'menus' => $this->menus,
+            'socialAccounts' => $socialAccounts,
+            'providerName' => $providerName,
+            'endpoints' => $endpoints,
+            'existsEmail' => $user->existsEmailAndPassword() ? 1 : 0
+        ]);
     }
 }

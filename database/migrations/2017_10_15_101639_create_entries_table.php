@@ -22,7 +22,7 @@ class CreateEntriesTable extends Migration
             $table->string('headline');
             $table->string('url', 2048);
             $table->dateTimeTz('updated');
-            $table->timestamps();
+            $table->timestampsTz();
         });
     }
 
