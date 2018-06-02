@@ -51,19 +51,24 @@ class HomeController extends Controller
 
         $this->menus[$accounts]['isCurrent'] = true;
         $providerName = collect(config('services.providers'));
+
         $socialAccounts = $providerName->map(function($item, $key) use ($user) {
             return $user->accounts->where('provider_name', $key)->map(function($account) {
-                return collect($account)->forget(['id', 'user_id', 'created_at', 'updated_at']);
+                return collect($account)->forget(['id', 'user_id', 'updated_at']);
             });
+        });
+
+        $endpoints = $providerName->map(function($item, $key) {
+            return collect([
+                'unlink' => route($key.'.unlink')
+            ]);
         });
 
         return view($accounts, [
             'menus' => $this->menus,
             'socialAccounts' => $socialAccounts,
             'providerName' => $providerName,
-            'endpoints' => collect([
-                'unlink' => url('/')
-            ]),
+            'endpoints' => $endpoints,
             'existsEmail' => $user->existsEmailAndPassword() ? 1 : 0
         ]);
     }

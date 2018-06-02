@@ -18,7 +18,7 @@
                         <a class="d-flex list-group-item list-group-item-action" :class="{'disabled' : isShowing, 'active': accountIndex === index }"
                            v-for="(account, index) in accounts.{{ $provider }}" :key="account"
                            :href="'#'+account.provider_name+'-'+account.nickname"
-                           v-on:click.prevent="showAccountSettings('{{ route('index') }}', account, index)">
+                           v-on:click.prevent="showAccountSettings(account, index)">
                             <img class="rounded-circle social-avatar mr-2" :src="account.avatar" alt="{{ $provider }} @{{ account.name }} Icon" />
                             <div class="align-self-center">
                                 <p class="mb-0">@{{ account.name }}</p>
@@ -26,7 +26,7 @@
                             </div>
                         </a>
                     </transition-group>
-                    <a class="d-flex list-group-item list-group-item-action" :class="{'disabled' : isShowing}" href="{{ route($provider.'.linktouser') }}">
+                    <a class="d-flex list-group-item list-group-item-action" href="{{ route($provider.'.linktouser') }}">
                         <button type="button" class="btn btn-secondary btn-lg btn-add p-0 rounded-circle mr-2">＋</button>
                         <p class="align-self-center mb-1">
                             Link Account
@@ -43,7 +43,7 @@
         <account-settings v-if="isDisplay"
             csrf-token="{{ csrf_token() }}"
             :provider-name="{{ $providerName }}"
-            :endpoints="endpoints"
+            :endpoints="{{ $endpoints }}"
             :is-safe-unlink="isSafeUnlink"
             :accounts="accounts"
             v-on:update:accounts="updateList($event)"
@@ -53,19 +53,19 @@
     </transition>
     <script>
     mix = {
-        data: { endpoints: { unlink: '/' }, isSafeUnlink: false, existsEmail: {{ $existsEmail }}, isDisplay: false, isShowing: false, accounts: accounts, account: {}, accountIndex: -1 },
+        data: { isSafeUnlink: false, existsEmail: {{ $existsEmail }}, isDisplay: false, isShowing: false, accounts: accounts, account: {}, accountIndex: -1 },
         methods: {
-            showAccountSettings(unlinkEndpoint, account, accountIndex) {
+            showAccountSettings(account, accountIndex) {
                 if (this.isShowing) return;
 
                 let delay = this.isDisplay ? 500 : 0;
 
+                this.accountIndex = -1;
                 this.isShowing = true;
                 this.isDisplay = false;
 
                 setTimeout(() => {
                     this.checkSafeUnlink();
-                    this.endpoints.unlink = unlinkEndpoint;
                     this.account = account;
 
                     this.isDisplay = true;
