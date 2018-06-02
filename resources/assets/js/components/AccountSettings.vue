@@ -56,23 +56,15 @@
 <script>
     export default {
         props: {
-            csrfToken: {
-                type: String,
-                default: '',
+            csrfToken: String,
+            endpoints: Object,
+            isSafeUnlink: {
+                type: Boolean,
+                default: false,
             },
             providerName: {
                 type: Object,
                 default: {},
-            },
-            endpoints: {
-                type: Object,
-                default: {
-                    unlink: '',
-                },
-            },
-            isSafeUnlink: {
-                type: Boolean,
-                default: false,
             },
             accounts: {
                 type: Object,
@@ -89,14 +81,31 @@
         },
         methods: {
             unlinkAccount() {
-                console.log("Unlinked "+this.providerName[this.account.provider_name]+" / "+this.account.name)
-                if (this.accounts[this.account.provider_name].length < 2) {
-                    Vue.delete(this.accounts, this.account.provider_name)
-                } else {
-                    Vue.delete(this.accounts[this.account.provider_name], this.accountIndex)
-                }
-                this.$emit('update:accounts', accounts)
-                jQuery(() => $('#unlinkModal').modal('hide'))
+                let formData = this.params({
+                    'id': this.account.provider_id
+                })
+
+                axios.delete(this.endpoints[this.account.provider_name].unlink, { params: formData })
+                    .then((res) => {
+                        console.log(res.data)
+                        console.log("Unlinked "+this.providerName[this.account.provider_name]+" / "+this.account.name)
+                        if (this.accounts[this.account.provider_name].length < 2) {
+                            Vue.delete(this.accounts, this.account.provider_name)
+                        } else {
+                            Vue.delete(this.accounts[this.account.provider_name], this.accountIndex)
+                        }
+                        this.$emit('update:accounts', accounts)
+                        jQuery(() => $('#unlinkModal').modal('hide'))
+                    })
+                    .catch((e) => {
+                        console.log(e.response.data)
+                        //location.reload()
+                    })
+            },
+            params(formData) {
+                formData['_token'] = this.csrfToken
+
+                return formData
             }
         },
         mounted() {
