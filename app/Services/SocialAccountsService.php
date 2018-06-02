@@ -36,6 +36,21 @@ class SocialAccountsService
         return $user;
     }
 
+    public function deleteLinkedAccount(String $provider, Int $providerId) : String
+    {
+        $account = LinkedSocialAccount::where([
+            ['provider_name', $provider],
+            ['provider_id', $providerId],
+            ['user_id', auth()->id()]
+        ]);
+        if ($account->exists()) {
+            $account->delete();
+        } else {
+            throw new \Exception('Not found account');
+        }
+        return 'Success unlinked!';
+    }
+
     /**
      * Set ProviderUser property to LinkedSocialAccount columns
     **/

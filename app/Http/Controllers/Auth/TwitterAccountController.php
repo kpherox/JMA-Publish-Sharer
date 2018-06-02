@@ -31,7 +31,7 @@ class TwitterAccountController extends SocialAccountController
     }
 
     /**
-     * Link Twitter account for User account.
+     * Link Twitter account to User.
      */
     public function linkToUser() : RedirectResponse
     {

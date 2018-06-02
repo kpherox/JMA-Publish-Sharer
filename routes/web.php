@@ -17,15 +17,17 @@ Auth::routes();
 
 Route::namespace('Auth')->group(function() {
     Route::prefix('github')->name('github.')->group(function() {
+        Route::get('callback', 'GitHubAccountController@handleProviderCallback')->name('callback');
         Route::get('login', 'GitHubAccountController@redirectToProvider')->name('login')->middleware('guest');
         Route::get('linktouser', 'GitHubAccountController@linkToUser')->name('linktouser')->middleware('auth');
-        Route::get('callback', 'GitHubAccountController@handleProviderCallback')->name('callback');
+        Route::delete('unlink', 'GitHubAccountController@unlinkFromUser')->name('unlink')->middleware('auth');
     });
 
     Route::prefix('twitter')->name('twitter.')->group(function() {
+        Route::get('callback', 'TwitterAccountController@handleProviderCallback')->name('callback');
         Route::get('login', 'TwitterAccountController@redirectToProvider')->name('login')->middleware('guest');
         Route::get('linktouser', 'TwitterAccountController@linkToUser')->name('linktouser')->middleware('auth');
-        Route::get('callback', 'TwitterAccountController@handleProviderCallback')->name('callback');
+        Route::delete('unlink', 'TwitterAccountController@unlinkFromUser')->name('unlink')->middleware('auth');
     });
 });
 
