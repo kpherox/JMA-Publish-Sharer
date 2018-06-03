@@ -26,4 +26,12 @@ class Entry extends Model
     public function feed() {
         return $this->belongsTo('App\Eloquents\Feed', 'feed_uuid', 'uuid');
     }
+
+    /**
+     * Get route key.
+    **/
+    public function getRouteKeyName() : String
+    {
+        return 'uuid';
+    }
 }
