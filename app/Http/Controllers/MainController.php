@@ -43,4 +43,14 @@ class MainController extends Controller
         return response($entry->xml_document, 200)
                     ->header('Content-Type', 'application/xml');
     }
+
+    /**
+     * Entry json.
+    **/
+    public function entryJson(Entry $entry) : \Illuminate\Http\JsonResponse
+    {
+        return response()->json((new \App\Services\SimpleXML($entry->xml_document, true))->toArray(true, true),
+                                200, [], JSON_UNESCAPED_UNICODE);
+
+    }
 }
