@@ -13,6 +13,8 @@
 
 Route::get('/', 'MainController@index')->name('index');
 
+Route::get('entry/{entry}.xml', 'MainController@entryXml')->name('entry.xml');
+
 Auth::routes();
 
 Route::namespace('Auth')->group(function() {

@@ -34,4 +34,13 @@ class MainController extends Controller
                    'paginateLinks' => $paginateLinks,
                ]);
     }
+
+    /**
+     * Entry xml.
+    **/
+    public function entryXml(Entry $entry) : \Illuminate\Http\Response
+    {
+        return response($entry->xml_document, 200)
+                    ->header('Content-Type', 'application/xml');
+    }
 }
