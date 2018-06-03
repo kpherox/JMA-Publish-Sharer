@@ -4,7 +4,7 @@ namespace App\Providers\Blade;
 
 use Illuminate\Support\ServiceProvider;
 
-class AliasProvider extends ServiceProvider
+class ComponentAliasServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
@@ -15,15 +15,5 @@ class AliasProvider extends ServiceProvider
     {
         // Alias components/navbar-right.blade.php
         \Blade::component('components.navbar-right', 'navbarRight');
-    }
-
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
     }
 }

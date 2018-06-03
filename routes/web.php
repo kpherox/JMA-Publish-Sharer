@@ -16,6 +16,7 @@ Route::get('/', 'MainController@index')->name('index');
 Route::prefix('entry')->group(function() {
     Route::get('{entry}.xml', 'MainController@entryXml')->name('entry.xml');
     Route::get('{entry}.json', 'MainController@entryJson')->name('entry.json');
+    Route::get('{entry}', 'MainController@entry')->name('entry');
 });
 
 Auth::routes();

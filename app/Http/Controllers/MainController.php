@@ -37,6 +37,14 @@ class MainController extends Controller
     }
 
     /**
+     * Entry page.
+    **/
+    public function entry(Entry $entry) : \Illuminate\View\View
+    {
+        return view('entry', ['entry' => collect((new SimpleXML($entry->xml_document, true))->toArray(true, true))]);
+    }
+
+    /**
      * Entry xml.
     **/
     public function entryXml(Entry $entry) : \Illuminate\Http\Response

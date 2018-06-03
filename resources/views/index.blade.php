@@ -12,7 +12,7 @@
                     <h5 class="card-title">{{ $entry->headline['title'] }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ $entry->updated }} / {{ $entry->observatory_name }}</h6>
                     <p class="card-text">{{ $entry->headline['headline'] }}</p>
-                    <a class="card-link text-right" href="{{ route('entry.xml', ['uuid' => $entry->uuid]) }}" data-original-href="{{ $entry->url }}">More detail</a>
+                    <a class="card-link text-right" href="{{ route('entry', ['uuid' => $entry->uuid]) }}" data-original-href="{{ $entry->url }}">More detail</a>
                 </div>
             </div>
             @endforeach
