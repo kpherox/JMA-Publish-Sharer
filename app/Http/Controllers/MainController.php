@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Eloquents\Entry;
+use App\Services\SimpleXML;
 
 class MainController extends Controller
 {
@@ -49,7 +50,7 @@ class MainController extends Controller
     **/
     public function entryJson(Entry $entry) : \Illuminate\Http\JsonResponse
     {
-        return response()->json((new \App\Services\SimpleXML($entry->xml_document, true))->toArray(true, true),
+        return response()->json((new SimpleXML($entry->xml_document, true))->toArray(true, true),
                                 200, [], JSON_UNESCAPED_UNICODE);
 
     }

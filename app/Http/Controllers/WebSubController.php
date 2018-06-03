@@ -9,6 +9,7 @@ use GuzzleHttp\Promise;
 use GuzzleHttp\Psr7;
 use App\Eloquents\Feed;
 use App\Eloquents\Entry;
+use App\Services\SimpleXML;
 
 class WebSubController extends Controller
 {
@@ -56,26 +57,19 @@ class WebSubController extends Controller
             \Log::debug('Success check hub signature');
         }
 
-        libxml_use_internal_errors(true);
-        $feedXml = simplexml_load_string($content);
+        $simpleXml = new SimpleXML($content);
 
-        if (!$feedXml) {
-            $message = 'Feed parse error';
-            \Log::warning($message);
-
-            foreach(libxml_get_errors() as $error) {
-                \Log::warning(trim($error->message));
-            }
-
-            libxml_clear_errors();
-            abort(403, $message);
+        try {
+            $feed = $simpleXml->toArray(true, true);
+        } catch (\Exception $e) {
+            \Log::warning($e);
+            abort(403, $e);
         }
         \Log::debug('Success feed parse');
 
         $now = Carbon::now();
         $now->setTimezone(config('app.timezone'));
 
-        $feed = json_decode(json_encode($feedXml), true);
         $feedUuid = collect(explode(':', $feed['id']))->last();
         $feedUpdated = Carbon::parse($feed['updated']);
         $feedUpdated->setTimezone(config('app.timezone'));

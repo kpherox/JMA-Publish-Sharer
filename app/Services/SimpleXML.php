@@ -23,7 +23,20 @@ class SimpleXML
     public function toSimpleXMLElement(Bool $isExpandAttributes = false) : \SimpleXMLElement
     {
         $xml = $this->isNamespaced ? $this->removeNamespace($this->rawXml) : $this->rawXml;
+
+        libxml_use_internal_errors(true);
         $simpleXml = simplexml_load_string($xml);
+
+        if (!$simpleXml) {
+            $message = 'Feed parse error';
+
+            foreach(libxml_get_errors() as $error) {
+                $message .= "\n" . trim($error->message);
+            }
+            libxml_clear_errors();
+
+            throw new \Exception($message);
+        }
 
         if ($isExpandAttributes) {
             self::expandAttributes($simpleXml);
@@ -34,12 +47,23 @@ class SimpleXML
 
     public function toJson(Bool $isExpandAttributes = false) : String
     {
-        return json_encode($this->toSimpleXMLElement($isExpandAttributes));
+        try {
+            return json_encode($this->toSimpleXMLElement($isExpandAttributes));
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
-    public function toArray(Bool $isExpandAttributes = false, Bool $isAssoc = false) : Array
+    /**
+     * @return Array|Object
+    **/
+    public function toArray(Bool $isExpandAttributes = false, Bool $isAssoc = false)
     {
-        return json_decode($this->toJson($isExpandAttributes), $isAssoc);
+        try {
+            return json_decode($this->toJson($isExpandAttributes), $isAssoc);
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     /**
