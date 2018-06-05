@@ -12,8 +12,11 @@ class MainController extends Controller
     **/
     public function index() : \Illuminate\View\View
     {
-        $entries = Entry::select(['uuid', 'kind_of_info', 'observatory_name', 'headline', 'url', 'updated'])
+        $entries = Entry::select('observatory_name', 'headline', 'updated')
                         ->groupBy('observatory_name', 'headline', 'updated')
+                        ->groupConcat('uuid', null, true)
+                        ->groupConcat('kind_of_info', null, true)
+                        ->groupConcat('url', null, true)
                         ->orderBy('updated', 'desc')
                         ->simplePaginate(5);
 
@@ -22,10 +25,14 @@ class MainController extends Controller
         $entries = $entries->map(function($entry) {
             preg_match('/【(.*)】(.*)/', $entry->headline, $headline);
 
-            $entry->headline = [
+            $entry->headline = collect([
                 'title' => $headline[1],
                 'headline' => $headline[2],
-            ];
+            ]);
+
+            $entry->uuid = collect(explode(',', $entry->uuid));
+            $entry->kind_of_info = collect(explode(',', $entry->kind_of_info));
+            $entry->url = collect(explode(',', $entry->url));
 
             return $entry;
         });

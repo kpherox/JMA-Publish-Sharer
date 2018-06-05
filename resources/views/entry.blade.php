@@ -7,16 +7,16 @@
             <h5>Entry</h5>
             <div class="card">
                 <h5 class="card-header bg-transparent d-flex">
-                    <span class="mr-auto">{{ $entry['Head']['InfoKind'] }}</span>
-                    <a class="card-link" href="{{ route('entry.xml', ['uuid' => $entryUuid]) }}">Xml file</a>
-                    <a class="card-link" href="{{ route('entry.json', ['uuid' => $entryUuid]) }}">Json file</a>
+                    <span class="mr-auto text-truncate">{{ $entry['Control']['Title'] }}</span>
+                    <a class="card-link text-nowrap" href="{{ route('entry.xml', ['uuid' => $entryUuid]) }}">Xml file</a>
+                    <a class="card-link text-nowrap" href="{{ route('entry.json', ['uuid' => $entryUuid]) }}">Json file</a>
                 </h5>
 
                 <div class="card-body">
                     <h5 class="card-title">{{ $entry['Head']['Title'] }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">@datetime($entry['Head']['ReportDateTime']) / {{ $entry['Control']['PublishingOffice'] }}</h6>
                     @if (!empty($entry['Head']['Headline']['Text']))
-                        <p class="card-text px-1">{{ $entry['Head']['Headline']['Text'] }}</p>
+                    <p class="card-text px-1">{{ $entry['Head']['Headline']['Text'] }}</p>
                     @endif
                 </div>
             </div>
