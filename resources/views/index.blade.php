@@ -32,8 +32,8 @@
                             More details
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            @foreach ($entry->kind_of_info as $kind)
-                            <a class="dropdown-item" href="{{ route('entry', ['uuid' => $entry->uuid->first()]) }}" data-original-href="{{ $entry->url }}">
+                            @foreach ($entry->kind_of_info as $index => $kind)
+                            <a class="dropdown-item" href="{{ route('entry', ['uuid' => $entry->uuid[$index]]) }}" data-original-href="{{ $entry->url }}">
                                 {{ $kind }}
                             </a>
                             @endforeach

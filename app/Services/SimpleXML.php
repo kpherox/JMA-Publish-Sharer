@@ -28,7 +28,7 @@ class SimpleXML
         $simpleXml = simplexml_load_string($xml);
 
         if (!$simpleXml) {
-            $message = 'Feed parse error';
+            $message = 'XML Parse error';
 
             foreach(libxml_get_errors() as $error) {
                 $message .= "\n" . trim($error->message);

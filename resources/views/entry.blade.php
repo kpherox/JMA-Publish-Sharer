@@ -1,4 +1,5 @@
 @extends ('layouts.default')
+@section ('title', $entry['Head']['Title'])
 
 @section ('content')
 <div class="container">
