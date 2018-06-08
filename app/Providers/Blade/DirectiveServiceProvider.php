@@ -13,8 +13,13 @@ class DirectiveServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \Blade::directive('datetime', function ($time) {
-            return "<?php echo \Carbon\Carbon::parse($time); ?>";
+        \Blade::directive('datetime', function ($time, $timezone = null) {
+            $timezone = $timezone ?: 'config(\'app.timezone\')';
+            return "<?php
+\$carbon = \Carbon\Carbon::parse($time);
+\$carbon->setTimezone($timezone);
+echo \$carbon;
+?>";
         });
     }
 }
