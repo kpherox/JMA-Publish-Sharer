@@ -35,6 +35,16 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'googleapi' => [
+
+        'maps' => [
+            'js' => [
+                'key' => env('GOOGLE_MAPS_JS_API_KEY'),
+            ],
+        ],
+
+    ],
+
     'oauth1' => [
         'twitter',
     ],

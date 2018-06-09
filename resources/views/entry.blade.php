@@ -15,12 +15,15 @@
 
                 <div class="card-body">
                     <h5 class="card-title">{{ $entry['Head']['Title'] }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">@datetime($entry['Head']['ReportDateTime']) / {{ $entry['Control']['PublishingOffice'] }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">発信時刻: @datetime($entry['Control']['DateTime'])</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">発表機関: {{ $entry['Control']['PublishingOffice'] }}</h6>
                     @if (!empty($entry['Head']['Headline']['Text']))
                     <p class="card-text px-1">{{ $entry['Head']['Headline']['Text'] }}</p>
                     @endif
                 </div>
             </div>
+
+            @yield ('moredetails')
         </div>
     </div>
 </div>
