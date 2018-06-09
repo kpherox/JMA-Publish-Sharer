@@ -145,7 +145,7 @@ class WebSubTest extends TestCase
 
         $response
             ->assertForbidden()
-            ->assertSeeText('Feed parse error');
+            ->assertSeeText('XML Parse error');
     }
 
     /**
