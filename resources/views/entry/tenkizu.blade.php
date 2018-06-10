@@ -12,12 +12,20 @@
                     center: {lat: 36.59444, lng: 136.62556},
                     mapTypeId: 'terrain'
                 });
-                @json ($entry['Body']['MeteorologicalInfos']['MeteorologicalInfo']['Item']).forEach(item => {
-                    if (item.Kind.Property.Type === '\u7b49\u5727\u7dda') {
-                        drawPolyline(item.Kind.Property.IsobarPart.Line);
-                        return;
-                    }
-                });
+                let infos = @json ($entry['Body']['MeteorologicalInfos'])
+                  , infoItems = infos[0] ? null : infos.MeteorologicalInfo.Item
+                  , drawIsobar = async item => {
+                        if (item.Kind.Property.Type === '\u7b49\u5727\u7dda') {
+                            drawPolyline(item.Kind.Property.IsobarPart.Line);
+                            return;
+                        }
+                    };
+                if (infoItems !== null) {
+                    infoItems.forEach(drawIsobar);
+                    return;
+                }
+
+                Infos.forEach(info => info.MeteorologicalInfo.Item.forEach(drawIsobar));
             }
           , getPath = (vector) => {
                 return vector.split('/').filter(v => v).map(x => {
