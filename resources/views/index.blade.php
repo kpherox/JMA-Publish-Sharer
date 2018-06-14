@@ -4,7 +4,16 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-9 col-xl-8 p-3">
-            <h5>Entries</h5>
+            <header class="d-flex dropdown">
+                <h5 class="d-block mt-2 mb-4">Entries</h5>
+                <button class="btn page-link text-dark d-block align-self-start dropdown-toggle ml-auto" type="button" data-toggle="dropdown">{{ request()->query('kind') ?: 'Select Kind' }}</button>
+
+                <div class="dropdown-menu dropdown-menu-right" style="height: auto;max-height: 200px;overflow-x: hidden;">
+                    @foreach ($kindList as $kind)
+                    <a class="dropdown-item" href="{{ route('index', array_merge(request()->query(), ['kind' => $kind['kind']])) }}">{{ $kind['kind'] }} ({{ $kind['count'] }})</a>
+                    @endforeach
+                </div>
+            </header>
             {{ $paginateLinks }}
             @foreach ($entries as $entry)
             <div class="card">
@@ -25,7 +34,7 @@
                 <div class="card-footer bg-transparent d-flex border-light">
                     <span class="mr-auto"></span>
                     @if ($entry->uuid->count() === 1)
-                    <a class="card-link text-nowrap" href="{{ route('entry', ['uuid' => $entry->uuid->first()]) }}" data-original-href="{{ $entry->url->first() }}">More detail</a>
+                    <a class="card-link text-nowrap" href="{{ route('entry', ['uuid' => $entry->uuid->first()]) }}">More detail</a>
                     @else
                     <div class="dropdown">
                         <a class="card-link text-nowrap dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
@@ -33,7 +42,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             @foreach ($entry->kind_of_info as $index => $kind)
-                            <a class="dropdown-item" href="{{ route('entry', ['uuid' => $entry->uuid[$index]]) }}" data-original-href="{{ $entry->url }}">
+                            <a class="dropdown-item" href="{{ route('entry', ['uuid' => $entry->uuid[$index]]) }}">
                                 {{ $kind }}
                             </a>
                             @endforeach
