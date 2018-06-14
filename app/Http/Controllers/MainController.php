@@ -49,7 +49,7 @@ class MainController extends Controller
     public function entry(Entry $entry) : \Illuminate\View\View
     {
         $entryArray = collect((new SimpleXML($entry->xml_document, true))->toArray(true, true));
-        return view(config('jmaxmlkinds.view.'.$entryArray['Control']['Title'], 'entry'), [
+        return view(config('jmaxmlkinds.'.$entryArray['Control']['Title'].'.view', 'entry'), [
                     'entry' => $entryArray,
                     'entryUuid' => $entry->uuid,
                 ]);
