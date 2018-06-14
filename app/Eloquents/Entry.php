@@ -34,4 +34,16 @@ class Entry extends Model
     {
         return 'uuid';
     }
+
+    public function entryDetail() {
+        return $this->hasMany('App\Eloquents\EntryDetail');
+    }
+
+    public function getChildrenKindsAttribute() {
+        $res = [];
+        foreach ($this->entryDetail as $detail) {
+            $res[] = $detail->kind_of_info;
+        }
+        return collect($res);
+    }
 }
