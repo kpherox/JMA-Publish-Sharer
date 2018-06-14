@@ -18,7 +18,7 @@ class MainController extends Controller
         if ($kind) {
             $entry_ids = EntryDetail::select('entry_id')->where('kind_of_info', $kind)->groupBy('entry_id');
             $entry_ids = $entry_ids
-                ->simplePaginate(15)
+                ->paginate(15)
                 ->appends(['kind' => $kind]);
             $paginateLinks = $entry_ids->links();
             $simple_entry_ids = [];
@@ -29,7 +29,7 @@ class MainController extends Controller
         } else {
             $entries = Entry::orderBy('updated', 'desc');
             $entries = $entries
-                ->simplePaginate(15);
+                ->paginate(15);
             $paginateLinks = $entries->links();
         }
 
