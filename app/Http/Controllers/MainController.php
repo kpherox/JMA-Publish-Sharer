@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Eloquents\Entry;
+use App\Eloquents\EntryDetail;
 use App\Services\SimpleXML;
 
 class MainController extends Controller
@@ -14,49 +15,30 @@ class MainController extends Controller
     {
         $kind = (request()->has('kind') && collect(config('jmaxmlkinds'))->has(request()->query('kind'))) ? request()->query('kind') : null;
 
-        $entries = Entry::select('observatory_name', 'headline', 'updated')
-                        ->groupConcat('uuid', null, true)
-                        ->groupConcat('kind_of_info', null, true)
-                        ->orderBy('updated', 'desc')
-                        ->groupBy('observatory_name', 'headline', 'updated');
-
         if ($kind) {
-            $entries = $entries
-                ->havingRaw('(kind_of_info LIKE \''.$kind.'\' OR kind_of_info LIKE \'%,'.$kind.'\' OR kind_of_info LIKE \''.$kind.',%\' OR kind_of_info LIKE \'%,'.$kind.',%\')')
+            $entry_ids = EntryDetail::select('entry_id')->where('kind_of_info', $kind)->groupBy('entry_id');
+            $entry_ids = $entry_ids
                 ->simplePaginate(15)
                 ->appends(['kind' => $kind]);
+            $paginateLinks = $entry_ids->links();
+            $simple_entry_ids = [];
+            foreach ($entry_ids as $entry_id) {
+                $simple_entry_ids[] = $entry_id->entry_id;
+            }
+            $entries = Entry::find($simple_entry_ids);
         } else {
-            $entries = $entries->simplePaginate(15);
+            $entries = Entry::orderBy('updated', 'desc');
+            $entries = $entries
+                ->simplePaginate(15);
+            $paginateLinks = $entries->links();
         }
-
-
-        $paginateLinks = $entries->links();
 
         $kindOrder = collect(config('jmaxmlkinds'))->keys();
         $sortBaseKinds = function($a, $b) use($kindOrder) {
             return ($kindOrder->search($a) > $kindOrder->search($b));
         };
 
-        $entries = $entries->map(function($entry) use($sortBaseKinds) {
-            preg_match('/【(.*)】(.*)/', $entry->headline, $headline);
-
-            $entry->headline = collect([
-                'title' => $headline[1],
-                'headline' => $headline[2],
-            ]);
-
-            $kind = collect(explode(',', $entry->kind_of_info));
-            $kindWithUuid = collect(explode(',', $entry->uuid))
-                    ->combine($kind)
-                    ->sort($sortBaseKinds);
-
-            $entry->uuid = $kindWithUuid->keys();
-            $entry->kind_of_info = $kindWithUuid->values();
-
-            return $entry;
-        });
-
-        $kindList = Entry::select('kind_of_info')
+        $kindList = EntryDetail::select('kind_of_info')
                         ->selectRaw('count(*) as kind_count')
                         ->groupBy('kind_of_info')
                         ->get()
@@ -79,8 +61,9 @@ class MainController extends Controller
     /**
      * Entry page.
     **/
-    public function entry(Entry $entry) : \Illuminate\View\View
+    public function entry($entry) : \Illuminate\View\View
     {
+        $entry = EntryDetail::select('xml_document', 'uuid')->where('uuid', $entry)->first();
         $entryArray = collect((new SimpleXML($entry->xml_document, true))->toArray(true, true));
         return view(config('jmaxmlkinds.'.$entryArray['Control']['Title'].'.view', 'entry'), [
                     'entry' => $entryArray,
@@ -91,8 +74,9 @@ class MainController extends Controller
     /**
      * Entry xml.
     **/
-    public function entryXml(Entry $entry) : \Illuminate\Http\Response
+    public function entryXml($entry) : \Illuminate\Http\Response
     {
+        $entry = EntryDetail::select('xml_document')->where('uuid', $entry)->first();
         return response($entry->xml_document, 200)
                     ->header('Content-Type', 'application/xml');
     }
@@ -100,8 +84,9 @@ class MainController extends Controller
     /**
      * Entry json.
     **/
-    public function entryJson(Entry $entry) : \Illuminate\Http\JsonResponse
+    public function entryJson($entry) : \Illuminate\Http\JsonResponse
     {
+        $entry = EntryDetail::select('xml_document')->where('uuid', $entry)->first();
         return response()->json((new SimpleXML($entry->xml_document, true))->toArray(true, true),
                                 200, [], JSON_UNESCAPED_UNICODE);
     }
