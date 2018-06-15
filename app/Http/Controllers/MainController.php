@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Eloquents\Entry;
 use App\Eloquents\EntryDetail;
 use App\Services\SimpleXML;
+use Storage;
 
 class MainController extends Controller
 {
@@ -63,8 +64,8 @@ class MainController extends Controller
     **/
     public function entry($entry) : \Illuminate\View\View
     {
-        $entry = EntryDetail::select('xml_document', 'uuid')->where('uuid', $entry)->first();
-        $entryArray = collect((new SimpleXML($entry->xml_document, true))->toArray(true, true));
+        $doc = Storage::get('entry', $entry);
+        $entryArray = collect((new SimpleXML($doc, true))->toArray(true, true));
         return view(config('jmaxmlkinds.'.$entryArray['Control']['Title'].'.view', 'entry'), [
                     'entry' => $entryArray,
                     'entryUuid' => $entry->uuid,
@@ -76,8 +77,8 @@ class MainController extends Controller
     **/
     public function entryXml($entry) : \Illuminate\Http\Response
     {
-        $entry = EntryDetail::select('xml_document')->where('uuid', $entry)->first();
-        return response($entry->xml_document, 200)
+        $doc = Storage::get('entry', $entry);
+        return response($doc, 200)
                     ->header('Content-Type', 'application/xml');
     }
 
@@ -86,8 +87,8 @@ class MainController extends Controller
     **/
     public function entryJson($entry) : \Illuminate\Http\JsonResponse
     {
-        $entry = EntryDetail::select('xml_document')->where('uuid', $entry)->first();
-        return response()->json((new SimpleXML($entry->xml_document, true))->toArray(true, true),
+        $doc = Storage::get('entry', $entry);
+        return response()->json((new SimpleXML($doc, true))->toArray(true, true),
                                 200, [], JSON_UNESCAPED_UNICODE);
     }
 }
