@@ -76,7 +76,7 @@ class WebSubHandler
     /**
      * Save feed.
     **/
-    public static function saveFeed(String $feedUuid, Array $feed = null)
+    private static function saveFeed(String $feedUuid, Array $feed = null)
     {
         $feedUuid = collect(explode(':', $feed['id']))->last();
 
@@ -100,7 +100,7 @@ class WebSubHandler
     /**
      * Save entries.
     **/
-    public static function saveEntries(String $feedUuid, Array $entries = null)
+    private static function saveEntries(String $feedUuid, Array $entries = null)
     {
         if (Arr::isAssoc($entries)) {
             $entries = [$entries];
