@@ -11,6 +11,7 @@ use App\Eloquents\Feed;
 use App\Eloquents\Entry;
 use App\Eloquents\EntryDetail;
 use App\Services\SimpleXML;
+use Storage;
 
 class WebSubController extends Controller
 {
@@ -140,6 +141,7 @@ class WebSubController extends Controller
 
             if ($result->getReasonPhrase() === 'OK') {
                 $xmlDoc = $result->getBody()->getContents();
+                Storage::put('entry/'.$key, $xmlDoc);
                 $entryArray['xml_document'] = $xmlDoc;
             }
 
