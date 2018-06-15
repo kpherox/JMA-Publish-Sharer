@@ -6,11 +6,12 @@
         <div class="col-lg-9 col-xl-8 p-3">
             <header class="d-flex dropdown">
                 <h5 class="d-block mt-2 mb-4">Entries</h5>
-                <button class="btn page-link text-dark d-block align-self-start dropdown-toggle ml-auto" type="button" data-toggle="dropdown">{{ request()->query('kind') ?: 'Select Kind' }}</button>
+                <button class="btn page-link text-dark d-block align-self-start dropdown-toggle ml-auto" type="button" data-toggle="dropdown">{{ $queries->get('kind') ?: 'Select Kind' }}</button>
 
                 <div class="dropdown-menu dropdown-menu-right" style="height: auto;max-height: 200px;overflow-x: hidden;">
+                    <a class="dropdown-item" href="{{ route('index', $queries->forget('kind')->all()) }}">Select Kind</a>
                     @foreach ($kindList as $kind)
-                    <a class="dropdown-item" href="{{ route('index', array_merge(request()->query(), ['kind' => $kind['kind']])) }}">{{ $kind['kind'] }} ({{ $kind['count'] }})</a>
+                    <a class="dropdown-item" href="{{ route('index', $queries->merge(['kind' => $kind['kind']])->all()) }}">{{ $kind['kind'] }} ({{ $kind['count'] }})</a>
                     @endforeach
                 </div>
             </header>
