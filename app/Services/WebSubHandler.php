@@ -117,33 +117,22 @@ class WebSubHandler
         foreach ($entries as $entry) {
             $parseedEntry = self::parseEntry($entry);
 
-            $promises[$parseedEntry['uuid']] = $parseedEntry['promise'];
+            $entryUuid = $parseedEntry['uuid'];
+
+            $promises[$entryUuid] = $parseedEntry['promise'];
 
             $entryArray = $parseedEntry['entry'];
             $entryArray['feed_uuid'] = $feedUuid;
-            $entryArrays[$parseedEntry['uuid']] = $entryArray;
+            $entryArray['created_at'] = $now;
+            $entryArray['updated_at'] = $now;
+            $entryArrays[$entryUuid] = $entryArray;
         }
 
-        foreach (Promise\settle($promises)->wait() as $key => $obj) {
-            switch ($obj['state']) {
-                case 'fulfilled':
-                    $results[$key] = $obj['value'];
-                    break;
-                case 'rejected':
-                    $results[$key] = new Psr7\Response($obj['reason']->getCode());
-                    break;
-                default:
-                    $results[$key] = new Psr7\Response(0);
-                    break;
-            }
-        }
+        $results = self::fetchXmlDocument($promises);
 
         $entryRecords = [];
         foreach ($results as $key => $result) {
             $entryArray = $entryArrays[$key];
-            $entryArray['uuid'] = $key;
-            $entryArray['created_at'] = $now;
-            $entryArray['updated_at'] = $now;
 
             if ($result->getReasonPhrase() === 'OK') {
                 $xmlDoc = $result->getBody()->getContents();
@@ -161,15 +150,18 @@ class WebSubHandler
     **/
     private static function parseEntry(Array $entry = null) : Array
     {
+        $entryUuid = collect(explode(':', $entry['id']))->last();
+
         $updated = Carbon::parse($entry['updated']);
         $updated->setTimezone(config('app.timezone'));
 
         $url = $entry['link']['@attributes']['href'];
 
         return [
-            'uuid' => collect(explode(':', $entry['id']))->last(),
+            'uuid' => $entryUuid,
             'promise' => \Guzzle::getAsync($url),
             'entry' => [
+                'uuid' => $entryUuid,
                 'kind_of_info' => $entry['title'],
                 'observatory_name' => collect($entry['author'])->get('name'),
                 'headline' => $entry['content'],
@@ -177,5 +169,29 @@ class WebSubHandler
                 'updated' => $updated,
             ],
         ];
+    }
+
+    /**
+     * Fetch xml document from JMA.
+    **/
+    private static function fetchXmlDocument(Array $promises) : Array
+    {
+        $results = [];
+
+        foreach (Promise\settle($promises)->wait() as $key => $obj) {
+            switch ($obj['state']) {
+                case 'fulfilled':
+                    $results[$key] = $obj['value'];
+                    break;
+                case 'rejected':
+                    $results[$key] = new Psr7\Response($obj['reason']->getCode());
+                    break;
+                default:
+                    $results[$key] = new Psr7\Response(0);
+                    break;
+            }
+        }
+
+        return $results;
     }
 }
