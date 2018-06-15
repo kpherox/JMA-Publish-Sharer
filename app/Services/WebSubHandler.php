@@ -2,6 +2,13 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Arr;
+use Carbon\Carbon;
+use GuzzleHttp\Promise;
+use GuzzleHttp\Psr7;
+use App\Eloquents\Feed;
+use App\Eloquents\Entry;
+
 class WebSubHandler
 {
     /**
@@ -53,5 +60,122 @@ class WebSubHandler
         }
 
         return true;
+    }
+
+    /**
+     * Save feed and entries.
+    **/
+    public static function saveFeedAndEntries(Array $feed = null)
+    {
+        $feedUuid = collect(explode(':', $feed['id']))->last();
+
+        WebSubHandler::saveFeed($feedUuid, $feed);
+        WebSubHandler::saveEntries($feedUuid, $feed['entry']);
+    }
+
+    /**
+     * Save feed.
+    **/
+    public static function saveFeed(String $feedUuid, Array $feed = null)
+    {
+        $feedUuid = collect(explode(':', $feed['id']))->last();
+
+        $feeds = Feed::firstOrNew(['uuid' => $feedUuid]);
+
+        $feedUpdated = Carbon::parse($feed['updated']);
+        $feedUpdated->setTimezone(config('app.timezone'));
+
+        $feeds->updated = $feedUpdated;
+
+        $links = collect($feed['link'])
+                    ->map(function($item) {return $item['@attributes'];})
+                    ->pluck('href', 'rel');
+        $feedUrl = $links['self'];
+
+        $feeds->url = $feedUrl;
+
+        $feeds->save();
+    }
+
+    /**
+     * Save entries.
+    **/
+    public static function saveEntries(String $feedUuid, Array $entries = null)
+    {
+        if (Arr::isAssoc($entries)) {
+            $entries = [$entries];
+        }
+
+        $now = Carbon::now();
+        $now->setTimezone(config('app.timezone'));
+
+        // Fetch JMA xml
+        $entryArrays = [];
+        $promises = [];
+        $results  = [];
+
+        foreach ($entries as $entry) {
+            $parseedEntry = self::parseEntry($entry);
+
+            $promises[$parseedEntry['uuid']] = $parseedEntry['promise'];
+
+            $entryArray = $parseedEntry['entry'];
+            $entryArray['feed_uuid'] = $feedUuid;
+            $entryArrays[$parseedEntry['uuid']] = $entryArray;
+        }
+
+        foreach (Promise\settle($promises)->wait() as $key => $obj) {
+            switch ($obj['state']) {
+                case 'fulfilled':
+                    $results[$key] = $obj['value'];
+                    break;
+                case 'rejected':
+                    $results[$key] = new Psr7\Response($obj['reason']->getCode());
+                    break;
+                default:
+                    $results[$key] = new Psr7\Response(0);
+                    break;
+            }
+        }
+
+        $entryRecords = [];
+        foreach ($results as $key => $result) {
+            $entryArray = $entryArrays[$key];
+            $entryArray['uuid'] = $key;
+            $entryArray['created_at'] = $now;
+            $entryArray['updated_at'] = $now;
+
+            if ($result->getReasonPhrase() === 'OK') {
+                $xmlDoc = $result->getBody()->getContents();
+                $entryArray['xml_document'] = $xmlDoc;
+            }
+
+            $entryRecords[] = $entryArray;
+        }
+
+        Entry::insert($entryRecords);
+    }
+
+    /**
+     * Parse entry.
+    **/
+    private static function parseEntry(Array $entry = null) : Array
+    {
+        $updated = Carbon::parse($entry['updated']);
+        $updated->setTimezone(config('app.timezone'));
+
+        $url = $entry['link']['@attributes']['href'];
+
+        return [
+            'uuid' => collect(explode(':', $entry['id']))->last(),
+            'promise' => \Guzzle::getAsync($url),
+            'entry' => [
+                'kind_of_info' => $entry['title'],
+                'observatory_name' => collect($entry['author'])->get('name'),
+                'headline' => $entry['content'],
+                'url' => $url,
+                'updated' => $updated,
+            ],
+        ];
     }
 }
