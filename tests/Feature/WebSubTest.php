@@ -164,7 +164,7 @@ class WebSubTest extends TestCase
 
         $response
             ->assertForbidden()
-            ->assertSeeText('Invalid hub signature');
+            ->assertSeeText('Invalid signature');
     }
 
     /**
@@ -183,7 +183,7 @@ class WebSubTest extends TestCase
 
         $response
             ->assertForbidden()
-            ->assertSeeText('Invalid x-hub-signature header');
+            ->assertSeeText('Invalid hubSignature');
     }
 
     /**
@@ -264,11 +264,13 @@ class WebSubTest extends TestCase
      *
      * @return void
      */
-    public function testSubscribeCheckNotFound()
+    public function testSubscribeCheckNotExistMode()
     {
         $response = $this->call('GET', self::$websubEndpoint, $this->getParameters(''), [], [], $this->getHeaders());
 
-        $response->assertNotFound();
+        $response
+            ->assertForbidden()
+            ->assertSeeText('Not exist hub.mode');
     }
 
 }

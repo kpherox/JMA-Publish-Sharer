@@ -10,6 +10,7 @@ use GuzzleHttp\Promise;
 use GuzzleHttp\Psr7;
 use App\Eloquents\Feed;
 use App\Eloquents\Entry;
+use App\Services\WebSubHandler;
 
 class WebSubController extends Controller
 {
@@ -19,19 +20,15 @@ class WebSubController extends Controller
     public function subscribeCheck(Request $request) : Response
     {
         // Subscribe check
-        $hubMode = $request->hub_mode;
-        abort_if($hubMode != 'subscribe' && $hubMode != 'unsubscribe', 404);
-
-        if (config('app.isUseWebSubVerifyToken')) {
-            $hubVerifyToken = $request->hub_verify_token;
-            abort_if(empty($hubVerifyToken), 403, 'Not exist hub.verify_token');
-            abort_if($hubVerifyToken != config('app.websubVerifyToken'), 403, 'Incorrect hub.verify_token');
+        try {
+            WebSubHandler::verifyToken($request->hub_mode, $request->hub_verify_token);
+            \Log::info('Success subscribe check');
+        } catch (\Exception $e) {
+            \Log::info('Failed subscribe check');
+            abort(403, $e->getMessage());
         }
-        $hubChallenge = $request->hub_challenge;
-        \Log::notice($hubMode);
-        \Log::info('Success subscribe check');
 
-        return response($hubChallenge, 200)->header('Content-Type', 'text/plain');
+        return response($request->hub_challenge, 200)->header('Content-Type', 'text/plain');
     }
 
     /**
@@ -44,17 +41,11 @@ class WebSubController extends Controller
         // Xml parse
         $content = $request->getContent();
 
-        if (config('app.isUseWebSubVerifyToken')) {
-            $hubSignature = $request->header('x-hub-signature');
-            abort_if(empty($hubSignature), 403, 'Not exist x-hub-signature header');
-
-            $signature = collect(explode('=',$hubSignature));
-            abort_if($signature->count() !== 2, 403, 'Invalid x-hub-signature header');
-
-            $hash = hash_hmac($signature->first(),$content,config('app.websubVerifyToken'));
-            abort_if($signature->last() !== $hash, 403, 'Invalid hub signature');
-
+        try {
+            WebSubHandler::verifySignature($content, $request->header('x-hub-signature'));
             \Log::debug('Success check hub signature');
+        } catch (\Exception $e) {
+            abort(403, $e->getMessage());
         }
 
         libxml_use_internal_errors(true);
