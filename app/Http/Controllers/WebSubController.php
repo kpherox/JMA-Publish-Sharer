@@ -9,6 +9,7 @@ use GuzzleHttp\Promise;
 use GuzzleHttp\Psr7;
 use App\Eloquents\Feed;
 use App\Eloquents\Entry;
+use App\Eloquents\EntryDetail;
 use App\Services\SimpleXML;
 
 class WebSubController extends Controller
@@ -103,14 +104,17 @@ class WebSubController extends Controller
             $url = $entry['link']['@attributes']['href'];
 
             $promises[$entryUuid] = \Guzzle::getAsync($url);
-
-            $entryArrays[$entryUuid] = [
-                'kind_of_info' => $kindOfInfo,
-                'feed_uuid' => $feedUuid,
+            $entry = Entry::first_or_create([
                 'observatory_name' => $observatory,
                 'headline' => $headline,
-                'url' => $url,
                 'updated' => $updated,
+            ]);
+
+            $entryArrays[$entryUuid] = [
+                'entry_id' => $entry->id,
+                'kind_of_info' => $kindOfInfo,
+                'feed_uuid' => $feedUuid,
+                'url' => $url,
             ];
         }
 
@@ -142,7 +146,7 @@ class WebSubController extends Controller
             $entryRecords[] = $entryArray;
         }
 
-        $entries = Entry::insert($entryRecords);
+        $entries = EntryDetail::insert($entryRecords);
     }
 }
 
