@@ -68,7 +68,7 @@ class MainController extends Controller
         $entryArray = collect((new SimpleXML($doc, true))->toArray(true, true));
         return view(config('jmaxmlkinds.'.$entryArray['Control']['Title'].'.view', 'entry'), [
                     'entry' => $entryArray,
-                    'entryUuid' => $entry->uuid,
+                    'entryUuid' => $entry,
                 ]);
     }
 
