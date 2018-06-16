@@ -142,7 +142,6 @@ class WebSubController extends Controller
             if ($result->getReasonPhrase() === 'OK') {
                 $xmlDoc = $result->getBody()->getContents();
                 Storage::put('entry/'.$key, $xmlDoc);
-                $entryArray['xml_document'] = $xmlDoc;
             }
 
             $entryRecords[] = $entryArray;
