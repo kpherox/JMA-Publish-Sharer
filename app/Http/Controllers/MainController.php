@@ -64,7 +64,7 @@ class MainController extends Controller
     **/
     public function entry($entry) : \Illuminate\View\View
     {
-        $doc = Storage::get('entry', $entry);
+        $doc = Storage::get('entry/'.$entry);
         $entryArray = collect((new SimpleXML($doc, true))->toArray(true, true));
         return view(config('jmaxmlkinds.'.$entryArray['Control']['Title'].'.view', 'entry'), [
                     'entry' => $entryArray,
@@ -77,7 +77,7 @@ class MainController extends Controller
     **/
     public function entryXml($entry) : \Illuminate\Http\Response
     {
-        $doc = Storage::get('entry', $entry);
+        $doc = Storage::get('entry/'.$entry);
         return response($doc, 200)
                     ->header('Content-Type', 'application/xml');
     }
@@ -87,7 +87,7 @@ class MainController extends Controller
     **/
     public function entryJson($entry) : \Illuminate\Http\JsonResponse
     {
-        $doc = Storage::get('entry', $entry);
+        $doc = Storage::get('entry/'.$entry);
         return response()->json((new SimpleXML($doc, true))->toArray(true, true),
                                 200, [], JSON_UNESCAPED_UNICODE);
     }
