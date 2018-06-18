@@ -24,8 +24,6 @@ class Feed extends Model
      */
     protected $hidden = [];
 
-    protected $primaryKey = 'uuid';
-
     // Relation entries
     public function entries() {
         return $this->hasMany('App\Eloquents\Entry', 'feed_uuid', 'uuid');

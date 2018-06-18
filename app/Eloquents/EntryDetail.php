@@ -18,10 +18,13 @@ class EntryDetail extends Model
         'xml_document',
     ];
 
-    protected $primaryKey = 'uuid';
-
     public function entry()
     {
         return $this->belongsTo('App\Eloquents\Entry');
+    }
+
+    public function getRouteKeyName() : String
+    {
+        return 'uuid';
     }
 }
