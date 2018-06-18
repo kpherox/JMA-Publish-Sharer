@@ -15,6 +15,7 @@
 
                 <div class="card-body">
                     <h5 class="card-title">{{ $entry['Head']['Title'] }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">分類種別: {{ $feedType->type }}</h6>
                     <h6 class="card-subtitle mb-2 text-muted">発信時刻: @datetime($entry['Control']['DateTime'])</h6>
                     <h6 class="card-subtitle mb-2 text-muted">発表機関: {{ $entry['Control']['PublishingOffice'] }}</h6>
                     @if (!empty($entry['Head']['Headline']['Text']))

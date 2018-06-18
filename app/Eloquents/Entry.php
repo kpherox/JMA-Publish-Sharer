@@ -12,7 +12,10 @@ class Entry extends Model
      * @var array
      */
     protected $fillable = [
-        'uuid', 'kind_of_info', 'feed_uuid', 'observatory_name', 'headline', 'url', 'updated',
+        'feed_uuid',
+        'observatory_name',
+        'headline',
+        'updated',
     ];
 
     /**
@@ -25,14 +28,6 @@ class Entry extends Model
     // Relation feed
     public function feed() {
         return $this->belongsTo('App\Eloquents\Feed', 'feed_uuid', 'uuid');
-    }
-
-    /**
-     * Get route key.
-    **/
-    public function getRouteKeyName() : String
-    {
-        return 'uuid';
     }
 
     public function entryDetail()

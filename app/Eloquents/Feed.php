@@ -12,7 +12,9 @@ class Feed extends Model
      * @var array
      */
     protected $fillable = [
-        'uuid', 'url', 'updated',
+        'uuid',
+        'url',
+        'updated',
     ];
 
     /**
@@ -22,9 +24,16 @@ class Feed extends Model
      */
     protected $hidden = [];
 
+    protected $primaryKey = 'uuid';
+
     // Relation entries
     public function entries() {
         return $this->hasMany('App\Eloquents\Entry', 'feed_uuid', 'uuid');
+    }
+
+    public function getTypeAttribute()
+    {
+        return basename(parse_url($this->url, PHP_URL_PATH), '.xml');
     }
 }
 

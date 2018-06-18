@@ -9,7 +9,6 @@ class EntryDetail extends Model
     protected $fillable = [
         'entry_id',
         'kind_of_info',
-        'feed_uuid',
         'url',
         'uuid',
         'xml_document',
@@ -18,6 +17,8 @@ class EntryDetail extends Model
     protected $hidden = [
         'xml_document',
     ];
+
+    protected $primaryKey = 'uuid';
 
     public function entry()
     {

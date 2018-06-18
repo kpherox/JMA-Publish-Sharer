@@ -81,7 +81,7 @@ class WebSubController extends Controller
         $feedUrl = $links['self'];
         $feeds = Feed::firstOrNew([
             'uuid' => $feedUuid,
-            'url' => $feedUrl
+            'url' => $feedUrl,
         ]);
         $feeds->updated = $feedUpdated;
         $feeds->save();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Eloquents\Entry;
 use App\Eloquents\EntryDetail;
+use App\Eloquents\Feed;
 use App\Services\SimpleXML;
 use Storage;
 
@@ -62,10 +63,13 @@ class MainController extends Controller
     public function entry($entry) : \Illuminate\View\View
     {
         $doc = Storage::get('entry/'.$entry);
+        $feedUuid = EntryDetail::find($entry)->entry->feed_uuid;
+        $feedType = Feed::find($feedUuid);
         $entryArray = collect((new SimpleXML($doc, true))->toArray(true, true));
         return view(config('jmaxmlkinds.'.$entryArray['Control']['Title'].'.view', 'entry'), [
                     'entry' => $entryArray,
                     'entryUuid' => $entry,
+                    'feedType' => $feedType,
                 ]);
     }
 
