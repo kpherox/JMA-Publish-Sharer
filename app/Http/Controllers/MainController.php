@@ -75,9 +75,9 @@ class MainController extends Controller
     /**
      * Entry xml.
     **/
-    public function entryXml($entry) : \Illuminate\Http\Response
+    public function entryXml($uuid) : \Illuminate\Http\Response
     {
-        $doc = Storage::get('entry/'.$entry);
+        $doc = Storage::get('entry/'.$uuid);
         return response($doc, 200)
                     ->header('Content-Type', 'application/xml');
     }
@@ -85,9 +85,9 @@ class MainController extends Controller
     /**
      * Entry json.
     **/
-    public function entryJson($entry) : \Illuminate\Http\JsonResponse
+    public function entryJson($uuid) : \Illuminate\Http\JsonResponse
     {
-        $doc = Storage::get('entry/'.$entry);
+        $doc = Storage::get('entry/'.$uuid);
         return response()->json((new SimpleXML($doc, true))->toArray(true, true),
                                 200, [], JSON_UNESCAPED_UNICODE);
     }
