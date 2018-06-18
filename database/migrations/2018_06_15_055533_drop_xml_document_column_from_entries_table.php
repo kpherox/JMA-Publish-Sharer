@@ -26,7 +26,7 @@ class DropXmlDocumentColumnFromEntriesTable extends Migration
     public function down()
     {
         Schema::table('entries', function (Blueprint $table) {
-            $table->mediumText('xml_document')->nullable()->after('url');
+            $table->mediumText('xml_document')->nullable();
         });
     }
 }
