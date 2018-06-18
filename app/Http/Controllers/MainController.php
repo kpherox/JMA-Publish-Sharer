@@ -35,9 +35,6 @@ class MainController extends Controller
         }
 
         $kindOrder = collect(config('jmaxmlkinds'))->keys();
-        $sortBaseKinds = function($a, $b) use($kindOrder) {
-            return ($kindOrder->search($a) > $kindOrder->search($b));
-        };
 
         $kindList = EntryDetail::select('kind_of_info')
                         ->selectRaw('count(*) as kind_count')
@@ -48,8 +45,8 @@ class MainController extends Controller
                                 'count' => $entry->kind_count,
                                 'kind' => $entry->kind_of_info
                             ];
-                        })->sort(function($a, $b) use($sortBaseKinds) {
-                            return $sortBaseKinds($a['kind'], $b['kind']);
+                        })->sort(function($a, $b) use($kindOrder) {
+                            return $kindOrder->search($a['kind']) > $kindOrder->search($b['kind']);
                         });
 
         return view('index', [

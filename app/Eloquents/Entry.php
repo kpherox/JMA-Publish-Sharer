@@ -56,6 +56,12 @@ class Entry extends Model
         foreach ($this->entryDetail as $detail) {
             $res[] = $detail->kind_of_info;
         }
-        return collect($res);
+
+        $kindOrder = collect(config('jmaxmlkinds'))->keys();
+
+        return collect($res)
+            ->sort(function($a, $b) use($kindOrder) {
+                return ($kindOrder->search($a) > $kindOrder->search($b));
+            });
     }
 }
