@@ -109,12 +109,12 @@ class WebSubController extends Controller
                 'observatory_name' => $observatory,
                 'headline' => $headline,
                 'updated' => $updated,
+                'feed_uuid' => $feedUuid,
             ]);
 
             $entryArrays[$entryUuid] = [
                 'entry_id' => $entry->id,
                 'kind_of_info' => $kindOfInfo,
-                'feed_uuid' => $feedUuid,
                 'url' => $url,
             ];
         }
