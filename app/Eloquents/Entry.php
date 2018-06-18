@@ -35,11 +35,23 @@ class Entry extends Model
         return 'uuid';
     }
 
-    public function entryDetail() {
+    public function entryDetail()
+    {
         return $this->hasMany('App\Eloquents\EntryDetail');
     }
 
-    public function getChildrenKindsAttribute() {
+    public function getParsedHeadlineAttribute()
+    {
+        preg_match('/【(.*)】(.*)/', $this->headline, $headline);
+        return collect([
+            'original' => $headline[0],
+            'title' => $headline[1],
+            'headline' => $headline[2],
+        ]);
+    }
+
+    public function getChildrenKindsAttribute()
+    {
         $res = [];
         foreach ($this->entryDetail as $detail) {
             $res[] = $detail->kind_of_info;
