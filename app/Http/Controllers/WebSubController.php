@@ -105,7 +105,7 @@ class WebSubController extends Controller
             $url = $entry['link']['@attributes']['href'];
 
             $promises[$entryUuid] = \Guzzle::getAsync($url);
-            $entry = Entry::first_or_create([
+            $entry = Entry::firstOrCreate([
                 'observatory_name' => $observatory,
                 'headline' => $headline,
                 'updated' => $updated,
