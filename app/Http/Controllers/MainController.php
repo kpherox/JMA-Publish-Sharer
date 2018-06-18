@@ -40,13 +40,12 @@ class MainController extends Controller
                         ->selectRaw('count(*) as kind_count')
                         ->groupBy('kind_of_info')
                         ->get()
+                        ->sortByKind()
                         ->map(function ($entry) {
                             return [
                                 'count' => $entry->kind_count,
                                 'kind' => $entry->kind_of_info
                             ];
-                        })->sort(function($a, $b) use($kindOrder) {
-                            return $kindOrder->search($a['kind']) > $kindOrder->search($b['kind']);
                         });
 
         return view('index', [
