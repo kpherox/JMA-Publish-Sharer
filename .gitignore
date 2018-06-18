@@ -28,3 +28,4 @@ Homestead.yaml
 # Coverage directory used by tools like istanbul
 /coverage
 
+/tests/sampleData
