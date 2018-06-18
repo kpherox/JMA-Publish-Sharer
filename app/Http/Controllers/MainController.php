@@ -56,6 +56,7 @@ class MainController extends Controller
                    'entries' => $entries,
                    'kindList' => $kindList,
                    'paginateLinks' => $paginateLinks,
+                   'queries' => collect(request()->query()),
                ]);
     }
 
