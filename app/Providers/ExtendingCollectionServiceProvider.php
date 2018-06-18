@@ -15,9 +15,17 @@ class ExtendingCollectionServiceProvider extends ServiceProvider
     public function boot()
     {
         Collection::macro('sortByKind', function () {
-            $kindOrder = collect(config('jmaxmlkinds'))->keys();
-            return $this->sort(function ($a, $b) use($kindOrder) {
+            $kindOrder = collect(config('jmaxml.kinds'))->keys();
+            return $this->sort(function ($a, $b) use ($kindOrder) {
                 return ($kindOrder->search($a->kind_of_info) > $kindOrder->search($b->kind_of_info));
+            });
+        });
+
+        Collection::macro('sortByFeedType', function () {
+            $typeOrder = collect(config('jmaxml.feedtypes'));
+
+            return $this->sort(function ($a, $b) use ($typeOrder) {
+                return ($typeOrder->search($a->type) > $typeOrder->search($b->type));
             });
         });
     }

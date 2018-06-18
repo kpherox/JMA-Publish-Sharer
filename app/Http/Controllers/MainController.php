@@ -15,7 +15,10 @@ class MainController extends Controller
     **/
     public function index() : \Illuminate\View\View
     {
-        $kind = (request()->has('kind') && collect(config('jmaxmlkinds'))->has(request()->query('kind'))) ? request()->query('kind') : null;
+        $type = (request()->has('type') && collect(config('jmaxml.feedtypes'))->contains(request()->query('type'))) ? request()->query('type') : null;
+        $kind = (request()->has('kind') && collect(config('jmaxml.kinds'))->has(request()->query('kind'))) ? request()->query('kind') : null;
+
+        $feeds = Feed::all()->sortByFeedType();
 
         if ($kind) {
             $entry_ids = EntryDetail::select('entry_id')->where('kind_of_info', $kind)->groupBy('entry_id');
@@ -28,14 +31,26 @@ class MainController extends Controller
                 $simple_entry_ids[] = $entry_id->entry_id;
             }
             $entries = Entry::find($simple_entry_ids);
+            $selected = 'Kind: '.$kind;
+        } elseif ($type) {
+            $entries = $feeds
+                ->filter(function ($feed) use ($type) {
+                    return $feed->type === $type;
+                })
+                ->first()->entries()
+                ->paginate(15)
+                ->appends(['type' => $type]);
+            $paginateLinks = $entries->links();
+            $selected = 'Type: '.trans('feedtypes.'.$type);
         } else {
             $entries = Entry::orderBy('updated', 'desc');
             $entries = $entries
                 ->paginate(15);
             $paginateLinks = $entries->links();
+            $selected = 'Select Type or Kind';
         }
 
-        $kindOrder = collect(config('jmaxmlkinds'))->keys();
+        $kindOrder = collect(config('jmaxml.kinds'))->keys();
 
         $kindList = EntryDetail::select('kind_of_info')
                         ->selectRaw('count(*) as kind_count')
@@ -51,6 +66,8 @@ class MainController extends Controller
 
         return view('index', [
                    'entries' => $entries,
+                   'feeds' => $feeds,
+                   'selected' => $selected,
                    'kindList' => $kindList,
                    'paginateLinks' => $paginateLinks,
                    'queries' => collect(request()->query()),
@@ -65,7 +82,7 @@ class MainController extends Controller
         $doc = Storage::get('entry/'.$entry->uuid);
         $feed = $entry->entry->feed;
         $entryArray = collect((new SimpleXML($doc, true))->toArray(true, true));
-        return view(config('jmaxmlkinds.'.$entryArray['Control']['Title'].'.view', 'entry'), [
+        return view(config('jmaxml.kinds.'.$entryArray['Control']['Title'].'.view', 'entry'), [
                     'entry' => $entryArray,
                     'entryUuid' => $entry->uuid,
                     'feed' => $feed,

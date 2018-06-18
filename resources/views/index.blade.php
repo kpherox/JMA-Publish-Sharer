@@ -4,15 +4,23 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-9 col-xl-8 p-3">
-            <header class="d-flex dropdown">
-                <h5 class="d-block mt-2 mb-4">Entries</h5>
-                <button class="btn page-link text-dark d-block align-self-start dropdown-toggle ml-auto" type="button" data-toggle="dropdown">{{ $queries->get('kind') ?: 'Select Kind' }}</button>
+            <header class="d-flex">
+                <h5 class="d-block mt-2 mb-4 mr-auto">Entries</h5>
 
-                <div class="dropdown-menu dropdown-menu-right" style="height: auto;max-height: 200px;overflow-x: hidden;">
-                    <a class="dropdown-item" href="{{ route('index', $queries->forget('kind')->all()) }}">Select Kind</a>
-                    @foreach ($kindList as $kind)
-                    <a class="dropdown-item" href="{{ route('index', $queries->merge(['kind' => $kind['kind']])->all()) }}">{{ $kind['kind'] }} ({{ $kind['count'] }})</a>
-                    @endforeach
+                <div class="dropdown align-self-start">
+                    <button class="btn page-link text-dark dropdown-toggle" type="button" data-toggle="dropdown">{{ $selected }}</button>
+
+                    <div class="dropdown-menu dropdown-menu-right" style="height:auto;max-height:500px;overflow-x:hidden;">
+                        <a class="dropdown-item" href="{{ route('index', $queries->forget(['type', 'kind'])->all()) }}">Select Type or Kind</a>
+                        <div class="dropdown-divider"></div>
+                        @foreach ($feeds as $feed)
+                        <a class="dropdown-item" href="{{ route('index', $queries->merge(['type' => $feed->type])->all()) }}">@lang('feedtypes.'.$feed->type) ({{ $feed->entries->count() }})</a>
+                        @endforeach
+                        <div class="dropdown-divider"></div>
+                        @foreach ($kindList as $kind)
+                        <a class="dropdown-item" href="{{ route('index', $queries->merge(['kind' => $kind['kind']])->all()) }}">{{ $kind['kind'] }} ({{ $kind['count'] }})</a>
+                        @endforeach
+                    </div>
                 </div>
             </header>
             {{ $paginateLinks }}
