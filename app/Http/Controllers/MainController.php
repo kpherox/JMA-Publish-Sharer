@@ -63,8 +63,7 @@ class MainController extends Controller
     public function entry($entry) : \Illuminate\View\View
     {
         $doc = Storage::get('entry/'.$entry);
-        $feedUuid = EntryDetail::find($entry)->entry->feed_uuid;
-        $feedType = Feed::find($feedUuid);
+        $feedType = EntryDetail::find($entry)->entry->feed;
         $entryArray = collect((new SimpleXML($doc, true))->toArray(true, true));
         return view(config('jmaxmlkinds.'.$entryArray['Control']['Title'].'.view', 'entry'), [
                     'entry' => $entryArray,
