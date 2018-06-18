@@ -19,8 +19,7 @@ class EntryDetail extends Model
         'xml_document',
     ];
 
-    public function entry()
-    {
+    public function entry() {
         return $this->belongsTo('App\Eloquents\Entry');
     }
 }
