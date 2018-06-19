@@ -15,40 +15,37 @@ class MainController extends Controller
     **/
     public function index() : \Illuminate\View\View
     {
-        $type = (request()->has('type') && collect(config('jmaxml.feedtypes'))->contains(request()->query('type'))) ? request()->query('type') : null;
-        $kind = (request()->has('kind') && collect(config('jmaxml.kinds'))->has(request()->query('kind'))) ? request()->query('kind') : null;
+        $type = request()->query('type') ?: null;
+        $kind = request()->query('kind') ?: null;
+
+        $appends = [];
 
         $feeds = Feed::all()->sortByFeedType();
 
         if ($kind) {
-            $entry_ids = EntryDetail::select('entry_id')->where('kind_of_info', $kind)->groupBy('entry_id');
-            $entry_ids = $entry_ids
-                ->paginate(15)
-                ->appends(['kind' => $kind]);
-            $paginateLinks = $entry_ids->links();
+            $selected = 'Kind: '.$kind;
+            $appends['kind'] = $kind;
+            $entry_ids = EntryDetail::select('entry_id')->where('kind_of_info', $kind)->groupBy('entry_id')->get();
+
             $simple_entry_ids = [];
             foreach ($entry_ids as $entry_id) {
                 $simple_entry_ids[] = $entry_id->entry_id;
             }
-            $entries = Entry::find($simple_entry_ids);
-            $selected = 'Kind: '.$kind;
+            $entries = Entry::whereIn('id', $simple_entry_ids)->orderBy('updated', 'desc');
         } elseif ($type) {
-            $entries = $feeds
-                ->filter(function ($feed) use ($type) {
-                    return $feed->type === $type;
-                })
-                ->first()->entries()
-                ->paginate(15)
-                ->appends(['type' => $type]);
-            $paginateLinks = $entries->links();
             $selected = 'Type: '.trans('feedtypes.'.$type);
+            $appends['type'] =$type;
+            $entries = $feeds->filter(function ($feed) use ($type) {
+                    return $feed->type === $type;
+                })->first()->entries()->orderBy('updated', 'desc');
         } else {
-            $entries = Entry::orderBy('updated', 'desc');
-            $entries = $entries
-                ->paginate(15);
-            $paginateLinks = $entries->links();
             $selected = 'Select Type or Kind';
+            $entries = Entry::orderBy('updated', 'desc');
         }
+
+        $entries = $entries
+                ->paginate(15)
+                ->appends($appends);
 
         $kindOrder = collect(config('jmaxml.kinds'))->keys();
 
@@ -69,7 +66,6 @@ class MainController extends Controller
                    'feeds' => $feeds,
                    'selected' => $selected,
                    'kindList' => $kindList,
-                   'paginateLinks' => $paginateLinks,
                    'queries' => collect(request()->query()),
                ]);
     }

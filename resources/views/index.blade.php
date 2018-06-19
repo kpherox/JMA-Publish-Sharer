@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </header>
-            {{ $paginateLinks }}
+            {{ $entries->links() }}
             @foreach ($entries as $entry)
             <div class="card">
                 <h5 class="card-header bg-transparent d-flex">
@@ -63,7 +63,7 @@
                 </div>
             </div>
             @endforeach
-            {{ $paginateLinks }}
+            {{ $entries->links() }}
         </div>
     </div>
 </div>
