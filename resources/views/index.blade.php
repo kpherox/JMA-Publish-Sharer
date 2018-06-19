@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-9 col-xl-8 p-3">
             <header class="d-flex">
-                <h5 class="d-block mt-2 mb-4 mr-auto">Entries</h5>
+                <h5 class="d-block mt-2 mb-4 mr-auto">Entries{!! $observatory !!}</h5>
 
                 <div class="dropdown align-self-start">
                     <button class="btn page-link text-dark dropdown-toggle" type="button" data-toggle="dropdown">{{ $selected }}</button>

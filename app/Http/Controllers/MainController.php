@@ -17,6 +17,7 @@ class MainController extends Controller
     {
         $type = request()->query('type') ?: null;
         $kind = request()->query('kind') ?: null;
+        $observatoryName = request()->query('observatory') ?: null;
 
         $appends = [];
 
@@ -43,6 +44,11 @@ class MainController extends Controller
             $entries = Entry::orderBy('updated', 'desc');
         }
 
+        if ($observatoryName) {
+            $appends['observatory'] = $observatoryName;
+            $entries = $entries->where('observatory_name', $observatoryName);
+        }
+
         $entries = $entries
                 ->paginate(15)
                 ->appends($appends);
@@ -65,6 +71,7 @@ class MainController extends Controller
                    'entries' => $entries,
                    'feeds' => $feeds,
                    'selected' => $selected,
+                   'observatory' => $observatoryName ? '<small class="text-muted"> - '.$observatoryName.'</small>' : null,
                    'kindList' => $kindList,
                    'queries' => collect(request()->query()),
                ]);
