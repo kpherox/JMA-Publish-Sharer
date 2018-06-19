@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </header>
-            {{ $entries->links() }}
+            {{ $entries->links('index-pagination') }}
             @foreach ($entries as $entry)
             <div class="card">
                 <h5 class="card-header bg-transparent d-flex">
@@ -63,7 +63,7 @@
                 </div>
             </div>
             @endforeach
-            {{ $entries->links() }}
+            {{ $entries->links('index-pagination') }}
         </div>
     </div>
 </div>
