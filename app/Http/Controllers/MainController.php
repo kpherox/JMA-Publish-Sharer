@@ -82,7 +82,10 @@ class MainController extends Controller
         $doc = Storage::get('entry/'.$entry->uuid);
         $feed = $entry->entry->feed;
         $entryArray = collect((new SimpleXML($doc, true))->toArray(true, true));
-        return view(config('jmaxml.kinds.'.$entryArray['Control']['Title'].'.view', 'entry'), [
+
+        $kindViewName = config('jmaxml.kinds.'.$entryArray['Control']['Title'].'.view');
+        $viewName = \View::exists($kindViewName) ? $kindViewName : 'entry';
+        return view($viewName, [
                     'entry' => $entryArray,
                     'entryUuid' => $entry->uuid,
                     'feed' => $feed,
