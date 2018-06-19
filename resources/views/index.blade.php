@@ -11,7 +11,7 @@
                     <button class="btn page-link text-dark dropdown-toggle" type="button" data-toggle="dropdown">{{ $selected }}</button>
 
                     <div class="dropdown-menu dropdown-menu-right" style="height:auto;max-height:500px;overflow-x:hidden;">
-                        <a class="dropdown-item" href="{{ route('index', $queries->forget(['type', 'kind'])->all()) }}">Select Type or Kind</a>
+                        <a class="dropdown-item" href="{{ route('index', $queries->forget(['page', 'type', 'kind'])->all()) }}">Select Type or Kind</a>
                         <div class="dropdown-divider"></div>
                         @foreach ($feeds as $feed)
                         <a class="dropdown-item" href="{{ route('index', $queries->merge(['type' => $feed->type])->all()) }}">@lang('feedtypes.'.$feed->type) ({{ $feed->entries->count() }})</a>
