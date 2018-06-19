@@ -32,19 +32,22 @@ class NormalizeEntryDetailParentTarget extends Migration
                         ['updated', $detail->updated],
                     ])->orderBy('id');
 
-                if ($detail->entry_id !== $entries->first()->id) {
-                    $detail->entry_id = $entries->first()->id;
-                    $detail->save();
-                }
-
                 if ($entries->count() > 1) {
+                    $first = true;
                     foreach ($entries->get() as $entry) {
-                        if ($entry->id === $entries->first()->id) {
+                        if ($first) {
+                            $first = false;
+                            $detail->entry_id = $entry->id;
+                            $detail->save();
                             continue;
                         }
                         $entry->delete();
                     }
+                } elseif ($detail->entry_id !== $entries->first()->id) {
+                    $detail->entry_id = $entries->first()->id;
+                    $detail->save();
                 }
+
                 $processed_count++;
                 if ($processed_count % 100 == 0) {
                     echo $processed_count.' of '.$all_count.' records processed.'.PHP_EOL;
