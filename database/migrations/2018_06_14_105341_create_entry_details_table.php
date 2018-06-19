@@ -21,7 +21,6 @@ class CreateEntryDetailsTable extends Migration
             $table->string('observatory_name');
             $table->string('headline');
             $table->string('url', 2048);
-            $table->mediumText('xml_document')->nullable();
             $table->dateTimeTz('updated');
             $table->timestamps();
         });

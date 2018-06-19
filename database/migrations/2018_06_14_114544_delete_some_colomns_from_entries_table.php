@@ -17,6 +17,7 @@ class DeleteSomeColomnsFromEntriesTable extends Migration
             $table->dropColumn('uuid');
             $table->dropColumn('kind_of_info');
             $table->dropColumn('url');
+            $table->dropColumn('xml_document');
         });
     }
 
@@ -31,6 +32,7 @@ class DeleteSomeColomnsFromEntriesTable extends Migration
             $table->uuid('uuid')->nullable();
             $table->string('kind_of_info')->nullable();
             $table->string('url', 2048)->nullable();
+            $table->mediumText('xml_document')->nullable();
         });
     }
 }

@@ -15,10 +15,14 @@ class CopyDataToEntryDetailsTableFromEntriesTable extends Migration
     public function up()
     {
         $entries_count = Eloquents\Entry::count();
+        $entries_last_id = Eloquents\Entry::select('id')
+                ->orderBy('id', 'desc')
+                ->limit(1)->first()->id;
+
         $processed_count = 0;
         echo "all count is ".$entries_count.PHP_EOL;
-        for ($i=0; $i < $entries_count+1000; $i=$i+1000) { 
-            $entries = Eloquents\Entry::offset($i)->limit(1000)->get();
+        for ($i=0; $i < $entries_last_id+1000; $i+=1000) {
+            $entries = Eloquents\Entry::whereRaw('id BETWEEN '.($i+1).' AND '.($i+1000))->get();
             echo 'from '.($i+1).' to '.($i+1000).' entries selected.'.PHP_EOL;
             foreach ($entries as $entry) {
                 $detail = new Eloquents\EntryDetail();
@@ -26,7 +30,6 @@ class CopyDataToEntryDetailsTableFromEntriesTable extends Migration
                 $detail->uuid = $entry->uuid;
                 $detail->kind_of_info = $entry->kind_of_info;
                 $detail->url = $entry->url;
-                $detail->xml_document = $entry->xml_document;
                 $detail->observatory_name = $entry->observatory_name;
                 $detail->headline = $entry->headline;
                 $detail->updated = $entry->updated;
@@ -46,8 +49,6 @@ class CopyDataToEntryDetailsTableFromEntriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('entries', function (Blueprint $table) {
-            Eloquents\EntryDetail::truncate();
-        });
+        Eloquents\EntryDetail::truncate();
     }
 }

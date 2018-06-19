@@ -16,18 +16,33 @@ class NormalizeEntryDetailParentTarget extends Migration
     public function up()
     {
         $all_count = Eloquents\EntryDetail::count();
+        $details_last_id = Eloquents\EntryDetail::select('id')
+                ->orderBy('id', 'desc')
+                ->limit(1)->first()->id;
+
         $processed_count = 0;
         echo "all count is ".$all_count.PHP_EOL;
-        for ($i=0; $i < $all_count+1000 ; $i=$i+1000) { 
-            $details = Eloquents\EntryDetail::offset($i)->limit(1000)->get();
+        for ($i=0; $i < $details_last_id+1000; $i+=1000) {
+            $details = Eloquents\EntryDetail::whereRaw('id BETWEEN '.($i+1).' AND '.($i+1000))->get();
             foreach ($details as $detail) {
-                $entries = Eloquents\Entry::where('observatory_name', $detail->observatory_name)->where('headline', $detail->headline)->where('updated', $detail->updated)->orderBy('id')->get();
-                $detail->entry_id = $entries->first()->id;
-                $detail->save();
-                if (count($entries) > 1) {
-                    $entries->pull(0);
-                    foreach ($entries as $entry_shoud_delete) {
-                        $entry_shoud_delete->delete();
+                $entries = Eloquents\Entry::select('id')
+                    ->where([
+                        ['observatory_name', $detail->observatory_name],
+                        ['headline', $detail->headline],
+                        ['updated', $detail->updated],
+                    ])->orderBy('id');
+
+                if ($detail->entry_id !== $entries->first()->id) {
+                    $detail->entry_id = $entries->first()->id;
+                    $detail->save();
+                }
+
+                if ($entries->count() > 1) {
+                    foreach ($entries->get() as $entry) {
+                        if ($entry->id === $entries->first()->id) {
+                            continue;
+                        }
+                        $entry->delete();
                     }
                 }
                 $processed_count++;
@@ -45,8 +60,5 @@ class NormalizeEntryDetailParentTarget extends Migration
      */
     public function down()
     {
-        Schema::table('entry_details', function (Blueprint $table) {
-            //
-        });
     }
 }
