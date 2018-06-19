@@ -30,7 +30,7 @@ class Entry extends Model
         return $this->belongsTo('App\Eloquents\Feed', 'feed_uuid', 'uuid');
     }
 
-    public function entryDetail()
+    public function entryDetails()
     {
         return $this->hasMany('App\Eloquents\EntryDetail');
     }
@@ -48,7 +48,7 @@ class Entry extends Model
     public function getChildrenKindsAttribute()
     {
         $res = [];
-        foreach ($this->entryDetail->sortByKind() as $detail) {
+        foreach ($this->entryDetails->sortByKind() as $detail) {
             $res[] = $detail->kind_of_info;
         }
 
