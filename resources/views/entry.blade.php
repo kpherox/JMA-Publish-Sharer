@@ -8,14 +8,14 @@
             <h5>Entry</h5>
             <div class="card">
                 <h5 class="card-header bg-transparent d-flex">
-                    <span class="mr-auto text-truncate">{{ $entry['Control']['Title'] }}</span>
+                    <a class="mr-auto text-truncate text-body" href="{{ route('index', ['kind' => $entry['Control']['Title']]) }}">{{ $entry['Control']['Title'] }}</a>
                     <a class="card-link text-nowrap" href="{{ route('entry.xml', ['uuid' => $entryUuid]) }}">Xml file</a>
                     <a class="card-link text-nowrap" href="{{ route('entry.json', ['uuid' => $entryUuid]) }}">Json file</a>
                 </h5>
 
                 <div class="card-body">
                     <h5 class="card-title">{{ $entry['Head']['Title'] }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">分類種別: @lang('feedtypes.'.$feed->type)</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">分類種別: <a href="{{ route('index', ['type' => $feed->type]) }}">@lang('feedtypes.'.$feed->type)</a></h6>
                     <h6 class="card-subtitle mb-2 text-muted">発信時刻: @datetime($entry['Control']['DateTime'])</h6>
                     <h6 class="card-subtitle mb-2 text-muted">発表機関: {{ $entry['Control']['PublishingOffice'] }}</h6>
                     @if (!empty($entry['Head']['Headline']['Text']))
