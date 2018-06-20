@@ -8,7 +8,7 @@
                 <h5 class="d-block mt-2 mb-4 mr-auto">
                 Entries
                 @if ($observatory)
-                <small class="text-muted"> - {{ $observatory }}</small>
+                <small class="text-muted">( {{ $observatory }} )</small>
                 @endif
                 </h5>
 
@@ -41,7 +41,19 @@
                     <h5 class="card-title">{{ $entry->parsed_headline['title'] }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">分類種別: @lang('feedtypes.'.$entry->feed->type)</h6>
                     <h6 class="card-subtitle mb-2 text-muted">発信時刻: @datetime($entry->updated)</h6>
-                    <h6 class="card-subtitle mb-2 text-muted">発表機関: {{ $entry->observatory_name }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        発表機関:
+                        @foreach (explode('　', $entry->observatory_name) as $observatoryName)
+                            @if ($loop->index > 0) > @endif
+
+                            @if ($observatory !== $observatoryName)
+                                <a href="{{ route('index', ['observatory' => $observatoryName]) }}">{{ $observatoryName }}</a>
+                            @else
+                                {{ $observatoryName }}
+                            @endif
+                        @endforeach
+                    </h6>
+
                     @if (!empty($entry->parsed_headline['headline']))
                     <p class="card-text px-1">{{ $entry->parsed_headline['headline'] }}</p>
                     @endif

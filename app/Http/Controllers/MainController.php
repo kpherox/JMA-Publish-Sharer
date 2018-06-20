@@ -46,9 +46,9 @@ class MainController extends Controller
 
         if ($observatoryName) {
             $appends['observatory'] = $observatoryName;
-            $entries = $entries->where('observatory_name', $observatoryName);
+            $entries = $entries->whereObservatoryName($observatoryName);
             $kindList = $kindList->whereHas('entry', function ($query) use ($observatoryName) {
-                            return $query->where('observatory_name', $observatoryName);
+                            return $query->whereObservatoryName($observatoryName);
                         });
         }
 
@@ -60,7 +60,7 @@ class MainController extends Controller
                     ->sortByFeedType()
                     ->map(function ($feed) use ($observatoryName) {
                         if ($observatoryName) {
-                            $feed->count = $feed->entries()->where('observatory_name', $observatoryName)->count();
+                            $feed->count = $feed->entries()->whereObservatoryName($observatoryName)->count();
                         } else {
                             $feed->count = $feed->entries()->count();
                         }

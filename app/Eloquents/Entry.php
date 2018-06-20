@@ -25,6 +25,11 @@ class Entry extends Model
      */
     protected $hidden = [];
 
+    public function scopeWhereObservatoryName($query, String $observatory)
+    {
+        return $query->where('observatory_name', 'LIKE', '%'.$observatory.'%');
+    }
+
     // Relation feed
     public function feed() {
         return $this->belongsTo('App\Eloquents\Feed', 'feed_uuid', 'uuid');

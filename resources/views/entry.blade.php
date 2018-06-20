@@ -20,7 +20,14 @@
                     <h5 class="card-title">{{ $entry['Head']['Title'] }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">分類種別: <a href="{{ route('index', ['type' => $feed->type]) }}">@lang('feedtypes.'.$feed->type)</a></h6>
                     <h6 class="card-subtitle mb-2 text-muted">発信時刻: @datetime($entry['Control']['DateTime'])</h6>
-                    <h6 class="card-subtitle mb-2 text-muted">発表機関: <a href="{{ route('index', ['observatory' => $entry['Control']['PublishingOffice']]) }}">{{ $entry['Control']['PublishingOffice'] }}</a></h6>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        発表機関:
+                        @foreach (explode('　', $entry['Control']['PublishingOffice']) as $observatoryName)
+                            @if (!$loop->first) > @endif
+                            <a href="{{ route('index', ['observatory' => $observatoryName]) }}">{{ $observatoryName }}</a>
+                        @endforeach
+                    </h6>
+
                     @if (!empty($entry['Head']['Headline']['Text']))
                     <p class="card-text px-1">{{ $entry['Head']['Headline']['Text'] }}</p>
                     @endif
