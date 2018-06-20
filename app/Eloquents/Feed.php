@@ -24,6 +24,11 @@ class Feed extends Model
      */
     protected $hidden = [];
 
+    public function scopeWhereType($query, String $type)
+    {
+        return $query->where('url', 'LIKE', '%'.$type.'%');
+    }
+
     // Relation entries
     public function entries() {
         return $this->hasMany('App\Eloquents\Entry', 'feed_uuid', 'uuid');

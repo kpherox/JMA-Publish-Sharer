@@ -21,8 +21,6 @@ class MainController extends Controller
 
         $appends = [];
 
-        $feeds = Feed::all()->sortByFeedType();
-
         if ($kind) {
             $selected = 'Kind: '.$kind;
             $appends['kind'] = $kind;
@@ -36,42 +34,48 @@ class MainController extends Controller
         } elseif ($type) {
             $selected = 'Type: '.trans('feedtypes.'.$type);
             $appends['type'] =$type;
-            $entries = $feeds->filter(function ($feed) use ($type) {
-                    return $feed->type === $type;
-                })->first()->entries()->orderBy('updated', 'desc');
+            $entries = Feed::whereType($type)->first()->entries()->orderBy('updated', 'desc');
         } else {
             $selected = 'Select Type or Kind';
             $entries = Entry::orderBy('updated', 'desc');
         }
 
+        $kindList = EntryDetail::select('kind_of_info', 'entry_id')
+                    ->selectRaw('count(*) as count')
+                    ->groupBy('kind_of_info');
+
         if ($observatoryName) {
             $appends['observatory'] = $observatoryName;
             $entries = $entries->where('observatory_name', $observatoryName);
+            $kindList = $kindList->whereHas('entry', function ($query) use ($observatoryName) {
+                            return $query->where('observatory_name', $observatoryName);
+                        });
         }
 
         $entries = $entries
-                ->paginate(15)
-                ->appends($appends);
+                    ->paginate(15)
+                    ->appends($appends);
 
-        $kindOrder = collect(config('jmaxml.kinds'))->keys();
+        $feeds = Feed::get(['uuid', 'url'])
+                    ->sortByFeedType()
+                    ->map(function ($feed) use ($observatoryName) {
+                        if ($observatoryName) {
+                            $feed->count = $feed->entries()->where('observatory_name', $observatoryName)->count();
+                        } else {
+                            $feed->count = $feed->entries()->count();
+                        }
+                        return $feed;
+                    })->filter(function ($feed) {
+                        return $feed->count > 0;
+                    });
 
-        $kindList = EntryDetail::select('kind_of_info')
-                        ->selectRaw('count(*) as kind_count')
-                        ->groupBy('kind_of_info')
-                        ->get()
-                        ->sortByKind()
-                        ->map(function ($entry) {
-                            return [
-                                'count' => $entry->kind_count,
-                                'kind' => $entry->kind_of_info
-                            ];
-                        });
+        $kindList = $kindList->get()->sortByKind();
 
         return view('index', [
                    'entries' => $entries,
                    'feeds' => $feeds,
                    'selected' => $selected,
-                   'observatory' => $observatoryName ? '<small class="text-muted"> - '.$observatoryName.'</small>' : null,
+                   'observatory' => $observatoryName,
                    'kindList' => $kindList,
                    'queries' => collect(request()->query()),
                ]);
