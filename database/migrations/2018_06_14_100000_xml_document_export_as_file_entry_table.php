@@ -15,6 +15,10 @@ class XmlDocumentExportAsFileEntryTable extends Migration
     public function up()
     {
         $all_count = Entry::count();
+        if (!$all_count) {
+            return;
+        }
+
         $entries_last_id = Entry::select('id')
                 ->orderBy('id', 'desc')
                 ->limit(1)->first()->id;
@@ -44,6 +48,10 @@ class XmlDocumentExportAsFileEntryTable extends Migration
     public function down()
     {
         $all_count = Entry::count();
+        if (!$all_count) {
+            return;
+        }
+
         $entries_last_id = Entry::select('id')
                 ->orderBy('id', 'desc')
                 ->limit(1)->first()->id;

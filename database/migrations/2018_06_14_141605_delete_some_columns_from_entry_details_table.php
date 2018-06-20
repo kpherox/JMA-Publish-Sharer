@@ -35,6 +35,10 @@ class DeleteSomeColumnsFromEntryDetailsTable extends Migration
         });
 
         $all_count = EntryDetail::count();
+        if (!$all_count) {
+            return;
+        }
+
         $details_last_id = EntryDetail::select('id')
                 ->orderBy('id', 'desc')
                 ->limit(1)->first()->id;

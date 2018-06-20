@@ -16,6 +16,10 @@ class NormalizeEntryDetailParentTarget extends Migration
     public function up()
     {
         $all_count = Eloquents\EntryDetail::count();
+        if (!$all_count) {
+            return;
+        }
+
         $details_last_id = Eloquents\EntryDetail::select('id')
                 ->orderBy('id', 'desc')
                 ->limit(1)->first()->id;
