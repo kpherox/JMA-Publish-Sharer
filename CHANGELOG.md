@@ -6,6 +6,10 @@ Changelog.
 - Support Social login.
 - Add feature test.
 - Add sample data to test directory.
+- Entries list to index page.
+- Entry page & kinds template.
+- Entries filter.
+- EntryDetails table.
 
 ### Changed
 - Laravel version upgrade 5.5 -> 5.6.
@@ -14,6 +18,8 @@ Changelog.
 - Rename model namespace App\Model to App\Eloquents\Model.
 - Save entry url's xml.
 - Add relation for Entry and Feed.
+- XML Document database to file.
+- Optimize entries table.
 
 ### Removed
 - Rate limit for websub endpoint.
