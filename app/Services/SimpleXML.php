@@ -54,13 +54,19 @@ class SimpleXML
         }
     }
 
-    /**
-     * @return Array|Object
-    **/
-    public function toArray(Bool $isExpandAttributes = false, Bool $isAssoc = false)
+    public function toArray(Bool $isExpandAttributes = false) : Array
     {
         try {
-            return json_decode($this->toJson($isExpandAttributes), $isAssoc);
+            return json_decode($this->toJson($isExpandAttributes), true);
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function toObject(Bool $isExpandAttributes = false) : \stdClass
+    {
+        try {
+            return json_decode($this->toJson($isExpandAttributes), false);
         } catch (\Exception $e) {
             throw $e;
         }

@@ -111,7 +111,7 @@ class MainController extends Controller
     {
         $doc = \Storage::get('entry/'.$entry->uuid);
         $feed = $entry->entry->feed;
-        $entryArray = collect((new SimpleXML($doc, true))->toArray(true, true));
+        $entryArray = collect((new SimpleXML($doc, true))->toArray(true));
 
         $kindViewName = config('jmaxml.kinds.'.$entryArray['Control']['Title'].'.view');
         $viewName = \View::exists($kindViewName) ? $kindViewName : 'entry';
@@ -138,7 +138,7 @@ class MainController extends Controller
     public function entryJson($uuid) : \Illuminate\Http\JsonResponse
     {
         $doc = \Storage::get('entry/'.$uuid);
-        return response()->json((new SimpleXML($doc, true))->toArray(true, true),
+        return response()->json((new SimpleXML($doc, true))->toArray(true),
                                 200, [], JSON_UNESCAPED_UNICODE);
     }
 }

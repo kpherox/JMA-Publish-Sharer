@@ -45,7 +45,7 @@ class WebSubController extends Controller
         $simpleXml = new SimpleXML($content);
 
         try {
-            $feed = $simpleXml->toArray(true, true);
+            $feed = $simpleXml->toArray(true);
         } catch (\Exception $e) {
             \Log::warning($e);
             abort(403, $e);
