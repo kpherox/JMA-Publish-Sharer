@@ -12,9 +12,13 @@
             </span>
         </h5>
 
-        <div class="list-group">
+        <div class="list-group list-group-flush">
             @foreach ($observatories as $obs)
-            <a class="list-group-item" href="{{ route('observatory', ['observatory' => $obs->observatory_name]) }}">{{ $obs->observatory_name }} ({{ $obs->count }})</a>
+                @if ($observatory !== $obs->observatory_name)
+                    <a class="list-group-item" href="{{ route('observatory', ['observatory' => $obs->observatory_name]) }}">{{ $obs->observatory_name }} ({{ $obs->count }})</a>
+                @else
+                    <a class="list-group-item active" href="{{ route('observatory', ['observatory' => $obs->observatory_name]) }}">{{ $obs->observatory_name }} ({{ $obs->count }})</a>
+                @endif
             @endforeach
         </div>
     </div>
