@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0d274442721784992adee73829183c1",
+    "content-hash": "acda2a6f92ee28aab6fe5c1092c00420",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1129,53 +1129,6 @@
                 "laravel"
             ],
             "time": "2018-06-20T09:15:03+00:00"
-        },
-        {
-            "name": "kpherox/laravel-group-concat",
-            "version": "v1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kPherox/laravel-group-concat.git",
-                "reference": "1f22e65ab50f7132fde7d38e3d319e8e36ada0c3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kPherox/laravel-group-concat/zipball/1f22e65ab50f7132fde7d38e3d319e8e36ada0c3",
-                "reference": "1f22e65ab50f7132fde7d38e3d319e8e36ada0c3",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/database": "^5.0",
-                "illuminate/support": "^5.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^3.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "kPherox\\GroupConcat\\Providers\\GroupConcatServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "kPherox\\GroupConcat\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "kPherox",
-                    "email": "admin@mail.kr-kp.com"
-                }
-            ],
-            "description": "Add GROUP_CONCAT() to Query\\Builder",
-            "time": "2018-06-06T06:20:44+00:00"
         },
         {
             "name": "laravel/framework",
