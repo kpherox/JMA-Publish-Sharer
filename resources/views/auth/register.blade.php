@@ -1,4 +1,5 @@
 @extends ('layouts.default')
+@section ('title', 'Register')
 
 @section ('content')
 <div class="container">

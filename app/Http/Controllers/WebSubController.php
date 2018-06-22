@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Services\WebSubHandler;
+use App\Services\SimpleXML;
 
 class WebSubController extends Controller
 {
     /**
      * Subscribe Check JMA
      */
-    public function subscribeCheck(Request $request) : Response
+    public function subscribeCheck(Request $request) : \Illuminate\Http\Response
     {
         // Subscribe check
         try {
@@ -42,23 +42,15 @@ class WebSubController extends Controller
             abort(403, $e->getMessage());
         }
 
-        libxml_use_internal_errors(true);
-        $feedXml = simplexml_load_string($content);
+        $simpleXml = new SimpleXML($content);
 
-        if (!$feedXml) {
-            $message = 'Feed parse error';
-            \Log::warning($message);
-
-            foreach(libxml_get_errors() as $error) {
-                \Log::warning(trim($error->message));
-            }
-
-            libxml_clear_errors();
-            abort(403, $message);
+        try {
+            $feed = $simpleXml->toArray(true, true);
+        } catch (\Exception $e) {
+            \Log::warning($e);
+            abort(403, $e);
         }
         \Log::debug('Success feed parse');
-
-        $feed = json_decode(json_encode($feedXml), true);
 
         WebSubHandler::saveFeedAndEntries($feed);
     }

@@ -2,6 +2,15 @@
 Changelog.
 
 ## [Unreleased]
+### Added
+- Entries list to index page.
+- Entry page & kinds template.
+- Entries filter.
+- EntryDetails table.
+
+### Changed
+- XML Document database to file.
+- Optimize entries table.
 
 ## [Version 0.3 (Pre-Release)][0.3] - 2018-06-03
 ### Added

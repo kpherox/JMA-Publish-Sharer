@@ -4,7 +4,7 @@ namespace App\Providers\Blade;
 
 use Illuminate\Support\ServiceProvider;
 
-class AliasProvider extends ServiceProvider
+class ComponentAliasServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.

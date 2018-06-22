@@ -3,7 +3,6 @@
 namespace App\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Feed extends Model
 {
@@ -13,7 +12,9 @@ class Feed extends Model
      * @var array
      */
     protected $fillable = [
-        'uuid', 'url', 'updated',
+        'uuid',
+        'url',
+        'updated',
     ];
 
     /**
@@ -23,12 +24,22 @@ class Feed extends Model
      */
     protected $hidden = [];
 
+    public function scopeWhereType($query, String $type)
+    {
+        return $query->where('url', 'LIKE', '%'.$type.'%');
+    }
+
     /**
      * Relation entries
     **/
-    public function entries() : HasMany
+    public function entries() : \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Eloquents\Entry', 'feed_uuid', 'uuid');
+    }
+
+    public function getTypeAttribute()
+    {
+        return basename(parse_url($this->url, PHP_URL_PATH), '.xml');
     }
 }
 

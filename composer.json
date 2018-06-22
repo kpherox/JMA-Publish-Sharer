@@ -12,9 +12,11 @@
     ],
     "require": {
         "php": "^7.1.3",
+        "doctrine/dbal": "^2.7",
         "fideloper/proxy": "^4.0",
         "htmlmin/htmlmin": "^5.6",
         "kozz/laravel-guzzle-provider": "^6.0",
+        "kpherox/laravel-group-concat": "^1.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.6",

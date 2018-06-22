@@ -107,6 +107,7 @@ class WebSubTest extends TestCase
                       ->with('http://*/*/b60694a6-d389-3194-a051-092ee9b2c474.xml')
                       ->andReturn(new Promise\FulfilledPromise(new Psr7\Response(200, [], $sampleData2)));
 
+        \Storage::fake('local');
         $atomFeed = file_get_contents('tests/SampleData/jmaxml_atomfeed.xml');
 
         $hash = hash_hmac('sha1', $atomFeed, $this->verifyToken);
@@ -115,18 +116,19 @@ class WebSubTest extends TestCase
 
         $response->assertSuccessful();
         $this
-            ->assertDatabaseHas('entries', [
+            ->assertDatabaseHas('entry_details', [
                 'uuid' => '8e55b8d8-518b-3dc9-9156-7e87c001d7b5',
-                'xml_document' => $sampleData1
             ])
-            ->assertDatabaseHas('entries', [
+            ->assertDatabaseHas('entry_details', [
                 'uuid' => 'b60694a6-d389-3194-a051-092ee9b2c474',
-                'xml_document' => $sampleData2
             ])
             ->assertDatabaseHas('feeds', [
                 'uuid' => 'be4342e2-ff73-363c-a3ed-66e05e977224',
                 'url' => 'http://xml.kishou.go.jp/*/*.xml'
             ]);
+
+        \Storage::disk('local')->assertExists('entry/8e55b8d8-518b-3dc9-9156-7e87c001d7b5');
+        \Storage::disk('local')->assertExists('entry/b60694a6-d389-3194-a051-092ee9b2c474');
     }
 
     /**
@@ -145,7 +147,7 @@ class WebSubTest extends TestCase
 
         $response
             ->assertForbidden()
-            ->assertSeeText('Feed parse error');
+            ->assertSeeText('XML Parse error');
     }
 
     /**

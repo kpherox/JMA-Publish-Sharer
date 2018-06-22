@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema; //Import Schema
 use Illuminate\Pagination\AbstractPaginator;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Add the following line
-        Schema::defaultStringLength(191);
+        \Schema::defaultStringLength(191);
     }
 
     /**

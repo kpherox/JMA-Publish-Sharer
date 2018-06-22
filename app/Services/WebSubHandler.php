@@ -8,6 +8,7 @@ use GuzzleHttp\Promise;
 use GuzzleHttp\Psr7;
 use App\Eloquents\Feed;
 use App\Eloquents\Entry;
+use App\Eloquents\EntryDetail;
 
 class WebSubHandler
 {
@@ -78,8 +79,6 @@ class WebSubHandler
     **/
     private static function saveFeed(String $feedUuid, Array $feed = null)
     {
-        $feedUuid = collect(explode(':', $feed['id']))->last();
-
         $feeds = Feed::firstOrNew(['uuid' => $feedUuid]);
 
         $feedUpdated = Carbon::parse($feed['updated']);
@@ -106,9 +105,6 @@ class WebSubHandler
             $entries = [$entries];
         }
 
-        $now = Carbon::now();
-        $now->setTimezone(config('app.timezone'));
-
         // Fetch JMA xml
         $entryArrays = [];
         $promises = [];
@@ -123,12 +119,17 @@ class WebSubHandler
 
             $entryArray = $parseedEntry['entry'];
             $entryArray['feed_uuid'] = $feedUuid;
-            $entryArray['created_at'] = $now;
-            $entryArray['updated_at'] = $now;
-            $entryArrays[$entryUuid] = $entryArray;
+            $entry = Entry::firstOrCreate($entryArray);
+
+            $entryDetail = $parseedEntry['entryDetail'];
+            $entryDetail['entry_id'] = $entry->id;
+            $entryDetail['created_at'] = $entry->created_at;
+            $entryDetail['updated_at'] = $entry->updated_at;
+            $entryArrays[$entryUuid] = $entryDetail;
         }
 
         $results = self::fetchXmlDocument($promises);
+
 
         $entryRecords = [];
         foreach ($results as $key => $result) {
@@ -136,13 +137,13 @@ class WebSubHandler
 
             if ($result->getReasonPhrase() === 'OK') {
                 $xmlDoc = $result->getBody()->getContents();
-                $entryArray['xml_document'] = $xmlDoc;
+                \Storage::put('entry/'.$key, $xmlDoc);
             }
 
             $entryRecords[] = $entryArray;
         }
 
-        Entry::insert($entryRecords);
+        EntryDetail::insert($entryRecords);
     }
 
     /**
@@ -161,12 +162,14 @@ class WebSubHandler
             'uuid' => $entryUuid,
             'promise' => \Guzzle::getAsync($url),
             'entry' => [
-                'uuid' => $entryUuid,
-                'kind_of_info' => $entry['title'],
                 'observatory_name' => collect($entry['author'])->get('name'),
                 'headline' => $entry['content'],
-                'url' => $url,
                 'updated' => $updated,
+            ],
+            'entryDetail' => [
+                'uuid' => $entryUuid,
+                'kind_of_info' => $entry['title'],
+                'url' => $url,
             ],
         ];
     }

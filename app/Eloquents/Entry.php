@@ -3,7 +3,6 @@
 namespace App\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Entry extends Model
 {
@@ -13,7 +12,10 @@ class Entry extends Model
      * @var array
      */
     protected $fillable = [
-        'uuid', 'kind_of_info', 'feed_uuid', 'observatory_name', 'headline', 'url', 'updated',
+        'feed_uuid',
+        'observatory_name',
+        'headline',
+        'updated',
     ];
 
     /**
@@ -23,11 +25,43 @@ class Entry extends Model
      */
     protected $hidden = [];
 
+    public function scopeWhereObservatoryName($query, String $observatory)
+    {
+        return $query->where('observatory_name', 'LIKE', '%'.$observatory.'%');
+    }
+
     /**
      * Relation feed
     **/
-    public function feed() : BelongsTo
+    public function feed() : \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Eloquents\Feed', 'feed_uuid', 'uuid');
+    }
+
+    public function entryDetails()
+    {
+        return $this->hasMany('App\Eloquents\EntryDetail');
+    }
+
+    public function getParsedHeadlineAttribute()
+    {
+        preg_match('/【(.*)】(.*)/', $this->headline, $headline);
+        return collect([
+            'original' => $headline[0],
+            'title' => $headline[1],
+            'headline' => $headline[2],
+        ]);
+    }
+
+    public function getChildrenKindsAttribute()
+    {
+        $res = [];
+        foreach ($this->entryDetails->sortByKind() as $detail) {
+            $res[] = $detail->kind_of_info;
+        }
+
+        $kindOrder = collect(config('jmaxmlkinds'))->keys();
+
+        return collect($res);
     }
 }
