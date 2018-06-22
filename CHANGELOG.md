@@ -2,11 +2,14 @@
 Changelog.
 
 ## [Unreleased]
+
+## [Version 0.4 (Pre-Release)][0.4] - 2018-06-23
 ### Added
 - Entries list to index page.
 - Entry page & kinds template.
 - Entries filter.
 - EntryDetails table.
+- Google Maps JavaScript API key.
 
 ### Changed
 - XML Document database to file.
@@ -49,7 +52,8 @@ Changelog.
 - Subscribe check.
 - Save received feed.
 
-[Unreleased]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.3...develop
+[Unreleased]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4...develop
+[0.4]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.3...v0.4
 [0.3]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.2.2...v0.3
 [0.2.2]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.2...v0.2.1
