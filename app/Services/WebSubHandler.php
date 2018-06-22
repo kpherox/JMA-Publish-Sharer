@@ -9,11 +9,15 @@ use GuzzleHttp\Psr7;
 use App\Eloquents\Feed;
 use App\Eloquents\Entry;
 use App\Eloquents\EntryDetail;
+use Illuminate\Support\Collection;
 
 class WebSubHandler
 {
     /**
      * Verify feed's signature.
+     *
+     * @param  String $requestBody
+     * @param  String? $hubSignature
     **/
     public static function verifySignature(String $requestBody, String $hubSignature = null) : Bool
     {
@@ -40,6 +44,9 @@ class WebSubHandler
 
     /**
      * Verify token for subscribe check.
+     *
+     * @param  String? $hubMode
+     * @param  String? $hubVerifyToken
     **/
     public static function verifyToken(String $hubMode = null, String $hubVerifyToken = null) : Bool
     {
@@ -65,8 +72,11 @@ class WebSubHandler
 
     /**
      * Save feed and entries.
+     *
+     * @param  Array $feed
+     * @return void
     **/
-    public static function saveFeedAndEntries(Array $feed = null)
+    public static function saveFeedAndEntries(Array $feed)
     {
         $feedUuid = collect(explode(':', $feed['id']))->last();
 
@@ -76,8 +86,12 @@ class WebSubHandler
 
     /**
      * Save feed.
+     *
+     * @param  String $feedUuid
+     * @param  Array $feed
+     * @return void
     **/
-    private static function saveFeed(String $feedUuid, Array $feed = null)
+    private static function saveFeed(String $feedUuid, Array $feed)
     {
         $feeds = Feed::firstOrNew(['uuid' => $feedUuid]);
 
@@ -98,8 +112,12 @@ class WebSubHandler
 
     /**
      * Save entries.
+     *
+     * @param  String $feedUuid
+     * @param  Array $entries
+     * @return void
     **/
-    private static function saveEntries(String $feedUuid, Array $entries = null)
+    private static function saveEntries(String $feedUuid, Array $entries)
     {
         if (Arr::isAssoc($entries)) {
             $entries = [$entries];
@@ -146,8 +164,10 @@ class WebSubHandler
 
     /**
      * Parse entry.
+     *
+     * @param  Array $entry
     **/
-    private static function parseEntry(Array $entry = null) : Array
+    private static function parseEntry(Array $entry) : Array
     {
         $entryUuid = collect(explode(':', $entry['id']))->last();
 
@@ -174,8 +194,10 @@ class WebSubHandler
 
     /**
      * Fetch xml document from JMA.
+     *
+     * @param  Array $promises
     **/
-    private static function fetchXmlDocument(Array $promises) : \Illuminate\Support\Collection
+    private static function fetchXmlDocument(Array $promises) : Collection
     {
         return collect(Promise\settle($promises)->wait())->map(function ($obj, $key) {
             if ($obj['state'] === 'fulfilled') {

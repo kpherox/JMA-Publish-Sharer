@@ -4,8 +4,25 @@ namespace App\Services;
 
 class SimpleXML
 {
+    /**
+     * Raw xml string.
+     *
+     * @var String
+     */
     private $rawXml;
+
+    /**
+     * Has namespace.
+     *
+     * @var Bool
+     */
     private $isNamespaced;
+
+    /**
+     * Leave prefix namespace.
+     *
+     * @var Bool
+     */
     private $prefixNamespace;
 
     /**
@@ -20,6 +37,9 @@ class SimpleXML
         $this->prefixNamespace = $prefixNamespace;
     }
 
+    /**
+     * @param  Bool $isExpandAttributes default: false
+    **/
     public function toSimpleXMLElement(Bool $isExpandAttributes = false) : \SimpleXMLElement
     {
         $xml = $this->isNamespaced ? $this->removeNamespace($this->rawXml) : $this->rawXml;
@@ -45,6 +65,9 @@ class SimpleXML
         return $simpleXml;
     }
 
+    /**
+     * @param  Bool $isExpandAttributes default: false
+    **/
     public function toJson(Bool $isExpandAttributes = false) : String
     {
         try {
@@ -54,6 +77,9 @@ class SimpleXML
         }
     }
 
+    /**
+     * @param  Bool $isExpandAttributes default: false
+    **/
     public function toArray(Bool $isExpandAttributes = false) : Array
     {
         try {
@@ -63,6 +89,9 @@ class SimpleXML
         }
     }
 
+    /**
+     * @param  Bool $isExpandAttributes default: false
+    **/
     public function toObject(Bool $isExpandAttributes = false) : \stdClass
     {
         try {
@@ -76,6 +105,8 @@ class SimpleXML
      * Remove namespace from xml.
      *
      * @referenced https://laracasts.com/discuss/channels/general-discussion/converting-xml-to-jsonarray
+     *
+     * @param  String $xml
     **/
     private function removeNamespace(String $xml) : String
     {
@@ -94,6 +125,9 @@ class SimpleXML
         return $xml;
     }
 
+    /**
+     * @param  \SimpleXMLElement $node
+    **/
     public static function expandAttributes(\SimpleXMLElement $node)
     {
         foreach ($node->children() as $child) {

@@ -8,6 +8,10 @@ use App\Eloquents\LinkedSocialAccount;
 
 class SocialAccountsService
 {
+    /**
+     * @param  \Laravel\Socialite\Contracts\User $providerUser
+     * @param  String $provider
+    **/
     public function findOrCreate(ProviderUser $providerUser, String $provider) : User
     {
         $account = LinkedSocialAccount::firstOrNew(['provider_name' => $provider, 'provider_id' => $providerUser->getId()]);
@@ -36,6 +40,10 @@ class SocialAccountsService
         return $user;
     }
 
+    /**
+     * @param  String $provider
+     * @param  Int $providerId
+    **/
     public function deleteLinkedAccount(String $provider, Int $providerId) : String
     {
         $account = LinkedSocialAccount::where([
@@ -53,6 +61,11 @@ class SocialAccountsService
 
     /**
      * Set ProviderUser property to LinkedSocialAccount columns
+     *
+     * @param  \App\Eloquents\LinkedSocialAccount inout $account
+     * @param  \Laravel\Socialite\Contracts\User $user
+     * @param  Bool $isOAuthOne
+     * @return void
     **/
     private function setAccountColumn(LinkedSocialAccount &$account, ProviderUser $user, Bool $isOAuthOne)
     {
@@ -65,6 +78,8 @@ class SocialAccountsService
 
     /**
      * Return original size image's url for Twitter
+     *
+     * @param  String $url
     **/
     private function originalSizeImageUrl(String $url) : String
     {
@@ -73,6 +88,8 @@ class SocialAccountsService
 
     /**
      * Contains provider to oauth1
+     *
+     * @param  String $provider
     **/
     private function isOAuthOne(String $provider) : Bool
     {

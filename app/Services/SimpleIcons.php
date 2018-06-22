@@ -4,11 +4,31 @@ namespace App\Services;
 
 class SimpleIcons
 {
+    /**
+     * Social icon list.
+     *
+     * @var Array
+     */
     private $iconList;
 
+    /**
+     * Get private $iconList.
+     *
+     * @return Array
+     */
     public function getIcons()
     {
         return $this->iconList;
+    }
+
+    /**
+     * Get private $iconList.
+     *
+     * @param  Array $icons
+     */
+    public function setIcons(Array $icons)
+    {
+        $this->iconList = $icons;
     }
 
     /**
@@ -21,7 +41,7 @@ class SimpleIcons
         $iconList = collect(json_decode(\File::get(resource_path('assets/simple-icons/_data/simple-icons.json')), true)['icons']);
         $providers = collect(config('services.providers'));
 
-        $this->iconList = $iconList->filter(function ($value) use ($providers) {
+        $icons = $iconList->filter(function ($value) use ($providers) {
                 return $providers->contains($value['title']);
             })->map(function ($value) use ($providers) {
                 $provider = $providers->search($value['title']);
@@ -31,5 +51,7 @@ class SimpleIcons
             })->sort(function ($a, $b) use ($providers) {
                 return $providers->keys()->search($a['lowerTitle']) > $providers->keys()->search($b['lowerTitle']);
             })->all();
+
+        $this->setIcons($icons);
     }
 }
