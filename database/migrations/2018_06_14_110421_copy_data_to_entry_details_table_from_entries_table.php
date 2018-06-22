@@ -39,7 +39,7 @@ class CopyDataToEntryDetailsTableFromEntriesTable extends Migration
                 $detail->save();
                 $processed_count++;
                 if (($processed_count) % 1000 == 0) {
-                    echo ($processed_count).' of '.$entries_count.' records copied.'.PHP_EOL;
+                    echo ($processed_count).' of '.$all_count.' records copied.'.PHP_EOL;
                 }
             }
         }
