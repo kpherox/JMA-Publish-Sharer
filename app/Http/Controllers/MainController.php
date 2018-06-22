@@ -28,9 +28,20 @@ class MainController extends Controller
         $type = request()->query('type') ?: null;
         $kind = request()->query('kind') ?: null;
 
-        $data = $this->entries($type, $kind, $observatoryName)->merge(['queries' => collect(request()->query())]);
+        $observatories = Entry::select('observatory_name')
+                    ->selectRaw('count(*) as count')
+                    ->selectRaw('MAX(updated) as max_updated')
+                    ->orderBy('max_updated', 'desc')
+                    ->groupBy('observatory_name')
+                    ->get();
 
-        return view('index', $data->all());
+        $data = $this->entries($type, $kind, $observatoryName)->merge([
+                    'observatory' => $observatoryName,
+                    'observatories' => $observatories,
+                    'queries' => collect(request()->query())->put('ovservatory', $observatoryName),
+                ]);
+
+        return view('observatory', $data->all());
     }
 
     private function entries(String $type = null, String $kind = null, String $observatoryName = null) : \Illuminate\Support\Collection
@@ -91,7 +102,6 @@ class MainController extends Controller
             'entries' => $entries,
             'feeds' => $feeds,
             'selected' => $selected,
-            'observatory' => $observatoryName,
             'kindList' => $kindList,
         ]);
     }
