@@ -27,7 +27,17 @@ class Entry extends Model
 
     public function scopeWhereObservatoryName($query, String $observatory)
     {
-        return $query->where('observatory_name', 'LIKE', '%'.$observatory.'%');
+        $observatories = Self::select('observatory_name')
+                ->groupBy('observatory_name')
+                ->get()
+                ->filter(function ($entry) use ($observatory) {
+                    $splitedObservatory = collect(preg_split( "/( |　)/", $entry->observatory_name));
+                    return ($entry->observatory_name === $observatory || $splitedObservatory->contains($observatory));
+                })->map(function ($entry) {
+                    return $entry->observatory_name;
+                });
+
+        return $query->whereIn('observatory_name', $observatories);
     }
 
     /**
@@ -38,12 +48,12 @@ class Entry extends Model
         return $this->belongsTo('App\Eloquents\Feed', 'feed_uuid', 'uuid');
     }
 
-    public function entryDetails()
+    public function entryDetails() : \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Eloquents\EntryDetail');
     }
 
-    public function getParsedHeadlineAttribute()
+    public function getParsedHeadlineAttribute() : \Illuminate\Support\Collection
     {
         preg_match('/【(.*)】(.*)/', $this->headline, $headline);
         return collect([
@@ -53,7 +63,7 @@ class Entry extends Model
         ]);
     }
 
-    public function getChildrenKindsAttribute()
+    public function getChildrenKindsAttribute() : \Illuminate\Support\Collection
     {
         $res = [];
         foreach ($this->entryDetails->sortByKind() as $detail) {

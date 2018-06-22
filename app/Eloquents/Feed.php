@@ -37,7 +37,7 @@ class Feed extends Model
         return $this->hasMany('App\Eloquents\Entry', 'feed_uuid', 'uuid');
     }
 
-    public function getTypeAttribute()
+    public function getTypeAttribute() : String
     {
         return basename(parse_url($this->url, PHP_URL_PATH), '.xml');
     }
