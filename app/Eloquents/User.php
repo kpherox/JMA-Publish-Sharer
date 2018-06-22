@@ -42,7 +42,7 @@ class User extends Authenticatable
     /**
      * Exists value of email column
     **/
-    public function existsEmail() : Bool
+    public function existsEmail() : bool
     {
         return isset($this->email);
     }
@@ -50,7 +50,7 @@ class User extends Authenticatable
     /**
      * Exists value of password column
     **/
-    public function existsPassword() : Bool
+    public function existsPassword() : bool
     {
         return isset($this->password);
     }
@@ -58,7 +58,7 @@ class User extends Authenticatable
     /**
      * Exists value of email column and password column
     **/
-    public function existsEmailAndPassword() : Bool
+    public function existsEmailAndPassword() : bool
     {
         return $this->existsEmail() && $this->existsPassword();
     }

@@ -16,10 +16,10 @@ class WebSubHandler
     /**
      * Verify feed's signature.
      *
-     * @param  String $requestBody
-     * @param  String? $hubSignature
+     * @param  string $requestBody
+     * @param  string? $hubSignature
     **/
-    public static function verifySignature(String $requestBody, String $hubSignature = null) : Bool
+    public static function verifySignature(string $requestBody, string $hubSignature = null) : bool
     {
         if (!config('app.isUseWebSubVerifyToken')) {
             return true;
@@ -45,10 +45,10 @@ class WebSubHandler
     /**
      * Verify token for subscribe check.
      *
-     * @param  String? $hubMode
-     * @param  String? $hubVerifyToken
+     * @param  string? $hubMode
+     * @param  string? $hubVerifyToken
     **/
-    public static function verifyToken(String $hubMode = null, String $hubVerifyToken = null) : Bool
+    public static function verifyToken(string $hubMode = null, string $hubVerifyToken = null) : bool
     {
         if ($hubMode !== 'subscribe' && $hubMode !== 'unsubscribe') {
             throw new \Exception('Not exist hub.mode');
@@ -73,10 +73,10 @@ class WebSubHandler
     /**
      * Save feed and entries.
      *
-     * @param  Array $feed
+     * @param  array $feed
      * @return void
     **/
-    public static function saveFeedAndEntries(Array $feed)
+    public static function saveFeedAndEntries(array $feed)
     {
         $feedUuid = collect(explode(':', $feed['id']))->last();
 
@@ -87,11 +87,11 @@ class WebSubHandler
     /**
      * Save feed.
      *
-     * @param  String $feedUuid
-     * @param  Array $feed
+     * @param  string $feedUuid
+     * @param  array $feed
      * @return void
     **/
-    private static function saveFeed(String $feedUuid, Array $feed)
+    private static function saveFeed(string $feedUuid, array $feed)
     {
         $feeds = Feed::firstOrNew(['uuid' => $feedUuid]);
 
@@ -113,11 +113,11 @@ class WebSubHandler
     /**
      * Save entries.
      *
-     * @param  String $feedUuid
-     * @param  Array $entries
+     * @param  string $feedUuid
+     * @param  array $entries
      * @return void
     **/
-    private static function saveEntries(String $feedUuid, Array $entries)
+    private static function saveEntries(string $feedUuid, array $entries)
     {
         if (Arr::isAssoc($entries)) {
             $entries = [$entries];
@@ -165,9 +165,9 @@ class WebSubHandler
     /**
      * Parse entry.
      *
-     * @param  Array $entry
+     * @param  array $entry
     **/
-    private static function parseEntry(Array $entry) : Array
+    private static function parseEntry(array $entry) : array
     {
         $entryUuid = collect(explode(':', $entry['id']))->last();
 
@@ -195,9 +195,9 @@ class WebSubHandler
     /**
      * Fetch xml document from JMA.
      *
-     * @param  Array $promises
+     * @param  array $promises
     **/
-    private static function fetchXmlDocument(Array $promises) : Collection
+    private static function fetchXmlDocument(array $promises) : Collection
     {
         return collect(Promise\settle($promises)->wait())->map(function ($obj, $key) {
             if ($obj['state'] === 'fulfilled') {

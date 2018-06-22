@@ -40,7 +40,7 @@ class EntryDetail extends Model
     /**
      * Use key name when route binding.
     **/
-    public function getRouteKeyName() : String
+    public function getRouteKeyName() : string
     {
         return 'uuid';
     }

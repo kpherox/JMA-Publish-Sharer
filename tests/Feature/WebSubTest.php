@@ -22,7 +22,7 @@ class WebSubTest extends TestCase
      *
      * @return array
      */
-    private function getParameters(String $status)
+    private function getParameters(string $status)
     {
         $result = [];
 
@@ -58,7 +58,7 @@ class WebSubTest extends TestCase
      *
      * @return array
      */
-    private function getHeaders(String $verbs = 'GET', String $signature = null)
+    private function getHeaders(string $verbs = 'GET', string $signature = null)
     {
         $headers = [
             'HTTP_User-Agent' => 'AppEngine-Google; (+http://code.google.com/appengine; appid: s~alert-hub)'

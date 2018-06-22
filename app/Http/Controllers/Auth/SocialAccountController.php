@@ -13,14 +13,14 @@ abstract class SocialAccountController extends Controller
     /**
      * Provider name.
      *
-     * @var String
+     * @var string
     **/
     private $provider = '';
 
     /**
      * Getter for provider name.
     **/
-    protected function getProvider() : String
+    protected function getProvider() : string
     {
         return $this->provider;
     }
@@ -28,7 +28,7 @@ abstract class SocialAccountController extends Controller
     /**
      * Setter for provider name.
     **/
-    protected function setProvider(String $value) : String
+    protected function setProvider(string $value) : string
     {
         return $this->provider = $value;
     }
@@ -54,7 +54,7 @@ abstract class SocialAccountController extends Controller
     public function unlinkFromUser(SocialAccountsService $accountService, Request $request)
     {
         try {
-            $message = $accountService->deleteLinkedAccount($this->getProvider(), (Int)$request->id);
+            $message = $accountService->deleteLinkedAccount($this->getProvider(), (int)$request->id);
         } catch (\Exception $e) {
             abort_if(!$request->ajax(), 403, 'Can\'t delete');
 

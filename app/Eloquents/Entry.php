@@ -49,11 +49,11 @@ class Entry extends Model
      * Local Scope: where observatory_name.
      *
      * @param  \Illuminate\Database\Eloquent\Builder $query
-     * @param  String $observatory
+     * @param  string $observatory
     **/
-    public function scopeWhereObservatoryName(Builder $query, String $observatory) : Builder
+    public function scopeWhereObservatoryName(Builder $query, string $observatory) : Builder
     {
-        $observatories = Self::select('observatory_name')
+        $observatories = self::select('observatory_name')
                 ->groupBy('observatory_name')
                 ->get()
                 ->filter(function ($entry) use ($observatory) {

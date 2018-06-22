@@ -22,7 +22,7 @@ class MainController extends Controller
         return view('index', $data->all());
     }
 
-    public function observatory(String $observatoryName) : \Illuminate\View\View
+    public function observatory(string $observatoryName) : \Illuminate\View\View
     {
         $type = request()->query('type') ?: null;
         $kind = request()->query('kind') ?: null;
@@ -43,7 +43,7 @@ class MainController extends Controller
         return view('observatory', $data->all());
     }
 
-    private function entries(String $type = null, String $kind = null, String $observatoryName = null) : \Illuminate\Support\Collection
+    private function entries(string $type = null, string $kind = null, string $observatoryName = null) : \Illuminate\Support\Collection
     {
         $appends = [];
 

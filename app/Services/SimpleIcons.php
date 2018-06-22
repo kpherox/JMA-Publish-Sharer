@@ -7,14 +7,14 @@ class SimpleIcons
     /**
      * Social icon list.
      *
-     * @var Array
+     * @var array
      */
     private $iconList;
 
     /**
      * Get private $iconList.
      *
-     * @return Array
+     * @return array
      */
     public function getIcons()
     {
@@ -24,9 +24,9 @@ class SimpleIcons
     /**
      * Get private $iconList.
      *
-     * @param  Array $icons
+     * @param  array $icons
      */
-    public function setIcons(Array $icons)
+    public function setIcons(array $icons)
     {
         $this->iconList = $icons;
     }

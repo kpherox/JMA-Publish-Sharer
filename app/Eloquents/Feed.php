@@ -38,9 +38,9 @@ class Feed extends Model
      * Local Scope: where url ($type.xml).
      *
      * @param  \Illuminate\Database\Eloquent\Builder $query
-     * @param  String $type
+     * @param  string $type
     **/
-    public function scopeWhereType(Builder $query, String $type) : Builder
+    public function scopeWhereType(Builder $query, string $type) : Builder
     {
         return $query->where('url', 'LIKE', '%'.$type.'.xml');
     }
@@ -48,7 +48,7 @@ class Feed extends Model
     /**
      * Mutator: feed type.
     **/
-    public function getTypeAttribute() : String
+    public function getTypeAttribute() : string
     {
         return basename(parse_url($this->url, PHP_URL_PATH), '.xml');
     }

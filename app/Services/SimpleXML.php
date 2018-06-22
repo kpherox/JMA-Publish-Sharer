@@ -7,21 +7,21 @@ class SimpleXML
     /**
      * Raw xml string.
      *
-     * @var String
+     * @var string
      */
     private $rawXml;
 
     /**
      * Has namespace.
      *
-     * @var Bool
+     * @var bool
      */
     private $isNamespaced;
 
     /**
      * Leave prefix namespace.
      *
-     * @var Bool
+     * @var bool
      */
     private $prefixNamespace;
 
@@ -30,7 +30,7 @@ class SimpleXML
      *
      * @return void
     **/
-    public function __construct(String $xml, Bool $isNamespaced = false, Bool $prefixNamespace = false)
+    public function __construct(string $xml, bool $isNamespaced = false, bool $prefixNamespace = false)
     {
         $this->rawXml = $xml;
         $this->isNamespaced = $isNamespaced;
@@ -38,9 +38,9 @@ class SimpleXML
     }
 
     /**
-     * @param  Bool $isExpandAttributes default: false
+     * @param  bool $isExpandAttributes default: false
     **/
-    public function toSimpleXMLElement(Bool $isExpandAttributes = false) : \SimpleXMLElement
+    public function toSimpleXMLElement(bool $isExpandAttributes = false) : \SimpleXMLElement
     {
         $xml = $this->isNamespaced ? $this->removeNamespace($this->rawXml) : $this->rawXml;
 
@@ -66,9 +66,9 @@ class SimpleXML
     }
 
     /**
-     * @param  Bool $isExpandAttributes default: false
+     * @param  bool $isExpandAttributes default: false
     **/
-    public function toJson(Bool $isExpandAttributes = false) : String
+    public function toJson(bool $isExpandAttributes = false) : string
     {
         try {
             return json_encode($this->toSimpleXMLElement($isExpandAttributes));
@@ -78,9 +78,9 @@ class SimpleXML
     }
 
     /**
-     * @param  Bool $isExpandAttributes default: false
+     * @param  bool $isExpandAttributes default: false
     **/
-    public function toArray(Bool $isExpandAttributes = false) : Array
+    public function toArray(bool $isExpandAttributes = false) : array
     {
         try {
             return json_decode($this->toJson($isExpandAttributes), true);
@@ -90,9 +90,9 @@ class SimpleXML
     }
 
     /**
-     * @param  Bool $isExpandAttributes default: false
+     * @param  bool $isExpandAttributes default: false
     **/
-    public function toObject(Bool $isExpandAttributes = false) : \stdClass
+    public function toObject(bool $isExpandAttributes = false) : \stdClass
     {
         try {
             return json_decode($this->toJson($isExpandAttributes), false);
@@ -106,9 +106,9 @@ class SimpleXML
      *
      * @referenced https://laracasts.com/discuss/channels/general-discussion/converting-xml-to-jsonarray
      *
-     * @param  String $xml
+     * @param  string $xml
     **/
-    private function removeNamespace(String $xml) : String
+    private function removeNamespace(string $xml) : string
     {
         $namespaces = collect(simplexml_load_string($xml)->getNamespaces(true))->keys();
         $nameSpaceDefRegEx = '(\S+)=["\']?((?:.(?!["\']?\s+(?:\S+)=|[>"\']))+.)["\']?';
