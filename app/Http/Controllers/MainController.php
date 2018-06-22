@@ -6,26 +6,35 @@ use App\Eloquents\Entry;
 use App\Eloquents\EntryDetail;
 use App\Eloquents\Feed;
 use App\Services\SimpleXML;
+use Illuminate\View\View;
+use Illuminate\Support\Collection;
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 
 class MainController extends Controller
 {
     /**
      * Index page.
     **/
-    public function index() : \Illuminate\View\View
+    public function index() : View
     {
-        $type = request()->query('type') ?: null;
-        $kind = request()->query('kind') ?: null;
+        $type = request('type', null);
+        $kind = request('kind', null);
 
         $data = $this->entries($type, $kind)->merge(['queries' => collect(request()->query())]);
 
         return view('index', $data->all());
     }
 
-    public function observatory(string $observatoryName) : \Illuminate\View\View
+    /**
+     * Observatory page.
+     *
+     * @param  string $observatoryName
+    **/
+    public function observatory(string $observatoryName) : View
     {
-        $type = request()->query('type') ?: null;
-        $kind = request()->query('kind') ?: null;
+        $type = request('type', null);
+        $kind = request('kind', null);
 
         $observatories = Entry::select('observatory_name')
                     ->selectRaw('count(*) as count')
@@ -43,57 +52,55 @@ class MainController extends Controller
         return view('observatory', $data->all());
     }
 
-    private function entries(string $type = null, string $kind = null, string $observatoryName = null) : \Illuminate\Support\Collection
+    /**
+     * Create entries list & filter list for index & observatory page.
+     *
+     * @param  string? $type
+     * @param  string? $kind
+     * @param  string? $observatoryName
+    **/
+    private function entries(string $type = null, string $kind = null, string $observatoryName = null) : Collection
     {
+        $selected = 'Select Type or Kind';
+        $entries = Entry::orderBy('updated', 'desc');
         $appends = [];
 
         if ($type) {
             $selected = 'Type: '.trans('feedtypes.'.$type);
-            $appends['type'] =$type;
-            $entries = Feed::whereType($type)->first()->entries()->orderBy('updated', 'desc');
+            $appends['type'] = $type;
+            $entries = $entries->whereHas('feed', function ($query) use ($type) {
+                            return $query->whereType($type);
+                        });
         } elseif ($kind) {
             $selected = 'Kind: '.$kind;
             $appends['kind'] = $kind;
-            $entry_ids = EntryDetail::select('entry_id')->where('kind_of_info', $kind)->groupBy('entry_id')->get();
-
-            $simple_entry_ids = $entry_ids->map(function ($entry_id) {
-                return $entry_id->entry_id;
-            })->all();
-            $entries = Entry::whereIn('id', $simple_entry_ids)->orderBy('updated', 'desc');
-        } else {
-            $selected = 'Select Type or Kind';
-            $entries = Entry::orderBy('updated', 'desc');
+            $entries = $entries->whereHas('entryDetails', function ($query) use ($kind) {
+                            return $query->where('kind_of_info', $kind);
+                        });
         }
 
+        $feeds = Feed::select(['uuid', 'url']);
         $kindList = EntryDetail::select('kind_of_info', 'entry_id')
                     ->selectRaw('count(*) as count')
                     ->groupBy('kind_of_info');
 
         if ($observatoryName) {
+            $entries = $entries->whereObservatoryName($observatoryName);
+            $feeds = $feeds->whereHas('entries', function ($query) use ($observatoryName) {
+                            return $query->whereObservatoryName($observatoryName);
+                        })->withCount(['entries' => function ($query) use ($observatoryName) {
+                            return $query->whereObservatoryName($observatoryName);
+                        }]);
             $kindList = $kindList->whereHas('entry', function ($query) use ($observatoryName) {
                             return $query->whereObservatoryName($observatoryName);
                         });
-            $entries = $entries->whereObservatoryName($observatoryName);
+        } else {
+            $feeds = $feeds->withCount('entries');
         }
 
-        $entries = $entries
-                    ->paginate(15)
-                    ->appends($appends);
+        $entries = $entries->paginate(15)->appends($appends);
 
-        $feeds = Feed::get(['uuid', 'url'])
-                    ->sortByFeedType()
-                    ->map(function ($feed) use ($observatoryName) {
-                        if ($observatoryName) {
-                            $feed->count = $feed->entries()->whereObservatoryName($observatoryName)->count();
-                        } else {
-                            $feed->count = $feed->entries()->count();
-                        }
-
-                        return $feed;
-                    })->filter(function ($feed) {
-                        return $feed->count > 0;
-                    });
-
+        $feeds = $feeds->get()->sortByFeedType();
         $kindList = $kindList->get()->sortByKind();
 
         return collect([
@@ -106,8 +113,10 @@ class MainController extends Controller
 
     /**
      * Entry page.
+     *
+     * @param  \App\Eloquents\EntryDetail $entry
     **/
-    public function entry(EntryDetail $entry) : \Illuminate\View\View
+    public function entry(EntryDetail $entry) : View
     {
         $doc = \Storage::get('entry/'.$entry->uuid);
         $feed = $entry->entry->feed;
@@ -124,8 +133,10 @@ class MainController extends Controller
 
     /**
      * Entry xml.
+     *
+     * @param  string $uuid
     **/
-    public function entryXml($uuid) : \Illuminate\Http\Response
+    public function entryXml(string $uuid) : Response
     {
         $doc = \Storage::get('entry/'.$uuid);
         return response($doc, 200)
@@ -134,8 +145,10 @@ class MainController extends Controller
 
     /**
      * Entry json.
+     *
+     * @param  string $uuid
     **/
-    public function entryJson($uuid) : \Illuminate\Http\JsonResponse
+    public function entryJson(string $uuid) : JsonResponse
     {
         $doc = \Storage::get('entry/'.$uuid);
         return response()->json((new SimpleXML($doc, true))->toArray(true),

@@ -6,6 +6,11 @@ use Illuminate\View\View;
 
 class HomeController extends Controller
 {
+    /**
+     * Page status.
+     *
+     * @var array
+     */
     private $menus = [
         'index' => [
             'name' => 'Top Page',

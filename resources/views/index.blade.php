@@ -13,7 +13,7 @@
                     <a class="dropdown-item" href="{{ route($__env->yieldContent('route', 'index'), $queries->forget(['page', 'type', 'kind'])->all()) }}">Select Type or Kind</a>
                     <div class="dropdown-divider"></div>
                     @foreach ($feeds as $feed)
-                    <a class="dropdown-item" href="{{ route($__env->yieldContent('route', 'index'), $queries->merge(['type' => $feed->type])->all()) }}">@lang('feedtypes.'.$feed->type) ({{ $feed->count }})</a>
+                    <a class="dropdown-item" href="{{ route($__env->yieldContent('route', 'index'), $queries->merge(['type' => $feed->type])->all()) }}">@lang('feedtypes.'.$feed->type) ({{ $feed->entries_count }})</a>
                     @endforeach
                     <div class="dropdown-divider"></div>
                     @foreach ($kindList as $kind)

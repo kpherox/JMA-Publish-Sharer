@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
@@ -15,7 +14,7 @@ abstract class SocialAccountController extends Controller
      *
      * @var string
     **/
-    private $provider = '';
+    private $provider;
 
     /**
      * Getter for provider name.
@@ -27,6 +26,8 @@ abstract class SocialAccountController extends Controller
 
     /**
      * Setter for provider name.
+     *
+     * @param  string $value
     **/
     protected function setProvider(string $value) : string
     {
@@ -49,23 +50,28 @@ abstract class SocialAccountController extends Controller
     /**
      * Unlink account from User.
      *
-     * @return RedirectResponse|JsonResponse
+     * @param  \App\Services\SocialAccountsService $accountService
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function unlinkFromUser(SocialAccountsService $accountService, Request $request)
+    public function unlinkFromUser(SocialAccountsService $accountService)
     {
-        try {
-            $message = $accountService->deleteLinkedAccount($this->getProvider(), (int)$request->id);
-        } catch (\Exception $e) {
-            abort_if(!$request->ajax(), 403, 'Can\'t delete');
+        $isAjax = request()->ajax();
 
-            return new JsonResponse([
+        try {
+            $message = $accountService->deleteLinkedAccount($this->getProvider(), (int)request('id'));
+        } catch (\Exception $e) {
+            if ($isAjax) {
+                return new JsonResponse([
                     'status' => 'Can\'t delete',
                     'statusCode' => 403,
                     'message' => $e->getMessage(),
                 ], 403);
+            }
+
+            abort(403, 'Can\'t delete');
         }
 
-        if ($request->ajax()) {
+        if ($isAjax) {
             return new JsonResponse([
                 'status' => 'OK',
                 'statusCode' => 201,
@@ -78,6 +84,8 @@ abstract class SocialAccountController extends Controller
 
     /**
      * Obtain the user information
+     *
+     * @param  \App\Services\SocialAccountsService $accountService
      */
     public function handleProviderCallback(SocialAccountsService $accountService) : RedirectResponse
     {
