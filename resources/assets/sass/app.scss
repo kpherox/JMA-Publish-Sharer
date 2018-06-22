@@ -98,6 +98,21 @@ $border-color:#cdcdcd;
     }
 }
 
+#map {
+    position: relative;
+    width: 100%;
+
+    &:before {
+        content: "";
+        display: block;
+        padding-top: (1/1.618)*100%;
+    }
+}
+
+.pagination {
+    justify-content: center;
+}
+
 .list-group-striped .list-group-item {
     &:nth-child(even) {
         background-color: rgba(0,0,0,.05);

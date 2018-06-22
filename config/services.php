@@ -40,6 +40,14 @@ return [
         'github' => 'GitHub',
     ],
 
+    'googleapi' => [
+        'maps' => [
+            'js' => [
+                'key' => env('GOOGLE_MAPS_JS_API_KEY'),
+            ],
+        ],
+    ],
+
     'oauth1' => [
         'twitter',
     ],

@@ -177,7 +177,10 @@ return [
         App\Providers\ConfigServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\Blade\AliasProvider::class,
+
+        App\Providers\Blade\ComponentAliasServiceProvider::class,
+        App\Providers\Blade\DirectiveServiceProvider::class,
+        App\Providers\ExtendingCollectionServiceProvider::class
 
     ],
 

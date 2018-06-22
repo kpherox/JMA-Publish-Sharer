@@ -11,7 +11,17 @@
 |
 */
 
-Route::view('/', 'welcome')->name('index');
+Route::get('/', 'MainController@index')->name('index');
+
+Route::prefix('observatory')->group(function() {
+    Route::get('{observatory}', 'MainController@observatory')->name('observatory');
+});
+
+Route::prefix('entry')->group(function() {
+    Route::get('{uuid}.xml', 'MainController@entryXml')->name('entry.xml');
+    Route::get('{uuid}.json', 'MainController@entryJson')->name('entry.json');
+    Route::get('{entry}', 'MainController@entry')->name('entry');
+});
 
 Auth::routes();
 

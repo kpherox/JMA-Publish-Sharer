@@ -4,6 +4,9 @@ namespace App\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 class Entry extends Model
 {
@@ -13,7 +16,10 @@ class Entry extends Model
      * @var array
      */
     protected $fillable = [
-        'uuid', 'kind_of_info', 'feed_uuid', 'observatory_name', 'headline', 'url', 'updated',
+        'feed_uuid',
+        'observatory_name',
+        'headline',
+        'updated',
     ];
 
     /**
@@ -24,10 +30,62 @@ class Entry extends Model
     protected $hidden = [];
 
     /**
-     * Relation feed
+     * Relation: belong to feed.
     **/
     public function feed() : BelongsTo
     {
         return $this->belongsTo('App\Eloquents\Feed', 'feed_uuid', 'uuid');
+    }
+
+    /**
+     * Relation: has many entry details.
+    **/
+    public function entryDetails() : HasMany
+    {
+        return $this->hasMany('App\Eloquents\EntryDetail');
+    }
+
+    /**
+     * Local Scope: where observatory_name.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  string $observatory
+    **/
+    public function scopeWhereObservatoryName(Builder $query, string $observatory) : Builder
+    {
+        $observatories = self::select('observatory_name')
+                ->groupBy('observatory_name')
+                ->get()
+                ->filter(function ($entry) use ($observatory) {
+                    $splitedObservatory = collect(preg_split( "/( |　)/", $entry->observatory_name));
+                    return ($entry->observatory_name === $observatory || $splitedObservatory->contains($observatory));
+                })->map(function ($entry) {
+                    return $entry->observatory_name;
+                });
+
+        return $query->whereIn('observatory_name', $observatories);
+    }
+
+    /**
+     * Mutator: parse headline.
+    **/
+    public function getParsedHeadlineAttribute() : Collection
+    {
+        preg_match('/【(.*)】(.*)/', $this->headline, $headline);
+        return collect([
+            'original' => $headline[0],
+            'title' => $headline[1],
+            'headline' => $headline[2],
+        ]);
+    }
+
+    /**
+     * Mutator: entryDetails kinds.
+    **/
+    public function getChildrenKindsAttribute() : Collection
+    {
+        return $this->entryDetails->sortByKind()->map(function ($detail) {
+            return $detail->kind_of_info;
+        });
     }
 }

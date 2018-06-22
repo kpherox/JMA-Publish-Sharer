@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
 class GitHubAccountController extends SocialAccountController

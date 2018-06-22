@@ -13,11 +13,26 @@ class LinkedSocialAccount extends Model
      * @var array
      */
     protected $fillable = [
-        'provider_name', 'provider_id', 'name', 'nickname', 'avatar', 'token', 'token_secret'
+        'provider_name',
+        'provider_id',
+        'name',
+        'nickname',
+        'avatar',
+        'token',
+        'token_secret',
     ];
 
     /**
-     * Relation user
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'token_secret',
+    ];
+
+    /**
+     * Relation: belong to user.
     **/
     public function user() : BelongsTo
     {

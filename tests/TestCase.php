@@ -24,8 +24,9 @@ abstract class TestCase extends BaseTestCase
         foreach (\DB::select('SHOW TABLES') as $table) {
             $columnName = 'Tables_in_'.\DB::connection('')->getDatabaseName();
             $tableName = $table->$columnName;
-            if ($tableName === 'migrations') continue;
-            \DB::statement('TRUNCATE TABLE `' . $tableName . '`');
+            if ($tableName !== 'migrations') {
+                \DB::statement('TRUNCATE TABLE `' . $tableName . '`');
+            }
         }
         parent::tearDown();
     }

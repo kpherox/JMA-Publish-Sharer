@@ -8,7 +8,11 @@ use App\Eloquents\LinkedSocialAccount;
 
 class SocialAccountsService
 {
-    public function findOrCreate(ProviderUser $providerUser, String $provider) : User
+    /**
+     * @param  \Laravel\Socialite\Contracts\User $providerUser
+     * @param  string $provider
+    **/
+    public function findOrCreate(ProviderUser $providerUser, string $provider) : User
     {
         $account = LinkedSocialAccount::firstOrNew(['provider_name' => $provider, 'provider_id' => $providerUser->getId()]);
 
@@ -36,7 +40,11 @@ class SocialAccountsService
         return $user;
     }
 
-    public function deleteLinkedAccount(String $provider, Int $providerId) : String
+    /**
+     * @param  string $provider
+     * @param  int $providerId
+    **/
+    public function deleteLinkedAccount(string $provider, int $providerId) : string
     {
         $account = LinkedSocialAccount::where([
             ['provider_name', $provider],
@@ -53,8 +61,13 @@ class SocialAccountsService
 
     /**
      * Set ProviderUser property to LinkedSocialAccount columns
+     *
+     * @param  \App\Eloquents\LinkedSocialAccount inout $account
+     * @param  \Laravel\Socialite\Contracts\User $user
+     * @param  bool $isOAuthOne
+     * @return void
     **/
-    private function setAccountColumn(LinkedSocialAccount &$account, ProviderUser $user, Bool $isOAuthOne)
+    private function setAccountColumn(LinkedSocialAccount &$account, ProviderUser $user, bool $isOAuthOne)
     {
         $account->name = $user->getName();
         $account->nickname = $user->getNickname();
@@ -65,16 +78,20 @@ class SocialAccountsService
 
     /**
      * Return original size image's url for Twitter
+     *
+     * @param  string $url
     **/
-    private function originalSizeImageUrl(String $url) : String
+    private function originalSizeImageUrl(string $url) : string
     {
         return preg_replace("/https?:\/\/(.+?)_normal.(jpg|jpeg|png|gif)/", "https://$1.$2", $url);
     }
 
     /**
      * Contains provider to oauth1
+     *
+     * @param  string $provider
     **/
-    private function isOAuthOne(String $provider) : Bool
+    private function isOAuthOne(string $provider) : bool
     {
         return collect(config('services.oauth1'))->contains($provider);
     }

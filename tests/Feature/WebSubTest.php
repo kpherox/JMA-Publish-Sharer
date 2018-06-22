@@ -22,7 +22,7 @@ class WebSubTest extends TestCase
      *
      * @return array
      */
-    private function getParameters(String $status)
+    private function getParameters(string $status)
     {
         $result = [];
 
@@ -58,7 +58,7 @@ class WebSubTest extends TestCase
      *
      * @return array
      */
-    private function getHeaders(String $verbs = 'GET', String $signature = null)
+    private function getHeaders(string $verbs = 'GET', string $signature = null)
     {
         $headers = [
             'HTTP_User-Agent' => 'AppEngine-Google; (+http://code.google.com/appengine; appid: s~alert-hub)'
@@ -107,6 +107,7 @@ class WebSubTest extends TestCase
                       ->with('http://*/*/b60694a6-d389-3194-a051-092ee9b2c474.xml')
                       ->andReturn(new Promise\FulfilledPromise(new Psr7\Response(200, [], $sampleData2)));
 
+        \Storage::fake('local');
         $atomFeed = file_get_contents('tests/SampleData/jmaxml_atomfeed.xml');
 
         $hash = hash_hmac('sha1', $atomFeed, $this->verifyToken);
@@ -115,18 +116,19 @@ class WebSubTest extends TestCase
 
         $response->assertSuccessful();
         $this
-            ->assertDatabaseHas('entries', [
+            ->assertDatabaseHas('entry_details', [
                 'uuid' => '8e55b8d8-518b-3dc9-9156-7e87c001d7b5',
-                'xml_document' => $sampleData1
             ])
-            ->assertDatabaseHas('entries', [
+            ->assertDatabaseHas('entry_details', [
                 'uuid' => 'b60694a6-d389-3194-a051-092ee9b2c474',
-                'xml_document' => $sampleData2
             ])
             ->assertDatabaseHas('feeds', [
                 'uuid' => 'be4342e2-ff73-363c-a3ed-66e05e977224',
                 'url' => 'http://xml.kishou.go.jp/*/*.xml'
             ]);
+
+        \Storage::disk('local')->assertExists('entry/8e55b8d8-518b-3dc9-9156-7e87c001d7b5');
+        \Storage::disk('local')->assertExists('entry/b60694a6-d389-3194-a051-092ee9b2c474');
     }
 
     /**
@@ -145,7 +147,7 @@ class WebSubTest extends TestCase
 
         $response
             ->assertForbidden()
-            ->assertSeeText('Feed parse error');
+            ->assertSeeText('XML Parse error');
     }
 
     /**
@@ -164,7 +166,7 @@ class WebSubTest extends TestCase
 
         $response
             ->assertForbidden()
-            ->assertSeeText('Invalid hub signature');
+            ->assertSeeText('Invalid signature');
     }
 
     /**
@@ -183,7 +185,7 @@ class WebSubTest extends TestCase
 
         $response
             ->assertForbidden()
-            ->assertSeeText('Invalid x-hub-signature header');
+            ->assertSeeText('Invalid hubSignature');
     }
 
     /**
@@ -264,11 +266,13 @@ class WebSubTest extends TestCase
      *
      * @return void
      */
-    public function testSubscribeCheckNotFound()
+    public function testSubscribeCheckNotExistMode()
     {
         $response = $this->call('GET', self::$websubEndpoint, $this->getParameters(''), [], [], $this->getHeaders());
 
-        $response->assertNotFound();
+        $response
+            ->assertForbidden()
+            ->assertSeeText('Not exist hub.mode');
     }
 
 }
