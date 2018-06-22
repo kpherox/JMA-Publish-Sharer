@@ -65,13 +65,8 @@ class Entry extends Model
 
     public function getChildrenKindsAttribute() : \Illuminate\Support\Collection
     {
-        $res = [];
-        foreach ($this->entryDetails->sortByKind() as $detail) {
-            $res[] = $detail->kind_of_info;
-        }
-
-        $kindOrder = collect(config('jmaxmlkinds'))->keys();
-
-        return collect($res);
+        return $this->entryDetails->sortByKind()->map(function ($detail) {
+            return $detail->kind_of_info;
+        });
     }
 }

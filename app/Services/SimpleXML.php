@@ -73,17 +73,18 @@ class SimpleXML
     **/
     private function removeNamespace(String $xml) : String
     {
-        $toRemove = collect(simplexml_load_string($xml)->getNamespaces(true))->keys();
+        $namespaces = collect(simplexml_load_string($xml)->getNamespaces(true))->keys();
         $nameSpaceDefRegEx = '(\S+)=["\']?((?:.(?!["\']?\s+(?:\S+)=|[>"\']))+.)["\']?';
 
-        foreach( $toRemove as $remove ) {
-            $replaced = $this->prefixNamespace ? $remove . '_' : '';
-            $xml = str_replace('<' . $remove . ':', '<' . $replaced, $xml);
-            $xml = str_replace('</' . $remove . ':', '</' . $replaced, $xml);
-            $xml = str_replace($remove . ':commentText', $replaced . 'commentText', $xml);
-            $pattern = "/xmlns:{$remove}{$nameSpaceDefRegEx}/";
+        $namespaces->each(function ($namespace) use (&$xml, $nameSpaceDefRegEx) {
+            $remove = $namespace . ':';
+            $replaced = $this->prefixNamespace ? $namespace . '_' : '';
+            $xml = str_replace('<' . $remove, '<' . $replaced, $xml);
+            $xml = str_replace('</' . $remove, '</' . $replaced, $xml);
+            $xml = str_replace($remove . 'commentText', $replaced . 'commentText', $xml);
+            $pattern = "/xmlns:{$namespace}{$nameSpaceDefRegEx}/";
             $xml = preg_replace($pattern, '', $xml, 1);
-        }
+        });
         return $xml;
     }
 

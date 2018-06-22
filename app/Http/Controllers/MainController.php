@@ -56,10 +56,9 @@ class MainController extends Controller
             $appends['kind'] = $kind;
             $entry_ids = EntryDetail::select('entry_id')->where('kind_of_info', $kind)->groupBy('entry_id')->get();
 
-            $simple_entry_ids = [];
-            foreach ($entry_ids as $entry_id) {
-                $simple_entry_ids[] = $entry_id->entry_id;
-            }
+            $simple_entry_ids = $entry_ids->map(function ($entry_id) {
+                return $entry_id->entry_id;
+            })->all();
             $entries = Entry::whereIn('id', $simple_entry_ids)->orderBy('updated', 'desc');
         } else {
             $selected = 'Select Type or Kind';

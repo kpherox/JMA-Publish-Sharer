@@ -130,9 +130,7 @@ class WebSubHandler
 
         $results = self::fetchXmlDocument($promises);
 
-
-        $entryRecords = [];
-        foreach ($results as $key => $result) {
+        $entryRecords = $results->map(function ($result, $key) use ($entryArrays) {
             $entryArray = $entryArrays[$key];
 
             if ($result->getReasonPhrase() === 'OK') {
@@ -140,8 +138,8 @@ class WebSubHandler
                 \Storage::put('entry/'.$key, $xmlDoc);
             }
 
-            $entryRecords[] = $entryArray;
-        }
+            return $entryArray;
+        })->values()->all();
 
         EntryDetail::insert($entryRecords);
     }
@@ -177,24 +175,18 @@ class WebSubHandler
     /**
      * Fetch xml document from JMA.
     **/
-    private static function fetchXmlDocument(Array $promises) : Array
+    private static function fetchXmlDocument(Array $promises) : \Illuminate\Support\Collection
     {
-        $results = [];
-
-        foreach (Promise\settle($promises)->wait() as $key => $obj) {
-            switch ($obj['state']) {
-                case 'fulfilled':
-                    $results[$key] = $obj['value'];
-                    break;
-                case 'rejected':
-                    $results[$key] = new Psr7\Response($obj['reason']->getCode());
-                    break;
-                default:
-                    $results[$key] = new Psr7\Response(0);
-                    break;
+        return collect(Promise\settle($promises)->wait())->map(function ($obj, $key) {
+            if ($obj['state'] === 'fulfilled') {
+                return $obj['value'];
             }
-        }
 
-        return $results;
+            if ($obj['state'] === 'rejected') {
+                return new Psr7\Response($obj['reason']->getCode());
+            }
+
+            return new Psr7\Response(0);
+        });
     }
 }
