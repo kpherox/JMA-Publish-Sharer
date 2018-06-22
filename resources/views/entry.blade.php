@@ -24,7 +24,7 @@
                         発表機関:
                         @foreach (explode('　', $entry['Control']['PublishingOffice']) as $observatoryName)
                             @if (!$loop->first) > @endif
-                            <a href="{{ route('index', ['observatory' => $observatoryName]) }}">{{ $observatoryName }}</a>
+                            <a href="{{ route('observatory', ['observatory' => $observatoryName]) }}">{{ $observatoryName }}</a>
                         @endforeach
                     </h6>
 

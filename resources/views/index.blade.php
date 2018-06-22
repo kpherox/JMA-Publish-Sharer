@@ -47,7 +47,7 @@
                             @if ($loop->index > 0) > @endif
 
                             @if ($observatory !== $observatoryName)
-                                <a href="{{ route('index', ['observatory' => $observatoryName]) }}">{{ $observatoryName }}</a>
+                                <a href="{{ route('observatory', ['observatory' => $observatoryName]) }}">{{ $observatoryName }}</a>
                             @else
                                 {{ $observatoryName }}
                             @endif

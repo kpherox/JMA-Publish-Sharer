@@ -17,11 +17,31 @@ class MainController extends Controller
     {
         $type = request()->query('type') ?: null;
         $kind = request()->query('kind') ?: null;
-        $observatoryName = request()->query('observatory') ?: null;
 
+        $data = $this->entries($type, $kind)->merge(['queries' => collect(request()->query())]);
+
+        return view('index', $data->all());
+    }
+
+    public function observatory(String $observatoryName) : \Illuminate\View\View
+    {
+        $type = request()->query('type') ?: null;
+        $kind = request()->query('kind') ?: null;
+
+        $data = $this->entries($type, $kind, $observatoryName)->merge(['queries' => collect(request()->query())]);
+
+        return view('index', $data->all());
+    }
+
+    private function entries(String $type = null, String $kind = null, String $observatoryName = null) : \Illuminate\Support\Collection
+    {
         $appends = [];
 
-        if ($kind) {
+        if ($type) {
+            $selected = 'Type: '.trans('feedtypes.'.$type);
+            $appends['type'] =$type;
+            $entries = Feed::whereType($type)->first()->entries()->orderBy('updated', 'desc');
+        } elseif ($kind) {
             $selected = 'Kind: '.$kind;
             $appends['kind'] = $kind;
             $entry_ids = EntryDetail::select('entry_id')->where('kind_of_info', $kind)->groupBy('entry_id')->get();
@@ -31,10 +51,6 @@ class MainController extends Controller
                 $simple_entry_ids[] = $entry_id->entry_id;
             }
             $entries = Entry::whereIn('id', $simple_entry_ids)->orderBy('updated', 'desc');
-        } elseif ($type) {
-            $selected = 'Type: '.trans('feedtypes.'.$type);
-            $appends['type'] =$type;
-            $entries = Feed::whereType($type)->first()->entries()->orderBy('updated', 'desc');
         } else {
             $selected = 'Select Type or Kind';
             $entries = Entry::orderBy('updated', 'desc');
@@ -45,11 +61,10 @@ class MainController extends Controller
                     ->groupBy('kind_of_info');
 
         if ($observatoryName) {
-            $appends['observatory'] = $observatoryName;
-            $entries = $entries->whereObservatoryName($observatoryName);
             $kindList = $kindList->whereHas('entry', function ($query) use ($observatoryName) {
                             return $query->whereObservatoryName($observatoryName);
                         });
+            $entries = $entries->whereObservatoryName($observatoryName);
         }
 
         $entries = $entries
@@ -64,6 +79,7 @@ class MainController extends Controller
                         } else {
                             $feed->count = $feed->entries()->count();
                         }
+
                         return $feed;
                     })->filter(function ($feed) {
                         return $feed->count > 0;
@@ -71,14 +87,13 @@ class MainController extends Controller
 
         $kindList = $kindList->get()->sortByKind();
 
-        return view('index', [
-                   'entries' => $entries,
-                   'feeds' => $feeds,
-                   'selected' => $selected,
-                   'observatory' => $observatoryName,
-                   'kindList' => $kindList,
-                   'queries' => collect(request()->query()),
-               ]);
+        return collect([
+            'entries' => $entries,
+            'feeds' => $feeds,
+            'selected' => $selected,
+            'observatory' => $observatoryName,
+            'kindList' => $kindList,
+        ]);
     }
 
     /**

@@ -13,6 +13,10 @@
 
 Route::get('/', 'MainController@index')->name('index');
 
+Route::prefix('observatory')->group(function() {
+    Route::get('{observatory}', 'MainController@observatory')->name('observatory');
+});
+
 Route::prefix('entry')->group(function() {
     Route::get('{uuid}.xml', 'MainController@entryXml')->name('entry.xml');
     Route::get('{uuid}.json', 'MainController@entryJson')->name('entry.json');
