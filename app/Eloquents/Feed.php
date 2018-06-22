@@ -3,6 +3,8 @@
 namespace App\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Builder;
 
 class Feed extends Model
 {
@@ -24,19 +26,28 @@ class Feed extends Model
      */
     protected $hidden = [];
 
-    public function scopeWhereType($query, String $type)
-    {
-        return $query->where('url', 'LIKE', '%'.$type.'%');
-    }
-
     /**
-     * Relation entries
+     * Relation: has many entries.
     **/
-    public function entries() : \Illuminate\Database\Eloquent\Relations\HasMany
+    public function entries() : HasMany
     {
         return $this->hasMany('App\Eloquents\Entry', 'feed_uuid', 'uuid');
     }
 
+    /**
+     * Local Scope: where url ($type.xml).
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  String $type
+    **/
+    public function scopeWhereType(Builder $query, String $type) : Builder
+    {
+        return $query->where('url', 'LIKE', '%'.$type.'.xml');
+    }
+
+    /**
+     * Mutator: feed type.
+    **/
     public function getTypeAttribute() : String
     {
         return basename(parse_url($this->url, PHP_URL_PATH), '.xml');

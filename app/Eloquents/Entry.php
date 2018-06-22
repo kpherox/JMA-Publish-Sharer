@@ -3,6 +3,10 @@
 namespace App\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 class Entry extends Model
 {
@@ -25,7 +29,29 @@ class Entry extends Model
      */
     protected $hidden = [];
 
-    public function scopeWhereObservatoryName($query, String $observatory)
+    /**
+     * Relation: belong to feed.
+    **/
+    public function feed() : BelongsTo
+    {
+        return $this->belongsTo('App\Eloquents\Feed', 'feed_uuid', 'uuid');
+    }
+
+    /**
+     * Relation: has many entry details.
+    **/
+    public function entryDetails() : HasMany
+    {
+        return $this->hasMany('App\Eloquents\EntryDetail');
+    }
+
+    /**
+     * Local Scope: where observatory_name.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  String $observatory
+    **/
+    public function scopeWhereObservatoryName(Builder $query, String $observatory) : Builder
     {
         $observatories = Self::select('observatory_name')
                 ->groupBy('observatory_name')
@@ -41,19 +67,9 @@ class Entry extends Model
     }
 
     /**
-     * Relation feed
+     * Mutator: parse headline.
     **/
-    public function feed() : \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo('App\Eloquents\Feed', 'feed_uuid', 'uuid');
-    }
-
-    public function entryDetails() : \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany('App\Eloquents\EntryDetail');
-    }
-
-    public function getParsedHeadlineAttribute() : \Illuminate\Support\Collection
+    public function getParsedHeadlineAttribute() : Collection
     {
         preg_match('/【(.*)】(.*)/', $this->headline, $headline);
         return collect([
@@ -63,7 +79,10 @@ class Entry extends Model
         ]);
     }
 
-    public function getChildrenKindsAttribute() : \Illuminate\Support\Collection
+    /**
+     * Mutator: entryDetails kinds.
+    **/
+    public function getChildrenKindsAttribute() : Collection
     {
         return $this->entryDetails->sortByKind()->map(function ($detail) {
             return $detail->kind_of_info;
