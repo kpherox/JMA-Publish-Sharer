@@ -7,9 +7,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
+use App\Events\EntrySaved;
 
 class Entry extends Model
 {
+    /**
+     * Event map.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'saved' => EntrySaved::class,
+    ];
+
     /**
      * The attributes that are mass assignable.
      *

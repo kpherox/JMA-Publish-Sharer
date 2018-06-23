@@ -3,10 +3,13 @@
 namespace App\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LinkedSocialAccount extends Model
 {
+    use Notifiable;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -30,6 +33,16 @@ class LinkedSocialAccount extends Model
     protected $hidden = [
         'token_secret',
     ];
+
+    public function routeNotificationForTwitter() : Array
+    {
+        return [
+            config('services.twitter.consumer_key'),
+            config('services.twitter.consumer_secret'),
+            $this->token,
+            $this->token_secret,
+        ];
+    }
 
     /**
      * Relation: belong to user.
