@@ -12,7 +12,6 @@ class WebSubTest extends TestCase
 {
 
     private static $websubEndpoint = '/hooks/websub/subscriber';
-    private static $websubOldEndpoint = '/hooks/push/subscriber';
 
     private $verifyToken = 'testwebsub';
     private $challengeValue = 'test';
@@ -85,16 +84,9 @@ class WebSubTest extends TestCase
      */
     public function testReceiveFeedSuccess()
     {
-        $this->receiveSuccess(self::$websubEndpoint);
-    }
+        \Notification::fake();
+        \Storage::fake('local');
 
-    public function testReceiveFeedOldPathSuccess()
-    {
-        $this->receiveSuccess(self::$websubOldEndpoint);
-    }
-
-    private function receiveSuccess($endpoint)
-    {
         $sampleData1 = file_get_contents('tests/SampleData/jmaxml_Samples/01_01_01_091210_VGSK50.xml');
         $sampleData2 = file_get_contents('tests/SampleData/jmaxml_Samples/01_01_02_091210_VGSK50.xml');
 
@@ -107,12 +99,11 @@ class WebSubTest extends TestCase
                       ->with('http://*/*/b60694a6-d389-3194-a051-092ee9b2c474.xml')
                       ->andReturn(new Promise\FulfilledPromise(new Psr7\Response(200, [], $sampleData2)));
 
-        \Storage::fake('local');
         $atomFeed = file_get_contents('tests/SampleData/jmaxml_atomfeed.xml');
 
         $hash = hash_hmac('sha1', $atomFeed, $this->verifyToken);
 
-        $response = $this->call('POST', $endpoint, [], [], [], $this->getHeaders('POST', 'sha1='.$hash), $atomFeed);
+        $response = $this->call('POST', self::$websubEndpoint, [], [], [], $this->getHeaders('POST', 'sha1='.$hash), $atomFeed);
 
         $response->assertSuccessful();
         $this
@@ -213,17 +204,7 @@ class WebSubTest extends TestCase
      */
     public function testSubscribeCheckSuccess()
     {
-        $this->checkSuccess(self::$websubEndpoint);
-    }
-
-    public function testSubscribeCheckOldPathSuccess()
-    {
-        $this->checkSuccess(self::$websubOldEndpoint);
-    }
-
-    private function checkSuccess($endpoint)
-    {
-        $response = $this->call('GET', $endpoint, $this->getParameters('check_success'), [], [], $this->getHeaders());
+        $response = $this->call('GET', self::$websubEndpoint, $this->getParameters('check_success'), [], [], $this->getHeaders());
 
         $response
             ->assertSuccessful()
