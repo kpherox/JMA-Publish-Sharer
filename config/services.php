@@ -55,6 +55,10 @@ return [
     'twitter' => [
         'client_id' => env('TWITTER_KEY'),
         'client_secret' => env('TWITTER_SECRET'),
+        'consumer_key' => env('TWITTER_API_KEY', env('TWITTER_KEY')),
+        'consumer_secret' => env('TWITTER_API_SECRET', env('TWITTER_SECRET')),
+        'access_token' => env('TWITTER_ACCESS_TOKEN'),
+        'access_secret' => env('TWITTER_ACCESS_SECRET'),
     ],
 
     'github' => [
