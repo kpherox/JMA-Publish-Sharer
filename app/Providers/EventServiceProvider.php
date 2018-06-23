@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use SocialiteProviders\Manager\SocialiteWasCalled;
+use SocialiteProviders\Twitter\TwitterExtendSocialite;
+use App\Events\EntrySaved;
+use App\Listeners\EntrySavedListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -13,11 +16,11 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'SocialiteProviders\Manager\SocialiteWasCalled' => [
-            'SocialiteProviders\Twitter\TwitterExtendSocialite@handle',
+        SocialiteWasCalled::class => [
+            TwitterExtendSocialite::class,
         ],
-        'App\Events\Event' => [
-            'App\Listeners\EventListener',
+        EntrySaved::class => [
+            EntrySavedListener::class,
         ],
     ];
 
