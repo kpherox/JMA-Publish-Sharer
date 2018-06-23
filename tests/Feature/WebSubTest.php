@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Promise;
+use App\Notifications\EntryReceived;
+use App\Eloquents\LinkedSocialAccount;
 
 class WebSubTest extends TestCase
 {
@@ -74,6 +76,47 @@ class WebSubTest extends TestCase
         };
 
         return $headers;
+    }
+
+    /**
+     * Receive feed test.
+     * Notification sent success.
+     *
+     * @return void
+     */
+    public function testEntryReceivedNotification()
+    {
+        \Notification::fake();
+
+        \Storage::fake('local');
+
+        $sampleData1 = file_get_contents('tests/SampleData/jmaxml_Samples/01_01_01_091210_VGSK50.xml');
+        $sampleData2 = file_get_contents('tests/SampleData/jmaxml_Samples/01_01_02_091210_VGSK50.xml');
+
+        \Guzzle::shouldReceive('getAsync')
+                      ->once()
+                      ->with('http://*/*/8e55b8d8-518b-3dc9-9156-7e87c001d7b5.xml')
+                      ->andReturn(new Promise\FulfilledPromise(new Psr7\Response(200, [], $sampleData1)));
+        \Guzzle::shouldReceive('getAsync')
+                      ->once()
+                      ->with('http://*/*/b60694a6-d389-3194-a051-092ee9b2c474.xml')
+                      ->andReturn(new Promise\FulfilledPromise(new Psr7\Response(200, [], $sampleData2)));
+
+        $atomFeed = file_get_contents('tests/SampleData/jmaxml_atomfeed.xml');
+
+        $hash = hash_hmac('sha1', $atomFeed, $this->verifyToken);
+
+        $response = $this->call('POST', self::$websubEndpoint, [], [], [], $this->getHeaders('POST', 'sha1='.$hash), $atomFeed);
+
+        \Notification::assertSentTo(
+            LinkedSocialAccount::where('provider_name', 'twitter')->first(),
+            EntryReceived::class
+        );
+
+        \Notification::assertNotSentTo(
+            LinkedSocialAccount::where('provider_name', 'github')->first(),
+            EntryReceived::class
+        );
     }
 
     /**
