@@ -34,18 +34,17 @@ class EntryReceived extends Notification implements ShouldQueue
      */
     public function via($notifiable) : array
     {
-        $via = $notifiable instanceof LinkedSocialAccount ? $notifiable : [];
+        $via = [];
 
-        if (is_array($via)) {
+        if (!$notifiable instanceof LinkedSocialAccount) {
             return $via;
         }
 
         switch ($notifiable->provider_name) {
             case 'twitter':
-                $via = [TwitterChannel::class];
+                $via[] = TwitterChannel::class;
                 break;
             default:
-                $via = [];
                 break;
         }
 
