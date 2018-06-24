@@ -5,7 +5,20 @@
         </h5>
 
         <div class="card-body">
-            <p class="card-text">I'm an example component!</p>
+            <div class="card border-light">
+                <h5 class="card-header bg-transparent border-info">Notification</h5>
+
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item d-sm-flex d-lg-block d-xl-flex">
+                        <p class="mb-0 p-2">
+                            Notification Test
+                        </p>
+                        <button class="btn btn-secondary ml-auto align-self-center" type="button" @click="testNotify">
+                            Post
+                        </button>
+                    </div>
+                </div>
+            </div>
 
             <div class="card border-light">
                 <h5 class="card-header bg-transparent border-danger">Danger Zone</h5>
@@ -79,15 +92,32 @@
                 default: {},
             },
         },
+        data() {
+            return {
+                params: {
+                    id: this.account.provider_id,
+                    _token: this.csrfToken
+                }
+            }
+        },
         methods: {
+            testNotify() {
+                let formData = this.params
+                formData.message = 'Notification test.'
+
+                axios.post(this.endpoints[this.account.provider_name].notify, formData)
+                    .then((res) => {
+                        alert(JSON.stringify(res.data.message))
+                    })
+                    .catch((e) => {
+                        console.error(e.response.data)
+                    })
+            },
             unlinkAccount() {
-                let formData = this.params({
-                    'id': this.account.provider_id
-                })
+                let formData = this.params
 
                 axios.delete(this.endpoints[this.account.provider_name].unlink, { params: formData })
                     .then((res) => {
-                        console.log(res.data)
                         console.log("Unlinked "+this.providerName[this.account.provider_name]+" / "+this.account.name)
                         if (this.accounts[this.account.provider_name].length < 2) {
                             Vue.delete(this.accounts, this.account.provider_name)
@@ -98,14 +128,8 @@
                         jQuery(() => $('#unlinkModal').modal('hide'))
                     })
                     .catch((e) => {
-                        console.log(e.response.data)
-                        //location.reload()
+                        console.error(e.response.data)
                     })
-            },
-            params(formData) {
-                formData['_token'] = this.csrfToken
-
-                return formData
             }
         },
         mounted() {

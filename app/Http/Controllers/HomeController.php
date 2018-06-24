@@ -65,7 +65,8 @@ class HomeController extends Controller
 
         $endpoints = $providerName->map(function($item, $key) {
             return collect([
-                'unlink' => route($key.'.unlink')
+                'unlink' => route($key.'.unlink'),
+                'notify' => route($key.'.notify')
             ]);
         });
 

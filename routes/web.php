@@ -30,6 +30,7 @@ Route::namespace('Auth')->group(function() {
         Route::get('callback', 'GitHubAccountController@handleProviderCallback')->name('callback');
         Route::get('login', 'GitHubAccountController@redirectToProvider')->name('login')->middleware('guest');
         Route::get('linktouser', 'GitHubAccountController@linkToUser')->name('linktouser')->middleware('auth');
+        Route::post('notify', 'GitHubAccountController@testNotify')->name('notify')->middleware('auth');
         Route::delete('unlink', 'GitHubAccountController@unlinkFromUser')->name('unlink')->middleware('auth');
     });
 
@@ -37,6 +38,7 @@ Route::namespace('Auth')->group(function() {
         Route::get('callback', 'TwitterAccountController@handleProviderCallback')->name('callback');
         Route::get('login', 'TwitterAccountController@redirectToProvider')->name('login')->middleware('guest');
         Route::get('linktouser', 'TwitterAccountController@linkToUser')->name('linktouser')->middleware('auth');
+        Route::post('notify', 'TwitterAccountController@testNotify')->name('notify')->middleware('auth');
         Route::delete('unlink', 'TwitterAccountController@unlinkFromUser')->name('unlink')->middleware('auth');
     });
 });
