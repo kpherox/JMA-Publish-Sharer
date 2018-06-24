@@ -20,11 +20,11 @@ class SocialAccountsService
         $didExistAccount = $account->id;
 
         if (!$didExistAccount && auth()->guest() && User::where('email', $providerUser->getEmail())->exists()) {
-            throw new \Exception('Already used this E-mail address');
+            throw new \Exception('Already used this E-mail address.');
         }
 
         if ($didExistAccount && auth()->check() && $account->user_id !== auth()->id()) {
-            throw new \Exception('It is already linked to other account');
+            throw new \Exception('It is already linked to other account.');
         }
 
         $this->setAccountColumn($account, $providerUser, $this->isOAuthOne($provider));
@@ -54,7 +54,7 @@ class SocialAccountsService
         if ($account->exists()) {
             $account->delete();
         } else {
-            throw new \Exception('Not found account');
+            throw new \Exception('Not found account.');
         }
         return 'Success unlinked!';
     }
@@ -68,9 +68,9 @@ class SocialAccountsService
         if ($account->exists()) {
             $account->first()->notify(new TestNotify($message));
         } else {
-            throw new \Exception('Not found account');
+            throw new \Exception('Not found account.');
         }
-        return 'Success notify!';
+        return 'Successfully notified!';
     }
 
     /**
