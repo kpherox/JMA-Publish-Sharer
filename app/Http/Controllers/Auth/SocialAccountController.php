@@ -82,6 +82,21 @@ abstract class SocialAccountController extends Controller
         return redirect()->route('home.accounts');
     }
 
+    public function testNotify(SocialAccountsService $accountService)
+    {
+        $isAjax = request()->ajax();
+
+        if ($isAjax) {
+            return new JsonResponse([
+                'status' => 'Can\'t notify',
+                'statusCode' => 403,
+                'message' => 'Unsupport this provider.',
+            ], 403);
+        }
+
+        abort(403, 'Can\'t notify');
+    }
+
     /**
      * Obtain the user information
      *

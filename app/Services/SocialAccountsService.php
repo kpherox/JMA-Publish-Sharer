@@ -5,6 +5,7 @@ namespace App\Services;
 use Laravel\Socialite\Contracts\User as ProviderUser;
 use App\Eloquents\User;
 use App\Eloquents\LinkedSocialAccount;
+use App\Notifications\TestNotify;
 
 class SocialAccountsService
 {
@@ -46,10 +47,9 @@ class SocialAccountsService
     **/
     public function deleteLinkedAccount(string $provider, int $providerId) : string
     {
-        $account = LinkedSocialAccount::where([
+        $account = auth()->user()->accounts()->where([
             ['provider_name', $provider],
             ['provider_id', $providerId],
-            ['user_id', auth()->id()]
         ]);
         if ($account->exists()) {
             $account->delete();
@@ -57,6 +57,20 @@ class SocialAccountsService
             throw new \Exception('Not found account');
         }
         return 'Success unlinked!';
+    }
+
+    public function testNotify(string $provider, int $providerId, string $message) : string
+    {
+        $account = auth()->user()->accounts()->where([
+            ['provider_name', $provider],
+            ['provider_id', $providerId],
+        ]);
+        if ($account->exists()) {
+            $account->first()->notify(new TestNotify($message));
+        } else {
+            throw new \Exception('Not found account');
+        }
+        return 'Success notify!';
     }
 
     /**
