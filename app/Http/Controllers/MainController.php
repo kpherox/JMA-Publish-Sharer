@@ -100,7 +100,7 @@ class MainController extends Controller
 
         $entries = $entries->paginate(15)->appends($appends);
 
-        $feeds = $feeds->get()->sortByFeedType();
+        $feeds = $feeds->get()->sortByType();
         $kindList = $kindList->get()->sortByKind();
 
         return collect([

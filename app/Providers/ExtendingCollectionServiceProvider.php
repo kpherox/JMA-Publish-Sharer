@@ -14,19 +14,26 @@ class ExtendingCollectionServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Collection::macro('sortByKind', function () {
-            $kindOrder = collect(config('jmaxml.kinds'))->keys();
-            return $this->sort(function ($a, $b) use ($kindOrder) {
-                return ($kindOrder->search($a->kind_of_info) > $kindOrder->search($b->kind_of_info));
-            });
+        Collection::macro('sortWithOrderBy', function ($order, $callback, $options = SORT_REGULAR, $descending = false) {
+            if (is_string($callback)) {
+                $callback = function ($item) use ($callback) {
+                    return data_get($item, $callback);
+                };
+            }
+
+            return $this->sortBy(function ($item, $key) use ($order, $callback) {
+                return $order->search($callback($item, $key));
+            }, $options, $descending);
         });
 
-        Collection::macro('sortByFeedType', function () {
-            $typeOrder = collect(config('jmaxml.feedtypes'));
+        Collection::macro('sortByKind', function ($options = SORT_REGULAR, $descending = false) {
+            $kinds = collect(config('jmaxml.kinds'))->keys();
+            return $this->sortWithOrderBy($kinds, 'kind_of_info', $options, $descending);
+        });
 
-            return $this->sort(function ($a, $b) use ($typeOrder) {
-                return ($typeOrder->search($a->type) > $typeOrder->search($b->type));
-            });
+        Collection::macro('sortByType', function ($options = SORT_REGULAR, $descending = false) {
+            $types = collect(config('jmaxml.feedtypes'));
+            return $this->sortWithOrderBy($types, 'type', $options, $descending);
         });
     }
 }
