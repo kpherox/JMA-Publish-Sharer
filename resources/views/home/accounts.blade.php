@@ -14,7 +14,7 @@
                 @endif
                 <h5 class="card-header bg-transparent border-info">{{ $providerName[$provider] }}</h5>
                 <div class="list-group list-group-flush">
-                    <transition-group name="fade" class="account-list">
+                    <transition-group name="fade" tag="div" class="account-list">
                         <a class="d-flex list-group-item list-group-item-action" :class="{'disabled' : isShowing, 'active': accountIndex === index }"
                            v-for="(account, index) in accounts.{{ $provider }}" :key="account"
                            :href="'#'+account.provider_name+'-'+account.nickname"
@@ -52,53 +52,59 @@
         </account-settings>
     </transition>
     <script>
-    mix = {
-        data: { isSafeUnlink: false, existsEmail: {{ $existsEmail }}, isDisplay: false, isShowing: false, accounts: accounts, account: {}, accountIndex: -1 },
-        methods: {
-            showAccountSettings(account, accountIndex) {
-                if (this.isShowing) return;
+    Object.assign(mix.data, {
+        isSafeUnlink: false,
+        existsEmail: {{ $existsEmail }},
+        isDisplay: false,
+        isShowing: false,
+        accounts: accounts,
+        account: {},
+        accountIndex: -1,
+    });
+    Object.assign(mix.methods, {
+        showAccountSettings(account, accountIndex) {
+            if (this.isShowing) return;
 
-                let delay = this.isDisplay ? 500 : 0;
+            let delay = this.isDisplay ? 500 : 0;
 
-                this.accountIndex = -1;
-                this.isShowing = true;
-                this.isDisplay = false;
+            this.accountIndex = -1;
+            this.isShowing = true;
+            this.isDisplay = false;
 
-                setTimeout(() => {
-                    this.checkSafeUnlink();
-                    this.account = account;
+            setTimeout(() => {
+                this.checkSafeUnlink();
+                this.account = account;
 
-                    this.isDisplay = true;
-                }, delay);
+                this.isDisplay = true;
+            }, delay);
 
-                setTimeout(() => {
-                    console.log('showed '+account.name+'\'s settings');
-                    this.accountIndex = accountIndex;
-                    this.isShowing = false;
-                }, delay + 500);
-            },
-            checkSafeUnlink() {
-                let count = 0;
+            setTimeout(() => {
+                console.log('showed '+account.name+'\'s settings');
+                this.accountIndex = accountIndex;
+                this.isShowing = false;
+            }, delay + 500);
+        },
+        checkSafeUnlink() {
+            let count = 0;
 
-                if (this.existsEmail) {
+            if (this.existsEmail) {
+                return this.isSafeUnlink = true;
+            }
+
+            for (let provider of Object.keys(this.accounts)) {
+                count += this.accounts[provider].length;
+
+                if (count > 1) {
                     return this.isSafeUnlink = true;
                 }
-
-                for (let provider of Object.keys(this.accounts)) {
-                    count += this.accounts[provider].length;
-
-                    if (count > 1) {
-                        return this.isSafeUnlink = true;
-                    }
-                }
-
-                return this.isSafeUnlink = false;
-            },
-            updateList(e) {
-                this.accounts = e;
-                this.$forceUpdate();
-                this.isDisplay = false;
             }
+
+            return this.isSafeUnlink = false;
+        },
+        updateList(e) {
+            this.accounts = e;
+            this.$forceUpdate();
+            this.isDisplay = false;
         }
     }
     </script>

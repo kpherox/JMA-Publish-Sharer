@@ -21,7 +21,9 @@ class MainController extends Controller
         $type = request('type', null);
         $kind = request('kind', null);
 
-        $data = $this->entries($type, $kind)->merge(['queries' => collect(request()->query())]);
+        $data = $this->entries($type, $kind)->merge([
+                    'routeUrl' => route('index'),
+                ]);
 
         return view('index', $data->all());
     }
@@ -36,17 +38,21 @@ class MainController extends Controller
         $type = request('type', null);
         $kind = request('kind', null);
 
-        $observatories = Entry::select('observatory_name')
+        $observatories = Entry::select('observatory_name as name')
                     ->selectRaw('count(*) as count')
                     ->selectRaw('MAX(updated) as max_updated')
                     ->orderBy('max_updated', 'desc')
                     ->groupBy('observatory_name')
-                    ->get();
+                    ->get()
+                    ->map(function($observatory) {
+                        $observatory->url = route('observatory', ['observatory' => $observatory->name]);
+                        return $observatory;
+                    });
 
         $data = $this->entries($type, $kind, $observatoryName)->merge([
                     'observatory' => $observatoryName,
                     'observatories' => $observatories,
-                    'queries' => collect(request()->query())->put('ovservatory', $observatoryName),
+                    'routeUrl' => route('observatory', ['observatory' => $observatoryName]),
                 ]);
 
         return view('observatory', $data->all());
@@ -100,8 +106,22 @@ class MainController extends Controller
 
         $entries = $entries->paginate(15)->appends($appends);
 
-        $feeds = $feeds->get()->sortByType();
-        $kindList = $kindList->get()->sortByKind();
+        $feeds = $feeds
+                    ->get()
+                    ->sortByType()
+                    ->map(function($feed) {
+                        $feed->transed_type = trans('feedtypes.'.$feed->type);
+                        $feed->param = '?type='.$feed->type;
+                        return $feed;
+                    });
+
+        $kindList = $kindList
+                    ->get()
+                    ->sortByKind()
+                    ->map(function($kind) {
+                        $kind->param = '?kind='.$kind->kind_of_info;
+                        return $kind;
+                    });
 
         return collect([
             'entries' => $entries,

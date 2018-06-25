@@ -3,24 +3,44 @@
 @section ('content')
 <div class="container">
     <div class="row justify-content-center">
-        <header class="d-flex col-lg-9 col-xl-8 p-3">
-            <h5 class="d-block mt-2 mb-4 mr-auto">@yield('title', 'Entries')</h5>
+        <header class="d-sm-flex col-lg-9 col-xl-8 p-3">
+            <h5 class="text-truncate d-block mt-2 mb-4 mr-auto px-2">@yield('title', 'Entries')</h5>
 
             <div class="dropdown align-self-start">
                 <button class="btn page-link text-dark dropdown-toggle" type="button" data-toggle="dropdown">{{ $selected }}</button>
 
-                <div class="dropdown-menu dropdown-menu-right" style="height:auto;max-height:500px;overflow-x:hidden;">
-                    <a class="dropdown-item" href="{{ route($__env->yieldContent('route', 'index'), $queries->forget(['page', 'type', 'kind'])->all()) }}">Select Type or Kind</a>
+                <div class="dropdown-menu dropdown-menu-right" style="width:280px;max-width:80vw;height:auto;max-height:500px;overflow-x:auto">
+                    <a class="dropdown-item" href="{{ $routeUrl }}">All Type/Kind</a>
+
                     <div class="dropdown-divider"></div>
+
                     @foreach ($feeds as $feed)
-                    <a class="dropdown-item" href="{{ route($__env->yieldContent('route', 'index'), $queries->merge(['type' => $feed->type])->all()) }}">@lang('feedtypes.'.$feed->type) ({{ $feed->entries_count }})</a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="{{ $routeUrl }}{{ $feed->param }}">
+                        <span class="text-nowrap text-truncate mr-1">{{ $feed->transed_type }}</span>
+                        <span class="badge badge-primary badge-pill">{{ $feed->entries_count }}</span>
+                    </a>
                     @endforeach
+
                     <div class="dropdown-divider"></div>
-                    @foreach ($kindList as $kind)
-                    <a class="dropdown-item" href="{{ route($__env->yieldContent('route', 'index'), $queries->merge(['kind' => $kind->kind_of_info])->all()) }}">{{ $kind->kind_of_info }} ({{ $kind->count }})</a>
-                    @endforeach
+
+                    <input class="dropdown-item" style="z-index:2" v-model="kindName" placeholder="Search kind">
+                    <transition-group tag="div" class="kind-list" style="display:none" v-show="true">
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                           v-for="(kind, index) in kinds" :key="kind"
+                           v-if="kind.kind_of_info.match(new RegExp(kindName))"
+                           :href="'{{ $routeUrl }}'+kind.param">
+                            <span class="text-nowrap text-truncate mr-1">@{{ kind.kind_of_info }}</span>
+                            <span class="badge badge-primary badge-pill">@{{ kind.count }}</span>
+                        </a>
+                    </transition-group>
                 </div>
             </div>
+    <script>
+    Object.assign(mix.data, {
+        kinds: {!! $kindList !!},
+        kindName: '',
+    });
+    </script>
         </header>
 
         <main class="col-lg-9 col-xl-8 p-3">

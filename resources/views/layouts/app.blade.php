@@ -21,7 +21,13 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <script>let mix = {};</script>
+        <script>
+            let mix = {
+                data: {},
+                methods: {},
+                computed: {},
+            };
+        </script>
     </head>
     <body>
         <div id="app">
