@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe69dc14780e99e1cc598e17098584fb",
+    "content-hash": "c0f5f6afd7ca8e94bf854b7dee55b0bf",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -1185,6 +1185,71 @@
             "time": "2018-06-20T09:15:03+00:00"
         },
         {
+            "name": "kpherox/laravel-notification-line",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kPherox/laravel-notification-line.git",
+                "reference": "041713c8fab3adf549c556888217034e0d062a7d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kPherox/laravel-notification-line/zipball/041713c8fab3adf549c556888217034e0d062a7d",
+                "reference": "041713c8fab3adf549c556888217034e0d062a7d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/notifications": "^5.3|^5.4|^5.5|^5.6",
+                "illuminate/support": "^5.1|^5.2|^5.3|^5.4|^5.5|^5.6",
+                "linecorp/line-bot-sdk": "^2.3",
+                "php": ">=5.6.4"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NotificationChannels\\Line\\LineServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NotificationChannels\\Line\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "NotificationChannels\\Line\\Test\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "kPherox",
+                    "email": "admin@mail.kr-kp.com",
+                    "homepage": "https://www.kr-kp.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "LINE Notifications Driver",
+            "homepage": "https://github.com/kPherox/laravel-notification-line",
+            "support": {
+                "source": "https://github.com/kPherox/laravel-notification-line/tree/master"
+            },
+            "time": "2018-06-26T03:05:49+00:00"
+        },
+        {
             "name": "kylewm/brevity",
             "version": "0.2.10",
             "source": {
@@ -1753,6 +1818,59 @@
                 "twitter"
             ],
             "time": "2016-08-17T00:36:58+00:00"
+        },
+        {
+            "name": "linecorp/line-bot-sdk",
+            "version": "2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/line/line-bot-sdk-php.git",
+                "reference": "38528aaa3a1abc2809974ab65cdcb7579f9eb927"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/line/line-bot-sdk-php/zipball/38528aaa3a1abc2809974ab65cdcb7579f9eb927",
+                "reference": "38528aaa3a1abc2809974ab65cdcb7579f9eb927",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "apigen/apigen": "~4.1",
+                "indigophp/hash-compat": "~1.1.0",
+                "phpmd/phpmd": "~2.4",
+                "phpunit/phpunit": "^4.8.24",
+                "squizlabs/php_codesniffer": "~2.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LINE\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache License Version 2.0"
+            ],
+            "authors": [
+                {
+                    "name": "moznion",
+                    "email": "moznion@gmail.com"
+                },
+                {
+                    "name": "Satoru Yoshihara",
+                    "email": "vaduz0@gmail.com"
+                }
+            ],
+            "description": "SDK of the LINE BOT API for PHP",
+            "homepage": "https://github.com/line/line-bot-sdk-php",
+            "keywords": [
+                "bot",
+                "line",
+                "sdk"
+            ],
+            "time": "2017-09-20T10:22:04+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2377,17 +2495,54 @@
             "time": "2018-01-20T00:28:24+00:00"
         },
         {
+            "name": "socialiteproviders/line",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/Line.git",
+                "reference": "910aad448601a4c8d559e9ce484b95e12bbb5d92"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/Line/zipball/910aad448601a4c8d559e9ce484b95e12bbb5d92",
+                "reference": "910aad448601a4c8d559e9ce484b95e12bbb5d92",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0",
+                "socialiteproviders/manager": "~2.0 || ~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\Line\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sorrawut Kittikeereechaikun",
+                    "email": "mix5003@gmail.com"
+                }
+            ],
+            "description": "Line Provider for Laravel Socialite",
+            "time": "2018-05-30T10:55:30+00:00"
+        },
+        {
             "name": "socialiteproviders/manager",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/kPherox/Manager.git",
-                "reference": "d541811d56e3c9fedd8de1d7ea50846ffe0767d3"
+                "url": "https://github.com/SocialiteProviders/Manager.git",
+                "reference": "51332d78cbaadc8856c518fd0e5e7983c96e4cb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kPherox/Manager/zipball/d541811d56e3c9fedd8de1d7ea50846ffe0767d3",
-                "reference": "d541811d56e3c9fedd8de1d7ea50846ffe0767d3",
+                "url": "https://api.github.com/repos/SocialiteProviders/Manager/zipball/51332d78cbaadc8856c518fd0e5e7983c96e4cb7",
+                "reference": "51332d78cbaadc8856c518fd0e5e7983c96e4cb7",
                 "shasum": ""
             },
             "require": {
@@ -2412,6 +2567,7 @@
                     "SocialiteProviders\\Manager\\Test\\": "tests/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2422,10 +2578,7 @@
                 }
             ],
             "description": "Easily add new or override built-in providers in Laravel Socialite.",
-            "support": {
-                "source": "https://github.com/kPherox/Manager/tree/master"
-            },
-            "time": "2018-05-25T16:36:05+00:00"
+            "time": "2018-05-26T03:38:30+00:00"
         },
         {
             "name": "socialiteproviders/twitter",
@@ -2521,16 +2674,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v4.1.0",
+            "version": "v4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "2d5d973bf9933d46802b01010bd25c800c87c242"
+                "reference": "70591cda56b4b47c55776ac78e157c4bb6c8b43f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/2d5d973bf9933d46802b01010bd25c800c87c242",
-                "reference": "2d5d973bf9933d46802b01010bd25c800c87c242",
+                "url": "https://api.github.com/repos/symfony/console/zipball/70591cda56b4b47c55776ac78e157c4bb6c8b43f",
+                "reference": "70591cda56b4b47c55776ac78e157c4bb6c8b43f",
                 "shasum": ""
             },
             "require": {
@@ -2585,11 +2738,11 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-30T07:26:09+00:00"
+            "time": "2018-05-31T10:17:53+00:00"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v4.1.0",
+            "version": "v4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
@@ -2642,16 +2795,16 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v4.1.0",
+            "version": "v4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "449f8b00b28ab6e6912c3e6b920406143b27193b"
+                "reference": "dbe0fad88046a755dcf9379f2964c61a02f5ae3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/449f8b00b28ab6e6912c3e6b920406143b27193b",
-                "reference": "449f8b00b28ab6e6912c3e6b920406143b27193b",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/dbe0fad88046a755dcf9379f2964c61a02f5ae3d",
+                "reference": "dbe0fad88046a755dcf9379f2964c61a02f5ae3d",
                 "shasum": ""
             },
             "require": {
@@ -2694,11 +2847,11 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-16T14:33:22+00:00"
+            "time": "2018-06-08T09:39:36+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v4.1.0",
+            "version": "v4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -2761,16 +2914,16 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v4.1.0",
+            "version": "v4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "087e2ee0d74464a4c6baac4e90417db7477dc238"
+                "reference": "84714b8417d19e4ba02ea78a41a975b3efaafddb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/087e2ee0d74464a4c6baac4e90417db7477dc238",
-                "reference": "087e2ee0d74464a4c6baac4e90417db7477dc238",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/84714b8417d19e4ba02ea78a41a975b3efaafddb",
+                "reference": "84714b8417d19e4ba02ea78a41a975b3efaafddb",
                 "shasum": ""
             },
             "require": {
@@ -2806,20 +2959,20 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-16T14:33:22+00:00"
+            "time": "2018-06-19T21:38:16+00:00"
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v4.1.0",
+            "version": "v4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "a916c88390fb861ee21f12a92b107d51bb68af99"
+                "reference": "4f9c7cf962e635b0b26b14500ac046e07dbef7f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/a916c88390fb861ee21f12a92b107d51bb68af99",
-                "reference": "a916c88390fb861ee21f12a92b107d51bb68af99",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/4f9c7cf962e635b0b26b14500ac046e07dbef7f3",
+                "reference": "4f9c7cf962e635b0b26b14500ac046e07dbef7f3",
                 "shasum": ""
             },
             "require": {
@@ -2860,20 +3013,20 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-25T14:55:38+00:00"
+            "time": "2018-06-19T21:38:16+00:00"
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v4.1.0",
+            "version": "v4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "b5ab9d4cdbfd369083744b6b5dfbf454e31e5f90"
+                "reference": "29c094a1c4f8209b7e033f612cbbd69029e38955"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/b5ab9d4cdbfd369083744b6b5dfbf454e31e5f90",
-                "reference": "b5ab9d4cdbfd369083744b6b5dfbf454e31e5f90",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/29c094a1c4f8209b7e033f612cbbd69029e38955",
+                "reference": "29c094a1c4f8209b7e033f612cbbd69029e38955",
                 "shasum": ""
             },
             "require": {
@@ -2881,13 +3034,13 @@
                 "psr/log": "~1.0",
                 "symfony/debug": "~3.4|~4.0",
                 "symfony/event-dispatcher": "~4.1",
-                "symfony/http-foundation": "~4.1",
+                "symfony/http-foundation": "^4.1.1",
                 "symfony/polyfill-ctype": "~1.8"
             },
             "conflict": {
                 "symfony/config": "<3.4",
                 "symfony/dependency-injection": "<4.1",
-                "symfony/var-dumper": "<4.1",
+                "symfony/var-dumper": "<4.1.1",
                 "twig/twig": "<1.34|<2.4,>=2"
             },
             "provide": {
@@ -2908,7 +3061,7 @@
                 "symfony/stopwatch": "~3.4|~4.0",
                 "symfony/templating": "~3.4|~4.0",
                 "symfony/translation": "~3.4|~4.0",
-                "symfony/var-dumper": "~4.1"
+                "symfony/var-dumper": "^4.1.1"
             },
             "suggest": {
                 "symfony/browser-kit": "",
@@ -2947,7 +3100,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-30T12:52:34+00:00"
+            "time": "2018-06-25T13:06:45+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -3120,16 +3273,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v4.1.0",
+            "version": "v4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "73445bd33b0d337c060eef9652b94df72b6b3434"
+                "reference": "1d1677391ecf00d1c5b9482d6050c0c27aa3ac3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/73445bd33b0d337c060eef9652b94df72b6b3434",
-                "reference": "73445bd33b0d337c060eef9652b94df72b6b3434",
+                "url": "https://api.github.com/repos/symfony/process/zipball/1d1677391ecf00d1c5b9482d6050c0c27aa3ac3a",
+                "reference": "1d1677391ecf00d1c5b9482d6050c0c27aa3ac3a",
                 "shasum": ""
             },
             "require": {
@@ -3165,20 +3318,20 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-30T07:26:09+00:00"
+            "time": "2018-05-31T10:17:53+00:00"
         },
         {
             "name": "symfony/routing",
-            "version": "v4.1.0",
+            "version": "v4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "180b51c66d10f09e562c9ebc395b39aacb2cf8a2"
+                "reference": "b38b9797327b26ea2e4146a40e6e2dc9820a6932"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/180b51c66d10f09e562c9ebc395b39aacb2cf8a2",
-                "reference": "180b51c66d10f09e562c9ebc395b39aacb2cf8a2",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/b38b9797327b26ea2e4146a40e6e2dc9820a6932",
+                "reference": "b38b9797327b26ea2e4146a40e6e2dc9820a6932",
                 "shasum": ""
             },
             "require": {
@@ -3191,7 +3344,6 @@
             },
             "require-dev": {
                 "doctrine/annotations": "~1.0",
-                "doctrine/common": "~2.2",
                 "psr/log": "~1.0",
                 "symfony/config": "~3.4|~4.0",
                 "symfony/dependency-injection": "~3.4|~4.0",
@@ -3243,20 +3395,20 @@
                 "uri",
                 "url"
             ],
-            "time": "2018-05-30T07:26:09+00:00"
+            "time": "2018-06-19T21:38:16+00:00"
         },
         {
             "name": "symfony/translation",
-            "version": "v4.1.0",
+            "version": "v4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "16328f5b217cebc8dd4adfe4aeeaa8c377581f5a"
+                "reference": "b6d8164085ee0b6debcd1b7a131fd6f63bb04854"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/16328f5b217cebc8dd4adfe4aeeaa8c377581f5a",
-                "reference": "16328f5b217cebc8dd4adfe4aeeaa8c377581f5a",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/b6d8164085ee0b6debcd1b7a131fd6f63bb04854",
+                "reference": "b6d8164085ee0b6debcd1b7a131fd6f63bb04854",
                 "shasum": ""
             },
             "require": {
@@ -3312,20 +3464,20 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-30T07:26:09+00:00"
+            "time": "2018-06-22T08:59:39+00:00"
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v4.1.0",
+            "version": "v4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "bc88ad53e825ebacc7b190bbd360781fce381c64"
+                "reference": "b2eebaec085d1f2cafbad7644733d494a3bbbc9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/bc88ad53e825ebacc7b190bbd360781fce381c64",
-                "reference": "bc88ad53e825ebacc7b190bbd360781fce381c64",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/b2eebaec085d1f2cafbad7644733d494a3bbbc9b",
+                "reference": "b2eebaec085d1f2cafbad7644733d494a3bbbc9b",
                 "shasum": ""
             },
             "require": {
@@ -3387,7 +3539,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2018-04-29T07:56:09+00:00"
+            "time": "2018-06-23T12:23:56+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -5192,6 +5344,7 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "kpherox/laravel-notification-line": 20,
         "socialiteproviders/manager": 20
     },
     "prefer-stable": true,

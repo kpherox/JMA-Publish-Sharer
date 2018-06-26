@@ -34,7 +34,7 @@ class LinkedSocialAccount extends Model
         'token_secret',
     ];
 
-    public function routeNotificationForTwitter() : Array
+    public function routeNotificationForTwitter() : array
     {
         return [
             config('services.twitter.consumer_key'),
@@ -42,6 +42,11 @@ class LinkedSocialAccount extends Model
             $this->token,
             $this->token_secret,
         ];
+    }
+
+    public function routeNotificationForLine() : string
+    {
+        return $this->provider_id;
     }
 
     /**

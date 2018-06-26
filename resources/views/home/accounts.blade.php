@@ -22,7 +22,7 @@
                             <img class="rounded-circle social-avatar mr-2" :src="account.avatar" alt="{{ $provider }} @{{ account.name }} Icon" />
                             <div class="align-self-center">
                                 <p class="mb-0">@{{ account.name }}</p>
-                                <p class="mb-0" :class="{'text-light': accountIndex === index, 'text-muted': accountIndex !== index}">&#64;@{{ account.nickname }}</p>
+                                <p class="mb-0" :class="{'text-light': accountIndex === index, 'text-muted': accountIndex !== index}" v-if='account.nickname'>&#64;@{{ account.nickname }}</p>
                             </div>
                         </a>
                     </transition-group>

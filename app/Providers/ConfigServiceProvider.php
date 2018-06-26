@@ -15,6 +15,7 @@ class ConfigServiceProvider extends ServiceProvider
     {
         config([
             'services.twitter.redirect' => url('twitter/callback'),
+            'services.line.redirect' => url('line/callback'),
             'services.github.redirect' => url('github/callback'),
         ]);
     }

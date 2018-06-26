@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 use SocialiteProviders\Twitter\TwitterExtendSocialite;
+use SocialiteProviders\Line\LineExtendSocialite;
 use App\Events\EntrySaved;
 use App\Listeners\EntrySavedListener;
 
@@ -18,6 +19,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         SocialiteWasCalled::class => [
             TwitterExtendSocialite::class,
+            LineExtendSocialite::class,
         ],
         EntrySaved::class => [
             EntrySavedListener::class,

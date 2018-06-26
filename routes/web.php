@@ -41,10 +41,17 @@ Route::namespace('Auth')->group(function() {
         Route::post('notify', 'TwitterAccountController@testNotify')->name('notify')->middleware('auth');
         Route::delete('unlink', 'TwitterAccountController@unlinkFromUser')->name('unlink')->middleware('auth');
     });
+
+    Route::prefix('line')->name('line.')->group(function() {
+        Route::get('callback', 'LineAccountController@handleProviderCallback')->name('callback');
+        Route::get('login', 'LineAccountController@redirectToProvider')->name('login')->middleware('guest');
+        Route::get('linktouser', 'LineAccountController@linkToUser')->name('linktouser')->middleware('auth');
+        Route::post('notify', 'LineAccountController@testNotify')->name('notify')->middleware('auth');
+        Route::delete('unlink', 'LineAccountController@unlinkFromUser')->name('unlink')->middleware('auth');
+    });
 });
 
 Route::prefix('home')->name('home.')->group(function() {
     Route::get('/', 'HomeController@index')->name('index');
     Route::get('social-accounts', 'HomeController@accounts')->name('accounts');
 });
-

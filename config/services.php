@@ -37,6 +37,7 @@ return [
 
     'providers' => [
         'twitter' => 'Twitter',
+        'line' => 'Line',
         'github' => 'GitHub',
     ],
 
@@ -59,6 +60,14 @@ return [
         'consumer_secret' => env('TWITTER_API_SECRET', env('TWITTER_SECRET')),
         'access_token' => env('TWITTER_ACCESS_TOKEN'),
         'access_secret' => env('TWITTER_ACCESS_SECRET'),
+    ],
+
+    'line' => [
+        'client_id' => env('LINE_CHANNEL_ACCESS_TOKEN'),
+        'client_secret' => env('LINE_CHANNEL_SECRET'),
+        'token' => env('LINE_BOT_CHANNEL_ACCESS_TOKEN'),
+        'secret' => env('LINE_BOT_CHANNEL_SECRET'),
+        'user_id' => env('LINE_DEFAULT_USER_ID')
     ],
 
     'github' => [
