@@ -113,6 +113,11 @@ class WebSubTest extends TestCase
             EntryReceived::class
         );
 
+        \Notification::assertSentTo(
+            LinkedSocialAccount::where('provider_name', 'line')->first(),
+            EntryReceived::class
+        );
+
         \Notification::assertNotSentTo(
             LinkedSocialAccount::where('provider_name', 'github')->first(),
             EntryReceived::class

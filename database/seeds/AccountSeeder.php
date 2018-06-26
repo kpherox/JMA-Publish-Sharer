@@ -12,7 +12,7 @@ class AccountSeeder extends Seeder
      */
     public function run()
     {
-        $providers = ['twitter', 'github'];
+        $providers = ['twitter', 'line', 'github'];
 
         $users = factory(Eloquents\User::class, 3)
             ->create()

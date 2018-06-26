@@ -32,7 +32,7 @@ class EntrySavedListener implements ShouldQueue
     {
         $entry = $event->entry;
 
-        LinkedSocialAccount::where('provider_name', 'twitter')->get()->each(function ($account) use ($entry) {
+        LinkedSocialAccount::whereIn('provider_name', ['twitter', 'line'])->get()->each(function ($account) use ($entry) {
             try {
                 $account->notify(new EntryReceived($entry));
             } catch (\Exception $e) {
