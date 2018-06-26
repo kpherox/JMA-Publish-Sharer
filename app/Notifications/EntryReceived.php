@@ -7,6 +7,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use NotificationChannels\Twitter\TwitterChannel;
 use NotificationChannels\Twitter\TwitterStatusUpdate;
+use NotificationChannels\Line\LineChannel;
+use NotificationChannels\Line\LineMessage;
 use App\Eloquents\Entry;
 use App\Eloquents\LinkedSocialAccount;
 
@@ -44,6 +46,9 @@ class EntryReceived extends Notification implements ShouldQueue
             case 'twitter':
                 $via[] = TwitterChannel::class;
                 break;
+            case 'line':
+                $via[] = LineChannel::class;
+                break;
             default:
                 break;
         }
@@ -52,12 +57,22 @@ class EntryReceived extends Notification implements ShouldQueue
     }
 
     /**
-     * Get the mail representation of the notification.
+     * Get the twitter status of the notification.
      *
      * @param  mixed  $notifiable
      */
     public function toTwitter($notifiable) : TwitterStatusUpdate
     {
         return new TwitterStatusUpdate($this->entry->parsed_headline['original']);
+    }
+
+    /**
+     * Get the line message of the notification.
+     *
+     * @param  mixed  $notifiable
+     */
+    public function toLine($notifiable)
+    {
+        return new LineMessage($this->entry->parsed_headline['original']);
     }
 }
