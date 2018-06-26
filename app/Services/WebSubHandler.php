@@ -76,90 +76,90 @@ class WebSubHandler
      * @param  array $feed
      * @return void
     **/
-    public static function saveFeedAndEntries(array $feed)
+    public static function saveFeedAndEntries(array $feedArray)
     {
-        $feedUuid = collect(explode(':', $feed['id']))->last();
+        $feed = WebSubHandler::saveFeed($feedArray['id'], $feedArray['updated'], $feedArray['link']);
+        $entries = WebSubHandler::saveEntries($feedArray['entry']);
 
-        WebSubHandler::saveFeed($feedUuid, $feed);
-        WebSubHandler::saveEntries($feedUuid, $feed['entry']);
+        $entries->each(function ($entry) use ($feed, &$promises) {
+            $feed->entries()->save($entry['entry']);
+
+            $promises[$entry['uuid']] = $entry['promise'];
+        });
+
+        self::saveDetailsXml($promises);
     }
 
     /**
      * Save feed.
      *
-     * @param  string $feedUuid
-     * @param  array $feed
-     * @return void
+     * @param  string $uuidString
+     * @param  string $updatedString
+     * @param  array $links
     **/
-    private static function saveFeed(string $feedUuid, array $feed)
+    private static function saveFeed(string $uuidString, string $updatedString, array $links) : Feed
     {
-        $feeds = Feed::firstOrNew(['uuid' => $feedUuid]);
+        $uuid = collect(explode(':', $uuidString))->last();
+        $feed = Feed::firstOrNew(['uuid' => $uuid]);
 
-        $feedUpdated = Carbon::parse($feed['updated']);
-        $feedUpdated->setTimezone(config('app.timezone'));
+        $updated = Carbon::parse($updatedString);
+        $updated->setTimezone(config('app.timezone'));
 
-        $feeds->updated = $feedUpdated;
+        $feed->updated = $updated;
 
-        $links = collect($feed['link'])
-                    ->map(function($item) {return $item['@attributes'];})
-                    ->pluck('href', 'rel');
-        $feedUrl = $links['self'];
+        $url = collect($links)->map(function($item) {return $item['@attributes'];})->pluck('href', 'rel');
 
-        $feeds->url = $feedUrl;
+        $feed->url = $url['self'];
 
-        $feeds->save();
+        $feed->save();
+
+        return $feed;
     }
 
     /**
      * Save entries.
      *
-     * @param  string $feedUuid
      * @param  array $entries
-     * @return void
     **/
-    private static function saveEntries(string $feedUuid, array $entries)
+    private static function saveEntries(array $entries) : Collection
     {
         if (Arr::isAssoc($entries)) {
             $entries = [$entries];
         }
 
-        // Fetch JMA xml
-        $entryArrays = [];
-        $promises = [];
-        $results  = [];
-
-        foreach ($entries as $entry) {
-            $parseedEntry = self::parseEntry($entry);
-
-            $entryUuid = $parseedEntry['uuid'];
-
-            $promises[$entryUuid] = $parseedEntry['promise'];
+        return collect($entries)->map(function ($entryArray) {
+            $parseedEntry = self::parseEntry($entryArray);
 
             $entryArray = $parseedEntry['entry'];
-            $entryArray['feed_uuid'] = $feedUuid;
-            $entry = Entry::firstOrCreate($entryArray);
+            $entry = Entry::firstOrCreate($parseedEntry['entry']);
 
-            $entryDetail = $parseedEntry['entryDetail'];
-            $entryDetail['entry_id'] = $entry->id;
-            $entryDetail['created_at'] = $entry->created_at;
-            $entryDetail['updated_at'] = $entry->updated_at;
-            $entryArrays[$entryUuid] = $entryDetail;
-        }
+            $entryDetail = EntryDetail::create($parseedEntry['entryDetail']);
+            $entry->entryDetails()->save($entryDetail);
 
+            return [
+                'entry' => $entry,
+                'uuid' => $parseedEntry['uuid'],
+                'promise' => $parseedEntry['promise'],
+            ];
+        });
+    }
+
+    /**
+     * Save entry_details xml document.
+     *
+     * @param  array $promises
+     * @return void
+    **/
+    private static function saveDetailsXml(array $promises)
+    {
         $results = self::fetchXmlDocument($promises);
 
-        $entryRecords = $results->map(function ($result, $key) use ($entryArrays) {
-            $entryArray = $entryArrays[$key];
-
+        $results->each(function ($result, $key) {
             if ($result->getReasonPhrase() === 'OK') {
                 $xmlDoc = $result->getBody()->getContents();
                 \Storage::put('entry/'.$key, $xmlDoc);
             }
-
-            return $entryArray;
-        })->values()->all();
-
-        EntryDetail::insert($entryRecords);
+        });
     }
 
     /**
@@ -169,7 +169,7 @@ class WebSubHandler
     **/
     private static function parseEntry(array $entry) : array
     {
-        $entryUuid = collect(explode(':', $entry['id']))->last();
+        $uuid = collect(explode(':', $entry['id']))->last();
 
         $updated = Carbon::parse($entry['updated']);
         $updated->setTimezone(config('app.timezone'));
@@ -177,7 +177,7 @@ class WebSubHandler
         $url = $entry['link']['@attributes']['href'];
 
         return [
-            'uuid' => $entryUuid,
+            'uuid' => $uuid,
             'promise' => \Guzzle::getAsync($url),
             'entry' => [
                 'observatory_name' => collect($entry['author'])->get('name'),
@@ -185,7 +185,7 @@ class WebSubHandler
                 'updated' => $updated,
             ],
             'entryDetail' => [
-                'uuid' => $entryUuid,
+                'uuid' => $uuid,
                 'kind_of_info' => $entry['title'],
                 'url' => $url,
             ],
