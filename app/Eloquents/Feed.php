@@ -40,7 +40,7 @@ class Feed extends Model
      * @param  \Illuminate\Database\Eloquent\Builder $query
      * @param  string $type
     **/
-    public function scopeWhereType(Builder $query, string $type) : Builder
+    public function scopeOfType(Builder $query, string $type) : Builder
     {
         return $query->where('url', 'LIKE', '%'.$type.'.xml');
     }

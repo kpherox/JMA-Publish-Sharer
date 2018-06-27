@@ -51,7 +51,7 @@ class Entry extends Model
      * @param  \Illuminate\Database\Eloquent\Builder $query
      * @param  string $observatory
     **/
-    public function scopeWhereObservatoryName(Builder $query, string $observatory) : Builder
+    public function scopeOfObservatory(Builder $query, string $observatory) : Builder
     {
         $observatories = self::select('observatory_name')
                 ->groupBy('observatory_name')

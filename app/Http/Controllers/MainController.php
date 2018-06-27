@@ -75,7 +75,7 @@ class MainController extends Controller
             $selected = 'Type: '.trans('feedtypes.'.$type);
             $appends['type'] = $type;
             $entries = $entries->whereHas('feed', function ($query) use ($type) {
-                            return $query->whereType($type);
+                            return $query->ofType($type);
                         });
         } elseif ($kind) {
             $selected = 'Kind: '.$kind;
@@ -91,14 +91,12 @@ class MainController extends Controller
                     ->groupBy('kind_of_info');
 
         if ($observatoryName) {
-            $entries = $entries->whereObservatoryName($observatoryName);
-            $feeds = $feeds->whereHas('entries', function ($query) use ($observatoryName) {
-                            return $query->whereObservatoryName($observatoryName);
-                        })->withCount(['entries' => function ($query) use ($observatoryName) {
-                            return $query->whereObservatoryName($observatoryName);
+            $entries = $entries->ofObservatory($observatoryName);
+            $feeds = $feeds->withCount(['entries' => function ($query) use ($observatoryName) {
+                            return $query->ofObservatory($observatoryName);
                         }]);
             $kindList = $kindList->whereHas('entry', function ($query) use ($observatoryName) {
-                            return $query->whereObservatoryName($observatoryName);
+                            return $query->ofObservatory($observatoryName);
                         });
         } else {
             $feeds = $feeds->withCount('entries');
@@ -106,16 +104,14 @@ class MainController extends Controller
 
         $entries = $entries->paginate(15)->appends($appends);
 
-        $feeds = $feeds
-                    ->get()
+        $feeds = $feeds->having('entries_count', '>=', 1)->get()
                     ->sortByType()
                     ->map(function($feed) {
                         $feed->param = '?type='.$feed->type;
                         return $feed;
                     });
 
-        $kindList = $kindList
-                    ->get()
+        $kindList = $kindList->get()
                     ->sortByKind()
                     ->map(function($kind) {
                         $kind->param = '?kind='.$kind->kind_of_info;
