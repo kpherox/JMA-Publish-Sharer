@@ -26,6 +26,8 @@ class Feed extends Model
      */
     protected $hidden = [];
 
+    protected $appends = ['type', 'transed_type'];
+
     /**
      * Relation: has many entries.
     **/

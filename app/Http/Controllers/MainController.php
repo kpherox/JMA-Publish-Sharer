@@ -85,8 +85,8 @@ class MainController extends Controller
                         });
         }
 
-        $feeds = Feed::select(['uuid', 'url']);
-        $kindList = EntryDetail::select('kind_of_info', 'entry_id')
+        $feeds = Feed::select(['url']);
+        $kindList = EntryDetail::select('kind_of_info')
                     ->selectRaw('count(*) as count')
                     ->groupBy('kind_of_info');
 
@@ -104,19 +104,9 @@ class MainController extends Controller
 
         $entries = $entries->paginate(15)->appends($appends);
 
-        $feeds = $feeds->having('entries_count', '>=', 1)->get()
-                    ->sortByType()
-                    ->map(function($feed) {
-                        $feed->param = '?type='.$feed->type;
-                        return $feed;
-                    });
+        $feeds = $feeds->having('entries_count', '>=', 1)->get()->sortByType();
 
-        $kindList = $kindList->get()
-                    ->sortByKind()
-                    ->map(function($kind) {
-                        $kind->param = '?kind='.$kind->kind_of_info;
-                        return $kind;
-                    });
+        $kindList = $kindList->get()->sortByKind();
 
         return collect([
             'entries' => $entries,

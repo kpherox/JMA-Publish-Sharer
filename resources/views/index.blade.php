@@ -14,12 +14,14 @@
 
                     <div class="dropdown-divider"></div>
 
-                    @foreach ($feeds as $feed)
-                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="{{ $routeUrl }}{{ $feed->param }}">
-                        <span class="text-nowrap text-truncate mr-1">{{ $feed->transed_type }}</span>
-                        <span class="badge badge-primary badge-pill">{{ $feed->entries_count }}</span>
-                    </a>
-                    @endforeach
+                    <transition-group tag="div" class="feed-list" style="display:none" v-show="true">
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                           v-for="(feed, index) in feeds" :key="feed"
+                           :href="route+'?type='+feed.type">
+                            <span class="text-nowrap text-truncate mr-1">@{{ feed.transed_type }}</span>
+                            <span class="badge badge-primary badge-pill">@{{ feed.entries_count }}</span>
+                        </a>
+                    </transition-group>
 
                     <div class="dropdown-divider"></div>
 
@@ -28,7 +30,7 @@
                         <a class="dropdown-item d-flex justify-content-between align-items-center"
                            v-for="(kind, index) in kinds" :key="kind"
                            v-if="kind.kind_of_info.match(new RegExp(kindName))"
-                           :href="'{{ $routeUrl }}'+kind.param">
+                           :href="route+'?kind='+kind.kind_of_info">
                             <span class="text-nowrap text-truncate mr-1">@{{ kind.kind_of_info }}</span>
                             <span class="badge badge-primary badge-pill">@{{ kind.count }}</span>
                         </a>
@@ -37,6 +39,8 @@
             </div>
     <script>
     Object.assign(mix.data, {
+        route: '{{ $routeUrl }}',
+        feeds: {!! $feeds !!},
         kinds: {!! $kindList !!},
         kindName: '',
     });
