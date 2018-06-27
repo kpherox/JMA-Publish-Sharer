@@ -7,7 +7,7 @@
             <h5 class="text-truncate d-block mt-2 mb-4 mr-auto px-2">@yield('title', 'Entries')</h5>
 
             <div class="dropdown align-self-start">
-                <button class="btn page-link text-dark dropdown-toggle" type="button" data-toggle="dropdown">{{ $selected }}</button>
+                <button class="btn page-link text-dark dropdown-toggle" type="button" data-toggle="dropdown">{{ $typeOrKind }}</button>
 
                 <div class="dropdown-menu dropdown-menu-right" style="width:280px;max-width:80vw;height:auto;max-height:500px;overflow-x:auto">
                     <a class="dropdown-item" href="{{ $routeUrl }}">All Type/Kind</a>
@@ -15,11 +15,15 @@
                     <div class="dropdown-divider"></div>
 
                     <transition-group tag="div" class="feed-list" style="display:none" v-show="true">
-                        <a class="dropdown-item d-flex justify-content-between align-items-center"
-                           v-for="(feed, index) in feeds" :key="feed"
+                        <a v-for="(feed, index) in feeds" :key="feed"
+                           class="dropdown-item d-flex justify-content-between align-items-center"
+                           :class="{'active': feed.type === selected}"
                            :href="route+'?type='+feed.type">
                             <span class="text-nowrap text-truncate mr-1">@{{ feed.transed_type }}</span>
-                            <span class="badge badge-primary badge-pill">@{{ feed.entries_count }}</span>
+                            <span class="badge badge-pill"
+                                  :class="feed.type === selected ? 'badge-light' : 'badge-primary'">
+                                @{{ feed.entries_count }}
+                            </span>
                         </a>
                     </transition-group>
 
@@ -27,12 +31,16 @@
 
                     <input class="dropdown-item" style="z-index:2" v-model="kindName" placeholder="Search kind">
                     <transition-group tag="div" class="kind-list" style="display:none" v-show="true">
-                        <a class="dropdown-item d-flex justify-content-between align-items-center"
-                           v-for="(kind, index) in kinds" :key="kind"
+                        <a v-for="(kind, index) in kinds" :key="kind"
                            v-if="kind.kind_of_info.match(new RegExp(kindName))"
+                           class="dropdown-item d-flex justify-content-between align-items-center"
+                           :class="{'active': index === parseInt(selected)}"
                            :href="route+'?kind='+kind.kind_of_info">
                             <span class="text-nowrap text-truncate mr-1">@{{ kind.kind_of_info }}</span>
-                            <span class="badge badge-primary badge-pill">@{{ kind.count }}</span>
+                            <span class="badge badge-pill"
+                                  :class="index === parseInt(selected) ? 'badge-light' : 'badge-primary'">
+                                @{{ kind.count }}
+                            </span>
                         </a>
                     </transition-group>
                 </div>
@@ -42,6 +50,7 @@
         route: '{{ $routeUrl }}',
         feeds: {!! $feeds !!},
         kinds: {!! $kindList !!},
+        selected: '{{ $selected }}',
         kindName: '',
     });
     </script>

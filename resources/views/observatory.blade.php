@@ -15,18 +15,23 @@
         <div class="list-group list-group-flush">
             <input class="list-group-item" style="z-index:2" type="text" v-model="observatoryName" placeholder="Search observatory">
             <transition-group tag="div" class="obs-list" style="display:none;" v-show="true">
-                <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" :class="{'active': observatory.name === '{{ $observatory }}' }"
-                   v-for="(observatory, index) in observatories" :key="observatory"
+                <a v-for="(observatory, index) in observatories" :key="observatory"
                    v-if="observatory.name.match(new RegExp(observatoryName))"
+                   class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                   :class="{'active': observatory.name === currentOBS }"
                    :href="observatory.url">
                     <span class="text-nowrap text-truncate mr-1">@{{ observatory.name }}</span>
-                    <span class="badge badge-primary badge-pill">@{{ observatory.count }}</span>
+                    <span class="badge badge-pill"
+                          :class="observatory.name === currentOBS ? 'badge-light' : 'badge-primary'">
+                        @{{ observatory.count }}
+                    </span>
                 </a>
             </transition-group>
         </div>
     </div>
     <script>
     Object.assign(mix.data, {
+        currentOBS: '{{ $observatory }}',
         observatories: {!! $observatories !!},
         observatoryName: '',
     });

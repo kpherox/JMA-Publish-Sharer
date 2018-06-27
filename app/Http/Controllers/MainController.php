@@ -67,25 +67,13 @@ class MainController extends Controller
     **/
     private function entries(string $type = null, string $kind = null, string $observatoryName = null) : Collection
     {
-        $selected = 'Select Type or Kind';
+        $typeOrKind = 'Select Type or Kind';
+        $selected = '';
         $entries = Entry::orderBy('updated', 'desc');
         $appends = [];
 
-        if ($type) {
-            $selected = 'Type: '.trans('feedtypes.'.$type);
-            $appends['type'] = $type;
-            $entries = $entries->whereHas('feed', function ($query) use ($type) {
-                            return $query->ofType($type);
-                        });
-        } elseif ($kind) {
-            $selected = 'Kind: '.$kind;
-            $appends['kind'] = $kind;
-            $entries = $entries->whereHas('entryDetails', function ($query) use ($kind) {
-                            return $query->where('kind_of_info', $kind);
-                        });
-        }
-
-        $feeds = Feed::select(['url']);
+        $feeds = Feed::select(['url'])
+                    ->having('entries_count', '>=', 1);
         $kindList = EntryDetail::select('kind_of_info')
                     ->selectRaw('count(*) as count')
                     ->groupBy('kind_of_info');
@@ -102,16 +90,34 @@ class MainController extends Controller
             $feeds = $feeds->withCount('entries');
         }
 
-        $entries = $entries->paginate(15)->appends($appends);
-
-        $feeds = $feeds->having('entries_count', '>=', 1)->get()->sortByType();
-
+        $feeds = $feeds->get()->sortByType();
         $kindList = $kindList->get()->sortByKind();
+
+        if ($type) {
+            $selected = $type;
+            $typeOrKind = 'Type: '.trans('feedtypes.'.$type);
+            $appends['type'] = $type;
+            $entries = $entries->whereHas('feed', function ($query) use ($type) {
+                            return $query->ofType($type);
+                        });
+        } elseif ($kind) {
+            $selected = $kindList->search(function ($i) use ($kind) {
+                return $i->kind_of_info === $kind;
+            });
+            $typeOrKind = 'Kind: '.$kind;
+            $appends['kind'] = $kind;
+            $entries = $entries->whereHas('entryDetails', function ($query) use ($kind) {
+                            return $query->where('kind_of_info', $kind);
+                        });
+        }
+
+        $entries = $entries->paginate(15)->appends($appends);
 
         return collect([
             'entries' => $entries,
-            'feeds' => $feeds,
             'selected' => $selected,
+            'typeOrKind' => $typeOrKind,
+            'feeds' => $feeds,
             'kindList' => $kindList,
         ]);
     }
