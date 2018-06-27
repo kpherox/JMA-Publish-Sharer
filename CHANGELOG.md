@@ -2,6 +2,13 @@
 Changelog.
 
 ## [Unreleased]
+### Changed
+- Replace blade foreach to vue list of type/kind/observatory list.
+- Add `shallow = true` to submodules.
+
+## [Version 0.4.1 (Pre-Release)][0.4.1] - 2018-06-23
+### Fixed
+- Fix undefined variable when running migrate.
 
 ## [Version 0.4 (Pre-Release)][0.4] - 2018-06-23
 ### Added
@@ -52,7 +59,8 @@ Changelog.
 - Subscribe check.
 - Save received feed.
 
-[Unreleased]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4...develop
+[Unreleased]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.1...develop
+[0.4.1]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4...v0.4.1
 [0.4]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.3...v0.4
 [0.3]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.2.2...v0.3
 [0.2.2]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.2.1...v0.2.2
