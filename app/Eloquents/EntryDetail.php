@@ -14,10 +14,9 @@ class EntryDetail extends Model
      */
     protected $fillable = [
         'entry_id',
+        'uuid',
         'kind_of_info',
         'url',
-        'uuid',
-        'xml_document',
     ];
 
     /**
@@ -25,9 +24,7 @@ class EntryDetail extends Model
      *
      * @var array
      */
-    protected $hidden = [
-        'xml_document',
-    ];
+    protected $hidden = [];
 
     /**
      * Relation: belong to entry.
@@ -43,5 +40,15 @@ class EntryDetail extends Model
     public function getRouteKeyName() : string
     {
         return 'uuid';
+    }
+
+    public function getXmlFileAttribute()
+    {
+        return \Storage::get('entry/'.$this->uuid);
+    }
+
+    public function setXmlFileAttribute(string $xmlDoc)
+    {
+        \Storage::put('entry/'.$this->uuid, $xmlDoc);
     }
 }

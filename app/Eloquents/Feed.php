@@ -52,5 +52,13 @@ class Feed extends Model
     {
         return basename(parse_url($this->url, PHP_URL_PATH), '.xml');
     }
+
+    /**
+     * Mutator: feed type.
+    **/
+    public function getTransedTypeAttribute() : string
+    {
+        return trans('feedtypes.'.$this->type);
+    }
 }
 
