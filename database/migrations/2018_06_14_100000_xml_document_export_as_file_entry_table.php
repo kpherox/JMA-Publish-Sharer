@@ -29,7 +29,7 @@ class XmlDocumentExportAsFileEntryTable extends Migration
             $entries = Entry::whereRaw('id BETWEEN '.($i+1).' AND '.($i+1000))->get();
             echo 'selected from '.($i+1).' '.$entries->count().' entries'.PHP_EOL;
             foreach ($entries as $entry) {
-                Storage::put('entry/'.$entry->uuid, $entry->xml_document);
+                $entry->xml_file = $entry->xml_document;
                 $entry->xml_document = null;
                 $entry->save();
                 $processed_count++;
@@ -62,7 +62,7 @@ class XmlDocumentExportAsFileEntryTable extends Migration
             $entries = Entry::whereRaw('id BETWEEN '.($i+1).' AND '.($i+1000))->get();
             echo 'selected from '.($i+1).' '.$entries->count().' entries'.PHP_EOL;
             foreach ($entries as $entry) {
-                $entry->xml_document = Storage::get('entry/'.$entry->uuid);
+                $entry->xml_document = $entry->xml_file;
                 $entry->save();
                 $processed_count++;
                 if ($processed_count % 100 == 0) {

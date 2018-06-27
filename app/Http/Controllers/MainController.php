@@ -110,7 +110,6 @@ class MainController extends Controller
                     ->get()
                     ->sortByType()
                     ->map(function($feed) {
-                        $feed->transed_type = trans('feedtypes.'.$feed->type);
                         $feed->param = '?type='.$feed->type;
                         return $feed;
                     });
@@ -138,7 +137,7 @@ class MainController extends Controller
     **/
     public function entry(EntryDetail $entry) : View
     {
-        $doc = \Storage::get('entry/'.$entry->uuid);
+        $doc = $entry->xml_file;
         $feed = $entry->entry->feed;
         $entryArray = collect((new SimpleXML($doc, true))->toArray(true));
 
@@ -156,9 +155,9 @@ class MainController extends Controller
      *
      * @param  string $uuid
     **/
-    public function entryXml(string $uuid) : Response
+    public function entryXml(EntryDetail $entry) : Response
     {
-        $doc = \Storage::get('entry/'.$uuid);
+        $doc = $entry->xml_file;
         return response($doc, 200)
                     ->header('Content-Type', 'application/xml');
     }
@@ -168,9 +167,9 @@ class MainController extends Controller
      *
      * @param  string $uuid
     **/
-    public function entryJson(string $uuid) : JsonResponse
+    public function entryJson(EntryDetail $entry) : JsonResponse
     {
-        $doc = \Storage::get('entry/'.$uuid);
+        $doc = $entry->xml_file;
         return response()->json((new SimpleXML($doc, true))->toArray(true),
                                 200, [], JSON_UNESCAPED_UNICODE);
     }

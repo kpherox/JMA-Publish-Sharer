@@ -84,10 +84,10 @@ class WebSubHandler
         $entries->each(function ($entry) use ($feed, &$promises) {
             $feed->entries()->save($entry['entry']);
 
-            $promises[$entry['uuid']] = $entry['promise'];
+            $promises[] = $entry->except(['except'])->all();
         });
 
-        self::saveDetailsXml($promises);
+        self::saveDetailsXml(collect($promises));
     }
 
     /**
@@ -136,28 +136,29 @@ class WebSubHandler
             $entryDetail = EntryDetail::create($parseedEntry['entryDetail']);
             $entry->entryDetails()->save($entryDetail);
 
-            return [
+            return collect([
                 'entry' => $entry,
-                'uuid' => $parseedEntry['uuid'],
+                'detail' => $entryDetail,
                 'promise' => $parseedEntry['promise'],
-            ];
+            ]);
         });
     }
 
     /**
      * Save entry_details xml document.
      *
-     * @param  array $promises
+     * @param  \Illuminate\Support\Collection $promises
      * @return void
     **/
-    private static function saveDetailsXml(array $promises)
+    private static function saveDetailsXml(Collection $promises)
     {
-        $results = self::fetchXmlDocument($promises);
+        $results = self::fetchXmlDocument($promises->map(function ($value) {return $value['promise'];})->all());
 
-        $results->each(function ($result, $key) {
+        $results->each(function ($result, $key) use ($promises) {
             if ($result->getReasonPhrase() === 'OK') {
                 $xmlDoc = $result->getBody()->getContents();
-                \Storage::put('entry/'.$key, $xmlDoc);
+                $detail = $promises[$key]['detail'];
+                $detail->xml_file = $xmlDoc;
             }
         });
     }
@@ -177,7 +178,6 @@ class WebSubHandler
         $url = $entry['link']['@attributes']['href'];
 
         return [
-            'uuid' => $uuid,
             'promise' => \Guzzle::getAsync($url),
             'entry' => [
                 'observatory_name' => collect($entry['author'])->get('name'),
