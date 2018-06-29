@@ -7,12 +7,6 @@
 
 require('./bootstrap');
 
-jQuery(() => {
-    $('a.disabled').click((e) => e.preventDefault());
-
-    $(document).click(() => $('.sidebar').collapse('hide'));
-});
-
 window.Vue = require('vue');
 
 /**
@@ -26,9 +20,8 @@ Vue.component('account-settings', require('./components/AccountSettings.vue'));
 const app = new Vue({
     el: '#app',
     mixins: [mix],
-    methods: {
-        logout: () => {
-            document.getElementById('logout-form').submit();
-        }
+    mounted() {
+        $('a.disabled').click((e) => e.preventDefault())
+        $(document).click(() => $('.sidebar').collapse('hide'))
     }
 });
