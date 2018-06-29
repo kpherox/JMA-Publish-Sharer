@@ -29,13 +29,14 @@
             </transition-group>
         </div>
     </div>
-    <script>
-    Object.assign(mix.data, {
-        currentOBS: '{{ $observatory }}',
-        observatories: @json ($observatories),
-        observatoryName: '',
-    });
-    </script>
 </sidebar>
+
+<script>
+Object.assign(mix.data, {
+    currentOBS: '{{ $observatory }}',
+    observatories: @json ($observatories),
+    observatoryName: '',
+});
+</script>
 @endsection
 

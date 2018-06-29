@@ -3,8 +3,8 @@
 @section ('content')
 <div class="container">
     <div class="row justify-content-center">
-        <header class="d-sm-flex col-lg-9 col-xl-8 p-3">
-            <h5 class="text-truncate d-block mt-2 mb-4 mr-auto px-2">@yield('title', 'Entries')</h5>
+        <header class="d-sm-flex col-lg-9 col-xl-8 px-3 mb-3">
+            <h5 class="text-truncate d-block my-2 mr-auto px-2">@yield('title', 'Entries')</h5>
 
             <div class="dropdown align-self-start">
                 <button class="btn page-link text-dark dropdown-toggle" type="button" data-toggle="dropdown">{{ $typeOrKind }}</button>
@@ -45,18 +45,9 @@
                     </transition-group>
                 </div>
             </div>
-    <script>
-    Object.assign(mix.data, {
-        route: '{{ $routeUrl }}',
-        feeds: @json ($feeds),
-        kinds: @json ($kindList),
-        selected: '{{ $selected }}',
-        kindName: '',
-    });
-    </script>
         </header>
 
-        <main class="col-lg-9 col-xl-8 p-3">
+        <main class="col-lg-9 col-xl-8">
             {{ $entries->links('components.index-pagination') }}
 
             @foreach ($entries as $entry)
@@ -109,11 +100,21 @@
                 </div>
             </div>
             @endforeach
-
-            {{ $entries->links('components.index-pagination') }}
         </main>
+
+        {{ $entries->links('components.index-pagination') }}
 
         @yield ('sidebar')
     </div>
 </div>
+
+<script>
+Object.assign(mix.data, {
+    route: '{{ $routeUrl }}',
+    feeds: @json ($feeds),
+    kinds: @json ($kindList),
+    selected: '{{ $selected }}',
+    kindName: '',
+});
+</script>
 @endsection
