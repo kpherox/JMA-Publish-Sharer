@@ -48,8 +48,8 @@
     <script>
     Object.assign(mix.data, {
         route: '{{ $routeUrl }}',
-        feeds: {!! $feeds !!},
-        kinds: {!! $kindList !!},
+        feeds: @json ($feeds),
+        kinds: @json ($kindList),
         selected: '{{ $selected }}',
         kindName: '',
     });

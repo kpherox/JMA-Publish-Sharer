@@ -32,7 +32,7 @@
     <script>
     Object.assign(mix.data, {
         currentOBS: '{{ $observatory }}',
-        observatories: {!! $observatories !!},
+        observatories: @json ($observatories),
         observatoryName: '',
     });
     </script>

@@ -6,11 +6,19 @@
     <div id="account-lists" class="card">
         <h5 class="card-header">Account Lists</h5>
         <div class="card-body">
-            <script>let accounts = {}</script>
+            <script>
+            Object.assign(mix.data, {
+                accounts: {},
+            });
+            </script>
             @foreach ($socialAccounts as $provider => $accounts)
             <div class="card border-0">
                 @if ($accounts->count() > 0)
-                <script>accounts.{{ $provider }} = @json($accounts->toArray())</script>
+                <script>
+                Object.assign(mix.data.accounts, {
+                    {{ $provider }}: @json ($accounts),
+                });
+                </script>
                 @endif
                 <h5 class="card-header bg-transparent border-info">{{ $providerName[$provider] }}</h5>
                 <div class="list-group list-group-flush">
@@ -57,7 +65,6 @@
         existsEmail: {{ $existsEmail }},
         isDisplay: false,
         isShowing: false,
-        accounts: accounts,
         account: {},
         accountIndex: -1,
     });
@@ -106,7 +113,7 @@
             this.$forceUpdate();
             this.isDisplay = false;
         }
-    }
+    });
     </script>
 </div>
 @endsection
