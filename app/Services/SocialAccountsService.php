@@ -107,6 +107,6 @@ class SocialAccountsService
     **/
     private function isOAuthOne(string $provider) : bool
     {
-        return collect(config('services.oauth1'))->contains($provider);
+        return config('services.'.$provider.'.oauth1', false);
     }
 }

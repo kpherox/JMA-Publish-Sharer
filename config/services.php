@@ -35,12 +35,6 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
-    'providers' => [
-        'twitter' => 'Twitter',
-        'line' => 'Line',
-        'github' => 'GitHub',
-    ],
-
     'googleapi' => [
         'maps' => [
             'js' => [
@@ -49,30 +43,38 @@ return [
         ],
     ],
 
-    'oauth1' => [
-        'twitter',
-    ],
-
     'twitter' => [
+        'socialite' => true,
         'client_id' => env('TWITTER_KEY'),
         'client_secret' => env('TWITTER_SECRET'),
         'consumer_key' => env('TWITTER_API_KEY', env('TWITTER_KEY')),
         'consumer_secret' => env('TWITTER_API_SECRET', env('TWITTER_SECRET')),
         'access_token' => env('TWITTER_ACCESS_TOKEN'),
         'access_secret' => env('TWITTER_ACCESS_SECRET'),
+        'simple_icons' => 'Twitter',
+        'name' => 'Twitter',
+        'oauth1' => true,
+        'notification' => true,
     ],
 
     'line' => [
+        'socialite' => true,
         'client_id' => env('LINE_CHANNEL_ACCESS_TOKEN'),
         'client_secret' => env('LINE_CHANNEL_SECRET'),
         'token' => env('LINE_BOT_CHANNEL_ACCESS_TOKEN'),
         'secret' => env('LINE_BOT_CHANNEL_SECRET'),
-        'user_id' => env('LINE_DEFAULT_USER_ID')
+        'user_id' => env('LINE_DEFAULT_USER_ID'),
+        'simple_icons' => 'Line',
+        'name' => 'LINE',
+        'notification' => true,
     ],
 
     'github' => [
+        'socialite' => true,
         'client_id' => env('GITHUB_KEY'),
         'client_secret' => env('GITHUB_SECRET'),
+        'simple_icons' => 'GitHub',
+        'name' => 'GitHub',
     ],
 
 ];

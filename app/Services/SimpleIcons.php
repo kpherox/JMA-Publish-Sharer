@@ -38,18 +38,25 @@ class SimpleIcons
     **/
     public function __construct()
     {
-        $iconList = collect(json_decode(\File::get(resource_path('assets/simple-icons/_data/simple-icons.json')), true)['icons']);
-        $providers = collect(config('services.providers'));
+        $json = \File::get(resource_path('assets/simple-icons/_data/simple-icons.json'));
+        $iconList = collect(json_decode($json, true)['icons']);
+        $providers = collect(config('services'))->filter(function ($provider) {
+            return data_get($provider, 'simple_icons', null);
+        });
 
         $icons = $iconList->filter(function ($value) use ($providers) {
-                return $providers->contains($value['title']);
+                return $providers->contains('simple_icons', $value['title']);
             })->map(function ($value) use ($providers) {
-                $provider = $providers->search($value['title']);
-                $value['lowerTitle'] = $provider;
-                $value['svg'] = \File::get(resource_path('assets/simple-icons/icons/'.$provider.'.svg'));
+                $iconName = $value['title'];
+                $provider = $providers->search(function ($provider) use ($iconName) {
+                    return data_get($provider, 'simple_icons', null) === $iconName;
+                });
+                data_set($value, 'title', config('services.'.$provider.'.name'));
+                data_set($value, 'provider', $provider);
+                data_set($value, 'svg', \File::get(resource_path('assets/simple-icons/icons/'.$provider.'.svg')));
                 return $value;
             })->sort(function ($a, $b) use ($providers) {
-                return $providers->keys()->search($a['lowerTitle']) > $providers->keys()->search($b['lowerTitle']);
+                return $providers->keys()->search($a['provider']) > $providers->keys()->search($b['provider']);
             })->all();
 
         $this->setIcons($icons);

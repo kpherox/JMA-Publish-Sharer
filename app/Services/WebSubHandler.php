@@ -174,7 +174,7 @@ class WebSubHandler
         $updated = Carbon::parse($entry['updated']);
         $updated->setTimezone(config('app.timezone'));
 
-        $url = $entry['link']['@attributes']['href'];
+        $url = data_get($entry, 'link.@attributes.href');
 
         return [
             'uuid' => $entryUuid,

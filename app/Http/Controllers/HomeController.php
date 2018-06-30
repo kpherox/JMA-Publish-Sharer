@@ -12,17 +12,14 @@ class HomeController extends Controller
      * @var array
      */
     private $menus = [
-        'index' => [
+        'topPage' => [
             'name' => 'Top Page',
-            'isCurrent' => false,
         ],
-        'home.index' => [
+        'index' => [
             'name' => 'Dashboard',
-            'isCurrent' => false,
         ],
-        'home.accounts' => [
+        'accounts' => [
             'name' => 'Social Accounts',
-            'isCurrent' => false,
         ],
     ];
 
@@ -41,9 +38,8 @@ class HomeController extends Controller
      */
     public function index() : View
     {
-        $index = 'home.index';
-        $this->menus[$index]['isCurrent'] = true;
-        return view($index, ['menus' => $this->menus]);
+        data_set($this->menus, 'index.isCurrent', true);
+        return view('home.index', ['menus' => $this->menus]);
     }
 
     /**
@@ -51,31 +47,35 @@ class HomeController extends Controller
      */
     public function accounts() : View
     {
-        $accounts = 'home.accounts';
-        $user = auth()->user();
+        data_set($this->menus, 'accounts.isCurrent', true);
+        $providers = collect(config('services'))->filter(function ($provider) {
+            return data_get($provider, 'socialite', false);
+        });
 
-        $this->menus[$accounts]['isCurrent'] = true;
-        $providerName = collect(config('services.providers'));
+        $providersName = $providers->map(function ($provider) {
+            return $provider['name'];
+        });
 
-        $socialAccounts = $providerName->map(function($item, $key) use ($user) {
-            return $user->accounts->where('provider_name', $key)->map(function($account) {
-                return collect($account)->forget(['id', 'user_id', 'updated_at']);
+        $socialAccounts = $providers->map(function($item, $key) use ($providers) {
+            return auth()->user()->accounts()->select('provider_name', 'provider_id', 'name', 'nickname', 'avatar')->where('provider_name', $key)->get()->map(function ($account) use ($providers) {
+                $account->can_notify = data_get($providers, $account->provider_name.'.notification', false);
+                return $account;
             });
         });
 
-        $endpoints = $providerName->map(function($item, $key) {
+        $endpoints = $providers->map(function($item, $key) {
             return collect([
                 'unlink' => route($key.'.unlink'),
                 'notify' => route($key.'.notify')
             ]);
         });
 
-        return view($accounts, [
+        return view('home.accounts', [
             'menus' => $this->menus,
             'socialAccounts' => $socialAccounts,
-            'providerName' => $providerName,
+            'providersName' => $providersName,
             'endpoints' => $endpoints,
-            'existsEmail' => $user->existsEmailAndPassword() ? 1 : 0
+            'existsEmail' => auth()->user()->existsEmailAndPassword(),
         ]);
     }
 }

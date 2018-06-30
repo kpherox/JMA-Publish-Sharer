@@ -50,7 +50,7 @@
                             @endforeach
                     </h6>
 
-                    @if (!empty($entry->parsed_headline['headline']))
+                    @if ($entry->parsed_headline->has('headline'))
                     <p class="card-text px-1">{{ $entry->parsed_headline['headline'] }}</p>
                     @endif
                 </div>
