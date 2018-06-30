@@ -42,9 +42,36 @@ class EntryDetail extends Model
         return 'uuid';
     }
 
+    public function getXmlFilenameAttribute()
+    {
+        return 'entry/'.$this->uuid;
+    }
+
+    public function getIsGzippedXmlFileAttribute()
+    {
+        return \Storage::exists($this->xml_filename.'.gz');
+    }
+
+    public function getGunzippedXmlFileAttribute()
+    {
+        if ($this->is_gzipped_xml_file) {
+            return gzdecode($this->xml_file);
+        } else {
+            return $this->xml_file;
+        }
+    }
+
     public function getXmlFileAttribute()
     {
-        return \Storage::get('entry/'.$this->uuid);
+        if ($this->is_gzipped_xml_file) {
+            return \Storage::get($this->xml_filename.'.gz');
+        }
+
+        if (\Storage::exists($this->xml_filename)) {
+            return \Storage::get($this->xml_filename);
+        }
+
+        return null;
     }
 
     public function setXmlFileAttribute(string $xmlDoc)
