@@ -121,8 +121,6 @@ return [
 
     'websubVerifyToken' => env('WEBSUB_VERIFY_TOKEN', ''),
 
-
-
     'supportGzip' => (function_exists('gzencode') && env('ENABEL_SAVE_WITH_GZIP', false)),
 
     /*
@@ -184,7 +182,7 @@ return [
 
         App\Providers\Blade\ComponentAliasServiceProvider::class,
         App\Providers\Blade\DirectiveServiceProvider::class,
-        App\Providers\ExtendingCollectionServiceProvider::class
+        App\Providers\ExtendingCollectionServiceProvider::class,
 
     ],
 

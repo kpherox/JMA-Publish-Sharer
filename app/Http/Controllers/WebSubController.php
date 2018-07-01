@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\SimpleXML;
 use Illuminate\Http\Response;
 use App\Services\WebSubHandler;
-use App\Services\SimpleXML;
 
 class WebSubController extends Controller
 {
     /**
-     * Subscribe Check JMA
+     * Subscribe Check JMA.
      */
     public function subscribeCheck() : Response
     {
@@ -26,7 +26,7 @@ class WebSubController extends Controller
     }
 
     /**
-     * Recive JMA Publish
+     * Recive JMA Publish.
      *
      * @return void
      */
@@ -55,4 +55,3 @@ class WebSubController extends Controller
         WebSubHandler::saveFeedAndEntries($feed);
     }
 }
-

@@ -13,7 +13,7 @@ abstract class TestCase extends BaseTestCase
     public function setUp()
     {
         parent::setUp();
-        if (!self::$migrated) {
+        if (! self::$migrated) {
             \Artisan::call('migrate:refresh');
             self::$migrated = true;
         }
@@ -25,10 +25,9 @@ abstract class TestCase extends BaseTestCase
             $columnName = 'Tables_in_'.\DB::connection('')->getDatabaseName();
             $tableName = $table->$columnName;
             if ($tableName !== 'migrations') {
-                \DB::statement('TRUNCATE TABLE `' . $tableName . '`');
+                \DB::statement('TRUNCATE TABLE `'.$tableName.'`');
             }
         }
         parent::tearDown();
     }
-
 }

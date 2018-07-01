@@ -43,6 +43,7 @@ class HomeController extends Controller
     {
         $index = 'home.index';
         $this->menus[$index]['isCurrent'] = true;
+
         return view($index, ['menus' => $this->menus]);
     }
 
@@ -57,15 +58,15 @@ class HomeController extends Controller
         $this->menus[$accounts]['isCurrent'] = true;
         $providerName = collect(config('services.providers'));
 
-        $socialAccounts = $providerName->map(function($item, $key) use ($user) {
-            return $user->accounts->where('provider_name', $key)->map(function($account) {
+        $socialAccounts = $providerName->map(function ($item, $key) use ($user) {
+            return $user->accounts->where('provider_name', $key)->map(function ($account) {
                 return collect($account)->forget(['id', 'user_id', 'updated_at']);
             });
         });
 
-        $endpoints = $providerName->map(function($item, $key) {
+        $endpoints = $providerName->map(function ($item, $key) {
             return collect([
-                'unlink' => route($key.'.unlink')
+                'unlink' => route($key.'.unlink'),
             ]);
         });
 
@@ -74,7 +75,7 @@ class HomeController extends Controller
             'socialAccounts' => $socialAccounts,
             'providerName' => $providerName,
             'endpoints' => $endpoints,
-            'existsEmail' => $user->existsEmailAndPassword() ? 1 : 0
+            'existsEmail' => $user->existsEmailAndPassword() ? 1 : 0,
         ]);
     }
 }

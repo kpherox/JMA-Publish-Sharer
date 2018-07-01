@@ -15,6 +15,7 @@ class DirectiveServiceProvider extends ServiceProvider
     {
         \Blade::directive('datetime', function ($time, $timezone = null) {
             $timezone = $timezone ?: 'config(\'app.timezone\')';
+
             return "<?php
 \$carbon = \Carbon\Carbon::parse($time);
 \$carbon->setTimezone($timezone);

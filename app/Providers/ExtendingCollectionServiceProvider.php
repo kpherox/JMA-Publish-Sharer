@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Collection;
+use Illuminate\Support\ServiceProvider;
 
 class ExtendingCollectionServiceProvider extends ServiceProvider
 {
@@ -34,11 +34,13 @@ class ExtendingCollectionServiceProvider extends ServiceProvider
 
         Collection::macro('sortByKind', function ($options = SORT_REGULAR, $descending = false) {
             $kinds = collect(config('jmaxml.kinds'))->keys();
+
             return $this->sortWithOrderBy('kind_of_info', $kinds, $options, $descending, false);
         });
 
         Collection::macro('sortByType', function ($options = SORT_REGULAR, $descending = false) {
             $types = collect(config('jmaxml.feedtypes'));
+
             return $this->sortWithOrderBy('type', $types, $options, $descending, false);
         });
     }

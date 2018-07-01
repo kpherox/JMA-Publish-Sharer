@@ -15,7 +15,9 @@ class TwitterAccountController extends SocialAccountController
      */
     public function __construct()
     {
-        if (method_exists('Base', '__construct')) parent::__construct();
+        if (method_exists('Base', '__construct')) {
+            parent::__construct();
+        }
         $this->setProvider('twitter');
     }
 
@@ -35,6 +37,7 @@ class TwitterAccountController extends SocialAccountController
     public function linkToUser() : RedirectResponse
     {
         $this->forceLogin = true;
+
         return parent::linkToUser();
     }
 }

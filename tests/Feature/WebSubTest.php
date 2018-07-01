@@ -3,14 +3,11 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Promise;
 
 class WebSubTest extends TestCase
 {
-
     private static $websubEndpoint = '/hooks/websub/subscriber';
     private static $websubOldEndpoint = '/hooks/push/subscriber';
 
@@ -61,18 +58,18 @@ class WebSubTest extends TestCase
     private function getHeaders(string $verbs = 'GET', string $signature = null)
     {
         $headers = [
-            'HTTP_User-Agent' => 'AppEngine-Google; (+http://code.google.com/appengine; appid: s~alert-hub)'
+            'HTTP_User-Agent' => 'AppEngine-Google; (+http://code.google.com/appengine; appid: s~alert-hub)',
         ];
 
         if (mb_strtoupper($verbs) === 'GET') {
             return $headers;
-        };
+        }
 
         $headers['HTTP_Content-Type'] = 'application/atom+xml';
 
-        if (!empty($signature)) {
+        if (! empty($signature)) {
             $headers['HTTP_X-Hub-Signature'] = $signature;
-        };
+        }
 
         return $headers;
     }
@@ -124,7 +121,7 @@ class WebSubTest extends TestCase
             ])
             ->assertDatabaseHas('feeds', [
                 'uuid' => 'be4342e2-ff73-363c-a3ed-66e05e977224',
-                'url' => 'http://xml.kishou.go.jp/*/*.xml'
+                'url' => 'http://xml.kishou.go.jp/*/*.xml',
             ]);
 
         \Storage::disk('local')->assertExists('entry/8e55b8d8-518b-3dc9-9156-7e87c001d7b5');
@@ -232,7 +229,7 @@ class WebSubTest extends TestCase
 
     /**
      * Subscribe check test.
-     * Incorrect value to 'hub.verify_token'
+     * Incorrect value to 'hub.verify_token'.
      *
      * @return void
      */
@@ -247,7 +244,7 @@ class WebSubTest extends TestCase
 
     /**
      * Subscribe check test.
-     * Does't set 'hub.verify_token'
+     * Does't set 'hub.verify_token'.
      *
      * @return void
      */
@@ -262,7 +259,7 @@ class WebSubTest extends TestCase
 
     /**
      * Subscribe check test.
-     * Doesn't set 'hub.mode'
+     * Doesn't set 'hub.mode'.
      *
      * @return void
      */
@@ -274,5 +271,4 @@ class WebSubTest extends TestCase
             ->assertForbidden()
             ->assertSeeText('Not exist hub.mode');
     }
-
 }
