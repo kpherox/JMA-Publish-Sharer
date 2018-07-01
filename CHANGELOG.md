@@ -2,6 +2,8 @@
 Changelog.
 
 ## [Unreleased]
+
+## [Version 0.4.2 (Pre-Release)][0.4.2] - 2018-07-02
 ### Added
 - Support gzip for entry xml file.
 - Add entry directory to git repository.
@@ -68,7 +70,8 @@ Changelog.
 - Subscribe check.
 - Save received feed.
 
-[Unreleased]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.1...develop
+[Unreleased]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.2...develop
+[0.4.2]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4...v0.4.1
 [0.4]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.3...v0.4
 [0.3]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.2.2...v0.3
