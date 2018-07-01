@@ -121,6 +121,10 @@ return [
 
     'websubVerifyToken' => env('WEBSUB_VERIFY_TOKEN', ''),
 
+
+
+    'supportGzip' => (function_exists('gzencode') && env('ENABEL_SAVE_WITH_GZIP', false)),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

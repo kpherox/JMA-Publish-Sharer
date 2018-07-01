@@ -76,6 +76,11 @@ class EntryDetail extends Model
 
     public function setXmlFileAttribute(string $xmlDoc)
     {
-        \Storage::put('entry/'.$this->uuid, $xmlDoc);
+        if (config('app.supportGzip')) {
+            $doc = gzencode($xmlDoc);
+            \Storage::put($this->xml_filename.'.gz', $doc);
+        } else {
+            \Storage::put($this->xml_filename, $xmlDoc);
+        }
     }
 }
