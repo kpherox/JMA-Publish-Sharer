@@ -1,6 +1,8 @@
 [submodule "resources/assets/simple-icons"]
 	path = resources/assets/simple-icons
 	url = https://github.com/simple-icons/simple-icons
+	shallow = true
 [submodule "tests/SampleData"]
 	path = tests/SampleData
 	url = https://github.com/kPherox/JMA-XML-SampleData
+	shallow = true

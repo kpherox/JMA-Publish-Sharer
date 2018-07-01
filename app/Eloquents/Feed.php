@@ -3,8 +3,8 @@
 namespace App\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Feed extends Model
 {
@@ -26,9 +26,11 @@ class Feed extends Model
      */
     protected $hidden = [];
 
+    protected $appends = ['type', 'transed_type'];
+
     /**
      * Relation: has many entries.
-    **/
+     */
     public function entries() : HasMany
     {
         return $this->hasMany('App\Eloquents\Entry', 'feed_uuid', 'uuid');
@@ -39,18 +41,25 @@ class Feed extends Model
      *
      * @param  \Illuminate\Database\Eloquent\Builder $query
      * @param  string $type
-    **/
-    public function scopeWhereType(Builder $query, string $type) : Builder
+     */
+    public function scopeOfType(Builder $query, string $type) : Builder
     {
         return $query->where('url', 'LIKE', '%'.$type.'.xml');
     }
 
     /**
      * Mutator: feed type.
-    **/
+     */
     public function getTypeAttribute() : string
     {
         return basename(parse_url($this->url, PHP_URL_PATH), '.xml');
     }
-}
 
+    /**
+     * Mutator: feed type.
+     */
+    public function getTransedTypeAttribute() : string
+    {
+        return trans('feedtypes.'.$this->type);
+    }
+}

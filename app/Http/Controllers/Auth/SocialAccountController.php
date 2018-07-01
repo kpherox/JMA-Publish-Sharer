@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use App\Services\SocialAccountsService;
 
 abstract class SocialAccountController extends Controller
@@ -13,12 +13,12 @@ abstract class SocialAccountController extends Controller
      * Provider name.
      *
      * @var string
-    **/
+     */
     private $provider;
 
     /**
      * Getter for provider name.
-    **/
+     */
     protected function getProvider() : string
     {
         return $this->provider;
@@ -28,7 +28,7 @@ abstract class SocialAccountController extends Controller
      * Setter for provider name.
      *
      * @param  string $value
-    **/
+     */
     protected function setProvider(string $value) : string
     {
         return $this->provider = $value;
@@ -58,7 +58,7 @@ abstract class SocialAccountController extends Controller
         $isAjax = request()->ajax();
 
         try {
-            $message = $accountService->deleteLinkedAccount($this->getProvider(), (int)request('id'));
+            $message = $accountService->deleteLinkedAccount($this->getProvider(), (int) request('id'));
         } catch (\Exception $e) {
             if ($isAjax) {
                 return new JsonResponse([
@@ -83,7 +83,7 @@ abstract class SocialAccountController extends Controller
     }
 
     /**
-     * Obtain the user information
+     * Obtain the user information.
      *
      * @param  \App\Services\SocialAccountsService $accountService
      */

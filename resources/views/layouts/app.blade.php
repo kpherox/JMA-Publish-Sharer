@@ -21,7 +21,13 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <script>let mix = {};</script>
+        <script>
+            let mix = {
+                data: {},
+                methods: {},
+                computed: {},
+            };
+        </script>
     </head>
     <body>
         <div id="app">
@@ -31,12 +37,6 @@
 
             @yield ('footer')
         </div>
-
-        @auth
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
-        @endauth
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>

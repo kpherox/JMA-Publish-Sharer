@@ -6,15 +6,23 @@
     <div id="account-lists" class="card">
         <h5 class="card-header">Account Lists</h5>
         <div class="card-body">
-            <script>let accounts = {}</script>
+            <script>
+            Object.assign(mix.data, {
+                accounts: {},
+            });
+            </script>
             @foreach ($socialAccounts as $provider => $accounts)
             <div class="card border-0">
                 @if ($accounts->count() > 0)
-                <script>accounts.{{ $provider }} = @json($accounts->toArray())</script>
+                <script>
+                Object.assign(mix.data.accounts, {
+                    {{ $provider }}: @json ($accounts),
+                });
+                </script>
                 @endif
                 <h5 class="card-header bg-transparent border-info">{{ $providerName[$provider] }}</h5>
                 <div class="list-group list-group-flush">
-                    <transition-group name="fade" class="account-list">
+                    <transition-group name="fade" tag="div" class="account-list">
                         <a class="d-flex list-group-item list-group-item-action" :class="{'disabled' : isShowing, 'active': accountIndex === index }"
                            v-for="(account, index) in accounts.{{ $provider }}" :key="account"
                            :href="'#'+account.provider_name+'-'+account.nickname"
@@ -51,57 +59,63 @@
             :account="account">
         </account-settings>
     </transition>
-    <script>
-    mix = {
-        data: { isSafeUnlink: false, existsEmail: {{ $existsEmail }}, isDisplay: false, isShowing: false, accounts: accounts, account: {}, accountIndex: -1 },
-        methods: {
-            showAccountSettings(account, accountIndex) {
-                if (this.isShowing) return;
+</div>
 
-                let delay = this.isDisplay ? 500 : 0;
+<script>
+Object.assign(mix.data, {
+    isSafeUnlink: false,
+    existsEmail: {{ $existsEmail }},
+    isDisplay: false,
+    isShowing: false,
+    account: {},
+    accountIndex: -1,
+});
+Object.assign(mix.methods, {
+    showAccountSettings(account, accountIndex) {
+        if (this.isShowing) return;
 
-                this.accountIndex = -1;
-                this.isShowing = true;
-                this.isDisplay = false;
+        let delay = this.isDisplay ? 500 : 0;
 
-                setTimeout(() => {
-                    this.checkSafeUnlink();
-                    this.account = account;
+        this.accountIndex = -1;
+        this.isShowing = true;
+        this.isDisplay = false;
 
-                    this.isDisplay = true;
-                }, delay);
+        setTimeout(() => {
+            this.checkSafeUnlink();
+            this.account = account;
 
-                setTimeout(() => {
-                    console.log('showed '+account.name+'\'s settings');
-                    this.accountIndex = accountIndex;
-                    this.isShowing = false;
-                }, delay + 500);
-            },
-            checkSafeUnlink() {
-                let count = 0;
+            this.isDisplay = true;
+        }, delay);
 
-                if (this.existsEmail) {
-                    return this.isSafeUnlink = true;
-                }
+        setTimeout(() => {
+            console.log('showed '+account.name+'\'s settings');
+            this.accountIndex = accountIndex;
+            this.isShowing = false;
+        }, delay + 500);
+    },
+    checkSafeUnlink() {
+        let count = 0;
 
-                for (let provider of Object.keys(this.accounts)) {
-                    count += this.accounts[provider].length;
+        if (this.existsEmail) {
+            return this.isSafeUnlink = true;
+        }
 
-                    if (count > 1) {
-                        return this.isSafeUnlink = true;
-                    }
-                }
+        for (let provider of Object.keys(this.accounts)) {
+            count += this.accounts[provider].length;
 
-                return this.isSafeUnlink = false;
-            },
-            updateList(e) {
-                this.accounts = e;
-                this.$forceUpdate();
-                this.isDisplay = false;
+            if (count > 1) {
+                return this.isSafeUnlink = true;
             }
         }
+
+        return this.isSafeUnlink = false;
+    },
+    updateList(e) {
+        this.accounts = e;
+        this.$forceUpdate();
+        this.isDisplay = false;
     }
-    </script>
-</div>
+});
+</script>
 @endsection
 
