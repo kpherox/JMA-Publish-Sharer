@@ -2,9 +2,18 @@
 Changelog.
 
 ## [Unreleased]
+### Added
+- Support gzip for entry xml file.
+- Add entry directory to git repository.
+
 ### Changed
 - Replace blade foreach to vue list of type/kind/observatory list.
 - Add `shallow = true` to submodules.
+- Replace `\Storage::get('entry/$uuid')` and `\Storage::put('entry/$uuid', $xmlDoc)` to mutator.
+- Change logout button to form submit button from JavaScript's click event.
+
+### Fixed
+- Fix kind name of config/jmaxml.kinds `指定河川洪水予報`.
 
 ## [Version 0.4.1 (Pre-Release)][0.4.1] - 2018-06-23
 ### Fixed
