@@ -2,12 +2,12 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Arr;
 use Carbon\Carbon;
-use GuzzleHttp\Promise;
 use GuzzleHttp\Psr7;
 use App\Eloquents\Feed;
+use GuzzleHttp\Promise;
 use App\Eloquents\Entry;
+use Illuminate\Support\Arr;
 use App\Eloquents\EntryDetail;
 use Illuminate\Support\Collection;
 
@@ -18,24 +18,24 @@ class WebSubHandler
      *
      * @param  string $requestBody
      * @param  string? $hubSignature
-    **/
+     */
     public static function verifySignature(string $requestBody, string $hubSignature = null) : bool
     {
-        if (!config('app.isUseWebSubVerifyToken')) {
+        if (! config('app.isUseWebSubVerifyToken')) {
             return true;
         }
 
-        if(empty($hubSignature)) {
+        if (empty($hubSignature)) {
             throw new \Exception('Not exist x-hub-signature header');
         }
 
-        $signature = collect(explode('=',$hubSignature));
-        if($signature->count() !== 2) {
+        $signature = collect(explode('=', $hubSignature));
+        if ($signature->count() !== 2) {
             throw new \Exception('Invalid hubSignature');
         }
 
         $hash = hash_hmac($signature->first(), $requestBody, config('app.websubVerifyToken'));
-        if($signature->last() !== $hash) {
+        if ($signature->last() !== $hash) {
             throw new \Exception('Invalid signature');
         }
 
@@ -47,7 +47,7 @@ class WebSubHandler
      *
      * @param  string? $hubMode
      * @param  string? $hubVerifyToken
-    **/
+     */
     public static function verifyToken(string $hubMode = null, string $hubVerifyToken = null) : bool
     {
         if ($hubMode !== 'subscribe' && $hubMode !== 'unsubscribe') {
@@ -55,7 +55,7 @@ class WebSubHandler
         }
         \Log::notice($hubMode);
 
-        if (!config('app.isUseWebSubVerifyToken')) {
+        if (! config('app.isUseWebSubVerifyToken')) {
             return true;
         }
 
@@ -75,11 +75,11 @@ class WebSubHandler
      *
      * @param  array $feed
      * @return void
-    **/
+     */
     public static function saveFeedAndEntries(array $feedArray)
     {
-        $feed = WebSubHandler::saveFeed($feedArray['id'], $feedArray['updated'], $feedArray['link']);
-        $entries = WebSubHandler::saveEntries($feedArray['entry']);
+        $feed = self::saveFeed($feedArray['id'], $feedArray['updated'], $feedArray['link']);
+        $entries = self::saveEntries($feedArray['entry']);
 
         $entries->each(function ($entry) use ($feed, &$promises) {
             $feed->entries()->save($entry['entry']);
@@ -96,7 +96,7 @@ class WebSubHandler
      * @param  string $uuidString
      * @param  string $updatedString
      * @param  array $links
-    **/
+     */
     private static function saveFeed(string $uuidString, string $updatedString, array $links) : Feed
     {
         $uuid = collect(explode(':', $uuidString))->last();
@@ -107,7 +107,9 @@ class WebSubHandler
 
         $feed->updated = $updated;
 
-        $url = collect($links)->map(function($item) {return $item['@attributes'];})->pluck('href', 'rel');
+        $url = collect($links)->map(function ($item) {
+            return $item['@attributes'];
+        })->pluck('href', 'rel');
 
         $feed->url = $url['self'];
 
@@ -120,7 +122,7 @@ class WebSubHandler
      * Save entries.
      *
      * @param  array $entries
-    **/
+     */
     private static function saveEntries(array $entries) : Collection
     {
         if (Arr::isAssoc($entries)) {
@@ -149,10 +151,12 @@ class WebSubHandler
      *
      * @param  \Illuminate\Support\Collection $promises
      * @return void
-    **/
+     */
     private static function saveDetailsXml(Collection $promises)
     {
-        $results = self::fetchXmlDocument($promises->map(function ($value) {return $value['promise'];})->all());
+        $results = self::fetchXmlDocument($promises->map(function ($value) {
+            return $value['promise'];
+        })->all());
 
         $results->each(function ($result, $key) use ($promises) {
             if ($result->getReasonPhrase() === 'OK') {
@@ -167,7 +171,7 @@ class WebSubHandler
      * Parse entry.
      *
      * @param  array $entry
-    **/
+     */
     private static function parseEntry(array $entry) : array
     {
         $uuid = collect(explode(':', $entry['id']))->last();
@@ -196,7 +200,7 @@ class WebSubHandler
      * Fetch xml document from JMA.
      *
      * @param  array $promises
-    **/
+     */
     private static function fetchXmlDocument(array $promises) : Collection
     {
         return collect(Promise\settle($promises)->wait())->map(function ($obj, $key) {

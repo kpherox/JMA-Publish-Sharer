@@ -1,10 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 use App\Eloquents;
-
+use Illuminate\Database\Migrations\Migration;
 
 class NormalizeEntryDetailParentTarget extends Migration
 {
@@ -16,7 +13,7 @@ class NormalizeEntryDetailParentTarget extends Migration
     public function up()
     {
         $all_count = Eloquents\EntryDetail::count();
-        if (!$all_count) {
+        if (! $all_count) {
             return;
         }
 
@@ -25,9 +22,9 @@ class NormalizeEntryDetailParentTarget extends Migration
                 ->limit(1)->first()->id;
 
         $processed_count = 0;
-        echo "all count is ".$all_count.PHP_EOL;
-        for ($i=0; $i < $details_last_id+1000; $i+=1000) {
-            $details = Eloquents\EntryDetail::whereRaw('id BETWEEN '.($i+1).' AND '.($i+1000))->get();
+        echo 'all count is '.$all_count.PHP_EOL;
+        for ($i = 0; $i < $details_last_id + 1000; $i += 1000) {
+            $details = Eloquents\EntryDetail::whereRaw('id BETWEEN '.($i + 1).' AND '.($i + 1000))->get();
             foreach ($details as $detail) {
                 $entries = Eloquents\Entry::select('id')
                     ->where([

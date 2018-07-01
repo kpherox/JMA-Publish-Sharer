@@ -2,11 +2,11 @@
 
 namespace App\Eloquents;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Entry extends Model
 {
@@ -31,7 +31,7 @@ class Entry extends Model
 
     /**
      * Relation: belong to feed.
-    **/
+     */
     public function feed() : BelongsTo
     {
         return $this->belongsTo('App\Eloquents\Feed', 'feed_uuid', 'uuid');
@@ -39,7 +39,7 @@ class Entry extends Model
 
     /**
      * Relation: has many entry details.
-    **/
+     */
     public function entryDetails() : HasMany
     {
         return $this->hasMany('App\Eloquents\EntryDetail');
@@ -50,15 +50,16 @@ class Entry extends Model
      *
      * @param  \Illuminate\Database\Eloquent\Builder $query
      * @param  string $observatory
-    **/
+     */
     public function scopeOfObservatory(Builder $query, string $observatory) : Builder
     {
         $observatories = self::select('observatory_name')
                 ->groupBy('observatory_name')
                 ->get()
                 ->filter(function ($entry) use ($observatory) {
-                    $splitedObservatory = collect(preg_split( "/( |　)/", $entry->observatory_name));
-                    return ($entry->observatory_name === $observatory || $splitedObservatory->contains($observatory));
+                    $splitedObservatory = collect(preg_split('/( |　)/', $entry->observatory_name));
+
+                    return $entry->observatory_name === $observatory || $splitedObservatory->contains($observatory);
                 })->map(function ($entry) {
                     return $entry->observatory_name;
                 });
@@ -68,10 +69,11 @@ class Entry extends Model
 
     /**
      * Mutator: parse headline.
-    **/
+     */
     public function getParsedHeadlineAttribute() : Collection
     {
         preg_match('/【(.*)】(.*)/', $this->headline, $headline);
+
         return collect([
             'original' => $headline[0],
             'title' => $headline[1],
@@ -81,7 +83,7 @@ class Entry extends Model
 
     /**
      * Mutator: entryDetails kinds.
-    **/
+     */
     public function getChildrenKindsAttribute() : Collection
     {
         return $this->entryDetails->sortByKind()->map(function ($detail) {

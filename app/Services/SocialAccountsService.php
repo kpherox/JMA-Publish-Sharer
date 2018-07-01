@@ -2,23 +2,23 @@
 
 namespace App\Services;
 
-use Laravel\Socialite\Contracts\User as ProviderUser;
 use App\Eloquents\User;
 use App\Eloquents\LinkedSocialAccount;
+use Laravel\Socialite\Contracts\User as ProviderUser;
 
 class SocialAccountsService
 {
     /**
      * @param  \Laravel\Socialite\Contracts\User $providerUser
      * @param  string $provider
-    **/
+     */
     public function findOrCreate(ProviderUser $providerUser, string $provider) : User
     {
         $account = LinkedSocialAccount::firstOrNew(['provider_name' => $provider, 'provider_id' => $providerUser->getId()]);
 
         $didExistAccount = $account->id;
 
-        if (!$didExistAccount && auth()->guest() && User::where('email', $providerUser->getEmail())->exists()) {
+        if (! $didExistAccount && auth()->guest() && User::where('email', $providerUser->getEmail())->exists()) {
             throw new \Exception('Already used this E-mail address');
         }
 
@@ -30,6 +30,7 @@ class SocialAccountsService
 
         if ($didExistAccount) {
             $account->save();
+
             return $account->user;
         }
 
@@ -43,30 +44,31 @@ class SocialAccountsService
     /**
      * @param  string $provider
      * @param  int $providerId
-    **/
+     */
     public function deleteLinkedAccount(string $provider, int $providerId) : string
     {
         $account = LinkedSocialAccount::where([
             ['provider_name', $provider],
             ['provider_id', $providerId],
-            ['user_id', auth()->id()]
+            ['user_id', auth()->id()],
         ]);
         if ($account->exists()) {
             $account->delete();
         } else {
             throw new \Exception('Not found account');
         }
+
         return 'Success unlinked!';
     }
 
     /**
-     * Set ProviderUser property to LinkedSocialAccount columns
+     * Set ProviderUser property to LinkedSocialAccount columns.
      *
      * @param  \App\Eloquents\LinkedSocialAccount inout $account
      * @param  \Laravel\Socialite\Contracts\User $user
      * @param  bool $isOAuthOne
      * @return void
-    **/
+     */
     private function setAccountColumn(LinkedSocialAccount &$account, ProviderUser $user, bool $isOAuthOne)
     {
         $account->name = $user->getName();
@@ -77,20 +79,20 @@ class SocialAccountsService
     }
 
     /**
-     * Return original size image's url for Twitter
+     * Return original size image's url for Twitter.
      *
      * @param  string $url
-    **/
+     */
     private function originalSizeImageUrl(string $url) : string
     {
-        return preg_replace("/https?:\/\/(.+?)_normal.(jpg|jpeg|png|gif)/", "https://$1.$2", $url);
+        return preg_replace("/https?:\/\/(.+?)_normal.(jpg|jpeg|png|gif)/", 'https://$1.$2', $url);
     }
 
     /**
-     * Contains provider to oauth1
+     * Contains provider to oauth1.
      *
      * @param  string $provider
-    **/
+     */
     private function isOAuthOne(string $provider) : bool
     {
         return collect(config('services.oauth1'))->contains($provider);

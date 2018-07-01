@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Eloquents\Entry;
-use App\Eloquents\EntryDetail;
 use App\Eloquents\Feed;
-use App\Services\SimpleXML;
+use App\Eloquents\Entry;
 use Illuminate\View\View;
-use Illuminate\Support\Collection;
+use App\Services\SimpleXML;
 use Illuminate\Http\Response;
+use App\Eloquents\EntryDetail;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 
 class MainController extends Controller
 {
     /**
      * Index page.
-    **/
+     */
     public function index() : View
     {
         $type = request('type', null);
@@ -32,7 +32,7 @@ class MainController extends Controller
      * Observatory page.
      *
      * @param  string $observatoryName
-    **/
+     */
     public function observatory(string $observatoryName) : View
     {
         $type = request('type', null);
@@ -44,8 +44,9 @@ class MainController extends Controller
                     ->orderBy('max_updated', 'desc')
                     ->groupBy('observatory_name')
                     ->get()
-                    ->map(function($observatory) {
+                    ->map(function ($observatory) {
                         $observatory->url = route('observatory', ['observatory' => $observatory->name]);
+
                         return $observatory;
                     });
 
@@ -64,7 +65,7 @@ class MainController extends Controller
      * @param  string? $type
      * @param  string? $kind
      * @param  string? $observatoryName
-    **/
+     */
     private function entries(string $type = null, string $kind = null, string $observatoryName = null) : Collection
     {
         $typeOrKind = 'Select Type or Kind';
@@ -81,11 +82,11 @@ class MainController extends Controller
         if ($observatoryName) {
             $entries = $entries->ofObservatory($observatoryName);
             $feeds = $feeds->withCount(['entries' => function ($query) use ($observatoryName) {
-                            return $query->ofObservatory($observatoryName);
-                        }]);
+                return $query->ofObservatory($observatoryName);
+            }]);
             $kindList = $kindList->whereHas('entry', function ($query) use ($observatoryName) {
-                            return $query->ofObservatory($observatoryName);
-                        });
+                return $query->ofObservatory($observatoryName);
+            });
         } else {
             $feeds = $feeds->withCount('entries');
         }
@@ -98,8 +99,8 @@ class MainController extends Controller
             $typeOrKind = 'Type: '.trans('feedtypes.'.$type);
             $appends['type'] = $type;
             $entries = $entries->whereHas('feed', function ($query) use ($type) {
-                            return $query->ofType($type);
-                        });
+                return $query->ofType($type);
+            });
         } elseif ($kind) {
             $selected = $kindList->search(function ($i) use ($kind) {
                 return $i->kind_of_info === $kind;
@@ -107,8 +108,8 @@ class MainController extends Controller
             $typeOrKind = 'Kind: '.$kind;
             $appends['kind'] = $kind;
             $entries = $entries->whereHas('entryDetails', function ($query) use ($kind) {
-                            return $query->where('kind_of_info', $kind);
-                        });
+                return $query->where('kind_of_info', $kind);
+            });
         }
 
         $entries = $entries->paginate(15)->appends($appends);
@@ -126,7 +127,7 @@ class MainController extends Controller
      * Entry page.
      *
      * @param  \App\Eloquents\EntryDetail $entry
-    **/
+     */
     public function entry(EntryDetail $entry) : View
     {
         $doc = $entry->gunzipped_xml_file;
@@ -135,6 +136,7 @@ class MainController extends Controller
 
         $kindViewName = config('jmaxml.kinds.'.$entryArray['Control']['Title'].'.view');
         $viewName = \View::exists($kindViewName) ? $kindViewName : 'entry';
+
         return view($viewName, [
                     'entry' => $entryArray,
                     'entryUuid' => $entry->uuid,
@@ -146,11 +148,11 @@ class MainController extends Controller
      * Entry xml.
      *
      * @param  string $uuid
-    **/
+     */
     public function entryXml(EntryDetail $entry) : Response
     {
         $headers = ['Content-Type' => 'application/xml'];
-        if (!collect(request()->header('Accept-Encoding'))->contains('gzip')) {
+        if (! collect(request()->header('Accept-Encoding'))->contains('gzip')) {
             return response($entry->gunzipped_xml_file, 200, $headers);
         }
 
@@ -165,10 +167,11 @@ class MainController extends Controller
      * Entry json.
      *
      * @param  string $uuid
-    **/
+     */
     public function entryJson(EntryDetail $entry) : JsonResponse
     {
         $doc = $entry->gunzipped_xml_file;
+
         return response()->json((new SimpleXML($doc, true))->toArray(true),
                                 200, [], JSON_UNESCAPED_UNICODE);
     }
