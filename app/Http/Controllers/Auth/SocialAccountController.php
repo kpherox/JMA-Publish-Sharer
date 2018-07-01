@@ -13,12 +13,12 @@ abstract class SocialAccountController extends Controller
      * Provider name.
      *
      * @var string
-     **/
+     */
     private $provider;
 
     /**
      * Getter for provider name.
-     **/
+     */
     protected function getProvider() : string
     {
         return $this->provider;
@@ -28,7 +28,7 @@ abstract class SocialAccountController extends Controller
      * Setter for provider name.
      *
      * @param  string $value
-     **/
+     */
     protected function setProvider(string $value) : string
     {
         return $this->provider = $value;

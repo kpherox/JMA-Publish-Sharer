@@ -28,7 +28,7 @@ class EntryDetail extends Model
 
     /**
      * Relation: belong to entry.
-     **/
+     */
     public function entry() : BelongsTo
     {
         return $this->belongsTo('App\Eloquents\Entry');
@@ -36,7 +36,7 @@ class EntryDetail extends Model
 
     /**
      * Use key name when route binding.
-     **/
+     */
     public function getRouteKeyName() : string
     {
         return 'uuid';

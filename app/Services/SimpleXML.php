@@ -29,7 +29,7 @@ class SimpleXML
      * Create a new instance.
      *
      * @return void
-     **/
+     */
     public function __construct(string $xml, bool $isNamespaced = false, bool $prefixNamespace = false)
     {
         $this->rawXml = $xml;
@@ -39,7 +39,7 @@ class SimpleXML
 
     /**
      * @param  bool $isExpandAttributes default: false
-     **/
+     */
     public function toSimpleXMLElement(bool $isExpandAttributes = false) : \SimpleXMLElement
     {
         $xml = $this->isNamespaced ? $this->removeNamespace($this->rawXml) : $this->rawXml;
@@ -67,7 +67,7 @@ class SimpleXML
 
     /**
      * @param  bool $isExpandAttributes default: false
-     **/
+     */
     public function toJson(bool $isExpandAttributes = false) : string
     {
         try {
@@ -79,7 +79,7 @@ class SimpleXML
 
     /**
      * @param  bool $isExpandAttributes default: false
-     **/
+     */
     public function toArray(bool $isExpandAttributes = false) : array
     {
         try {
@@ -91,7 +91,7 @@ class SimpleXML
 
     /**
      * @param  bool $isExpandAttributes default: false
-     **/
+     */
     public function toObject(bool $isExpandAttributes = false) : \stdClass
     {
         try {
@@ -107,7 +107,7 @@ class SimpleXML
      * @referenced https://laracasts.com/discuss/channels/general-discussion/converting-xml-to-jsonarray
      *
      * @param  string $xml
-     **/
+     */
     private function removeNamespace(string $xml) : string
     {
         $namespaces = collect(simplexml_load_string($xml)->getNamespaces(true))->keys();
@@ -128,7 +128,7 @@ class SimpleXML
 
     /**
      * @param  \SimpleXMLElement $node
-     **/
+     */
     public static function expandAttributes(\SimpleXMLElement $node)
     {
         foreach ($node->children() as $child) {

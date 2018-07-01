@@ -35,7 +35,7 @@ class SimpleIcons
      * Create a new instance.
      *
      * @return void
-     **/
+     */
     public function __construct()
     {
         $iconList = collect(json_decode(\File::get(resource_path('assets/simple-icons/_data/simple-icons.json')), true)['icons']);

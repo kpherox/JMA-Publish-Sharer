@@ -33,7 +33,7 @@ class LinkedSocialAccount extends Model
 
     /**
      * Relation: belong to user.
-     **/
+     */
     public function user() : BelongsTo
     {
         return $this->belongsTo('App\Eloquents\User');

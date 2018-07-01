@@ -15,7 +15,7 @@ class MainController extends Controller
 {
     /**
      * Index page.
-     **/
+     */
     public function index() : View
     {
         $type = request('type', null);
@@ -32,7 +32,7 @@ class MainController extends Controller
      * Observatory page.
      *
      * @param  string $observatoryName
-     **/
+     */
     public function observatory(string $observatoryName) : View
     {
         $type = request('type', null);
@@ -65,7 +65,7 @@ class MainController extends Controller
      * @param  string? $type
      * @param  string? $kind
      * @param  string? $observatoryName
-     **/
+     */
     private function entries(string $type = null, string $kind = null, string $observatoryName = null) : Collection
     {
         $typeOrKind = 'Select Type or Kind';
@@ -127,7 +127,7 @@ class MainController extends Controller
      * Entry page.
      *
      * @param  \App\Eloquents\EntryDetail $entry
-     **/
+     */
     public function entry(EntryDetail $entry) : View
     {
         $doc = $entry->gunzipped_xml_file;
@@ -148,7 +148,7 @@ class MainController extends Controller
      * Entry xml.
      *
      * @param  string $uuid
-     **/
+     */
     public function entryXml(EntryDetail $entry) : Response
     {
         $headers = ['Content-Type' => 'application/xml'];
@@ -167,7 +167,7 @@ class MainController extends Controller
      * Entry json.
      *
      * @param  string $uuid
-     **/
+     */
     public function entryJson(EntryDetail $entry) : JsonResponse
     {
         $doc = $entry->gunzipped_xml_file;

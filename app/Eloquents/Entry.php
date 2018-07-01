@@ -31,7 +31,7 @@ class Entry extends Model
 
     /**
      * Relation: belong to feed.
-     **/
+     */
     public function feed() : BelongsTo
     {
         return $this->belongsTo('App\Eloquents\Feed', 'feed_uuid', 'uuid');
@@ -39,7 +39,7 @@ class Entry extends Model
 
     /**
      * Relation: has many entry details.
-     **/
+     */
     public function entryDetails() : HasMany
     {
         return $this->hasMany('App\Eloquents\EntryDetail');
@@ -50,7 +50,7 @@ class Entry extends Model
      *
      * @param  \Illuminate\Database\Eloquent\Builder $query
      * @param  string $observatory
-     **/
+     */
     public function scopeOfObservatory(Builder $query, string $observatory) : Builder
     {
         $observatories = self::select('observatory_name')
@@ -69,7 +69,7 @@ class Entry extends Model
 
     /**
      * Mutator: parse headline.
-     **/
+     */
     public function getParsedHeadlineAttribute() : Collection
     {
         preg_match('/【(.*)】(.*)/', $this->headline, $headline);
@@ -83,7 +83,7 @@ class Entry extends Model
 
     /**
      * Mutator: entryDetails kinds.
-     **/
+     */
     public function getChildrenKindsAttribute() : Collection
     {
         return $this->entryDetails->sortByKind()->map(function ($detail) {

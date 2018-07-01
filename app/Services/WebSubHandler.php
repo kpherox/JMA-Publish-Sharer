@@ -18,7 +18,7 @@ class WebSubHandler
      *
      * @param  string $requestBody
      * @param  string? $hubSignature
-     **/
+     */
     public static function verifySignature(string $requestBody, string $hubSignature = null) : bool
     {
         if (! config('app.isUseWebSubVerifyToken')) {
@@ -47,7 +47,7 @@ class WebSubHandler
      *
      * @param  string? $hubMode
      * @param  string? $hubVerifyToken
-     **/
+     */
     public static function verifyToken(string $hubMode = null, string $hubVerifyToken = null) : bool
     {
         if ($hubMode !== 'subscribe' && $hubMode !== 'unsubscribe') {
@@ -75,7 +75,7 @@ class WebSubHandler
      *
      * @param  array $feed
      * @return void
-     **/
+     */
     public static function saveFeedAndEntries(array $feedArray)
     {
         $feed = self::saveFeed($feedArray['id'], $feedArray['updated'], $feedArray['link']);
@@ -96,7 +96,7 @@ class WebSubHandler
      * @param  string $uuidString
      * @param  string $updatedString
      * @param  array $links
-     **/
+     */
     private static function saveFeed(string $uuidString, string $updatedString, array $links) : Feed
     {
         $uuid = collect(explode(':', $uuidString))->last();
@@ -122,7 +122,7 @@ class WebSubHandler
      * Save entries.
      *
      * @param  array $entries
-     **/
+     */
     private static function saveEntries(array $entries) : Collection
     {
         if (Arr::isAssoc($entries)) {
@@ -151,7 +151,7 @@ class WebSubHandler
      *
      * @param  \Illuminate\Support\Collection $promises
      * @return void
-     **/
+     */
     private static function saveDetailsXml(Collection $promises)
     {
         $results = self::fetchXmlDocument($promises->map(function ($value) {
@@ -171,7 +171,7 @@ class WebSubHandler
      * Parse entry.
      *
      * @param  array $entry
-     **/
+     */
     private static function parseEntry(array $entry) : array
     {
         $uuid = collect(explode(':', $entry['id']))->last();
@@ -200,7 +200,7 @@ class WebSubHandler
      * Fetch xml document from JMA.
      *
      * @param  array $promises
-     **/
+     */
     private static function fetchXmlDocument(array $promises) : Collection
     {
         return collect(Promise\settle($promises)->wait())->map(function ($obj, $key) {

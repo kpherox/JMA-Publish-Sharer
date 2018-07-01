@@ -30,7 +30,7 @@ class Feed extends Model
 
     /**
      * Relation: has many entries.
-     **/
+     */
     public function entries() : HasMany
     {
         return $this->hasMany('App\Eloquents\Entry', 'feed_uuid', 'uuid');
@@ -41,7 +41,7 @@ class Feed extends Model
      *
      * @param  \Illuminate\Database\Eloquent\Builder $query
      * @param  string $type
-     **/
+     */
     public function scopeOfType(Builder $query, string $type) : Builder
     {
         return $query->where('url', 'LIKE', '%'.$type.'.xml');
@@ -49,7 +49,7 @@ class Feed extends Model
 
     /**
      * Mutator: feed type.
-     **/
+     */
     public function getTypeAttribute() : string
     {
         return basename(parse_url($this->url, PHP_URL_PATH), '.xml');
@@ -57,7 +57,7 @@ class Feed extends Model
 
     /**
      * Mutator: feed type.
-     **/
+     */
     public function getTransedTypeAttribute() : string
     {
         return trans('feedtypes.'.$this->type);
