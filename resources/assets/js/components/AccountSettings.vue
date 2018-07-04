@@ -34,23 +34,25 @@
                 <h5 class="card-header bg-transparent border-primary">Notification</h5>
 
                 <div class="list-group list-group-flush" v-if="account.can_notify">
-                    <div class="list-group-item d-sm-flex d-lg-block d-xl-flex">
+                    <div class="list-group-item d-flex">
                         <input id="allowNotification" class="align-self-center" type="checkbox">
                         <label class="m-1 p-1 w-100" for="allowNotification">
                             Allow notification<br/>
                             <small class="text-muted">When we receive a new entry, Notify from/to this account.</small>
                         </label>
                     </div>
-                    <form class="list-group-item d-sm-flex d-lg-block d-xl-flex">
+                    <form class="list-group-item d-flex">
                         <input class="m-1 p-1 w-100 text-body" v-model="message" placeholder="Notification Test. (customizable)">
                         <button class="btn btn-secondary ml-auto align-self-center" type="submit" @click.prevent="testNotify">
                             Post
                         </button>
                     </form>
                 </div>
-                <p class="m-1 p-1 w-100" v-else>
-                    This account provider can't notification.
-                </p>
+                <div class="card-body" v-else>
+                    <p class="card-text">
+                        This account provider can't notification.
+                    </p>
+                </div>
             </div>
 
             <div class="card border-light">
