@@ -70,7 +70,7 @@ class RouteServiceProvider extends ServiceProvider
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
     }
- 
+
     /**
      * Define the "hooks" routes for the application.
      *

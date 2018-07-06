@@ -1,9 +1,9 @@
 <?php
 
+use App\Eloquents\EntryDetail;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use App\Eloquents\EntryDetail;
 
 class DeleteSomeColumnsFromEntryDetailsTable extends Migration
 {
@@ -35,7 +35,7 @@ class DeleteSomeColumnsFromEntryDetailsTable extends Migration
         });
 
         $all_count = EntryDetail::count();
-        if (!$all_count) {
+        if (! $all_count) {
             return;
         }
 
@@ -44,12 +44,12 @@ class DeleteSomeColumnsFromEntryDetailsTable extends Migration
                 ->limit(1)->first()->id;
 
         $processed_count = 0;
-        echo "all count is ".$all_count.PHP_EOL;
-        for ($i=0; $i < $details_last_id+1000; $i+=1000) {
-            $details = EntryDetail::whereRaw('id BETWEEN '.($i+1).' AND '.($i+1000))->get();
+        echo 'all count is '.$all_count.PHP_EOL;
+        for ($i = 0; $i < $details_last_id + 1000; $i += 1000) {
+            $details = EntryDetail::whereRaw('id BETWEEN '.($i + 1).' AND '.($i + 1000))->get();
             foreach ($details as $detail) {
                 $entry = $detail->entry;
-                if (!$entry) {
+                if (! $entry) {
                     continue;
                 }
 

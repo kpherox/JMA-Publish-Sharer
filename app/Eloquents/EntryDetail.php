@@ -14,10 +14,9 @@ class EntryDetail extends Model
      */
     protected $fillable = [
         'entry_id',
+        'uuid',
         'kind_of_info',
         'url',
-        'uuid',
-        'xml_document',
     ];
 
     /**
@@ -25,13 +24,11 @@ class EntryDetail extends Model
      *
      * @var array
      */
-    protected $hidden = [
-        'xml_document',
-    ];
+    protected $hidden = [];
 
     /**
      * Relation: belong to entry.
-    **/
+     */
     public function entry() : BelongsTo
     {
         return $this->belongsTo('App\Eloquents\Entry');
@@ -39,9 +36,49 @@ class EntryDetail extends Model
 
     /**
      * Use key name when route binding.
-    **/
+     */
     public function getRouteKeyName() : string
     {
         return 'uuid';
+    }
+
+    public function getXmlFilenameAttribute()
+    {
+        return 'entry/'.$this->uuid;
+    }
+
+    public function getIsGzippedXmlFileAttribute()
+    {
+        return \Storage::exists($this->xml_filename.'.gz');
+    }
+
+    public function getGunzippedXmlFileAttribute()
+    {
+        if ($this->is_gzipped_xml_file) {
+            return gzdecode($this->xml_file);
+        } else {
+            return $this->xml_file;
+        }
+    }
+
+    public function getXmlFileAttribute()
+    {
+        if ($this->is_gzipped_xml_file) {
+            return \Storage::get($this->xml_filename.'.gz');
+        }
+
+        if (\Storage::exists($this->xml_filename)) {
+            return \Storage::get($this->xml_filename);
+        }
+    }
+
+    public function setXmlFileAttribute(string $xmlDoc)
+    {
+        if (config('app.supportGzip')) {
+            $doc = gzencode($xmlDoc);
+            \Storage::put($this->xml_filename.'.gz', $doc);
+        } else {
+            \Storage::put($this->xml_filename, $xmlDoc);
+        }
     }
 }

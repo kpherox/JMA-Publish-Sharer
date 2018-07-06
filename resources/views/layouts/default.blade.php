@@ -1,7 +1,7 @@
 @extends ('layouts.app')
 
 @section ('header')
-<header class="navbar navbar-expand-md navbar-light bg-white">
+<header class="navbar navbar-expand-md navbar-light bg-white mb-3">
     <nav class="container">
         <!-- Branding Image -->
         <a class="navbar-brand" href="{{ route('index') }}">

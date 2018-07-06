@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Collection;
+use Illuminate\Support\ServiceProvider;
 
 class ExtendingCollectionServiceProvider extends ServiceProvider
 {
@@ -14,19 +14,34 @@ class ExtendingCollectionServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Collection::macro('sortByKind', function () {
-            $kindOrder = collect(config('jmaxml.kinds'))->keys();
-            return $this->sort(function ($a, $b) use ($kindOrder) {
-                return ($kindOrder->search($a->kind_of_info) > $kindOrder->search($b->kind_of_info));
-            });
+        Collection::macro('sortWithOrderBy', function ($callback, $order, $options = SORT_REGULAR, $descending = false, $holdKey = true) {
+            if (is_string($callback)) {
+                $callback = function ($item) use ($callback) {
+                    return data_get($item, $callback);
+                };
+            }
+
+            $sorted = $this->sortBy(function ($item, $key) use ($order, $callback) {
+                return $order->search($callback($item, $key));
+            }, $options, $descending);
+
+            if ($holdKey) {
+                return $sorted;
+            }
+
+            return $sorted->values();
         });
 
-        Collection::macro('sortByFeedType', function () {
-            $typeOrder = collect(config('jmaxml.feedtypes'));
+        Collection::macro('sortByKind', function ($options = SORT_REGULAR, $descending = false) {
+            $kinds = collect(config('jmaxml.kinds'))->keys();
 
-            return $this->sort(function ($a, $b) use ($typeOrder) {
-                return ($typeOrder->search($a->type) > $typeOrder->search($b->type));
-            });
+            return $this->sortWithOrderBy('kind_of_info', $kinds, $options, $descending, false);
+        });
+
+        Collection::macro('sortByType', function ($options = SORT_REGULAR, $descending = false) {
+            $types = collect(config('jmaxml.feedtypes'));
+
+            return $this->sortWithOrderBy('type', $types, $options, $descending, false);
         });
     }
 }

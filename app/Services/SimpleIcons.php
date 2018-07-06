@@ -35,7 +35,7 @@ class SimpleIcons
      * Create a new instance.
      *
      * @return void
-    **/
+     */
     public function __construct()
     {
         $json = \File::get(resource_path('assets/simple-icons/_data/simple-icons.json'));
@@ -45,19 +45,20 @@ class SimpleIcons
         });
 
         $icons = $iconList->filter(function ($value) use ($providers) {
-                return $providers->contains('simple_icons', $value['title']);
-            })->map(function ($value) use ($providers) {
-                $iconName = $value['title'];
-                $provider = $providers->search(function ($provider) use ($iconName) {
-                    return data_get($provider, 'simple_icons', null) === $iconName;
-                });
-                data_set($value, 'title', config('services.'.$provider.'.name'));
-                data_set($value, 'provider', $provider);
-                data_set($value, 'svg', \File::get(resource_path('assets/simple-icons/icons/'.$provider.'.svg')));
-                return $value;
-            })->sort(function ($a, $b) use ($providers) {
-                return $providers->keys()->search($a['provider']) > $providers->keys()->search($b['provider']);
-            })->all();
+            return $providers->contains('simple_icons', $value['title']);
+        })->map(function ($value) use ($providers) {
+            $iconName = $value['title'];
+            $provider = $providers->search(function ($provider) use ($iconName) {
+                return data_get($provider, 'simple_icons', null) === $iconName;
+            });
+            data_set($value, 'title', config('services.'.$provider.'.name'));
+            data_set($value, 'provider', $provider);
+            data_set($value, 'svg', \File::get(resource_path('assets/simple-icons/icons/'.$provider.'.svg')));
+
+            return $value;
+        })->sort(function ($a, $b) use ($providers) {
+            return $providers->keys()->search($a['provider']) > $providers->keys()->search($b['provider']);
+        })->all();
 
         $this->setIcons($icons);
     }

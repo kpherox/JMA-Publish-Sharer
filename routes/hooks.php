@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +12,7 @@ use Illuminate\Http\Request;
 |
 */
 
-/**
+/*
  * WebSub webhooks
  */
 Route::prefix('websub')->name('websub.')->group(function () {
@@ -22,8 +21,7 @@ Route::prefix('websub')->name('websub.')->group(function () {
 });
 
 // old prefix
-Route::prefix('push')->name('push.')->group(function() {
+Route::prefix('push')->name('push.')->group(function () {
     Route::get('subscriber', 'WebSubController@subscribeCheck')->name('subscribeCheck');
     Route::post('subscriber', 'WebSubController@receiveFeed')->name('receiveFeet');
 });
-

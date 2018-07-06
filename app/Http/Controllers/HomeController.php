@@ -39,6 +39,7 @@ class HomeController extends Controller
     public function index() : View
     {
         data_set($this->menus, 'index.isCurrent', true);
+
         return view('home.index', ['menus' => $this->menus]);
     }
 
@@ -66,7 +67,7 @@ class HomeController extends Controller
         $endpoints = $providers->map(function($item, $key) {
             return collect([
                 'unlink' => route($key.'.unlink'),
-                'notify' => route($key.'.notify')
+                'notify' => route($key.'.notify'),
             ]);
         });
 

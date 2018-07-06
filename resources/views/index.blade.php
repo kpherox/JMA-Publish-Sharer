@@ -3,27 +3,51 @@
 @section ('content')
 <div class="container">
     <div class="row justify-content-center">
-        <header class="d-flex col-lg-9 col-xl-8 p-3">
-            <h5 class="d-block mt-2 mb-4 mr-auto">@yield('title', 'Entries')</h5>
+        <header class="d-sm-flex col-lg-9 col-xl-8 px-3 mb-3">
+            <h5 class="text-truncate d-block my-2 mr-auto px-2">@yield('title', 'Entries')</h5>
 
             <div class="dropdown align-self-start">
-                <button class="btn page-link text-dark dropdown-toggle" type="button" data-toggle="dropdown">{{ $selected }}</button>
+                <button class="btn page-link text-dark dropdown-toggle" type="button" data-toggle="dropdown">{{ $typeOrKind }}</button>
 
-                <div class="dropdown-menu dropdown-menu-right" style="height:auto;max-height:500px;overflow-x:hidden;">
-                    <a class="dropdown-item" href="{{ route($__env->yieldContent('route', 'index'), $queries->forget(['page', 'type', 'kind'])->all()) }}">Select Type or Kind</a>
+                <div class="dropdown-menu dropdown-menu-right" style="width:280px;max-width:80vw;height:auto;max-height:500px;overflow-x:auto">
+                    <a class="dropdown-item" href="{{ $routeUrl }}">All Type/Kind</a>
+
                     <div class="dropdown-divider"></div>
-                    @foreach ($feeds as $feed)
-                    <a class="dropdown-item" href="{{ route($__env->yieldContent('route', 'index'), $queries->merge(['type' => $feed->type])->all()) }}">@lang('feedtypes.'.$feed->type) ({{ $feed->entries_count }})</a>
-                    @endforeach
+
+                    <transition-group tag="div" class="feed-list" style="display:none" v-show="true">
+                        <a v-for="(feed, index) in feeds" :key="feed"
+                           class="dropdown-item d-flex justify-content-between align-items-center"
+                           :class="{'active': feed.type === selected}"
+                           :href="route+'?type='+feed.type">
+                            <span class="text-nowrap text-truncate mr-1">@{{ feed.transed_type }}</span>
+                            <span class="badge badge-pill"
+                                  :class="feed.type === selected ? 'badge-light' : 'badge-primary'">
+                                @{{ feed.entries_count }}
+                            </span>
+                        </a>
+                    </transition-group>
+
                     <div class="dropdown-divider"></div>
-                    @foreach ($kindList as $kind)
-                    <a class="dropdown-item" href="{{ route($__env->yieldContent('route', 'index'), $queries->merge(['kind' => $kind->kind_of_info])->all()) }}">{{ $kind->kind_of_info }} ({{ $kind->count }})</a>
-                    @endforeach
+
+                    <input class="dropdown-item" style="z-index:2" v-model="kindName" placeholder="Search kind">
+                    <transition-group tag="div" class="kind-list" style="display:none" v-show="true">
+                        <a v-for="(kind, index) in kinds" :key="kind"
+                           v-if="kind.kind_of_info.match(new RegExp(kindName))"
+                           class="dropdown-item d-flex justify-content-between align-items-center"
+                           :class="{'active': index === parseInt(selected)}"
+                           :href="route+'?kind='+kind.kind_of_info">
+                            <span class="text-nowrap text-truncate mr-1">@{{ kind.kind_of_info }}</span>
+                            <span class="badge badge-pill"
+                                  :class="index === parseInt(selected) ? 'badge-light' : 'badge-primary'">
+                                @{{ kind.count }}
+                            </span>
+                        </a>
+                    </transition-group>
                 </div>
             </div>
         </header>
 
-        <main class="col-lg-9 col-xl-8 p-3">
+        <main class="col-lg-9 col-xl-8">
             {{ $entries->links('components.index-pagination') }}
 
             @foreach ($entries as $entry)
@@ -83,4 +107,14 @@
         @yield ('sidebar')
     </div>
 </div>
+
+<script>
+Object.assign(mix.data, {
+    route: '{{ $routeUrl }}',
+    feeds: @json ($feeds),
+    kinds: @json ($kindList),
+    selected: '{{ $selected }}',
+    kindName: '',
+});
+</script>
 @endsection

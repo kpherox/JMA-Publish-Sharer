@@ -13,7 +13,7 @@ abstract class TestCase extends BaseTestCase
     public function setUp()
     {
         parent::setUp();
-        if (!self::$migrated) {
+        if (! self::$migrated) {
             \Artisan::call('migrate:refresh');
             \Artisan::call('db:seed');
             self::$migrated = true;
@@ -27,5 +27,4 @@ abstract class TestCase extends BaseTestCase
         \DB::table('entry_details')->truncate();
         parent::tearDown();
     }
-
 }

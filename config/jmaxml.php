@@ -90,7 +90,7 @@ return [
             'view' => 'entry.kei_h27',
         ],
 
-        '指定河川洪水予報 ' => [
+        '指定河川洪水予報' => [
             'view' => 'entry.kozui',
         ],
 

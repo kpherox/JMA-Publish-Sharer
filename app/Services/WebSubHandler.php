@@ -2,12 +2,12 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Arr;
 use Carbon\Carbon;
-use GuzzleHttp\Promise;
 use GuzzleHttp\Psr7;
 use App\Eloquents\Feed;
+use GuzzleHttp\Promise;
 use App\Eloquents\Entry;
+use Illuminate\Support\Arr;
 use App\Eloquents\EntryDetail;
 use Illuminate\Support\Collection;
 
@@ -18,24 +18,24 @@ class WebSubHandler
      *
      * @param  string $requestBody
      * @param  string? $hubSignature
-    **/
+     */
     public static function verifySignature(string $requestBody, string $hubSignature = null) : bool
     {
-        if (!config('app.isUseWebSubVerifyToken')) {
+        if (! config('app.isUseWebSubVerifyToken')) {
             return true;
         }
 
-        if(empty($hubSignature)) {
+        if (empty($hubSignature)) {
             throw new \Exception('Not exist x-hub-signature header');
         }
 
-        $signature = collect(explode('=',$hubSignature));
-        if($signature->count() !== 2) {
+        $signature = collect(explode('=', $hubSignature));
+        if ($signature->count() !== 2) {
             throw new \Exception('Invalid hubSignature');
         }
 
         $hash = hash_hmac($signature->first(), $requestBody, config('app.websubVerifyToken'));
-        if($signature->last() !== $hash) {
+        if ($signature->last() !== $hash) {
             throw new \Exception('Invalid signature');
         }
 
@@ -47,7 +47,7 @@ class WebSubHandler
      *
      * @param  string? $hubMode
      * @param  string? $hubVerifyToken
-    **/
+     */
     public static function verifyToken(string $hubMode = null, string $hubVerifyToken = null) : bool
     {
         if ($hubMode !== 'subscribe' && $hubMode !== 'unsubscribe') {
@@ -55,7 +55,7 @@ class WebSubHandler
         }
         \Log::notice($hubMode);
 
-        if (!config('app.isUseWebSubVerifyToken')) {
+        if (! config('app.isUseWebSubVerifyToken')) {
             return true;
         }
 
@@ -75,101 +75,106 @@ class WebSubHandler
      *
      * @param  array $feed
      * @return void
-    **/
-    public static function saveFeedAndEntries(array $feed)
+     */
+    public static function saveFeedAndEntries(array $feedArray)
     {
-        $feedUuid = collect(explode(':', $feed['id']))->last();
+        $feed = self::saveFeed($feedArray['id'], $feedArray['updated'], $feedArray['link']);
+        $entries = self::saveEntries($feedArray['entry']);
 
-        WebSubHandler::saveFeed($feedUuid, $feed);
-        WebSubHandler::saveEntries($feedUuid, $feed['entry']);
+        $entries->each(function ($entry) use ($feed, &$promises) {
+            $feed->entries()->save($entry['entry']);
+
+            $promises[] = $entry->except(['except'])->all();
+        });
+
+        self::saveDetailsXml(collect($promises));
     }
 
     /**
      * Save feed.
      *
-     * @param  string $feedUuid
-     * @param  array $feed
-     * @return void
-    **/
-    private static function saveFeed(string $feedUuid, array $feed)
+     * @param  string $uuidString
+     * @param  string $updatedString
+     * @param  array $links
+     */
+    private static function saveFeed(string $uuidString, string $updatedString, array $links) : Feed
     {
-        $feeds = Feed::firstOrNew(['uuid' => $feedUuid]);
+        $uuid = collect(explode(':', $uuidString))->last();
+        $feed = Feed::firstOrNew(['uuid' => $uuid]);
 
-        $feedUpdated = Carbon::parse($feed['updated']);
-        $feedUpdated->setTimezone(config('app.timezone'));
+        $updated = Carbon::parse($updatedString);
+        $updated->setTimezone(config('app.timezone'));
 
-        $feeds->updated = $feedUpdated;
+        $feed->updated = $updated;
 
-        $links = collect($feed['link'])
-                    ->map(function($item) {return $item['@attributes'];})
-                    ->pluck('href', 'rel');
-        $feedUrl = $links['self'];
+        $url = collect($links)->map(function ($item) {
+            return $item['@attributes'];
+        })->pluck('href', 'rel');
 
-        $feeds->url = $feedUrl;
+        $feed->url = $url['self'];
 
-        $feeds->save();
+        $feed->save();
+
+        return $feed;
     }
 
     /**
      * Save entries.
      *
-     * @param  string $feedUuid
      * @param  array $entries
-     * @return void
-    **/
-    private static function saveEntries(string $feedUuid, array $entries)
+     */
+    private static function saveEntries(array $entries) : Collection
     {
         if (Arr::isAssoc($entries)) {
             $entries = [$entries];
         }
 
-        // Fetch JMA xml
-        $entryArrays = [];
-        $promises = [];
-        $results  = [];
-
-        foreach ($entries as $entry) {
-            $parseedEntry = self::parseEntry($entry);
-
-            $entryUuid = $parseedEntry['uuid'];
-
-            $promises[$entryUuid] = $parseedEntry['promise'];
+        return collect($entries)->map(function ($entryArray) {
+            $parseedEntry = self::parseEntry($entryArray);
 
             $entryArray = $parseedEntry['entry'];
-            $entryArray['feed_uuid'] = $feedUuid;
-            $entry = Entry::firstOrCreate($entryArray);
+            $entry = Entry::firstOrCreate($parseedEntry['entry']);
 
-            $entryDetail = $parseedEntry['entryDetail'];
-            $entryDetail['entry_id'] = $entry->id;
-            $entryDetail['created_at'] = $entry->created_at;
-            $entryDetail['updated_at'] = $entry->updated_at;
-            $entryArrays[$entryUuid] = $entryDetail;
-        }
+            $entryDetail = EntryDetail::create($parseedEntry['entryDetail']);
+            $entry->entryDetails()->save($entryDetail);
 
-        $results = self::fetchXmlDocument($promises);
+            return collect([
+                'entry' => $entry,
+                'detail' => $entryDetail,
+                'promise' => $parseedEntry['promise'],
+            ]);
+        });
+    }
 
-        $entryRecords = $results->map(function ($result, $key) use ($entryArrays) {
-            $entryArray = $entryArrays[$key];
+    /**
+     * Save entry_details xml document.
+     *
+     * @param  \Illuminate\Support\Collection $promises
+     * @return void
+     */
+    private static function saveDetailsXml(Collection $promises)
+    {
+        $results = self::fetchXmlDocument($promises->map(function ($value) {
+            return $value['promise'];
+        })->all());
 
+        $results->each(function ($result, $key) use ($promises) {
             if ($result->getReasonPhrase() === 'OK') {
                 $xmlDoc = $result->getBody()->getContents();
-                \Storage::put('entry/'.$key, $xmlDoc);
+                $detail = $promises[$key]['detail'];
+                $detail->xml_file = $xmlDoc;
             }
-
-            return $entryArray;
-        })->values()->all();
-
-        EntryDetail::insert($entryRecords);
+        });
     }
 
     /**
      * Parse entry.
      *
      * @param  array $entry
-    **/
+     */
     private static function parseEntry(array $entry) : array
     {
-        $entryUuid = collect(explode(':', $entry['id']))->last();
+        $uuid = collect(explode(':', $entry['id']))->last();
 
         $updated = Carbon::parse($entry['updated']);
         $updated->setTimezone(config('app.timezone'));
@@ -177,7 +182,6 @@ class WebSubHandler
         $url = data_get($entry, 'link.@attributes.href');
 
         return [
-            'uuid' => $entryUuid,
             'promise' => \Guzzle::getAsync($url),
             'entry' => [
                 'observatory_name' => collect($entry['author'])->get('name'),
@@ -185,7 +189,7 @@ class WebSubHandler
                 'updated' => $updated,
             ],
             'entryDetail' => [
-                'uuid' => $entryUuid,
+                'uuid' => $uuid,
                 'kind_of_info' => $entry['title'],
                 'url' => $url,
             ],
@@ -196,7 +200,7 @@ class WebSubHandler
      * Fetch xml document from JMA.
      *
      * @param  array $promises
-    **/
+     */
     private static function fetchXmlDocument(array $promises) : Collection
     {
         return collect(Promise\settle($promises)->wait())->map(function ($obj, $key) {

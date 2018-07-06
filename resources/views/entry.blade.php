@@ -4,11 +4,11 @@
 @section ('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-lg-9 col-xl-8 p-3">
-            <header class="d-flex">
-                <h5 class="d-block mt-2 mb-4 mr-auto">Entry</h5>
-            </header>
+        <header class="d-sm-flex col-lg-9 col-xl-8 px-3 mb-3">
+            <h5 class="text-truncate d-block my-2 mr-auto px-2">Entry</h5>
+        </header>
 
+        <main class="col-lg-9 col-xl-8">
             <div class="card">
                 <h5 class="card-header bg-transparent d-flex">
                     <a class="mr-auto text-truncate text-body" href="{{ route('index', ['kind' => data_get($entry, 'Control.Title')]) }}">{{ data_get($entry, 'Control.Title') }}</a>
@@ -35,7 +35,7 @@
             </div>
 
             @yield ('moredetails')
-        </div>
+        </main>
     </div>
 </div>
 @endsection

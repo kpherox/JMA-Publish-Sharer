@@ -13,7 +13,10 @@
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="{{ route('home.index') }}">{{ auth()->user()->name }}</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{ route('logout') }}" v-on:click.prevent="logout">Logout</a>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="dropdown-item">Logout</button>
+            </form>
         </div>
     </li>
     @endguest

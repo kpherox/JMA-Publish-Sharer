@@ -29,7 +29,7 @@ class SimpleXML
      * Create a new instance.
      *
      * @return void
-    **/
+     */
     public function __construct(string $xml, bool $isNamespaced = false, bool $prefixNamespace = false)
     {
         $this->rawXml = $xml;
@@ -39,7 +39,7 @@ class SimpleXML
 
     /**
      * @param  bool $isExpandAttributes default: false
-    **/
+     */
     public function toSimpleXMLElement(bool $isExpandAttributes = false) : \SimpleXMLElement
     {
         $xml = $this->isNamespaced ? $this->removeNamespace($this->rawXml) : $this->rawXml;
@@ -47,11 +47,11 @@ class SimpleXML
         libxml_use_internal_errors(true);
         $simpleXml = simplexml_load_string($xml);
 
-        if (!$simpleXml) {
+        if (! $simpleXml) {
             $message = 'XML Parse error';
 
-            foreach(libxml_get_errors() as $error) {
-                $message .= "\n" . trim($error->message);
+            foreach (libxml_get_errors() as $error) {
+                $message .= "\n".trim($error->message);
             }
             libxml_clear_errors();
 
@@ -67,7 +67,7 @@ class SimpleXML
 
     /**
      * @param  bool $isExpandAttributes default: false
-    **/
+     */
     public function toJson(bool $isExpandAttributes = false) : string
     {
         try {
@@ -79,7 +79,7 @@ class SimpleXML
 
     /**
      * @param  bool $isExpandAttributes default: false
-    **/
+     */
     public function toArray(bool $isExpandAttributes = false) : array
     {
         try {
@@ -91,7 +91,7 @@ class SimpleXML
 
     /**
      * @param  bool $isExpandAttributes default: false
-    **/
+     */
     public function toObject(bool $isExpandAttributes = false) : \stdClass
     {
         try {
@@ -107,27 +107,28 @@ class SimpleXML
      * @referenced https://laracasts.com/discuss/channels/general-discussion/converting-xml-to-jsonarray
      *
      * @param  string $xml
-    **/
+     */
     private function removeNamespace(string $xml) : string
     {
         $namespaces = collect(simplexml_load_string($xml)->getNamespaces(true))->keys();
         $nameSpaceDefRegEx = '(\S+)=["\']?((?:.(?!["\']?\s+(?:\S+)=|[>"\']))+.)["\']?';
 
         $namespaces->each(function ($namespace) use (&$xml, $nameSpaceDefRegEx) {
-            $remove = $namespace . ':';
-            $replaced = $this->prefixNamespace ? $namespace . '_' : '';
-            $xml = str_replace('<' . $remove, '<' . $replaced, $xml);
-            $xml = str_replace('</' . $remove, '</' . $replaced, $xml);
-            $xml = str_replace($remove . 'commentText', $replaced . 'commentText', $xml);
+            $remove = $namespace.':';
+            $replaced = $this->prefixNamespace ? $namespace.'_' : '';
+            $xml = str_replace('<'.$remove, '<'.$replaced, $xml);
+            $xml = str_replace('</'.$remove, '</'.$replaced, $xml);
+            $xml = str_replace($remove.'commentText', $replaced.'commentText', $xml);
             $pattern = "/xmlns:{$namespace}{$nameSpaceDefRegEx}/";
             $xml = preg_replace($pattern, '', $xml, 1);
         });
+
         return $xml;
     }
 
     /**
      * @param  \SimpleXMLElement $node
-    **/
+     */
     public static function expandAttributes(\SimpleXMLElement $node)
     {
         foreach ($node->children() as $child) {
@@ -141,7 +142,7 @@ class SimpleXML
                 continue;
             }
 
-            $childAttributes = $node->addChild($child->getName() . "@attributes");
+            $childAttributes = $node->addChild($child->getName().'@attributes');
 
             foreach ($attrs as $key => $val) {
                 $childAttributes->addChild($key, $val);

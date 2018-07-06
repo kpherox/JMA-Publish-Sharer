@@ -4,7 +4,7 @@
 @section ('observatory', $observatory)
 
 @section ('sidebar')
-<sidebar class="col-lg-3 col-xl-4 p-3">
+<sidebar class="col-lg-3 col-xl-4">
     <div class="card">
         <h5 class="card-header bg-transparent d-flex">
             <span class="text-truncate">
@@ -13,15 +13,30 @@
         </h5>
 
         <div class="list-group list-group-flush">
-            @foreach ($observatories as $obs)
-                @if ($observatory !== $obs->observatory_name)
-                    <a class="list-group-item" href="{{ route('observatory', ['observatory' => $obs->observatory_name]) }}">{{ $obs->observatory_name }} ({{ $obs->count }})</a>
-                @else
-                    <a class="list-group-item active" href="{{ route('observatory', ['observatory' => $obs->observatory_name]) }}">{{ $obs->observatory_name }} ({{ $obs->count }})</a>
-                @endif
-            @endforeach
+            <input class="list-group-item" style="z-index:2" type="text" v-model="observatoryName" placeholder="Search observatory">
+            <transition-group tag="div" class="obs-list" style="display:none;" v-show="true">
+                <a v-for="(observatory, index) in observatories" :key="observatory"
+                   v-if="observatory.name.match(new RegExp(observatoryName))"
+                   class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                   :class="{'active': observatory.name === currentOBS }"
+                   :href="observatory.url">
+                    <span class="text-nowrap text-truncate mr-1">@{{ observatory.name }}</span>
+                    <span class="badge badge-pill"
+                          :class="observatory.name === currentOBS ? 'badge-light' : 'badge-primary'">
+                        @{{ observatory.count }}
+                    </span>
+                </a>
+            </transition-group>
         </div>
     </div>
 </sidebar>
+
+<script>
+Object.assign(mix.data, {
+    currentOBS: '{{ $observatory }}',
+    observatories: @json ($observatories),
+    observatoryName: '',
+});
+</script>
 @endsection
 
