@@ -20,7 +20,7 @@ class CreateEntriesTable extends Migration
             $table->uuid('feed_uuid');
             $table->string('observatory_name');
             $table->string('headline');
-            $table->string('url', 2048);
+            $table->string('url');
             $table->dateTimeTz('updated');
             $table->timestampsTz();
         });

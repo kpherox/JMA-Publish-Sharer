@@ -34,7 +34,7 @@ class Entry extends Model
      */
     public function feed() : BelongsTo
     {
-        return $this->belongsTo('App\Eloquents\Feed', 'feed_uuid', 'uuid');
+        return $this->belongsTo('App\Eloquents\Feed');
     }
 
     /**
