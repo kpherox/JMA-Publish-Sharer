@@ -28,12 +28,16 @@ class Feed extends Model
 
     protected $appends = ['type', 'transed_type'];
 
+    protected $primaryKey = 'uuid';
+
+    protected $primaryType = 'string';
+
     /**
      * Relation: has many entries.
      */
     public function entries() : HasMany
     {
-        return $this->hasMany('App\Eloquents\Entry', 'feed_uuid', 'uuid');
+        return $this->hasMany('App\Eloquents\Entry');
     }
 
     /**

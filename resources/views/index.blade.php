@@ -100,9 +100,9 @@
                 </div>
             </div>
             @endforeach
-        </main>
 
-        {{ $entries->links('components.index-pagination') }}
+            {{ $entries->links('components.index-pagination') }}
+        </main>
 
         @yield ('sidebar')
     </div>

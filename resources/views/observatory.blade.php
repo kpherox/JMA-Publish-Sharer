@@ -4,7 +4,7 @@
 @section ('observatory', $observatory)
 
 @section ('sidebar')
-<sidebar class="col-lg-3 col-xl-4 p-3">
+<sidebar class="col-lg-3 col-xl-4">
     <div class="card">
         <h5 class="card-header bg-transparent d-flex">
             <span class="text-truncate">

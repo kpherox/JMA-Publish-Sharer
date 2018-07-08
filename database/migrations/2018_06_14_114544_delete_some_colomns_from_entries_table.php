@@ -30,9 +30,9 @@ class DeleteSomeColomnsFromEntriesTable extends Migration
     public function down()
     {
         Schema::table('entries', function (Blueprint $table) {
-            $table->uuid('uuid')->nullable();
-            $table->string('kind_of_info')->nullable();
-            $table->string('url', 2048)->nullable();
+            $table->uuid('uuid');
+            $table->string('kind_of_info');
+            $table->string('url');
             $table->mediumText('xml_document')->nullable();
         });
 

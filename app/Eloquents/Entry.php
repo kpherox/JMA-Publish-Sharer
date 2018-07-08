@@ -34,7 +34,7 @@ class Entry extends Model
      */
     public function feed() : BelongsTo
     {
-        return $this->belongsTo('App\Eloquents\Feed', 'feed_uuid', 'uuid');
+        return $this->belongsTo('App\Eloquents\Feed');
     }
 
     /**
@@ -72,7 +72,7 @@ class Entry extends Model
      */
     public function getParsedHeadlineAttribute() : Collection
     {
-        preg_match('/【(.*)】(.*)/', $this->headline, $headline);
+        preg_match('/【(.*?)】(.*)/', $this->headline, $headline);
 
         return collect([
             'original' => $headline[0],

@@ -183,6 +183,7 @@ return [
         App\Providers\Blade\ComponentAliasServiceProvider::class,
         App\Providers\Blade\DirectiveServiceProvider::class,
         App\Providers\ExtendingCollectionServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
 
     ],
 
