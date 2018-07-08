@@ -3,7 +3,7 @@ Changelog.
 
 ## [Unreleased]
 
-## [Version 0.4.4 (Pre-Release)][0.4.4] - 2018-07-08
+## [Version 0.4.4 (Pre-Release, hotfix)][0.4.4] - 2018-07-08
 ### Fixed
 - Fix incorrect variable name.
 
@@ -33,7 +33,7 @@ Changelog.
 ### Fixed
 - Fix kind name of config/jmaxml.kinds `指定河川洪水予報`.
 
-## [Version 0.4.1 (Pre-Release)][0.4.1] - 2018-06-23
+## [Version 0.4.1 (Pre-Release, hotfix)][0.4.1] - 2018-06-23
 ### Fixed
 - Fix undefined variable when running migrate.
 
@@ -66,11 +66,11 @@ Changelog.
 ### Removed
 - Rate limit for websub endpoint.
 
-## [Version 0.2.2 (Pre-Release)][0.2.2] - 2017-10-23
+## [Version 0.2.2 (Pre-Release, hotfix)][0.2.2] - 2017-10-23
 ### Fixed
 - Change `$entries->feed_uuid = $uuid` to `$entries->feed_uuid = $uuid[2]`.
 
-## [Version 0.2.1 (Pre-Release)][0.2.1] - 2017-10-23
+## [Version 0.2.1 (Pre-Release, hotfix)][0.2.1] - 2017-10-23
 ### Fixed
 - Remove `array_push($entriesUUID, $entryUUID);`.
 
