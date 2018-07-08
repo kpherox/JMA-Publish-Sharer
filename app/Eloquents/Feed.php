@@ -30,7 +30,7 @@ class Feed extends Model
 
     protected $primaryKey = 'uuid';
 
-    protected $primaryType = 'string';
+    protected $keyType = 'string';
 
     /**
      * Relation: has many entries.
