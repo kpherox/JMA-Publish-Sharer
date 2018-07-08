@@ -3,6 +3,10 @@ Changelog.
 
 ## [Unreleased]
 
+## [Version 0.4.4 (Pre-Release)][0.4.4] - 2018-07-08
+### Fixed
+- Fix incorrect variable name.
+
 ## [Version 0.4.3 (Pre-Release)][0.4.3] - 2018-07-08
 ### Added
 - Add `entry.ippanho` template.
@@ -82,7 +86,8 @@ Changelog.
 - Subscribe check.
 - Save received feed.
 
-[Unreleased]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.3...develop
+[Unreleased]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.4...develop
+[0.4.4]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.3...v0.4.4
 [0.4.3]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4...v0.4.1
