@@ -3,6 +3,18 @@ Changelog.
 
 ## [Unreleased]
 
+## [Version 0.4.3 (Pre-Release)][0.4.3] - 2018-07-08
+### Added
+- Add `entry.ippanho` template.
+
+### Changed
+- Feed primary key `id` -> `uuid`.
+- Delete `feeds.id` column.
+
+### Fixed
+- Fix entry `parsed_headline`.
+- Fix breaking design for observatory page.
+
 ## [Version 0.4.2 (Pre-Release)][0.4.2] - 2018-07-02
 ### Added
 - Support gzip for entry xml file.
@@ -70,7 +82,8 @@ Changelog.
 - Subscribe check.
 - Save received feed.
 
-[Unreleased]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.2...develop
+[Unreleased]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.3...develop
+[0.4.3]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4...v0.4.1
 [0.4]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.3...v0.4
