@@ -26,7 +26,7 @@
         </div>
 
         <h5 class="card-header bg-transparent">
-            {{ account.name }} <small class="text-muted">&#64;{{ account.nickname }}</small> - {{ providerName[account.provider_name] }}
+            {{ account.name }} <small v-if="account.nickname" class="text-muted">&#64;{{ account.nickname }}</small> - {{ providerName[account.provider_name] }}
         </h5>
 
         <div class="card-body">
@@ -84,7 +84,7 @@
 
                             <div class="modal-body">
                                 <p class="card-text">
-                                    This account (<strong>&#64;{{ account.nickname }} - {{ providerName[account.provider_name] }}</strong>) will be deauthenticated.<br/>
+                                    This account (<strong>{{ account.nickname ? '&#64;'+account.nickname : account.name }} - {{ providerName[account.provider_name] }}</strong>) will be deauthenticated.<br/>
                                     Are you okay?
                                 </p>
                             </div>
