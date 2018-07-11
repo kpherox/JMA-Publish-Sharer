@@ -72,7 +72,7 @@ class Entry extends Model
      */
     public function getParsedHeadlineAttribute() : Collection
     {
-        preg_match('/【(.*?)】(.*)/', $this->headline, $headline);
+        preg_match('/【(.*?)】(.*)/s', $this->headline, $headline);
 
         return collect([
             'original' => $headline[0],
