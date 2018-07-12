@@ -63,15 +63,6 @@
 </div>
 
 <script>
-window.addEventListener("error", handleError, true);
-
-function handleError(evt) {
-    if (evt.message) { // Chrome sometimes provides this
-        alert("error: "+evt.message +" at linenumber: "+evt.lineno+" of file: "+evt.filename);
-    } else {
-        alert("error: "+evt.type+" from element: "+(evt.srcElement || evt.target));
-    }
-}
 Object.assign(mix.data, {
     isSafeUnlink: false,
     existsEmail: @json ($existsEmail),
@@ -82,47 +73,49 @@ Object.assign(mix.data, {
 });
 Object.assign(mix.methods, {
     showAccountSettings(account, accountIndex) {
-        if (this.isShowing) return;
+        if (this.isShowing || account === this.selectedAccount) {
+            return 0
+        }
 
-        let delay = this.isDisplay ? 500 : 0;
+        let delay = this.isDisplay ? 500 : 0
 
-        this.selectedAccount = {};
-        this.isShowing = true;
-        this.isDisplay = false;
-
-        setTimeout(() => {
-            this.checkSafeUnlink();
-            this.selectedAccount = account;
-            this.isDisplay = true;
-        }, delay);
+        this.selectedAccount = {}
+        this.isShowing = true
+        this.isDisplay = false
 
         setTimeout(() => {
-            console.log('showed '+account.name+'\'s settings');
-            this.accountIndex = accountIndex;
-            this.isShowing = false;
-        }, delay + 500);
+            this.checkSafeUnlink()
+            this.selectedAccount = account
+            this.isDisplay = true
+        }, delay)
+
+        setTimeout(() => {
+            console.log('showed '+account.name+'\'s settings')
+            this.accountIndex = accountIndex
+            this.isShowing = false
+        }, delay + 500)
     },
     checkSafeUnlink() {
-        let count = 0;
+        let count = 0
 
         if (this.existsEmail) {
-            return this.isSafeUnlink = true;
+            return this.isSafeUnlink = true
         }
 
         for (let provider of Object.keys(this.accounts)) {
-            count += this.accounts[provider].length;
+            count += this.accounts[provider].length
 
             if (count > 1) {
-                return this.isSafeUnlink = true;
+                return this.isSafeUnlink = true
             }
         }
 
-        return this.isSafeUnlink = false;
+        return this.isSafeUnlink = false
     },
     updateList(e) {
-        this.accounts = e;
-        this.$forceUpdate();
-        this.isDisplay = false;
+        this.accounts = e
+        this.$forceUpdate()
+        this.isDisplay = false
     }
 });
 </script>
