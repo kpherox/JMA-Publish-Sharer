@@ -1,7 +1,8 @@
 <?php
 
 if (! function_exists('parseIppanhoText')) {
-    function parseIppanhoText($text) {
+    function parseIppanhoText($text)
+    {
         $text = '<p class="card-text">'.$text.'</p>';
         $text = preg_replace('/\n/', '<br/>', $text);
 
@@ -10,15 +11,15 @@ if (! function_exists('parseIppanhoText')) {
         collect([
             [
                 'firstPos' => mb_strpos($text, '［'),
-                'brackets' => ['［','］'],
+                'brackets' => ['［', '］'],
             ],
             [
                 'firstPos' => mb_strpos($text, '【'),
-                'brackets' => ['【','】'],
+                'brackets' => ['【', '】'],
             ],
             [
                 'firstPos' => mb_strpos($text, '＜'),
-                'brackets' => ['＜','＞'],
+                'brackets' => ['＜', '＞'],
             ],
         ])->filter(function ($item) {
             return $item['firstPos'] !== false;
@@ -39,4 +40,3 @@ if (! function_exists('parseIppanhoText')) {
         return $text;
     }
 }
-
