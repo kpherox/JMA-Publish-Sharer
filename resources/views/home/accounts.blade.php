@@ -35,7 +35,7 @@
                             </div>
                         </a>
                     </transition-group>
-                    <a class="d-flex list-group-item list-group-item-action" href="{{ route($provider.'.linktouser') }}">
+                    <a class="d-flex list-group-item list-group-item-action" href="{{ route($provider.'.linkToUser') }}">
                         <button type="button" class="btn btn-secondary btn-lg btn-add p-0 rounded-circle mr-2">＋</button>
                         <p class="align-self-center mb-1">
                             Link Account
