@@ -4,6 +4,7 @@ namespace App\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LinkedSocialAccount extends Model
@@ -55,5 +56,13 @@ class LinkedSocialAccount extends Model
     public function user() : BelongsTo
     {
         return $this->belongsTo('App\Eloquents\User');
+    }
+
+    /**
+     * Relation: has many account settings.
+     */
+    public function settings() : HasMany
+    {
+        return $this->hasMany('App\Eloquents\AccountSetting');
     }
 }
