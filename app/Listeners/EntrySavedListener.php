@@ -13,16 +13,6 @@ class EntrySavedListener implements ShouldQueue
     use InteractsWithQueue;
 
     /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Handle the event.
      *
      * @param  EntryReceived  $event
@@ -32,17 +22,15 @@ class EntrySavedListener implements ShouldQueue
     {
         $entry = $event->entry;
 
-        LinkedSocialAccount::whereIn('provider_name', ['twitter', 'line'])->get()->each(function ($account) use ($entry) {
-            $notificationSettings = $account->settings()->whereType('notification')->where('settings->isAllow', true);
-            if (! $notificationSettings->exists()) {
-                return;
-            }
-
-            try {
-                $account->notify(new EntryReceived($entry));
-            } catch (\Exception $e) {
-                report($e);
-            }
-        });
+        LinkedSocialAccount::whereIn('provider_name', ['twitter', 'line'])
+            ->whereHas('settings', function ($query) {
+                $query->whereType('notification')->where('settings->isAllow', true);
+            })->get()->each(function ($account) use ($entry) {
+                try {
+                    $account->notify(new EntryReceived($entry));
+                } catch (\Exception $e) {
+                    report($e);
+                }
+            });
     }
 }
