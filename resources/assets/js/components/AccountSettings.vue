@@ -35,7 +35,7 @@
 
                 <div class="list-group list-group-flush" v-if="account.can_notify">
                     <div class="list-group-item d-flex">
-                        <input id="allowNotification" class="align-self-center" type="checkbox">
+                        <input id="allowNotification" class="align-self-center" v-model="notification.isAllow" type="checkbox" @click.prevent="allowNotification">
                         <label class="m-1 p-1 w-100" for="allowNotification">
                             Allow notification<br/>
                             <small class="text-muted">When we receive a new entry, Notify from/to this account.</small>
@@ -134,6 +134,9 @@
                     _token: this.csrfToken
                 },
                 message: null,
+                notification: {
+                    isAllow: false,
+                },
                 alertModal: {
                     title: null,
                     message: null,
@@ -162,6 +165,18 @@
                 this.alertModal.message = resData.message
                 this.showModal('#alertModal')
                 return [resData, isSuccess]
+            },
+            allowNotification() {
+                let formData = this.params
+                formData.type = 'notification'
+                formData.key = 'isAllow'
+                formData.value = !this.notification.isAllow
+
+                axios.post(this.endpoints[this.account.provider_name].settings, formData)
+                    .then((res) => {
+                        let resData = res.data
+                        this.notification.isAllow = resData.settings.isAllow || false
+                    })
             },
             testNotify() {
                 let formData = this.params
@@ -206,6 +221,14 @@
                         return [resData, isSuccess]
                     }).then(this.resultAlert)
             }
+        },
+        created() {
+            let formData = this.params
+            axios.get(this.endpoints[this.account.provider_name].settings, { params: formData })
+                .then((res) => {
+                    let resData = res.data
+                    this.notification.isAllow = resData.settings.notification.isAllow || false
+                })
         },
         mounted() {
             console.log('Component mounted.')
