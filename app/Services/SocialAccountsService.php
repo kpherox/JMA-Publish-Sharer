@@ -44,16 +44,16 @@ class SocialAccountsService
 
     /**
      * @param  string $provider
-     * @param  int $providerId
+     * @param  $providerId
      */
-    public function deleteLinkedAccount(string $provider, int $providerId) : string
+    public function deleteLinkedAccount(string $provider, $providerId) : string
     {
-        $account = auth()->user()->accounts()->where([
-            ['provider_name', $provider],
-            ['provider_id', $providerId],
-        ]);
-        if ($account->exists()) {
-            $account->delete();
+        $accounts = auth()->user()
+            ->accounts()
+            ->whereProviderName($provider)
+            ->whereProviderId($providerId);
+        if ($accounts->exists()) {
+            $accounts->delete();
         } else {
             throw new \Exception('Not found account.');
         }
@@ -61,17 +61,23 @@ class SocialAccountsService
         return 'Success unlinked!';
     }
 
-    public function testNotify(string $provider, int $providerId, string $message) : string
+    /**
+     * @param  string $provider
+     * @param  $providerId
+     * @param  string $message
+     */
+    public function testNotify(string $provider, $providerId, string $message) : string
     {
-        $account = auth()->user()->accounts()->where([
-            ['provider_name', $provider],
-            ['provider_id', $providerId],
-        ]);
-        if ($account->exists()) {
-            $account->first()->notify(new TestNotify($message));
+        $accounts = auth()->user()
+            ->accounts()
+            ->whereProviderName($provider)
+            ->whereProviderId($providerId);
+        if ($accounts->exists()) {
+            $accounts->first()->notify(new TestNotify($message));
         } else {
             throw new \Exception('Not found account.');
         }
+
         return 'Successfully notified!';
     }
 

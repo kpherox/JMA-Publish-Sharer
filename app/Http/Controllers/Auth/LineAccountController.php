@@ -35,7 +35,7 @@ class LineAccountController extends SocialAccountController
         $isAjax = request()->ajax();
 
         try {
-            $message = $accountService->testNotify($this->getProvider(), (int)request('id'), request('message'));
+            $message = $accountService->testNotify($this->getProvider(), request('id'), request('message'));
         } catch (\Exception $e) {
             report($e);
             if ($isAjax) {

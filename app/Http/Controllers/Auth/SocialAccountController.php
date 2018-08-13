@@ -58,7 +58,7 @@ abstract class SocialAccountController extends Controller
         $isAjax = request()->ajax();
 
         try {
-            $message = $accountService->deleteLinkedAccount($this->getProvider(), (int) request('id'));
+            $message = $accountService->deleteLinkedAccount($this->getProvider(), request('id'));
         } catch (\Exception $e) {
             if ($isAjax) {
                 return new JsonResponse([
