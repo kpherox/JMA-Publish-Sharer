@@ -18,8 +18,23 @@ class AccountSeeder extends Seeder
             ->create()
             ->each(function ($user) use ($providers) {
                 foreach ($providers as $provider) {
-                    $user->accounts()->save(factory(Eloquents\LinkedSocialAccount::class)->make(['provider_name' => $provider]));
+                    $account = factory(Eloquents\LinkedSocialAccount::class)
+                        ->make(['provider_name' => $provider]);
+                    $user->accounts()->save($account);
                 }
             });
+
+        $user = $users->first();
+        $user->accounts->each(function ($account) {
+            if ($account->provider_name !== 'twitter' && $account->provider_name != 'line') {
+                return;
+            }
+
+            $isAllow = $account->provider_name === 'twitter' ? true : false;
+
+            $setting = factory(Eloquents\AccountSetting::class)
+                ->make(['type' => 'notification', 'settings' => ['isAllow' => $account->provider_name === 'twitter' ? true : false]]);
+            $account->settings()->save($setting);
+        });
     }
 }

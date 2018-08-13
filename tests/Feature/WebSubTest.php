@@ -106,12 +106,12 @@ class WebSubTest extends TestCase
         $response = $this->call('POST', self::$websubEndpoint, [], [], [], $this->getHeaders('POST', 'sha1='.$hash), $atomFeed);
 
         \Notification::assertSentTo(
-            LinkedSocialAccount::where('provider_name', 'twitter')->first(),
+            LinkedSocialAccount::where('provider_name', 'twitter')->whereHas('settings', function ($query) {return $query->where('settings->isAllow', true);})->first(),
             EntryReceived::class
         );
 
-        \Notification::assertSentTo(
-            LinkedSocialAccount::where('provider_name', 'line')->first(),
+        \Notification::assertNotSentTo(
+            LinkedSocialAccount::where('provider_name', 'line')->whereHas('settings', function ($query) {return $query->where('settings->isAllow', false);})->first(),
             EntryReceived::class
         );
 
