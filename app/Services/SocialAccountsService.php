@@ -3,8 +3,10 @@
 namespace App\Services;
 
 use App\Eloquents\User;
+use App\Eloquents\AccountSetting;
 use App\Eloquents\LinkedSocialAccount;
 use App\Notifications\TestNotify;
+use Illuminate\Support\Collection;
 use Laravel\Socialite\Contracts\User as ProviderUser;
 
 class SocialAccountsService
@@ -42,6 +44,66 @@ class SocialAccountsService
         return $user;
     }
 
+    /**
+     * @param  string $provider
+     * @param  $providerId
+     */
+    public function getAccountSettings(string $provider, $providerId) : Collection
+    {
+        $accounts = auth()->user()
+            ->accounts()
+            ->whereProviderName($provider)
+            ->whereProviderId($providerId);
+        if (! $accounts->exists()) {
+            throw new \Exception('Not found account.');
+        }
+
+        $allSettings = collect([]);
+
+        $settings = $accounts->first()->settings()->get();
+        $settings->each(function ($setting) use (&$allSettings) {
+            $allSettings->put($setting->type, $setting->settings);
+        });
+
+        $settingTypes = collect(['notification']);
+        $settingTypes->each(function ($type) use (&$allSettings) {
+            if (! $allSettings->has($type)) {
+                $allSettings->put($type, []);
+            }
+        });
+
+        return $allSettings;
+    }
+
+    /**
+     * @param  string $provider
+     * @param  $providerId
+     * @param  string $settingType
+     * @param  string $settingKey
+     * @param  $settingValue
+     */
+    public function updateAccountSettings(string $provider, $providerId, string $settingType, string $settingKey, $settingValue) : Collection
+    {
+        $settingTypes = collect(['notification']);
+        if (! $settingTypes->contains($settingType)) {
+            throw new \Exception('Invalid setting type.');
+        }
+
+        $accounts = auth()->user()
+            ->accounts()
+            ->whereProviderName($provider)
+            ->whereProviderId($providerId);
+        if (! $accounts->exists()) {
+            throw new \Exception('Not found account.');
+        }
+
+        $settings = $accounts->first()->settings()->whereType($settingType);
+        $setting = $settings->firstOrCreate(['type' => $settingType]);
+        $setting->settings = $setting->settings->put($settingKey, $settingValue);
+        $settings->save($setting);
+
+        return $setting->settings;
+    }
     /**
      * @param  string $provider
      * @param  $providerId

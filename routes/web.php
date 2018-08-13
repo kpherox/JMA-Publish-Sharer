@@ -37,7 +37,9 @@ Route::namespace('Auth')->group(function () {
             Route::get('callback', $controller.'@handleProviderCallback')->name('callback');
             Route::get('login', $controller.'@redirectToProvider')->name('login')->middleware('guest');
             Route::get('linktouser', $controller.'@linkToUser')->name('linkToUser')->middleware('auth');
+            Route::get('settings', $controller.'@settings')->name('settings')->middleware('auth');
             Route::post('notify', $controller.'@testNotify')->name('notify')->middleware('auth');
+            Route::post('settings', $controller.'@updateSettings')->name('updateSettings')->middleware('auth');
             Route::delete('unlink', $controller.'@unlinkFromUser')->name('unlink')->middleware('auth');
         });
     }

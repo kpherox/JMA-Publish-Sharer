@@ -48,6 +48,74 @@ abstract class SocialAccountController extends Controller
     }
 
     /**
+     * Get account settings.
+     *
+     * @param  \App\Services\SocialAccountsService $accountService
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function settings(SocialAccountsService $accountService)
+    {
+        $isAjax = request()->ajax();
+
+        try {
+            $message = $accountService->getAccountSettings($this->getProvider(), request('id'));
+        } catch (\Exception $e) {
+            if ($isAjax) {
+                return new JsonResponse([
+                    'status' => 'Can\'t get settings',
+                    'statusCode' => 403,
+                    'message' => $e->getMessage(),
+                ], 403);
+            }
+
+            abort(403, 'Can\'t get settings');
+        }
+
+        if ($isAjax) {
+            return new JsonResponse([
+                'status' => 'OK',
+                'statusCode' => 201,
+                'settings' => $message,
+            ], 201);
+        }
+    }
+
+    /**
+     * Update account settings.
+     *
+     * @param  \App\Services\SocialAccountsService $accountService
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function updateSettings(SocialAccountsService $accountService)
+    {
+        $isAjax = request()->ajax();
+
+        try {
+            $message = $accountService->updateAccountSettings($this->getProvider(), request('id'), request('type'), request('key'), request('value'));
+        } catch (\Exception $e) {
+            if ($isAjax) {
+                return new JsonResponse([
+                    'status' => 'Can\'t update settings',
+                    'statusCode' => 403,
+                    'message' => $e->getMessage(),
+                ], 403);
+            }
+
+            abort(403, 'Can\'t update settings');
+        }
+
+        if ($isAjax) {
+            return new JsonResponse([
+                'status' => 'OK',
+                'statusCode' => 201,
+                'settings' => $message,
+            ], 201);
+        }
+
+        return redirect()->route('home.accounts');
+    }
+
+    /**
      * Unlink account from User.
      *
      * @param  \App\Services\SocialAccountsService $accountService
