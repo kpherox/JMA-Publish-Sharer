@@ -24,7 +24,8 @@
         "socialiteproviders/line": "^2.0",
         "socialiteproviders/manager": "dev-master#51332d78cbaadc8856c518fd0e5e7983c96e4cb7 as 3.3.1",
         "socialiteproviders/twitter": "^3.0.1",
-        "webpatser/laravel-uuid": "^3.0"
+        "webpatser/laravel-uuid": "^3.0",
+        "ybr-nx/laravel-mariadb": "^1.0"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

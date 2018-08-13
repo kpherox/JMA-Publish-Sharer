@@ -17,7 +17,7 @@ class CreateAccountSettingsTable extends Migration
             $table->uuid('uuid');
             $table->bigInteger('linked_social_account_id');
             $table->string('type');
-            $table->text('settings');
+            $table->json('settings');
             $table->timestampsTz();
         });
     }

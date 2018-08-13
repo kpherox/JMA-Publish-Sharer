@@ -99,7 +99,10 @@ class SocialAccountsService
 
         $settings = $accounts->first()->settings()->whereType($settingType);
         $setting = $settings->firstOrCreate(['type' => $settingType]);
-        $setting->settings = $setting->settings->put($settingKey, $settingValue);
+        $setting->forceFill([
+            'settings->'.$settingKey => $settingValue
+        ])->save();
+
         $settings->save($setting);
 
         return $setting->settings;
