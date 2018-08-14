@@ -292,18 +292,18 @@
                         } else {
                             Vue.delete(this.accounts[this.account.provider_name], this.accountIndex)
                         }
-                        this.$emit('update:accounts', accounts)
                         return [res.data, true]
-                    })
-                    .catch((e) => {
+                    }).catch((e) => {
                         return [e.response.data, false]
-                    })
-                    .then(([resData, isSuccess]) => {
+                    }).then(([resData, isSuccess]) => {
                         if (isSuccess) {
                             resData.status = "Unlinked"
                             resData.message = this.providerName[this.account.provider_name]+" / "+this.account.name+"."
                         }
                         this.hideModal('#unlinkModal')
+                        $('#alertModal').on('hide.bs.modal', () => {
+                            this.$emit('update:accounts')
+                        })
                         return [resData, isSuccess]
                     }).then(this.resultAlert)
             },

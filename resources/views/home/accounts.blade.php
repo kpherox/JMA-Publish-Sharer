@@ -113,9 +113,7 @@ Object.assign(mix.methods, {
 
         return this.isSafeUnlink = false
     },
-    updateList(e) {
-        this.accounts = e
-        this.$forceUpdate()
+    updateList() {
         this.isDisplay = false
     }
 });
