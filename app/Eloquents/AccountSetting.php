@@ -36,6 +36,15 @@ class AccountSetting extends Model
     ];
 
     /**
+     * The attributes defaults.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'settings' => '{}',
+    ];
+
+    /**
      * The attributes that should be casted to native types.
      *
      * @var array
