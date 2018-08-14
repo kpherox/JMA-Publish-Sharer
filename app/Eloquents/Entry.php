@@ -17,7 +17,7 @@ class Entry extends Model
      * @var array
      */
     protected $dispatchesEvents = [
-        'created' => EntrySaved::class,
+        'updated' => EntrySaved::class,
     ];
 
     /**
