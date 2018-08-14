@@ -18,7 +18,7 @@
 
                 <div class="card-body">
                     <h5 class="card-title">{{ data_get($entry, 'Head.Title') }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">分類種別: <a href="{{ route('index', ['type' => $feed->type]) }}">@lang('feedtypes.'.$feed->type)</a></h6>
+                    <h6 class="card-subtitle mb-2 text-muted">@lang('feedtypes.name'): <a href="{{ route('index', ['type' => $feed->type]) }}">@lang('feedtypes.'.$feed->type)</a></h6>
                     <h6 class="card-subtitle mb-2 text-muted">発信時刻: @datetime(data_get($entry, 'Control.DateTime'))</h6>
                     <h6 class="card-subtitle mb-2 text-muted">
                         発表機関:
