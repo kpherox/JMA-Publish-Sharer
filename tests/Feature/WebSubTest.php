@@ -106,7 +106,7 @@ class WebSubTest extends TestCase
         $response = $this->call('POST', self::$websubEndpoint, [], [], [], $this->getHeaders('POST', 'sha1='.$hash), $atomFeed);
 
         \Notification::assertSentTo(
-            LinkedSocialAccount::where('provider_name', 'twitter')->whereHas('settings', function ($query) {return $query->where('settings->isAllow', true);})->first(),
+            LinkedSocialAccount::where('provider_name', 'twitter')->whereHas('settings', function ($query) {return $query->where('settings->isAllow', true)->where('settings->filters->feedtypes->extra', true);})->first(),
             EntryReceived::class
         );
 
@@ -160,7 +160,7 @@ class WebSubTest extends TestCase
             ])
             ->assertDatabaseHas('feeds', [
                 'uuid' => 'be4342e2-ff73-363c-a3ed-66e05e977224',
-                'url' => 'http://xml.kishou.go.jp/*/*.xml',
+                'url' => 'http://xml.kishou.go.jp/*/extra.xml',
             ]);
 
         \Storage::disk('local')->assertExists('entry/8e55b8d8-518b-3dc9-9156-7e87c001d7b5');
