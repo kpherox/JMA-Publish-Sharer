@@ -57,7 +57,8 @@
             :accounts="accounts"
             v-on:update:accounts="updateList($event)"
             :account-index="accountIndex"
-            :account="selectedAccount">
+            :account="selectedAccount"
+            :notification-filters="{{ $notificationFilters }}">
         </account-settings>
     </transition>
 </div>

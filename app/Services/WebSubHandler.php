@@ -84,7 +84,7 @@ class WebSubHandler
         $entries->each(function ($entry) use ($feed, &$promises) {
             $feed->entries()->save($entry['entry']);
 
-            $promises[] = $entry->except(['except'])->all();
+            $promises[] = $entry->all();
         });
 
         self::saveDetailsXml(collect($promises));

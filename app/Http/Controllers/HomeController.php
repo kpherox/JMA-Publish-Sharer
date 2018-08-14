@@ -72,12 +72,30 @@ class HomeController extends Controller
             ]);
         });
 
+        $feedtypes = collect(config('jmaxml.feedtypes'));
+        $feedtypeFilter = $feedtypes->map(function ($feedtype) {
+            return [
+                $feedtype => [
+                    'name' => trans('feedtypes.'.$feedtype),
+                    'isAllow' => false,
+                ],
+            ];
+        })->collapse();
+
+        $notificationFilters = collect([
+            'feedtypes' => [
+                'name' => trans('feedtypes.name'),
+                'items' => $feedtypeFilter->all(),
+            ],
+        ]);
+
         return view('home.accounts', [
             'menus' => $this->menus,
             'socialAccounts' => $socialAccounts,
             'providersName' => $providersName,
             'endpoints' => $endpoints,
             'existsEmail' => auth()->user()->existsEmailAndPassword(),
+            'notificationFilters' => $notificationFilters,
         ]);
     }
 }
