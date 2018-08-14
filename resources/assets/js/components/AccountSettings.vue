@@ -299,11 +299,11 @@
                         if (isSuccess) {
                             resData.status = "Unlinked"
                             resData.message = this.providerName[this.account.provider_name]+" / "+this.account.name+"."
+                            $('#alertModal').on('hide.bs.modal', () => {
+                                this.$emit('update:accounts')
+                            })
                         }
                         this.hideModal('#unlinkModal')
-                        $('#alertModal').on('hide.bs.modal', () => {
-                            this.$emit('update:accounts')
-                        })
                         return [resData, isSuccess]
                     }).then(this.resultAlert)
             },

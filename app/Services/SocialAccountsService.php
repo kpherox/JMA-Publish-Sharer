@@ -118,6 +118,9 @@ class SocialAccountsService
             ->whereProviderName($provider)
             ->whereProviderId($providerId);
         if ($accounts->exists()) {
+            $accounts->each(function ($account) {
+                $account->settings()->delete();
+            });
             $accounts->delete();
         } else {
             throw new \Exception('Not found account.');
