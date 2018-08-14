@@ -17,10 +17,14 @@ class DirectiveServiceProvider extends ServiceProvider
             $timezone = $timezone ?: 'config(\'app.timezone\')';
 
             return "<?php
-\$carbon = \Carbon\Carbon::parse($time);
-\$carbon->setTimezone($timezone);
-echo \$carbon;
-?>";
+                \$carbon = \Carbon\Carbon::parse($time);
+                \$carbon->setTimezone($timezone);
+                echo \$carbon;
+            ?>";
+        });
+
+        \Blade::directive('parseText', function ($text) {
+            return "<?php echo parseIppanhoText(e($text)); ?>";
         });
     }
 }

@@ -183,6 +183,7 @@ return [
         App\Providers\Blade\DirectiveServiceProvider::class,
         App\Providers\ConfigServiceProvider::class,
         App\Providers\ExtendingCollectionServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
 
     ],
 

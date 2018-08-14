@@ -60,7 +60,8 @@
 
                 <div class="card-body">
                     <h5 class="card-title">{{ $entry->parsed_headline['title'] }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">@lang('feedtypes.name'): @lang('feedtypes.'.$entry->feed->type)</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                    <h6 class="card-subtitle mb-2 text-muted">@lang('feedtypes.name'): {{ $entry->feed->transed_type }}</h6>
                     <h6 class="card-subtitle mb-2 text-muted">発信時刻: @datetime($entry->updated)</h6>
                     <h6 class="card-subtitle mb-2 text-muted">
                         発表機関:

@@ -14,15 +14,15 @@ class CreateEntryDetailsTable extends Migration
     public function up()
     {
         Schema::create('entry_details', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('entry_id');
             $table->uuid('uuid')->unique();
             $table->string('kind_of_info');
             $table->string('observatory_name');
             $table->string('headline');
-            $table->string('url', 2048);
+            $table->string('url');
             $table->dateTimeTz('updated');
-            $table->timestamps();
+            $table->timestampsTz();
         });
     }
 

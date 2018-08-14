@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFeedsTable extends Migration
+class ChangeTypeToTextOfHeadlineColumnOfEntries extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateFeedsTable extends Migration
      */
     public function up()
     {
-        Schema::create('feeds', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->uuid('uuid')->unique();
-            $table->string('url');
-            $table->dateTimeTz('updated');
-            $table->timestampsTz();
+        Schema::table('entries', function (Blueprint $table) {
+            $table->text('headline')->change();
         });
     }
 
@@ -29,6 +25,8 @@ class CreateFeedsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feeds');
+        Schema::table('entries', function (Blueprint $table) {
+            $table->string('headline')->change();
+        });
     }
 }
