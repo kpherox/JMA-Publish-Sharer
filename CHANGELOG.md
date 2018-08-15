@@ -2,6 +2,9 @@
 Changelog.
 
 ## [Unreleased]
+
+
+## [Version 0.5 (Pre-Release)][0.5] - 2018-08-15
 ### Added
 - Added notification to social account.
 - Supported LINE Login.
@@ -15,9 +18,11 @@ Changelog.
 - Fixed full text of headline can't be saved.
 - Fixed don't save feed_uuid when new feed recoed.
 
+
 ## [Version 0.4.4 (Pre-Release, hotfix)][0.4.4] - 2018-07-08
 ### Fixed
 - Fixed incorrect variable name.
+
 
 ## [Version 0.4.3 (Pre-Release)][0.4.3] - 2018-07-08
 ### Added
@@ -30,6 +35,7 @@ Changelog.
 ### Fixed
 - Fixed entry `parsed_headline`.
 - Fixed breaking design for observatory page.
+
 
 ## [Version 0.4.2 (Pre-Release)][0.4.2] - 2018-07-02
 ### Added
@@ -45,9 +51,11 @@ Changelog.
 ### Fixed
 - Fixed kind name of config/jmaxml.kinds `指定河川洪水予報`.
 
+
 ## [Version 0.4.1 (Pre-Release, hotfix)][0.4.1] - 2018-06-23
 ### Fixed
 - Fixed undefined variable when running migrate.
+
 
 ## [Version 0.4 (Pre-Release)][0.4] - 2018-06-23
 ### Added
@@ -60,6 +68,7 @@ Changelog.
 ### Changed
 - XML Document database to file. [#1]
 - Optimized entries table. [#1]
+
 
 ## [Version 0.3 (Pre-Release)][0.3] - 2018-06-03
 ### Added
@@ -78,13 +87,16 @@ Changelog.
 ### Removed
 - Rate limit for websub endpoint.
 
+
 ## [Version 0.2.2 (Pre-Release, hotfix)][0.2.2] - 2017-10-23
 ### Fixed
 - Changed `$entries->feed_uuid = $uuid` to `$entries->feed_uuid = $uuid[2]`.
 
+
 ## [Version 0.2.1 (Pre-Release, hotfix)][0.2.1] - 2017-10-23
 ### Fixed
 - Removed `array_push($entriesUUID, $entryUUID);`.
+
 
 ## [Version 0.2 (Pre-Release)][0.2] - 2017-10-23
 ### Changed
@@ -93,12 +105,15 @@ Changelog.
 ### Removed
 - Entries column of feeds table.
 
+
 ## [Version 0.1 (Pre-Release)][0.1] - 2017-10-15
 **Initial release.**
 - Subscribe check.
 - Save received feed.
 
-[Unreleased]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.4...develop
+
+[Unreleased]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.5...develop
+[0.5]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.4...v0.5
 [0.4.4]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.3...v0.4.4
 [0.4.3]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.1...v0.4.2
