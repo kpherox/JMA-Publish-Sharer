@@ -26,7 +26,7 @@ class WebSubController extends Controller
     }
 
     /**
-     * Recive JMA Publish
+     * Recive JMA Publish.
      */
     public function receiveFeed() : Response
     {

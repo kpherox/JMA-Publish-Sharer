@@ -2,15 +2,15 @@
 
 namespace App\Notifications;
 
-use Illuminate\Notifications\Notification;
+use App\Eloquents\Entry;
 use Illuminate\Bus\Queueable;
+use App\Eloquents\LinkedSocialAccount;
+use Illuminate\Notifications\Notification;
+use NotificationChannels\Line\LineChannel;
+use NotificationChannels\Line\LineMessage;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use NotificationChannels\Twitter\TwitterChannel;
 use NotificationChannels\Twitter\TwitterStatusUpdate;
-use NotificationChannels\Line\LineChannel;
-use NotificationChannels\Line\LineMessage;
-use App\Eloquents\Entry;
-use App\Eloquents\LinkedSocialAccount;
 
 class EntryReceived extends Notification implements ShouldQueue
 {
@@ -38,7 +38,7 @@ class EntryReceived extends Notification implements ShouldQueue
     {
         $via = [];
 
-        if (!$notifiable instanceof LinkedSocialAccount) {
+        if (! $notifiable instanceof LinkedSocialAccount) {
             return $via;
         }
 

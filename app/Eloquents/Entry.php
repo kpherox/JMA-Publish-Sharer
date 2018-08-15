@@ -2,10 +2,10 @@
 
 namespace App\Eloquents;
 
+use App\Events\EntrySaved;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use App\Events\EntrySaved;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
