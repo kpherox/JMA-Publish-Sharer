@@ -4,6 +4,11 @@ Changelog.
 ## [Unreleased]
 
 
+## [Version 0.5.1 (Pre-Release, hotfix)][0.5.1] - 2018-08-15
+## Fixed
+- Fix insert duplicate error for entry details.
+
+
 ## [Version 0.5 (Pre-Release)][0.5] - 2018-08-15
 ### Added
 - Added notification to social account.
@@ -112,7 +117,8 @@ Changelog.
 - Save received feed.
 
 
-[Unreleased]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.5...develop
+[Unreleased]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.5.1...develop
+[0.5.1]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.5...v0.5.1
 [0.5]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.4...v0.5
 [0.4.4]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.3...v0.4.4
 [0.4.3]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.4.2...v0.4.3
