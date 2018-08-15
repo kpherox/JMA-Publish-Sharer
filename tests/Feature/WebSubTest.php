@@ -107,14 +107,14 @@ class WebSubTest extends TestCase
 
         \Notification::assertSentTo(
             LinkedSocialAccount::where('provider_name', 'twitter')->whereHas('settings', function ($query) {
-                return $query->where('settings->isAllow', true)->where('settings->filters->feedtypes->extra', true);
+                return $query->where('settings->filters->feedtypes->extra', true);
             })->first(),
             EntryReceived::class
         );
 
-        \Notification::assertNotSentTo(
+        \Notification::assertSentTo(
             LinkedSocialAccount::where('provider_name', 'line')->whereHas('settings', function ($query) {
-                return $query->where('settings->isAllow', false);
+                return $query->where('settings->filters->feedtypes->isAllow', false)->where('settings->filters->feedtypes->extra', false);
             })->first(),
             EntryReceived::class
         );
