@@ -84,7 +84,7 @@ class WebSubHandler
         $entries->each(function ($entry) use ($feed, &$promises) {
             $feed->entries()->save($entry['entry']);
 
-            $promises[] = $entry->except(['except'])->all();
+            $promises[] = $entry->all();
         });
 
         self::saveDetailsXml(collect($promises));
@@ -179,7 +179,7 @@ class WebSubHandler
         $updated = Carbon::parse($entry['updated']);
         $updated->setTimezone(config('app.timezone'));
 
-        $url = $entry['link']['@attributes']['href'];
+        $url = data_get($entry, 'link.@attributes.href');
 
         return [
             'promise' => \Guzzle::getAsync($url),

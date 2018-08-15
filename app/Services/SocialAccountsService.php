@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Eloquents\User;
+use App\Notifications\TestNotify;
+use Illuminate\Support\Collection;
 use App\Eloquents\LinkedSocialAccount;
 use Laravel\Socialite\Contracts\User as ProviderUser;
 
@@ -19,11 +21,11 @@ class SocialAccountsService
         $didExistAccount = $account->id;
 
         if (! $didExistAccount && auth()->guest() && User::where('email', $providerUser->getEmail())->exists()) {
-            throw new \Exception('Already used this E-mail address');
+            throw new \Exception('Already used this E-mail address.');
         }
 
         if ($didExistAccount && auth()->check() && $account->user_id !== auth()->id()) {
-            throw new \Exception('It is already linked to other account');
+            throw new \Exception('It is already linked to other account.');
         }
 
         $this->setAccountColumn($account, $providerUser, $this->isOAuthOne($provider));
@@ -43,22 +45,108 @@ class SocialAccountsService
 
     /**
      * @param  string $provider
-     * @param  int $providerId
+     * @param  $providerId
      */
-    public function deleteLinkedAccount(string $provider, int $providerId) : string
+    public function getAccountSettings(string $provider, $providerId) : Collection
     {
-        $account = LinkedSocialAccount::where([
-            ['provider_name', $provider],
-            ['provider_id', $providerId],
-            ['user_id', auth()->id()],
-        ]);
-        if ($account->exists()) {
-            $account->delete();
+        $accounts = auth()->user()
+            ->accounts()
+            ->whereProviderName($provider)
+            ->whereProviderId($providerId);
+        if (! $accounts->exists()) {
+            throw new \Exception('Not found account.');
+        }
+
+        $allSettings = collect([]);
+
+        $settings = $accounts->first()->settings()->get();
+        $settings->each(function ($setting) use (&$allSettings) {
+            $allSettings->put($setting->type, $setting->settings);
+        });
+
+        $settingTypes = collect(['notification']);
+        $settingTypes->each(function ($type) use (&$allSettings) {
+            if (! $allSettings->has($type)) {
+                $allSettings->put($type, []);
+            }
+        });
+
+        return $allSettings;
+    }
+
+    /**
+     * @param  string $provider
+     * @param  $providerId
+     * @param  string $settingType
+     * @param  string $settingKey
+     * @param  $settingValue
+     */
+    public function updateAccountSettings(string $provider, $providerId, string $settingType, string $settingKey, $settingValue) : Collection
+    {
+        $settingTypes = collect(['notification']);
+        if (! $settingTypes->contains($settingType)) {
+            throw new \Exception('Invalid setting type.');
+        }
+
+        $accounts = auth()->user()
+            ->accounts()
+            ->whereProviderName($provider)
+            ->whereProviderId($providerId);
+        if (! $accounts->exists()) {
+            throw new \Exception('Not found account.');
+        }
+
+        $settings = $accounts->first()->settings()->whereType($settingType);
+        $setting = $settings->firstOrCreate(['type' => $settingType]);
+        $setting->forceFill([
+            'settings->'.$settingKey => $settingValue,
+        ])->save();
+
+        $settings->save($setting);
+
+        return $setting->settings;
+    }
+
+    /**
+     * @param  string $provider
+     * @param  $providerId
+     */
+    public function deleteLinkedAccount(string $provider, $providerId) : string
+    {
+        $accounts = auth()->user()
+            ->accounts()
+            ->whereProviderName($provider)
+            ->whereProviderId($providerId);
+        if ($accounts->exists()) {
+            $accounts->each(function ($account) {
+                $account->settings()->delete();
+            });
+            $accounts->delete();
         } else {
-            throw new \Exception('Not found account');
+            throw new \Exception('Not found account.');
         }
 
         return 'Success unlinked!';
+    }
+
+    /**
+     * @param  string $provider
+     * @param  $providerId
+     * @param  string $message
+     */
+    public function testNotify(string $provider, $providerId, string $message) : string
+    {
+        $accounts = auth()->user()
+            ->accounts()
+            ->whereProviderName($provider)
+            ->whereProviderId($providerId);
+        if ($accounts->exists()) {
+            $accounts->first()->notify(new TestNotify($message));
+        } else {
+            throw new \Exception('Not found account.');
+        }
+
+        return 'Successfully notified!';
     }
 
     /**
@@ -95,6 +183,6 @@ class SocialAccountsService
      */
     private function isOAuthOne(string $provider) : bool
     {
-        return collect(config('services.oauth1'))->contains($provider);
+        return config('services.'.$provider.'.oauth1', false);
     }
 }

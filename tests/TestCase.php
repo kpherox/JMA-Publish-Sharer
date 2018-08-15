@@ -15,19 +15,16 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
         if (! self::$migrated) {
             \Artisan::call('migrate:refresh');
+            \Artisan::call('db:seed');
             self::$migrated = true;
         }
     }
 
     public function tearDown()
     {
-        foreach (\DB::select('SHOW TABLES') as $table) {
-            $columnName = 'Tables_in_'.\DB::connection('')->getDatabaseName();
-            $tableName = $table->$columnName;
-            if ($tableName !== 'migrations') {
-                \DB::statement('TRUNCATE TABLE `'.$tableName.'`');
-            }
-        }
+        \DB::table('feeds')->truncate();
+        \DB::table('entries')->truncate();
+        \DB::table('entry_details')->truncate();
         parent::tearDown();
     }
 }

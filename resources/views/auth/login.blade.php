@@ -66,7 +66,7 @@
                     <div class="social-login text-center">
                         @foreach ($simpleIcons as $simpleIcon)
                         <div class="btn btn-default btn-social" style="background-color: #{{ $simpleIcon['hex'] }}">
-                            <a href="{{ route($simpleIcon['lowerTitle'].'.login') }}">
+                            <a href="{{ route($simpleIcon['provider'].'.login') }}">
                                 {!! $simpleIcon['svg'] !!}
                                 Sign in with {{ $simpleIcon['title'] }}
                             </a>

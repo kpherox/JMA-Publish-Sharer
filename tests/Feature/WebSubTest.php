@@ -5,11 +5,12 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Promise;
+use App\Notifications\EntryReceived;
+use App\Eloquents\LinkedSocialAccount;
 
 class WebSubTest extends TestCase
 {
     private static $websubEndpoint = '/hooks/websub/subscriber';
-    private static $websubOldEndpoint = '/hooks/push/subscriber';
 
     private $verifyToken = 'testwebsub';
     private $challengeValue = 'test';
@@ -76,22 +77,16 @@ class WebSubTest extends TestCase
 
     /**
      * Receive feed test.
-     * Success pattarn.
+     * Notification sent success.
      *
      * @return void
      */
-    public function testReceiveFeedSuccess()
+    public function testEntryReceivedNotification()
     {
-        $this->receiveSuccess(self::$websubEndpoint);
-    }
+        \Notification::fake();
 
-    public function testReceiveFeedOldPathSuccess()
-    {
-        $this->receiveSuccess(self::$websubOldEndpoint);
-    }
+        \Storage::fake('local');
 
-    private function receiveSuccess($endpoint)
-    {
         $sampleData1 = file_get_contents('tests/SampleData/jmaxml_Samples/01_01_01_091210_VGSK50.xml');
         $sampleData2 = file_get_contents('tests/SampleData/jmaxml_Samples/01_01_02_091210_VGSK50.xml');
 
@@ -104,12 +99,60 @@ class WebSubTest extends TestCase
                       ->with('http://*/*/b60694a6-d389-3194-a051-092ee9b2c474.xml')
                       ->andReturn(new Promise\FulfilledPromise(new Psr7\Response(200, [], $sampleData2)));
 
-        \Storage::fake('local');
         $atomFeed = file_get_contents('tests/SampleData/jmaxml_atomfeed.xml');
 
         $hash = hash_hmac('sha1', $atomFeed, $this->verifyToken);
 
-        $response = $this->call('POST', $endpoint, [], [], [], $this->getHeaders('POST', 'sha1='.$hash), $atomFeed);
+        $response = $this->call('POST', self::$websubEndpoint, [], [], [], $this->getHeaders('POST', 'sha1='.$hash), $atomFeed);
+
+        \Notification::assertSentTo(
+            LinkedSocialAccount::where('provider_name', 'twitter')->whereHas('settings', function ($query) {
+                return $query->where('settings->filters->feedtypes->extra', true);
+            })->first(),
+            EntryReceived::class
+        );
+
+        \Notification::assertSentTo(
+            LinkedSocialAccount::where('provider_name', 'line')->whereHas('settings', function ($query) {
+                return $query->where('settings->filters->feedtypes->isAllow', false)->where('settings->filters->feedtypes->extra', false);
+            })->first(),
+            EntryReceived::class
+        );
+
+        \Notification::assertNotSentTo(
+            LinkedSocialAccount::where('provider_name', 'github')->first(),
+            EntryReceived::class
+        );
+    }
+
+    /**
+     * Receive feed test.
+     * Success pattarn.
+     *
+     * @return void
+     */
+    public function testReceiveFeedSuccess()
+    {
+        \Notification::fake();
+        \Storage::fake('local');
+
+        $sampleData1 = file_get_contents('tests/SampleData/jmaxml_Samples/01_01_01_091210_VGSK50.xml');
+        $sampleData2 = file_get_contents('tests/SampleData/jmaxml_Samples/01_01_02_091210_VGSK50.xml');
+
+        \Guzzle::shouldReceive('getAsync')
+                      ->once()
+                      ->with('http://*/*/8e55b8d8-518b-3dc9-9156-7e87c001d7b5.xml')
+                      ->andReturn(new Promise\FulfilledPromise(new Psr7\Response(200, [], $sampleData1)));
+        \Guzzle::shouldReceive('getAsync')
+                      ->once()
+                      ->with('http://*/*/b60694a6-d389-3194-a051-092ee9b2c474.xml')
+                      ->andReturn(new Promise\FulfilledPromise(new Psr7\Response(200, [], $sampleData2)));
+
+        $atomFeed = file_get_contents('tests/SampleData/jmaxml_atomfeed.xml');
+
+        $hash = hash_hmac('sha1', $atomFeed, $this->verifyToken);
+
+        $response = $this->call('POST', self::$websubEndpoint, [], [], [], $this->getHeaders('POST', 'sha1='.$hash), $atomFeed);
 
         $response->assertSuccessful();
         $this
@@ -121,7 +164,7 @@ class WebSubTest extends TestCase
             ])
             ->assertDatabaseHas('feeds', [
                 'uuid' => 'be4342e2-ff73-363c-a3ed-66e05e977224',
-                'url' => 'http://xml.kishou.go.jp/*/*.xml',
+                'url' => 'http://xml.kishou.go.jp/*/extra.xml',
             ]);
 
         \Storage::disk('local')->assertExists('entry/8e55b8d8-518b-3dc9-9156-7e87c001d7b5');
@@ -210,17 +253,7 @@ class WebSubTest extends TestCase
      */
     public function testSubscribeCheckSuccess()
     {
-        $this->checkSuccess(self::$websubEndpoint);
-    }
-
-    public function testSubscribeCheckOldPathSuccess()
-    {
-        $this->checkSuccess(self::$websubOldEndpoint);
-    }
-
-    private function checkSuccess($endpoint)
-    {
-        $response = $this->call('GET', $endpoint, $this->getParameters('check_success'), [], [], $this->getHeaders());
+        $response = $this->call('GET', self::$websubEndpoint, $this->getParameters('check_success'), [], [], $this->getHeaders());
 
         $response
             ->assertSuccessful()

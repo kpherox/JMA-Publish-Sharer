@@ -134,7 +134,7 @@ class MainController extends Controller
         $feed = $entry->entry->feed;
         $entryArray = collect((new SimpleXML($doc, true))->toArray(true));
 
-        $kindViewName = config('jmaxml.kinds.'.$entryArray['Control']['Title'].'.view');
+        $kindViewName = config('jmaxml.kinds.'.data_get($entryArray, 'Control.Title').'.view');
         $viewName = \View::exists($kindViewName) ? $kindViewName : 'entry';
 
         return view($viewName, [
