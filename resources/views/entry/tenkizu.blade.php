@@ -90,7 +90,7 @@ var map
                         break;
                 }
             }
-          , infos = @json ($entry['Body']['MeteorologicalInfos']);
+          , infos = @json (data_get($entry, 'Body.MeteorologicalInfos'));
 
         if (infos[0]) {
             infos.forEach(infoItemForEach);

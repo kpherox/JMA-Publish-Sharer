@@ -39,6 +39,21 @@ return [
             'prefix' => env('DB_PREFIX', ''),
         ],
 
+        'mariadb' => [
+            'driver' => 'mariadb',
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'homestead'),
+            'username' => env('DB_USERNAME', 'homestead'),
+            'password' => env('DB_PASSWORD', 'secret'),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => env('DB_PREFIX', ''),
+            'strict' => false,
+            'engine' => null,
+        ],
+
         'mysql' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
@@ -79,7 +94,7 @@ return [
         ],
 
         'testing' => [
-            'driver' => 'mysql',
+            'driver' => 'mariadb',
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_TEST_DATABASE', 'homestead_test'),

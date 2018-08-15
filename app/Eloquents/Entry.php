@@ -2,6 +2,7 @@
 
 namespace App\Eloquents;
 
+use App\Events\EntrySaved;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -10,6 +11,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Entry extends Model
 {
+    /**
+     * Event map.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'updated' => EntrySaved::class,
+    ];
+
     /**
      * The attributes that are mass assignable.
      *

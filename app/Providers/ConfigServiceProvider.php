@@ -7,15 +7,16 @@ use Illuminate\Support\ServiceProvider;
 class ConfigServiceProvider extends ServiceProvider
 {
     /**
-     * Register the application services.
+     * Bootstrap services.
      *
      * @return void
      */
-    public function register()
+    public function boot()
     {
-        config([
-            'services.twitter.redirect' => url('twitter/callback'),
-            'services.github.redirect' => url('github/callback'),
-        ]);
+        collect(config('services'))->keys()->each(function ($provider) {
+            if (config('services.'.$provider.'.socialite', false)) {
+                config(['services.'.$provider.'.redirect' => url($provider.'/callback')]);
+            }
+        });
     }
 }

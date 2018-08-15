@@ -27,10 +27,8 @@ class WebSubController extends Controller
 
     /**
      * Recive JMA Publish.
-     *
-     * @return void
      */
-    public function receiveFeed()
+    public function receiveFeed() : Response
     {
         // Xml parse
         $content = request()->getContent();
@@ -53,5 +51,7 @@ class WebSubController extends Controller
         \Log::debug('Success feed parse');
 
         WebSubHandler::saveFeedAndEntries($feed);
+
+        return response(201);
     }
 }

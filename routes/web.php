@@ -26,19 +26,23 @@ Route::prefix('entry')->group(function () {
 Auth::routes();
 
 Route::namespace('Auth')->group(function () {
-    Route::prefix('github')->name('github.')->group(function () {
-        Route::get('callback', 'GitHubAccountController@handleProviderCallback')->name('callback');
-        Route::get('login', 'GitHubAccountController@redirectToProvider')->name('login')->middleware('guest');
-        Route::get('linktouser', 'GitHubAccountController@linkToUser')->name('linktouser')->middleware('auth');
-        Route::delete('unlink', 'GitHubAccountController@unlinkFromUser')->name('unlink')->middleware('auth');
-    });
+    $socialite = [
+        'github' => 'GitHubAccountController',
+        'twitter' => 'TwitterAccountController',
+        'line' => 'LineAccountController',
+    ];
 
-    Route::prefix('twitter')->name('twitter.')->group(function () {
-        Route::get('callback', 'TwitterAccountController@handleProviderCallback')->name('callback');
-        Route::get('login', 'TwitterAccountController@redirectToProvider')->name('login')->middleware('guest');
-        Route::get('linktouser', 'TwitterAccountController@linkToUser')->name('linktouser')->middleware('auth');
-        Route::delete('unlink', 'TwitterAccountController@unlinkFromUser')->name('unlink')->middleware('auth');
-    });
+    foreach ($socialite as $provider => $controller) {
+        Route::prefix($provider)->name($provider.'.')->group(function () use ($controller) {
+            Route::get('callback', $controller.'@handleProviderCallback')->name('callback');
+            Route::get('login', $controller.'@redirectToProvider')->name('login')->middleware('guest');
+            Route::get('linktouser', $controller.'@linkToUser')->name('linkToUser')->middleware('auth');
+            Route::get('settings', $controller.'@settings')->name('settings')->middleware('auth');
+            Route::post('notify', $controller.'@testNotify')->name('notify')->middleware('auth');
+            Route::post('settings', $controller.'@updateSettings')->name('updateSettings')->middleware('auth');
+            Route::delete('unlink', $controller.'@unlinkFromUser')->name('unlink')->middleware('auth');
+        });
+    }
 });
 
 Route::prefix('home')->name('home.')->group(function () {

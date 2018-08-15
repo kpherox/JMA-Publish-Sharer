@@ -6,7 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use App\Services\SocialAccountsService;
 
-class TwitterAccountController extends SocialAccountController
+class LineAccountController extends SocialAccountController
 {
     private $forceLogin = false;
 
@@ -20,27 +20,16 @@ class TwitterAccountController extends SocialAccountController
         if (method_exists('Base', '__construct')) {
             parent::__construct();
         }
-        $this->setProvider('twitter');
+        $this->setProvider('line');
     }
 
     /**
-     * Redirect the user to the Twitter authentication page.
+     * Redirect the user to the LINE authentication page.
      */
     public function redirectToProvider() : RedirectResponse
     {
         return \Socialite::driver($this->getProvider())
-                    ->with(['force_login' => $this->forceLogin])
                     ->redirect();
-    }
-
-    /**
-     * Link Twitter account to User.
-     */
-    public function linkToUser() : RedirectResponse
-    {
-        $this->forceLogin = true;
-
-        return parent::linkToUser();
     }
 
     public function testNotify(SocialAccountsService $accountService)
@@ -50,6 +39,7 @@ class TwitterAccountController extends SocialAccountController
         try {
             $message = $accountService->testNotify($this->getProvider(), request('id'), request('message'));
         } catch (\Exception $e) {
+            report($e);
             if ($isAjax) {
                 return new JsonResponse([
                     'status' => 'Can\'t notify',

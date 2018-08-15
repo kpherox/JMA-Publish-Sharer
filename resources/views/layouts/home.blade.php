@@ -7,7 +7,7 @@
             <nav class="sidebar-links py-2">
                 <div class="list-group list-group-flush">
                     @foreach ($menus as $routeName => $menu)
-                    <a class="list-group-item {{ $menu['isCurrent'] ? 'text-body disabled' : 'list-group-item-action list-group-item-dark text-dark' }}{{ $routeName === 'index' ? ' d-md-none d-landscape-none' : '' }}" href="{{ route($routeName) }}">
+                    <a class="list-group-item {{ data_get($menu, 'isCurrent', false) ? 'text-body disabled' : 'list-group-item-action list-group-item-dark text-dark' }}{{ $routeName === 'topPage' ? ' d-md-none d-landscape-none' : '' }}" href="{{ $routeName === 'topPage' ? route('index') : route('home.'.$routeName) }}">
                         {{ $menu['name'] }}
                     </a>
                     @endforeach
