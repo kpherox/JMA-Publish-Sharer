@@ -28,9 +28,20 @@ class Feed extends Model
 
     protected $appends = ['type', 'transed_type'];
 
+    /**
+     * Primary key column.
+     */
     protected $primaryKey = 'uuid';
 
+    /**
+     * Primary key type.
+     */
     protected $keyType = 'string';
+
+    /**
+     * Enable increment.
+     */
+    public $incrementing = false;
 
     /**
      * Relation: has many entries.
