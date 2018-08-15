@@ -86,6 +86,7 @@ class HomeController extends Controller
         $notificationFilters = collect([
             'feedtypes' => [
                 'name' => trans('feedtypes.name'),
+                'isAllow' => false,
                 'items' => $feedtypeFilter->all(),
             ],
         ]);

@@ -34,10 +34,11 @@ class AccountSeeder extends Seeder
 
             $setting = factory(Eloquents\AccountSetting::class)
                 ->make(['type' => 'notification', 'settings' => [
-                    'isAllow' => $account->provider_name === 'twitter' ? true : false,
+                    'isAllow' => true,
                     'filters' => [
                         'feedtypes' => [
-                            'extra' => true,
+                            'isAllow' => $isAllow,
+                            'extra' => $isAllow,
                         ],
                     ],
                 ]]);

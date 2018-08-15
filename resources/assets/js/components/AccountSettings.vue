@@ -85,6 +85,14 @@
                             </span>
                         </a>
                         <div :id="filterType" class="list-group list-group-flush collapse">
+                            <div class="list-group-item">
+                                <label class="m-0 d-flex">
+                                    <input class="align-self-center mr-2" v-model="filter.isAllow" type="checkbox" @click.prevent="allowFilter(filterType)">
+                                    <p class="mb-0 w-100">
+                                        Allow Filter of {{filter.name}}
+                                    </p>
+                                </label>
+                            </div>
                             <div v-for="(item, itemType) in filter.items"
                                  class="list-group-item">
                                 <label class="m-0 d-flex">
@@ -240,6 +248,18 @@
                 this.showModal('#alertModal')
                 return [resData, isSuccess]
             },
+            allowFilter(filterType) {
+                let formData = this.params
+                formData.type = 'notification'
+                formData.key = 'filters->'+filterType+'->isAllow'
+                formData.value = !this.notification.filters[filterType].isAllow
+
+                axios.post(this.endpoints[this.account.provider_name].settings, formData)
+                    .then((res) => {
+                        let resData = res.data
+                        this.notification.filters[filterType].isAllow = resData.settings.filters[filterType].isAllow
+                    })
+            },
             changeFilter(filterType, itemType) {
                 let formData = this.params
                 formData.type = 'notification'
@@ -249,7 +269,7 @@
                 axios.post(this.endpoints[this.account.provider_name].settings, formData)
                     .then((res) => {
                         let resData = res.data
-                        this.notification.filters[filterType].items[itemType].isAllow = resData.settings.filters[filterType][itemType] || false
+                        this.notification.filters[filterType].items[itemType].isAllow = resData.settings.filters[filterType][itemType]
                     })
             },
             allowNotification() {
@@ -261,7 +281,7 @@
                 axios.post(this.endpoints[this.account.provider_name].settings, formData)
                     .then((res) => {
                         let resData = res.data
-                        this.notification.isAllow = resData.settings.isAllow || false
+                        this.notification.isAllow = resData.settings.isAllow
                     })
             },
             testNotify() {
@@ -313,12 +333,12 @@
             axios.get(this.endpoints[this.account.provider_name].settings, { params: formData })
                 .then((res) => {
                     let resData = res.data
-                    this.notification.isAllow = resData.settings.notification.isAllow || false
+                    this.notification.isAllow = resData.settings.notification.isAllow
 
-                    this.notification.filters
                     Object.keys(this.notification.filters).forEach((filterType) => {
+                        this.notification.filters[filterType].isAllow = resData.settings.notification.filters[filterType].isAllow
                         for (let itemType of Object.keys(this.notification.filters[filterType].items)) {
-                            this.notification.filters[filterType].items[itemType].isAllow = resData.settings.notification.filters[filterType][itemType] || false
+                            this.notification.filters[filterType].items[itemType].isAllow = resData.settings.notification.filters[filterType][itemType]
                         }
                     });
                 })
