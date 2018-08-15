@@ -135,7 +135,7 @@ class WebSubHandler
             $entryArray = $parseedEntry['entry'];
             $entry = Entry::firstOrCreate($parseedEntry['entry']);
 
-            $entryDetail = EntryDetail::create($parseedEntry['entryDetail']);
+            $entryDetail = EntryDetail::firstOrCreate($parseedEntry['entryDetail']);
             $entry->entryDetails()->save($entryDetail);
 
             return collect([
