@@ -2,12 +2,18 @@
 Changelog.
 
 ## [Unreleased]
+### Added
+- Added notification to social account.
+- Supported LINE Login.
+- Added MariaDB driver for json column.
+
 ### Changed
 - Modifiable database prefix.
 - Supported multiline headline.
 
 ### Fixed
-- Fixed issue that full text of headline can't be saved
+- Fixed full text of headline can't be saved.
+- Fixed don't save feed_uuid when new feed recoed.
 
 ## [Version 0.4.4 (Pre-Release, hotfix)][0.4.4] - 2018-07-08
 ### Fixed
