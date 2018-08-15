@@ -57,14 +57,15 @@ class HomeController extends Controller
             return $provider['name'];
         });
 
-        $socialAccounts = $providers->map(function($item, $key) use ($providers) {
+        $socialAccounts = $providers->map(function ($item, $key) use ($providers) {
             return auth()->user()->accounts()->select('provider_name', 'provider_id', 'name', 'nickname', 'avatar')->where('provider_name', $key)->get()->map(function ($account) use ($providers) {
                 $account->can_notify = data_get($providers, $account->provider_name.'.notification', false);
+
                 return $account;
             });
         });
 
-        $endpoints = $providers->map(function($item, $key) {
+        $endpoints = $providers->map(function ($item, $key) {
             return collect([
                 'settings' => route($key.'.settings'),
                 'unlink' => route($key.'.unlink'),

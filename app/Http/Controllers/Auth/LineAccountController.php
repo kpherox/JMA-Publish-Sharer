@@ -17,7 +17,9 @@ class LineAccountController extends SocialAccountController
      */
     public function __construct()
     {
-        if (method_exists('Base', '__construct')) parent::__construct();
+        if (method_exists('Base', '__construct')) {
+            parent::__construct();
+        }
         $this->setProvider('line');
     }
 

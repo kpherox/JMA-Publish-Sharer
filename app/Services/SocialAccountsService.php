@@ -3,10 +3,9 @@
 namespace App\Services;
 
 use App\Eloquents\User;
-use App\Eloquents\AccountSetting;
-use App\Eloquents\LinkedSocialAccount;
 use App\Notifications\TestNotify;
 use Illuminate\Support\Collection;
+use App\Eloquents\LinkedSocialAccount;
 use Laravel\Socialite\Contracts\User as ProviderUser;
 
 class SocialAccountsService
@@ -100,13 +99,14 @@ class SocialAccountsService
         $settings = $accounts->first()->settings()->whereType($settingType);
         $setting = $settings->firstOrCreate(['type' => $settingType]);
         $setting->forceFill([
-            'settings->'.$settingKey => $settingValue
+            'settings->'.$settingKey => $settingValue,
         ])->save();
 
         $settings->save($setting);
 
         return $setting->settings;
     }
+
     /**
      * @param  string $provider
      * @param  $providerId

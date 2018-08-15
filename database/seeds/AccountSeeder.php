@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Eloquents;
+use Illuminate\Database\Seeder;
 
 class AccountSeeder extends Seeder
 {
@@ -37,8 +37,8 @@ class AccountSeeder extends Seeder
                     'isAllow' => $account->provider_name === 'twitter' ? true : false,
                     'filters' => [
                         'feedtypes' => [
-                            'extra' => true
-                        ]
+                            'extra' => true,
+                        ],
                     ],
                 ]]);
             $account->settings()->save($setting);

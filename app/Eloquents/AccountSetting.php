@@ -2,9 +2,9 @@
 
 namespace App\Eloquents;
 
+use App\Traits\PrimaryUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Traits\PrimaryUuid;
 
 class AccountSetting extends Model
 {
