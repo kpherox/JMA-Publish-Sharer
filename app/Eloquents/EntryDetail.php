@@ -52,15 +52,6 @@ class EntryDetail extends Model
         return \Storage::exists($this->xmlFilename().'.gz');
     }
 
-    public function getGzippedXmlFileAttribute() : string
-    {
-        if ($this->isGzippedXmlFile()) {
-            return \Storage::get($this->xmlFilename().'.gz');
-        }
-
-        return '';
-    }
-
     public function getXmlFileAttribute() : string
     {
         if ($this->isGzippedXmlFile()) {
@@ -82,5 +73,29 @@ class EntryDetail extends Model
         } else {
             \Storage::put($this->xmlFilename(), $xmlDoc);
         }
+    }
+
+    public function getGzippedXmlFileAttribute() : string
+    {
+        if ($this->isGzippedXmlFile()) {
+            return \Storage::get($this->xmlFilename().'.gz');
+        }
+
+        return '';
+    }
+
+    public function getEntryPageUrlAttribute() : string
+    {
+        return route('entry', ['entry' => $this->uuid]);
+    }
+
+    public function getXmlFileUrlAttribute() : string
+    {
+        return route('entry.xml', ['entry' => $this->uuid]);
+    }
+
+    public function getJsonFileUrlAttribute() : string
+    {
+        return route('entry.json', ['entry' => $this->uuid]);
     }
 }

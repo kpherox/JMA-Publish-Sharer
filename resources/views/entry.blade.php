@@ -12,8 +12,8 @@
             <div class="card">
                 <h5 class="card-header bg-transparent d-flex">
                     <a class="mr-auto text-truncate text-body" href="{{ route('index', ['kind' => data_get($entry, 'Control.Title')]) }}">{{ data_get($entry, 'Control.Title') }}</a>
-                    <a class="card-link text-nowrap" href="{{ route('entry.xml', ['uuid' => $entryUuid]) }}">Xml file</a>
-                    <a class="card-link text-nowrap" href="{{ route('entry.json', ['uuid' => $entryUuid]) }}">Json file</a>
+                    <a class="card-link text-nowrap" href="{{ $xmlUrl }}">Xml file</a>
+                    <a class="card-link text-nowrap" href="{{ $jsonUrl }}">Json file</a>
                 </h5>
 
                 <div class="card-body">

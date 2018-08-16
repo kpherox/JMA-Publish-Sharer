@@ -139,7 +139,8 @@ class MainController extends Controller
 
         return view($viewName, [
                     'entry' => $entryArray,
-                    'entryUuid' => $entry->uuid,
+                    'xmlUrl' => $entry->xml_file_url,
+                    'jsonUrl' => $entry->json_file_url,
                     'feed' => $feed,
                 ]);
     }

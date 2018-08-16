@@ -82,8 +82,8 @@
 
                 <div class="card-footer bg-transparent d-flex border-light">
                     <span class="mr-auto"></span>
-                    @if ($entry->entryDetails->count() === 1)
-                    <a class="card-link text-nowrap" href="{{ route('entry', ['entry' => $entry->entryDetails->first()->uuid]) }}">More detail</a>
+                    @if ($entry->entryDetails()->count() === 1)
+                    <a class="card-link text-nowrap" href="{{ $entry->entryDetails()->first()->entry_page_url }}">More detail</a>
                     @else
                     <div class="dropdown">
                         <a class="card-link text-nowrap dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
@@ -91,7 +91,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             @foreach ($entry->entryDetails->sortByKind() as $detail)
-                            <a class="dropdown-item" href="{{ route('entry', ['entry' => $detail->uuid]) }}">
+                            <a class="dropdown-item" href="{{ $detail->entry_page_url }}">
                                 {{ $detail->kind_of_info }}
                             </a>
                             @endforeach
