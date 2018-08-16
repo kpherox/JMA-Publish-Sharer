@@ -130,7 +130,7 @@ class MainController extends Controller
      */
     public function entry(EntryDetail $entry) : View
     {
-        $doc = $entry->gunzipped_xml_file;
+        $doc = $entry->xml_file;
         $feed = $entry->entry->feed;
         $entryArray = collect((new SimpleXML($doc, true))->toArray(true));
 
@@ -152,12 +152,9 @@ class MainController extends Controller
     public function entryXml(EntryDetail $entry) : Response
     {
         $headers = ['Content-Type' => 'application/xml'];
-        if (! collect(request()->header('Accept-Encoding'))->contains('gzip')) {
-            return response($entry->gunzipped_xml_file, 200, $headers);
-        }
-
-        if ($entry->is_gzipped_xml_file) {
+        if (collect(request()->header('Accept-Encoding'))->contains('gzip') && $entry->isGzippedXmlFile()) {
             $header['Content-Encoding'] = 'gzip';
+            return response($entry->gzipped_xml_file, 200, $headers);
         }
 
         return response($entry->xml_file, 200, $headers);
@@ -170,7 +167,7 @@ class MainController extends Controller
      */
     public function entryJson(EntryDetail $entry) : JsonResponse
     {
-        $doc = $entry->gunzipped_xml_file;
+        $doc = $entry->xml_file;
 
         return response()->json((new SimpleXML($doc, true))->toArray(true),
                                 200, [], JSON_UNESCAPED_UNICODE);
