@@ -32,7 +32,6 @@ class EntryReceived extends Notification implements ShouldQueue
      * Get the notification's delivery channels.
      *
      * @param  mixed  $notifiable
-     * @return array
      */
     public function via($notifiable) : array
     {
@@ -57,13 +56,27 @@ class EntryReceived extends Notification implements ShouldQueue
     }
 
     /**
+     * Get the notification's message.
+     */
+    private function message() : string
+    {
+        $messages = collect([
+            $this->entry->parsed_headline['title'],
+            $this->entry->parsed_headline['headline'],
+            $this->entry->entryDetails()->first()->entry_page_url,
+        ]);
+
+        return $messages->implode(PHP_EOL);
+    }
+
+    /**
      * Get the twitter status of the notification.
      *
      * @param  mixed  $notifiable
      */
     public function toTwitter($notifiable) : TwitterStatusUpdate
     {
-        return new TwitterStatusUpdate($this->entry->parsed_headline['original']);
+        return new TwitterStatusUpdate($this->message());
     }
 
     /**
@@ -73,6 +86,6 @@ class EntryReceived extends Notification implements ShouldQueue
      */
     public function toLine($notifiable)
     {
-        return new LineMessage($this->entry->parsed_headline['original']);
+        return new LineMessage($this->message());
     }
 }
