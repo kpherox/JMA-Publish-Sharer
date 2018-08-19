@@ -10,6 +10,7 @@ use Illuminate\Http\Response;
 use App\Eloquents\EntryDetail;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
+use Illuminate\Filesystem\FileNotFoundException;
 
 class MainController extends Controller
 {
@@ -130,9 +131,14 @@ class MainController extends Controller
      */
     public function entry(EntryDetail $entry) : View
     {
-        $doc = $entry->xml_file;
         $feed = $entry->entry->feed;
-        $entryArray = collect((new SimpleXML($doc, true))->toArray(true));
+        try {
+            $entryArray = collect((new SimpleXML($entry->xml_file, true))->toArray(true));
+        } catch (FileNotFoundException $e) {
+            $entryArray = [];
+        } catch (\Exception $e) {
+            abort(403, $e);
+        }
 
         $kindViewName = config('jmaxml.kinds.'.data_get($entryArray, 'Control.Title').'.view');
         $viewName = \View::exists($kindViewName) ? $kindViewName : 'entry';
@@ -152,8 +158,12 @@ class MainController extends Controller
      */
     public function entryXml(EntryDetail $entry) : Response
     {
+        if (! $entry->existsXmlFile()) {
+            abort(404);
+        }
+
         $headers = ['Content-Type' => 'application/xml'];
-        if (collect(request()->header('Accept-Encoding'))->contains('gzip') && $entry->isGzippedXmlFile()) {
+        if (collect(request()->header('Accept-Encoding'))->contains('gzip') && $entry->existsGzippedXmlFile()) {
             $header['Content-Encoding'] = 'gzip';
             return response($entry->gzipped_xml_file, 200, $headers);
         }
@@ -168,9 +178,16 @@ class MainController extends Controller
      */
     public function entryJson(EntryDetail $entry) : JsonResponse
     {
-        $doc = $entry->xml_file;
+        if (! $entry->existsXmlFile()) {
+            abort(404);
+        }
 
-        return response()->json((new SimpleXML($doc, true))->toArray(true),
-                                200, [], JSON_UNESCAPED_UNICODE);
+        try {
+            $entryArray = collect((new SimpleXML($entry->xml_file, true))->toArray(true));
+        } catch (\Exception $e) {
+            abort(403, $e);
+        }
+
+        return response()->json($entryArray, 200, [], JSON_UNESCAPED_UNICODE);
     }
 }

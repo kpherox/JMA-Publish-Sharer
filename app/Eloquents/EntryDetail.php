@@ -4,6 +4,7 @@ namespace App\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Filesystem\FileNotFoundException;
 
 class EntryDetail extends Model
 {
@@ -47,22 +48,27 @@ class EntryDetail extends Model
         return 'entry/'.$this->uuid;
     }
 
-    public function isGzippedXmlFile() : bool
+    public function existsXmlFile() : bool
+    {
+        return \Storage::exists($this->xmlFilename()) || $this->existsGzippedXmlFile();
+    }
+
+    public function existsGzippedXmlFile() : bool
     {
         return \Storage::exists($this->xmlFilename().'.gz');
     }
 
     public function getXmlFileAttribute() : string
     {
-        if ($this->isGzippedXmlFile()) {
+        if (! $this->existsXmlFile()) {
+            throw new FileNotFoundException('Not Found XML File.');
+        }
+
+        if ($this->existsGzippedXmlFile()) {
             return gzdecode($this->gzipped_xml_file);
         }
 
-        if (\Storage::exists($this->xmlFilename())) {
-            return \Storage::get($this->xmlFilename());
-        }
-
-        return '';
+        return \Storage::get($this->xmlFilename());
     }
 
     public function setXmlFileAttribute(string $xmlDoc)
@@ -77,11 +83,11 @@ class EntryDetail extends Model
 
     public function getGzippedXmlFileAttribute() : string
     {
-        if ($this->isGzippedXmlFile()) {
-            return \Storage::get($this->xmlFilename().'.gz');
+        if (! $this->existsGzippedXmlFile()) {
+            throw new FileNotFoundException('Not Found Gzipped XML File.');
         }
 
-        return '';
+        return \Storage::get($this->xmlFilename().'.gz');
     }
 
     public function getEntryPageUrlAttribute() : string

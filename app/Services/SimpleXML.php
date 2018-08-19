@@ -42,20 +42,11 @@ class SimpleXML
      */
     public function toSimpleXMLElement(bool $isExpandAttributes = false) : \SimpleXMLElement
     {
-        $xml = $this->isNamespaced ? $this->removeNamespace($this->rawXml) : $this->rawXml;
-
-        libxml_use_internal_errors(true);
-        $simpleXml = simplexml_load_string($xml);
-
-        if (! $simpleXml) {
-            $message = 'XML Parse error';
-
-            foreach (libxml_get_errors() as $error) {
-                $message .= "\n".trim($error->message);
-            }
-            libxml_clear_errors();
-
-            throw new \Exception($message);
+        try {
+            $xml = $this->isNamespaced ? $this->removeNamespace($this->rawXml) : $this->rawXml;
+            $simpleXml = $this->simpleXmlElement($xml);
+        } catch (\Exception $e) {
+            throw $e;
         }
 
         if ($isExpandAttributes) {
@@ -101,6 +92,27 @@ class SimpleXML
         }
     }
 
+    private function simpleXmlElement(string $xml) : \SimpleXMLElement
+    {
+        libxml_use_internal_errors(true);
+        $simpleXml = simplexml_load_string($xml);
+
+        if (! $simpleXml) {
+            $message = 'XML Parse error';
+
+            foreach (libxml_get_errors() as $error) {
+                $message .= "\n".trim($error->message);
+            }
+            libxml_clear_errors();
+
+            throw new \Exception($message);
+        }
+
+        libxml_use_internal_errors(false);
+
+        return $simpleXml;
+    }
+
     /**
      * Remove namespace from xml.
      *
@@ -110,7 +122,11 @@ class SimpleXML
      */
     private function removeNamespace(string $xml) : string
     {
-        $namespaces = collect(simplexml_load_string($xml)->getNamespaces(true))->keys();
+        try {
+            $namespaces = collect($this->simpleXmlElement($xml)->getNamespaces(true))->keys();
+        } catch (\Exception $e) {
+            throw $e;
+        }
         $nameSpaceDefRegEx = '(\S+)=["\']?((?:.(?!["\']?\s+(?:\S+)=|[>"\']))+.)["\']?';
 
         $namespaces->each(function ($namespace) use (&$xml, $nameSpaceDefRegEx) {
