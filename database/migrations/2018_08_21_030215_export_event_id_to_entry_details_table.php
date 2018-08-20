@@ -59,6 +59,6 @@ class ExportEventIdToEntryDetailsTable extends Migration
      */
     public function down()
     {
-        EntryDetail::update(['event_id' => null]);
+        \DB::table('entry_details')->update(['event_id' => null]);
     }
 }

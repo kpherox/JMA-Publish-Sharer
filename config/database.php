@@ -94,7 +94,7 @@ return [
         ],
 
         'testing' => [
-            'driver' => 'mariadb',
+            'driver' => env('DB_TEST_DRIVER', 'mysql'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_TEST_DATABASE', 'homestead_test'),
