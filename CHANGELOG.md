@@ -33,7 +33,7 @@ Changelog.
 - Fixed full text of headline can't be saved.
 - Fixed don't save feed_uuid when new feed recoed.
 
-
+  
 ## [Version 0.4.4 (Pre-Release, hotfix)][0.4.4] - 2018-07-08
 ### Fixed
 - Fixed incorrect variable name.
@@ -85,6 +85,9 @@ Changelog.
 - Optimized entries table. [#1]
 
 
+<details>
+ <summary>Version 0.3.x or earlier</summary>
+
 ## [Version 0.3 (Pre-Release)][0.3] - 2018-06-03
 ### Added
 - Supported Social login.
@@ -126,6 +129,7 @@ Changelog.
 - Subscribe check.
 - Save received feed.
 
+</details>
 
 [Unreleased]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.5.1...develop
 [0.5.1]: https://github.com/kPherox/JMA-Publish-Sharer/compare/v0.5...v0.5.1
