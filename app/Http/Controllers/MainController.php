@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 use App\Eloquents\EntryDetail;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
-use Illuminate\Filesystem\FileNotFoundException;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class MainController extends Controller
 {

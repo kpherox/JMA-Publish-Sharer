@@ -2,6 +2,7 @@
 
 use App\Eloquents\Entry;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class XmlDocumentExportAsFileEntryTable extends Migration
 {
@@ -60,8 +61,13 @@ class XmlDocumentExportAsFileEntryTable extends Migration
             $entries = Entry::whereRaw('id BETWEEN '.($i + 1).' AND '.($i + 1000))->get();
             echo 'selected from '.($i + 1).' '.$entries->count().' entries'.PHP_EOL;
             foreach ($entries as $entry) {
-                $entry->xml_document = $entry->xml_file;
-                $entry->save();
+                try {
+                    $entry->xml_document = $entry->xml_file;
+                    $entry->save();
+                } catch (FileNotFoundException $e) {
+                    report($e);
+                }
+
                 $processed_count++;
                 if ($processed_count % 100 == 0) {
                     echo $processed_count.' entries processed. all:'.$all_count.PHP_EOL;
