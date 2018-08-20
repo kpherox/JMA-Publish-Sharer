@@ -159,10 +159,26 @@ class WebSubHandler
         })->all());
 
         $results->each(function ($result, $key) use ($promises) {
-            if ($result->getReasonPhrase() === 'OK') {
-                $xmlDoc = $result->getBody()->getContents();
-                $detail = $promises[$key]['detail'];
-                $detail->xml_file = $xmlDoc;
+            if ($result->getReasonPhrase() !== 'OK') {
+                return;
+            }
+
+            $xmlDoc = $result->getBody()->getContents();
+            $detail = $promises[$key]['detail'];
+            $detail->xml_file = $xmlDoc;
+
+            try {
+                $entryArray = collect((new SimpleXML($xmlDoc, true))->toArray(true));
+                $eventId = data_get($entryArray, 'Head.EventID');
+            } catch (\Exception $e) {
+                \Log::info('Error caught uuid: '.$detail->uuid);
+                report($e);
+                $eventId = null;
+            }
+
+            if ($eventId) {
+                $detail->event_id = $eventId;
+                $detail->save();
             }
         });
     }
