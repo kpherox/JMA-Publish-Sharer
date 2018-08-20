@@ -135,7 +135,7 @@ class MainController extends Controller
         try {
             $entryArray = collect((new SimpleXML($entry->xml_file, true))->toArray(true));
         } catch (FileNotFoundException $e) {
-            $entryArray = [];
+            abort(404, $e);
         } catch (\Exception $e) {
             abort(403, $e);
         }
