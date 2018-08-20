@@ -2,6 +2,16 @@
 Changelog.
 
 ## [Unreleased]
+### Added
+- Added saving event id.
+
+### Changed
+- Notification message include entry page link.
+- Added entry page url attributes to EntryDetail.
+
+### Fixed
+- Error handling of remove namespace from xml string.
+- Changed entry page to aborted 404 when xml file doesn't found.
 
 
 ## [Version 0.5.1 (Pre-Release, hotfix)][0.5.1] - 2018-08-15
