@@ -88,7 +88,7 @@ class WebSubTest extends TestCase
         \Storage::fake('local');
 
         $sampleData1 = file_get_contents('tests/SampleData/jmaxml_Samples/01_01_01_091210_VGSK50.xml');
-        $sampleData2 = file_get_contents('tests/SampleData/jmaxml_Samples/01_01_02_091210_VGSK50.xml');
+        $sampleData2 = file_get_contents('tests/SampleData/jmaxml_Samples/02_01_01_091210_VGSK55.xml');
 
         \Guzzle::shouldReceive('getAsync')
                       ->once()
@@ -137,7 +137,7 @@ class WebSubTest extends TestCase
         \Storage::fake('local');
 
         $sampleData1 = file_get_contents('tests/SampleData/jmaxml_Samples/01_01_01_091210_VGSK50.xml');
-        $sampleData2 = file_get_contents('tests/SampleData/jmaxml_Samples/01_01_02_091210_VGSK50.xml');
+        $sampleData2 = file_get_contents('tests/SampleData/jmaxml_Samples/02_01_01_091210_VGSK55.xml');
 
         \Guzzle::shouldReceive('getAsync')
                       ->once()
@@ -161,6 +161,7 @@ class WebSubTest extends TestCase
             ])
             ->assertDatabaseHas('entry_details', [
                 'uuid' => 'b60694a6-d389-3194-a051-092ee9b2c474',
+                'event_id' => '20080311131200_18',
             ])
             ->assertDatabaseHas('feeds', [
                 'uuid' => 'be4342e2-ff73-363c-a3ed-66e05e977224',
