@@ -30,6 +30,24 @@ class MainController extends Controller
     }
 
     /**
+     * Event index page.
+     *
+     * @param  string $eventId
+     */
+    public function event(string $eventId) : View
+    {
+        $entries = Entry::whereHas('entryDetails', function ($query) use ($eventId) {
+            return $query->whereEventId($eventId);
+        })->paginate(15);
+
+        return view('event', [
+            'entries' => $entries,
+            'eventId' => $eventId,
+            'routeUrl' => route('event', ['id' => $eventId]),
+        ]);
+    }
+
+    /**
      * Observatory page.
      *
      * @param  string $observatoryName
@@ -165,6 +183,7 @@ class MainController extends Controller
         $headers = ['Content-Type' => 'application/xml'];
         if (collect(request()->header('Accept-Encoding'))->contains('gzip') && $entry->existsGzippedXmlFile()) {
             $header['Content-Encoding'] = 'gzip';
+
             return response($entry->gzipped_xml_file, 200, $headers);
         }
 

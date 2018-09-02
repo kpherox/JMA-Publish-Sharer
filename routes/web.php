@@ -13,14 +13,16 @@
 
 Route::get('/', 'MainController@index')->name('index');
 
+Route::get('event/{id}', 'MainController@event')->name('event');
+
 Route::prefix('observatory')->group(function () {
     Route::get('{observatory}', 'MainController@observatory')->name('observatory');
 });
 
-Route::prefix('entry')->group(function () {
-    Route::get('{entry}.xml', 'MainController@entryXml')->name('entry.xml');
-    Route::get('{entry}.json', 'MainController@entryJson')->name('entry.json');
-    Route::get('{entry}', 'MainController@entry')->name('entry');
+Route::prefix('entry')->name('entry')->group(function () {
+    Route::get('{entry}.xml', 'MainController@entryXml')->name('.xml');
+    Route::get('{entry}.json', 'MainController@entryJson')->name('.json');
+    Route::get('{entry}', 'MainController@entry');
 });
 
 Auth::routes();
