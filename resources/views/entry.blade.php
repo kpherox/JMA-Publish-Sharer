@@ -27,6 +27,9 @@
                             <a href="{{ route('observatory', ['observatory' => $observatoryName]) }}">{{ $observatoryName }}</a>
                         @endforeach
                     </h6>
+                    @if (data_get($entry, 'Head.EventID'))
+                    <h6 class="card-subtitle mb-2 text-muted">Event ID: <a href="{{ route('event', ['id' => data_get($entry, 'Head.EventID')]) }}">{{ data_get($entry, 'Head.EventID') }}</a></h6>
+                    @endif
 
                     @if (data_get($entry, 'Head.Headline.Text', null))
                     <p class="card-text px-1">{{ data_get($entry, 'Head.Headline.Text') }}</p>

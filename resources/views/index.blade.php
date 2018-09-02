@@ -60,7 +60,6 @@
 
                 <div class="card-body">
                     <h5 class="card-title">{{ $entry->parsed_headline['title'] }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">
                     <h6 class="card-subtitle mb-2 text-muted">@lang('feedtypes.name'): {{ $entry->feed->transed_type }}</h6>
                     <h6 class="card-subtitle mb-2 text-muted">発信時刻: @datetime($entry->updated)</h6>
                     <h6 class="card-subtitle mb-2 text-muted">
@@ -74,6 +73,9 @@
                                 @endif
                             @endforeach
                     </h6>
+                    @if ($entry->event_id)
+                    <h6 class="card-subtitle mb-2 text-muted">Event ID: <a href="{{ route('event', ['id' => $entry->event_id]) }}">{{ $entry->event_id }}</a></h6>
+                    @endif
 
                     @if ($entry->parsed_headline->has('headline'))
                     <p class="card-text px-1">{{ $entry->parsed_headline['headline'] }}</p>
