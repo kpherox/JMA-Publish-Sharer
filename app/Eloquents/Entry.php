@@ -100,4 +100,12 @@ class Entry extends Model
             return $detail->kind_of_info;
         });
     }
+
+    /**
+     * Mutator: entryDetails event id.
+     */
+    public function getEventIdAttribute() : ?string
+    {
+        return $this->entryDetails()->first()->event_id;
+    }
 }
