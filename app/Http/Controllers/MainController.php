@@ -85,7 +85,7 @@ class MainController extends Controller
      * @param  string? $kind
      * @param  string? $observatoryName
      */
-    private function entries(string $type = null, string $kind = null, string $observatoryName = null) : Collection
+    private function entries(?string $type, ?string $kind, string $observatoryName = null) : Collection
     {
         $typeOrKind = 'Select Type or Kind';
         $selected = '';

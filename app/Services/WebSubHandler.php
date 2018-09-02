@@ -19,7 +19,7 @@ class WebSubHandler
      * @param  string $requestBody
      * @param  string? $hubSignature
      */
-    public static function verifySignature(string $requestBody, string $hubSignature = null) : bool
+    public static function verifySignature(string $requestBody, ?string $hubSignature) : bool
     {
         if (! config('app.isUseWebSubVerifyToken')) {
             return true;
@@ -48,7 +48,7 @@ class WebSubHandler
      * @param  string? $hubMode
      * @param  string? $hubVerifyToken
      */
-    public static function verifyToken(string $hubMode = null, string $hubVerifyToken = null) : bool
+    public static function verifyToken(?string $hubMode, ?string $hubVerifyToken) : bool
     {
         if ($hubMode !== 'subscribe' && $hubMode !== 'unsubscribe') {
             throw new \Exception('Not exist hub.mode');
