@@ -28,7 +28,7 @@
                            :class="{'disabled' : isShowing, 'active': account === selectedAccount && ! isShowing}"
                            :href="'#'+account.provider_name+'-'+(account.nickname || account.name || index)"
                            v-on:click.prevent="showAccountSettings(account, index)">
-                            <img class="rounded-circle social-avatar mr-2" :src="account.avatar" alt="{{ $provider }} @{{ account.name }} Icon" />
+                            <img class="rounded-circle social-avatar mr-2 bg-info" :src="account.avatar" alt="" />
                             <div class="align-self-center">
                                 <p class="mb-0">@{{ account.name }}</p>
                                 <p class="mb-0" :class="account === selectedAccount && ! isShowing ? 'text-light' : 'text-muted'" v-if='account.nickname'>&#64;@{{ account.nickname }}</p>
