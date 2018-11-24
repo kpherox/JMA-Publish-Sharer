@@ -31,8 +31,8 @@ if (! function_exists('parseIppanhoText')) {
             $h4Opening = '<'.$h4.' class="'.($count === 0 ? 'card-title pb-2 mb-2 border-bottom' : 'card-subtitle mt-3').'">';
             $h4Closing = '</'.$h4.'><p class="card-text">';
 
-            $text = preg_replace('/<p class="card-text">'.$heading.'<br\/>/', $h4Opening.'\1'.$h4Closing, $text);
-            $text = preg_replace('/<br\/>'.$heading.'<br\/>/', '</p>'.$h4Opening.'\1'.$h4Closing, $text);
+            $text = preg_replace('/<p class="card-text">(　)?'.$heading.'(　)?<br\/>/', $h4Opening.'\2'.$h4Closing, $text);
+            $text = preg_replace('/<br\/>(　)?'.$heading.'(　)?<br\/>/', '</p>'.$h4Opening.'\2'.$h4Closing, $text);
             $count++;
         });
         $text = preg_replace('/<br\/>(?!　)/', '', $text);
