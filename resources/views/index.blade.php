@@ -78,7 +78,7 @@
                     @endif
 
                     @if ($entry->parsed_headline->has('headline'))
-                    <p class="card-text px-1">{{ $entry->parsed_headline['headline'] }}</p>
+                        @formatToHTML ($entry->parsed_headline['headline'])
                     @endif
                 </div>
 

@@ -32,7 +32,7 @@
                     @endif
 
                     @if (data_get($entry, 'Head.Headline.Text', null))
-                    <p class="card-text px-1">{{ data_get($entry, 'Head.Headline.Text') }}</p>
+                        @formatToHTML (data_get($entry, 'Head.Headline.Text', ''))
                     @endif
                 </div>
             </div>

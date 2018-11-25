@@ -23,8 +23,12 @@ class DirectiveServiceProvider extends ServiceProvider
             ?>";
         });
 
-        \Blade::directive('parseText', function ($text) {
-            return "<?php echo parseIppanhoText(e($text)); ?>";
+        \Blade::directive('formatToHTML', function ($text) {
+            return "<?php echo formatToHTML(e($text)); ?>";
+        });
+
+        \Blade::directive('formatIppanho', function ($text) {
+            return "<?php echo formatIppanhoText(e($text)); ?>";
         });
     }
 }
