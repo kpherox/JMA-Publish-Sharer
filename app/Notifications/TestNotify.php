@@ -2,12 +2,12 @@
 
 namespace App\Notifications;
 
-use Illuminate\Bus\Queueable;
 use App\Eloquents\LinkedSocialAccount;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Line\LineChannel;
 use NotificationChannels\Line\LineMessage;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use NotificationChannels\Twitter\TwitterChannel;
 use NotificationChannels\Twitter\TwitterStatusUpdate;
 

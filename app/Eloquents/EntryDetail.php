@@ -2,9 +2,9 @@
 
 namespace App\Eloquents;
 
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class EntryDetail extends Model
 {

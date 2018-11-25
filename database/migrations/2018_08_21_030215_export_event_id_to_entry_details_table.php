@@ -1,7 +1,7 @@
 <?php
 
-use App\Services\SimpleXML;
 use App\Eloquents\EntryDetail;
+use App\Services\SimpleXML;
 use Illuminate\Database\Migrations\Migration;
 
 class ExportEventIdToEntryDetailsTable extends Migration
