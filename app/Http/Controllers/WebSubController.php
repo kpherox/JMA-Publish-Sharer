@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Services\SimpleXML;
-use Illuminate\Http\Response;
 use App\Services\WebSubHandler;
+use Illuminate\Http\Response;
 
 class WebSubController extends Controller
 {

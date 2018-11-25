@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use GuzzleHttp\Psr7;
-use GuzzleHttp\Promise;
-use App\Notifications\EntryReceived;
 use App\Eloquents\LinkedSocialAccount;
+use App\Notifications\EntryReceived;
+use GuzzleHttp\Promise;
+use GuzzleHttp\Psr7;
+use Tests\TestCase;
 
 class WebSubTest extends TestCase
 {

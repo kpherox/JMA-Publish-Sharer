@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Eloquents\Feed;
 use App\Eloquents\Entry;
-use Illuminate\View\View;
-use App\Services\SimpleXML;
-use Illuminate\Http\Response;
 use App\Eloquents\EntryDetail;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Collection;
+use App\Eloquents\Feed;
+use App\Services\SimpleXML;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
+use Illuminate\View\View;
 
 class MainController extends Controller
 {

@@ -1,8 +1,8 @@
 <?php
 
 use App\Eloquents\Entry;
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Database\Migrations\Migration;
 
 class XmlDocumentExportAsFileEntryTable extends Migration
 {

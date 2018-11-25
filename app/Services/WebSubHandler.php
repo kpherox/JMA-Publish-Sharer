@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use Carbon\Carbon;
-use GuzzleHttp\Psr7;
-use App\Eloquents\Feed;
-use GuzzleHttp\Promise;
 use App\Eloquents\Entry;
-use Illuminate\Support\Arr;
 use App\Eloquents\EntryDetail;
+use App\Eloquents\Feed;
+use Carbon\Carbon;
+use GuzzleHttp\Promise;
+use GuzzleHttp\Psr7;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
 class WebSubHandler

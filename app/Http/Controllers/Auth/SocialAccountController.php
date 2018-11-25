@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
 use App\Services\SocialAccountsService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 
 abstract class SocialAccountController extends Controller
 {

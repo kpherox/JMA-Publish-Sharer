@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\View\View;
-use App\Services\SimpleIcons;
 use App\Http\Controllers\Controller;
+use App\Services\SimpleIcons;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\View\View;
 
 class LoginController extends Controller
 {

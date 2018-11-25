@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
+use App\Eloquents\LinkedSocialAccount;
 use App\Eloquents\User;
 use App\Notifications\TestNotify;
 use Illuminate\Support\Collection;
-use App\Eloquents\LinkedSocialAccount;
 use Laravel\Socialite\Contracts\User as ProviderUser;
 
 class SocialAccountsService

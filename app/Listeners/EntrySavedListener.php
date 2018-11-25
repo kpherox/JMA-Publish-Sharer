@@ -2,11 +2,11 @@
 
 namespace App\Listeners;
 
+use App\Eloquents\LinkedSocialAccount;
 use App\Events\EntrySaved;
 use App\Notifications\EntryReceived;
-use App\Eloquents\LinkedSocialAccount;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
 
 class EntrySavedListener implements ShouldQueue
 {

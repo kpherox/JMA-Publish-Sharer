@@ -4,10 +4,10 @@ namespace App\Providers;
 
 use App\Events\EntrySaved;
 use App\Listeners\EntrySavedListener;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use SocialiteProviders\Line\LineExtendSocialite;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 use SocialiteProviders\Twitter\TwitterExtendSocialite;
-use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {

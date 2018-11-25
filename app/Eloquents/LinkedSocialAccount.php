@@ -3,9 +3,9 @@
 namespace App\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
 
 class LinkedSocialAccount extends Model
 {
