@@ -25,8 +25,12 @@ class XmlDocumentExportAsFileEntryTable extends Migration
         $processed_count = 0;
         echo 'all:'.$all_count.PHP_EOL;
         for ($i = 0; $i < $entries_last_id + 1000; $i += 1000) {
-            $entries = Entry::whereRaw('id BETWEEN '.($i + 1).' AND '.($i + 1000))->get();
-            echo 'selected from '.($i + 1).' '.$entries->count().' entries'.PHP_EOL;
+            $range = [
+                ($i + 1),
+                ($i + 1000)
+            ];
+            $entries = Entry::whereRaw('id BETWEEN ? AND ?', $range)->get();
+            echo vsprintf('from %d to %d entries selected.', $range).PHP_EOL;
             foreach ($entries as $entry) {
                 $entry->xml_file = $entry->xml_document;
                 $entry->xml_document = null;
@@ -58,8 +62,12 @@ class XmlDocumentExportAsFileEntryTable extends Migration
         $processed_count = 0;
         echo 'all:'.$all_count.PHP_EOL;
         for ($i = 0; $i < $entries_last_id + 1000; $i += 1000) {
-            $entries = Entry::whereRaw('id BETWEEN '.($i + 1).' AND '.($i + 1000))->get();
-            echo 'selected from '.($i + 1).' '.$entries->count().' entries'.PHP_EOL;
+            $range = [
+                ($i + 1),
+                ($i + 1000)
+            ];
+            $entries = Entry::whereRaw('id BETWEEN ? AND ?', $range)->get();
+            echo vsprintf('from %d to %d entries selected.', $range).PHP_EOL;
             foreach ($entries as $entry) {
                 try {
                     $entry->xml_document = $entry->xml_file;

@@ -25,8 +25,12 @@ class ExportEventIdToEntryDetailsTable extends Migration
         $processed_count = 0;
         echo 'all count is '.$all_count.PHP_EOL;
         for ($i = 0; $i < $details_last_id + 1000; $i += 1000) {
-            $details = EntryDetail::whereRaw('id BETWEEN '.($i + 1).' AND '.($i + 1000))->get();
-            echo 'from '.($i + 1).' to '.($i + 1000).' details selected.'.PHP_EOL;
+            $range = [
+                ($i + 1),
+                ($i + 1000)
+            ];
+            $details = EntryDetail::whereRaw('id BETWEEN ? AND ?', $range)->get();
+            echo vsprintf('from %d to %d entries selected.', $range).PHP_EOL;
             foreach ($details as $detail) {
                 try {
                     $doc = $detail->xml_file;
