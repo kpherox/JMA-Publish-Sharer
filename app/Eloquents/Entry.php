@@ -63,18 +63,7 @@ class Entry extends Model
      */
     public function scopeOfObservatory(Builder $query, string $observatory) : Builder
     {
-        $observatories = self::select('observatory_name')
-                ->groupBy('observatory_name')
-                ->get()
-                ->filter(function ($entry) use ($observatory) {
-                    $splitedObservatory = collect(preg_split('/( |　)/', $entry->observatory_name));
-
-                    return $entry->observatory_name === $observatory || $splitedObservatory->contains($observatory);
-                })->map(function ($entry) {
-                    return $entry->observatory_name;
-                });
-
-        return $query->whereIn('observatory_name', $observatories);
+        return $query->where('observatory_name', 'REGEXP', sprintf('(^| |　)%s( |　|$)', $observatory));
     }
 
     /**
